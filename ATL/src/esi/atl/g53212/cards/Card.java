@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package esi.atl.g53212.cards;
 
 /**
@@ -11,4 +6,22 @@ package esi.atl.g53212.cards;
  */
 public class Card {
     
+    private Color color;
+    private Value value;
+
+    public Card(Color color, Value value) {
+        if (color == null) {
+            throw new IllegalArgumentException("La couleur de la carte n'est pas correcte !");
+        }
+        if (value == null) {
+            throw new IllegalArgumentException("La valeur de la carte n'est pas correcte !");
+        }
+        this.color = color;
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value + " de " + this.color;
+    }
 }
