@@ -8,19 +8,24 @@ public class Game {
     
     public static void main(String[] args) {
         
-        Deck cardList = new Deck();
-        cardList.shuffle();
-        
-        try {
-            int n = Integer.parseInt(args[0]);
+        int n = 0;
+        if (args.length == 1) {
+            try {
+                n = Integer.parseInt(args[0]);
+                
+            } catch (Exception e) {
+                System.out.println("Usage : " );
+                System.exit(0);
+            }
+            Deck cardList = new Deck();
+            cardList.shuffle();
             for (int i = 0; i < n; i++) {
                 System.out.println(cardList.hit());
             }
-            System.exit(0); 
-        } catch (Exception e) {
-            System.out.println("Usage : " + e.getMessage());
+            
+            System.out.println(cardList);
+        } else {
+            System.out.println("Usage : Not enough arguments");
         }
-        
-        System.out.println(cardList);
     }
 }
