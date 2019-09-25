@@ -1,11 +1,15 @@
 package esi.atl.g53212.cards;
 
 /**
- *
  * @author leopoldmols
  */
 public class Game {
     
+    /**
+     * This main method initializes and shows a deck of n cards.
+     * N is defined by the parameters in the project preferences
+     * @param args the arguments defined in the project preferences
+     */
     public static void main(String[] args) {
         
         int n = 0;

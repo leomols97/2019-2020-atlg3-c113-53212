@@ -1,7 +1,7 @@
 package esi.atl.g53212.cards;
 
 /**
- *
+ * This enumeration allows exactly 12 possibilities of value to assign to each card
  * @author leopoldmols
  */
 public enum Value {
@@ -21,10 +21,17 @@ public enum Value {
     
     private String value;
 
+    /**
+     * Construct a value with the first class parameters
+     * @param value the value received as parameters
+     */
     private Value(String value) {
         this.value = value;
     }
     
+    /**
+     * @return one of the 12 values
+     */
     @Override
     public String toString () {
         return this.value;
