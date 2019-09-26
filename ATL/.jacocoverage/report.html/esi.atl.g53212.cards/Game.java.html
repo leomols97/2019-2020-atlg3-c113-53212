@@ -13,24 +13,27 @@
     public static void main(String[] args) {
         
 <span class="fc" id="L15">        int n = 0;</span>
-<span class="pc bpc" id="L16" title="1 of 2 branches missed.">        if (args.length == 1) {</span>
+        
+        // APA : Verifier le nombre de carte demandée
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        if (args.length == 1) {</span>
             try {
-<span class="fc" id="L18">                n = Integer.parseInt(args[0]);</span>
+<span class="fc" id="L20">                n = Integer.parseInt(args[0]);</span>
                 
-<span class="nc" id="L20">            } catch (Exception e) {</span>
-<span class="nc" id="L21">                System.out.println(&quot;Usage : &quot; );</span>
-<span class="nc" id="L22">                System.exit(0);</span>
-<span class="fc" id="L23">            }</span>
-<span class="fc" id="L24">            Deck cardList = new Deck();</span>
-<span class="fc" id="L25">            cardList.shuffle();</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            for (int i = 0; i &lt; n; i++) {</span>
-<span class="fc" id="L27">                System.out.println(cardList.hit());</span>
+<span class="nc" id="L22">            } catch (NumberFormatException e) { // APA : Etre précis dans l'exception</span>
+                // APA : NumberFormatException
+<span class="nc" id="L24">                System.out.println(&quot;L'argument doit être un entier entre 0 et 52&quot;);</span>
+<span class="nc" id="L25">                System.exit(0);</span>
+<span class="fc" id="L26">            }</span>
+<span class="fc" id="L27">            Deck cardList = new Deck();</span>
+<span class="fc" id="L28">            cardList.shuffle();</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">            for (int i = 0; i &lt; n; i++) {</span>
+<span class="fc" id="L30">                System.out.println(cardList.hit());</span>
             }
             
-<span class="nc" id="L30">            System.out.println(cardList);</span>
-<span class="nc" id="L31">        } else {</span>
-<span class="nc" id="L32">            System.out.println(&quot;Usage : Not enough arguments&quot;);</span>
+<span class="nc" id="L33">            System.out.println(cardList);</span>
+<span class="nc" id="L34">        } else {</span>
+<span class="nc" id="L35">            System.out.println(&quot;Usage : Not enough arguments&quot;);</span>
         }
-<span class="nc" id="L34">    }</span>
+<span class="nc" id="L37">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

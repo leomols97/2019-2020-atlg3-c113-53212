@@ -14,7 +14,7 @@ public class Game {
         
         int n = 0;
         
-        // APA : Verifier le nombre de carte demandée
+        // APA : Verifier le nombre de cartes demandé
         if (args.length == 1) {
             try {
                 n = Integer.parseInt(args[0]);
@@ -31,6 +31,7 @@ public class Game {
             }
             
             System.out.println(cardList);
+            // System.exit(0);
         } else {
             System.out.println("Usage : Not enough arguments");
         }

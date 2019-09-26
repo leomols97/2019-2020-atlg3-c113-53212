@@ -72,7 +72,8 @@ public class Deck {
         int i = 1;
         String deck = "Your cards : ";
         while (i < cardList.size()) {
-            deck += cardList.get(i) + ", ";
+            deck += cardList.get(i) + ", \n";
+            i++;
         }
         return deck;
     }
