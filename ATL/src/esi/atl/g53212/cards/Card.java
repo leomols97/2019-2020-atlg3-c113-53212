@@ -49,6 +49,11 @@ public class Card {
             return false;
         }
         final Card other = (Card) obj;
+        
+        // APA :
+        /*
+            return this.color== other.color && this.value == other.value
+        */
         if (this.color != other.color) {
             return false;
         }

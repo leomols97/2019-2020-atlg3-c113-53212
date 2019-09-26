@@ -13,12 +13,15 @@ public class Game {
     public static void main(String[] args) {
         
         int n = 0;
+        
+        // APA : Verifier le nombre de carte demandée
         if (args.length == 1) {
             try {
                 n = Integer.parseInt(args[0]);
                 
-            } catch (Exception e) {
-                System.out.println("Usage : " );
+            } catch (NumberFormatException e) { // APA : Etre précis dans l'exception
+                // APA : NumberFormatException
+                System.out.println("L'argument doit être un entier entre 0 et 52");
                 System.exit(0);
             }
             Deck cardList = new Deck();

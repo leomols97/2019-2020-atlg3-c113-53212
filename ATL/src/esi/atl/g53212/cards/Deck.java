@@ -2,6 +2,7 @@ package esi.atl.g53212.cards;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,6 +19,9 @@ public class Deck {
      * Creates an ArrayList of cards and gives a color and a value to each card
      */
     public Deck() {
+        // APA : Pourquoi une arrayList
+        //cardList = new LinkedList<Card>();
+        // APA : Pourquoi ne pas avoir créer directement de 52
         cardList = new ArrayList<Card>();
         for (Color colorCard : Color.values()) {
             for (Value valueCard : Value.values()) {
@@ -45,6 +49,8 @@ public class Deck {
      * @return the first card of the deck
      */
     public Card hit () {
+        // APA : Si la liste est vide ?
+        // APA : cardList.remove(cardList.size()-1)
         return this.cardList.remove(0);
     }
 

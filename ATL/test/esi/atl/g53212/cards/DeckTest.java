@@ -30,6 +30,8 @@ public class DeckTest {
      */
     @Test
     public void testHit() {
+        // APA : Tester la taille du paquet
+        // APA : Tester l'exception si paquet est vide
         System.out.println("hit");
         Deck instance = new Deck();
         Card expResult = new Card(Color.CLUB, Value.ACE);
