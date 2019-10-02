@@ -3,14 +3,14 @@ package esi.atl.oo_inheritance;
 public class PinnablePoint extends Point {
     
     private boolean pinned; // once pinned cannot move.
-
+    
     public PinnablePoint(double x, double y) {
         super(x, y);
         this.pinned = false;
     }
     
     public void pin() { pinned = true; } // once pinned, no way to unpin.
-
+    
     @Override
     public Point move(double dx, double dy) {
         if(!pinned)
@@ -18,6 +18,13 @@ public class PinnablePoint extends Point {
         // do nothing if pinned.
         return this;
     }
+    
+//    @Override
+//    public Point move(double dx, double dy) throws Exception {
+//        if (! pinned) super.move(dx, dy);
+//        else throw new Exception("Point is pinned, cannot move anymore");
+//        return this;
+//    }
     
     @Override
     public String toString() {

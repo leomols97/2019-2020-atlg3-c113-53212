@@ -1,6 +1,11 @@
-package esi.atl.oo_inheritance;
+package asciipaint;
 
-public class Point implements Movable{
+/**
+ *
+ * @author leopoldmols
+ */
+public class Point {
+    
     private double x;
     private double y;
     
