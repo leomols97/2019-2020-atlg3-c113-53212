@@ -7,7 +7,7 @@ import asciipaint.Point;
  */
 public interface Shape {
     
-    public Point move (double dx, double dy);
+    public void move (double dx, double dy);
     public boolean isInside (Point p);
-    public ColoredShape getColor();
+    public char getColor();
 }

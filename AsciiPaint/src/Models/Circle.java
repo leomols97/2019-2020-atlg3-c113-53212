@@ -5,22 +5,31 @@ import asciipaint.Point;
  *
  * @author leopoldmols
  */
-public class Circle implements Shape {
+public class Circle extends ColoredShape {
     
-    @Override
-    public Point move(double dx, double dy) {
-        this.x += dx;
-        this.y += dy;
-        return this;
+    private Point center;
+    private double radius;
+
+    public Circle(Point center, double radius, char color)
+    {
+        super(color);
+        this.center = center;
+        this.radius = radius;
+        
+    }
+    
+    public void move(double dx, double dy)
+    {
+        center = new Point(center.getX() + dx, center.getY() + dy);
     }
 
     @Override
-    public boolean isInside(Point p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isInside(Point p)
+    {
+        return radius <= center.distance(p);
     }
 
-    @Override
-    public ColoredShape getColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public char getColor() {
+//        return this.getColor();
+//    }
 }

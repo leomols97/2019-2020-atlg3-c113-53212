@@ -5,21 +5,33 @@ import asciipaint.Point;
  *
  * @author leopoldmols
  */
-public class Rectangle implements Shape {
+public class Rectangle extends ColoredShape {
+    
+    Point upperLeft;
+    double width;
+    double height;
+
+    public Rectangle(Point upperLeft, double width, double height, char color)
+    {
+        super(color);
+        this.upperLeft = upperLeft;
+        this.width = width;
+        this.height = height;
+    }
     
     @Override
-    public Point move(double dx, double dy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void move(double dx, double dy)
+    {
+        upperLeft = new Point(upperLeft.getX() + dx, upperLeft.getY() + dy);
     }
 
     @Override
-    public boolean isInside(Point p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isInside(Point p)
+    {
+        
     }
 
-    @Override
-    public ColoredShape getColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+//    public char getColor() {
+//        return this.getColor();
+//    }
 }
