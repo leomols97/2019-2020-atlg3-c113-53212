@@ -1,5 +1,4 @@
 package Models;
-import asciipaint.Point;
 
 /**
  *
@@ -28,7 +27,11 @@ public class Rectangle extends ColoredShape {
     @Override
     public boolean isInside(Point p)
     {
-        
+        if (p.getX() - upperLeft.getX() < height && p.getY() - upperLeft.getY() < width)
+        {
+            return true;
+        }
+        return false;
     }
 
 //    public char getColor() {

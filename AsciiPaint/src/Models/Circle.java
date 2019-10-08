@@ -1,5 +1,4 @@
 package Models;
-import asciipaint.Point;
 
 /**
  *
