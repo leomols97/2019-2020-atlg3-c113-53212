@@ -1,4 +1,6 @@
-package Models;
+package Controller;
+
+import Models.AsciiPaint;
 
 /**
  *

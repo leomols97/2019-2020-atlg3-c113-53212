@@ -26,7 +26,7 @@ public class Point {
         return this;
     }
     
-    public double distance (Point p1)
+    public double distanceTo (Point p1)
     {
         double lengthX = this.getX() - p1.getX();
         double lengthY = this.getY() - p1.getY();

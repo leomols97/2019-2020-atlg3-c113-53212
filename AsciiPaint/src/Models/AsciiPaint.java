@@ -37,11 +37,11 @@ public class AsciiPaint {
     }
     
     /**
-     *
-     * @param x
-     * @param y
-     * @param radius
-     * @param color
+     * Creates a new Circle
+     * @param x the abscissa of the circle center
+     * @param y the ordered of the circle center
+     * @param radius the circle radius
+     * @param color the circle color
      */
     public void newCircle (int x, int y, double radius, char color)
     {
@@ -51,12 +51,12 @@ public class AsciiPaint {
     }
     
     /**
-     *
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param color
+     * Creates a new Rectangle
+     * @param x the abscissa of the upper left rectangle corner
+     * @param y the ordered of the upper left rectangle corner
+     * @param width the rectangle width
+     * @param height the rectangle height
+     * @param color the rectangle color
      */
     public void newRectangle (int x, int y, double width, double height, char color)
     {
@@ -66,11 +66,11 @@ public class AsciiPaint {
     }
     
     /**
-     *
-     * @param x
-     * @param y
-     * @param side
-     * @param color
+     * Creates a new Square
+     * @param x the abscissa of the upper left square corner
+     * @param y the ordered of the upper left square corner
+     * @param side the square side length
+     * @param color the square color
      */
     public void newSquare (int x, int y, double side, char color)
     {
@@ -80,8 +80,8 @@ public class AsciiPaint {
     }
     
     /**
-     *
-     * @return
+     * Shwos the paint
+     * @return a String that shows correctly all the different shapes
      */
     public String asAscii()
     {

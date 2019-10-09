@@ -25,7 +25,7 @@ public class Circle extends ColoredShape {
     @Override
     public boolean isInside(Point p)
     {
-        return radius <= center.distance(p);
+        return radius <= center.distanceTo(p);
     }
 
 //    public char getColor() {
