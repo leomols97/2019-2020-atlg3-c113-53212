@@ -15,23 +15,57 @@ public class View {
         this.in = new Scanner (System.in);
     }
     
-    public void doNext ()
+    public int doNext ()
     {
+        String ans = "";
+        int ansInt;
+        boolean correctAns = false;
+        
         System.out.println("What do you want to do now ?");
-        System.out.println("1 - Add a shape");
-        System.out.println("2 - Show the grid");
-        System.out.println("3 - Exit");
+        while (!correctAns)
+        {
+            System.out.println("1 - Add a shape");
+            System.out.println("2 - Show the grid");
+            System.out.println("3 - Exit");
+            System.out.print("Your answer : ");
+            try
+            {
+                ans = in.nextLine();
+                ansInt = Integer.parseInt(ans);
+                switch (ansInt)
+                {
+                    case 1 :
+                        correctAns = true;
+                        return 1;
+                    case 2 :
+                        correctAns = true;
+                        return 2;
+                    case 3 :
+                        correctAns = true;
+                        return 3;
+                    default :
+                        System.out.println("You cannot do that !");
+                        correctAns = false;
+                        break;
+                }
+            } catch (NumberFormatException e)
+            {
+                System.out.println("You cannot do that !");
+            }
+        }
+        return 0;
     }
     
-    public void beginning () 
+    public void beginning ()
     {
         System.out.println("Hello ! Welcome to AsciiPaint.");
         System.out.println("You're on a 30x30 grid and you can add many shapes as you want.");
+        doNext();
     }
     
     public void error ()
     {
-        System.out.print("You cannot do that!");
+        System.out.println("You cannot do that!");
         doNext();
     }
     
