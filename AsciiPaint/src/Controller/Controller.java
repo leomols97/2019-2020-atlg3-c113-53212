@@ -104,7 +104,7 @@ public class Controller {
                 keepingOn = false;
                 break;
             default :
-                System.out.println("CONTROLLER addshowexit default error");
+                System.out.println("CONTROLLER addShowExit default error");
                 view.error();
                 break;
         }
@@ -135,7 +135,7 @@ public class Controller {
     public void newShape (String [] t, AsciiPaint paint)
     {
         try
-        {
+        {            
             switch (t[1].toLowerCase())
             {
                 case "square" :

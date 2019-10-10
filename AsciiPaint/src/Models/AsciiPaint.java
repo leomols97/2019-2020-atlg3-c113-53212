@@ -76,8 +76,8 @@ public class AsciiPaint {
     public void newSquare (int x, int y, double side, char color)
     {
         Point p = new Point(x, y);
-        Square r = new Square(p, side, color);
-        drawing.addShape(r);
+        Square s = new Square(p, side, color);
+        drawing.addShape(s);
     }
     
     /**
