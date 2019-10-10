@@ -30,14 +30,4 @@ public class Application {
             continuing = c.addShowExit(t, this.paint);
         }
     }
-    
-    /**
-     * Implements the start() method
-     * @param args
-     */
-    public static void main(String[] args)
-    {
-        Application app = new Application();
-        app.start();
-    }
 }

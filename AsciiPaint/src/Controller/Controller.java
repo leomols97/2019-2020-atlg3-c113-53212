@@ -2,7 +2,6 @@ package Controller;
 
 import Models.AsciiPaint;
 import View.View;
-import static java.lang.System.in;
 
 /**
  *
@@ -23,16 +22,15 @@ public class Controller {
         this.view = view;
     }
     
-    /**
-     * Begins a game and purpose a table example
-     */
-    public void beginning ()
-    {
-        view.beginning();
-        String[] t = {"add", "square", "10", "10", "5", "y"};
-        addShowExit(t, asciiPaint);
-//        doNext();
-    }
+//    /**
+//     * Begins a game and purpose a table example
+//     */
+//    public void beginning ()
+//    {
+//        view.beginning();
+//        String[] t = {"add", "square", "10", "10", "5", "y"};
+//        addShowExit(t, asciiPaint);       
+//    }
     
 //    /**
 //     * Asks the user what he wants to do next
@@ -90,15 +88,14 @@ public class Controller {
     {
         boolean keepingOn = true;
         
-        
-        switch (view.doNext()) {
+        switch (t[0].toLowerCase()) {
             case "add" :
                 if (t.length < 2) {
                     System.out.println("CONTROLLER addshowexit add error");
                     view.error();
                     break;
                 }
-                newShape(t);
+                newShape(t, paint);
                 break;
             case "show" :
                 System.out.println(paint.asAscii());
@@ -108,17 +105,34 @@ public class Controller {
                 break;
             default :
                 System.out.println("CONTROLLER addshowexit default error");
-                view.error();;
+                view.error();
                 break;
         }
         return keepingOn;
     }
     
+    
+    public void readSquareCom (String [] t, AsciiPaint paint)
+    {
+        paint.newSquare(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
+    }
+    
+    public void readRectangleCom (String [] t, AsciiPaint paint)
+    {
+        paint.newRectangle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), Double.parseDouble(t[5]), t[6].charAt(0));
+    }
+    
+    public void readCircleCom (String [] t, AsciiPaint paint)
+    {
+        paint.newCircle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
+    }
+    
     /**
      * Constructs a shape belonging the second argument of the table t
      * @param t a table of String
+     * @param paint
      */
-    public void newShape (String [] t)
+    public void newShape (String [] t, AsciiPaint paint)
     {
         try
         {
@@ -130,7 +144,8 @@ public class Controller {
                         view.errorSquare();
                     }
                     //if (view.doNext() == 1) {
-                    drawSquare(t);
+                    readSquareCom(t, paint);
+//                    drawSquare(t);
                     //}
                     break;
                 case "rectangle" :
@@ -139,7 +154,8 @@ public class Controller {
                         view.errorRectangle();
                     }
                     //if (view.doNext() == 1) {
-                    drawRectangle(t);
+                    readRectangleCom(t, paint);
+//                    drawRectangle(t);
                     //}
                     break;
                 case "circle" :
@@ -148,7 +164,8 @@ public class Controller {
                         view.errorCircle();
                     }
                     //if (view.doNext() == 1) {
-                    drawCircle(t);
+                    readCircleCom(t, paint);
+//                    drawCircle(t);
                     //}
                     break;
                 default :
@@ -170,7 +187,7 @@ public class Controller {
      */
     public void drawSquare (String [] t)
     {
-        asciiPaint.newSquare(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
+        this.asciiPaint.newSquare(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
     }
     
     /**
@@ -179,7 +196,7 @@ public class Controller {
      */
     public void drawRectangle (String [] t)
     {
-        asciiPaint.newRectangle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), Double.parseDouble(t[5]), t[6].charAt(0));
+        this.asciiPaint.newRectangle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), Double.parseDouble(t[5]), t[6].charAt(0));
     }
     
     /**
@@ -188,6 +205,6 @@ public class Controller {
      */
     public void drawCircle (String [] t)
     {
-        asciiPaint.newCircle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
+        this.asciiPaint.newCircle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
     }
 }

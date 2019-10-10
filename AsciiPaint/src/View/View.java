@@ -20,7 +20,7 @@ public class View {
     
     /**
      * Asks the user what he wants to do next
-     * //     * @return a number that will correspond to what the user wants the program to do next
+     * @return the String that will correspond to what the user wants the program to do next
      */
     public String doNext ()
     {
