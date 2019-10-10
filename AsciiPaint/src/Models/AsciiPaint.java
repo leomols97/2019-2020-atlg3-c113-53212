@@ -29,6 +29,7 @@ public class AsciiPaint {
     /**
      * Looks for the color of the shape that stands on the point p
      * @param p the shape at this point
+     * @return 
      * @returns the color
      */
     public char getColor (Point p)
@@ -75,7 +76,7 @@ public class AsciiPaint {
     public void newSquare (int x, int y, double side, char color)
     {
         Point p = new Point(x, y);
-        Rectangle r = new Rectangle(p, x, y, color);
+        Square r = new Square(p, side, color);
         drawing.addShape(r);
     }
     

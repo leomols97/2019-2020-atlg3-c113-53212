@@ -9,8 +9,8 @@ import java.util.List;
 public class Drawing {
     
     private  List<Shape> shapes;
-    private int height;
-    private int width;
+    private final int height;
+    private final int width;
 
     /**
      * Construct a drawing of 30 x 30 points
@@ -58,7 +58,7 @@ public class Drawing {
 
     /**
      * Get The height of the drawing
-     * @returns the height of the shape
+     * @return the height of the shape
      */
     public int getHeight() {
         return height;
@@ -66,7 +66,7 @@ public class Drawing {
 
     /**
      * Get The width of the drawing
-     * @returns the width of the shape
+     * @return the width of the shape
      */
     public int getWidth() {
         return width;
