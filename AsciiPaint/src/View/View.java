@@ -20,54 +20,29 @@ public class View {
     
     /**
      * Asks the user what he wants to do next
-     * @return a number that will correspond to what the user wants the program to do next
+     * //     * @return a number that will correspond to what the user wants the program to do next
      */
-    public int doNext ()
+    public String doNext ()
     {
-        String ans = "";
-        int ansInt;
-        boolean correctAns = false;
-        
+//        String ans = "";
+//        int ansInt;
+//        boolean correctAns = false;
+
         System.out.println("What do you want to do now ?\n");
-        while (!correctAns)
-        {
-            System.out.println("1 - Add a shape (STYLE :\n"
-                    + "SQUARE : \"add square int (upperLeft corner X) int (upperLeft corner Y) double (side length) char (color)\"\n"
-                    + "RECTANGLE : \"add rectangle int (upperLeft corner X) int (upperLeft corner Y) double (width length) double (height length) char (color)\"\n"
-                    + "CIRCLE : \"add circle int (center X) int (center Y) double (radius length) char (color)\")\n");
-            System.out.println("2 - Show the grid : \n"
-                    + "show\n");
-            System.out.println("3 - Exit : \n"
-                    + "exit\n");
-            System.out.print("Your answer : ");
-            try
-            {
-                ans = in.nextLine();
-                ansInt = Integer.parseInt(ans);
-                switch (ansInt)
-                {
-                    case 1 :
-                        correctAns = true;
-                        return 1;
-                    case 2 :
-                        correctAns = true;
-                        return 2;
-                    case 3 :
-                        correctAns = true;
-                        return 3;
-                    default :
-                        System.out.println("You cannot do that ! (default doNext())");
-                        correctAns = false;
-                        break;
-                }
-            } catch (Exception e)
-            {
-                System.out.println("You cannot do that ! (VIEW catch doNext())");
-            }
-        }
-        return 0;
-    }
-    
+//        while (!correctAns)
+//        {
+        System.out.println("1 - Add a shape (STYLE :\n");
+//                    + "SQUARE : \"add square int (upperLeft corner X) int (upperLeft corner Y) double (side length) char (color)\"\n"
+//                    + "RECTANGLE : \"add rectangle int (upperLeft corner X) int (upperLeft corner Y) double (width length) double (height length) char (color)\"\n"
+//                    + "CIRCLE : \"add circle int (center X) int (center Y) double (radius length) char (color)\")\n");
+        System.out.println("2 - Show the grid : \n");
+//                    + "show\n");
+        System.out.println("3 - Exit : \n");
+//                    + "exit\n");
+        System.out.print("Your answer : ");
+        
+        return in.nextLine();
+    }       
     /**
      *shows a beginning message and ask the user what he wants to do
      */
@@ -75,7 +50,7 @@ public class View {
     {
         System.out.println("Hello ! Welcome to AsciiPaint.");
         System.out.println("You're on a 30x30 grid and you can add many shapes as you want.");
-        doNext();
+        //doNext();
     }
     
     /**
@@ -84,7 +59,7 @@ public class View {
     public void error ()
     {
         System.out.println("You cannot do that ! (VIEW error())");
-        doNext();
+        //doNext();
     }
     
     /**
@@ -95,7 +70,7 @@ public class View {
         System.out.print("You cannot do that ! (VIEW errorSquare)");
         System.out.println("A square must be definied as so : ");
         System.out.println("add square int (upperLeft corner X) int (upperLeft corner Y) double (side length) char (color)");
-        doNext();
+        //doNext();
     }
     
     /**
@@ -106,7 +81,7 @@ public class View {
         System.out.print("You cannot do that ! (VIEW errorRectangle)");
         System.out.println("A rectangle must be definied as so : ");
         System.out.println("add rectangle int (upperLeft corner X) int (upperLeft corner Y) double (width length) double (height length) char (color)");
-        doNext();
+        //doNext();
     }
     
     /**
@@ -117,6 +92,6 @@ public class View {
         System.out.print("You cannot do that ! (VIEW errorCircle())");
         System.out.println("A circle must be definied as so : ");
         System.out.println("add circle int (center X) int (center Y) double (radius length) char (color)");
-        doNext();
+        //doNext();
     }
 }

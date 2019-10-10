@@ -2,6 +2,7 @@ package Controller;
 
 import Models.AsciiPaint;
 import View.View;
+import static java.lang.System.in;
 
 /**
  *
@@ -30,8 +31,54 @@ public class Controller {
         view.beginning();
         String[] t = {"add", "square", "10", "10", "5", "y"};
         addShowExit(t, asciiPaint);
-//        view.doNext();
+//        doNext();
     }
+    
+//    /**
+//     * Asks the user what he wants to do next
+//     * @return a number that will correspond to what the user wants the program to do next
+//     */
+//    public int doNext ()
+//    {
+//        String ans = "";
+//        int ansInt;
+//        boolean correctAns = false;
+//        
+//        System.out.println("What do you want to do now ?\n");
+//        while (!correctAns)
+//        {
+//            System.out.println("1 - Add a shape (STYLE :\n"
+//                    + "SQUARE : \"add square int (upperLeft corner X) int (upperLeft corner Y) double (side length) char (color)\"\n"
+//                    + "RECTANGLE : \"add rectangle int (upperLeft corner X) int (upperLeft corner Y) double (width length) double (height length) char (color)\"\n"
+//                    + "CIRCLE : \"add circle int (center X) int (center Y) double (radius length) char (color)\")\n");
+//            System.out.println("2 - Show the grid : \n"
+//                    + "show\n");
+//            System.out.println("3 - Exit : \n"
+//                    + "exit\n");
+//            System.out.print("Your answer : ");
+//            try
+//            {
+//                ans = in.nextLine();
+//                ansInt = Integer.parseInt(ans);
+//                switch (ansInt)
+//                {
+//                    case 1 :
+//                    case 2 :
+//                    case 3 :
+//                        correctAns = true;
+//                        return ansInt;
+//                    default :
+//                        System.out.println("You cannot do that ! (default doNext())");
+//                        correctAns = false;
+//                        break;
+//                }
+//            } catch (Exception e)
+//            {
+//                System.out.println("You cannot do that ! (VIEW catch doNext())");
+//            }
+//        }
+//        return 0;
+//    }
     
     /**
      * Analyses the first part of the command entered by the user
@@ -43,14 +90,15 @@ public class Controller {
     {
         boolean keepingOn = true;
         
-        switch (t[0].toLowerCase()) {
+        
+        switch (view.doNext()) {
             case "add" :
                 if (t.length < 2) {
                     System.out.println("CONTROLLER addshowexit add error");
                     view.error();
                     break;
                 }
-                newShape(t, paint);
+                newShape(t);
                 break;
             case "show" :
                 System.out.println(paint.asAscii());
@@ -69,9 +117,8 @@ public class Controller {
     /**
      * Constructs a shape belonging the second argument of the table t
      * @param t a table of String
-     * @param asciiPaint of AsciiPaint type
      */
-    public void newShape (String [] t, AsciiPaint asciiPaint)
+    public void newShape (String [] t)
     {
         try
         {
@@ -83,7 +130,7 @@ public class Controller {
                         view.errorSquare();
                     }
                     //if (view.doNext() == 1) {
-                    drawSquare(t, asciiPaint);
+                    drawSquare(t);
                     //}
                     break;
                 case "rectangle" :
@@ -92,7 +139,7 @@ public class Controller {
                         view.errorRectangle();
                     }
                     //if (view.doNext() == 1) {
-                    drawRectangle(t, asciiPaint);
+                    drawRectangle(t);
                     //}
                     break;
                 case "circle" :
@@ -101,7 +148,7 @@ public class Controller {
                         view.errorCircle();
                     }
                     //if (view.doNext() == 1) {
-                    drawCircle(t, asciiPaint);
+                    drawCircle(t);
                     //}
                     break;
                 default :
@@ -120,30 +167,27 @@ public class Controller {
     /**
      * Draw a square with the rest of the parameters
      * @param t the arguments needed for the parameters of the Square
-     * @param paint of AsciiPaint
      */
-    public void drawSquare (String [] t, AsciiPaint paint)
+    public void drawSquare (String [] t)
     {
-        paint.newSquare(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
+        asciiPaint.newSquare(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
     }
     
     /**
      * Draw a square with the rest of the parameters
      * @param t the arguments needed for the parameters of the Rectangle
-     * @param paint of AsciiPaint
      */
-    public void drawRectangle (String [] t, AsciiPaint paint)
+    public void drawRectangle (String [] t)
     {
-        paint.newRectangle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), Double.parseDouble(t[5]), t[6].charAt(0));
+        asciiPaint.newRectangle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), Double.parseDouble(t[5]), t[6].charAt(0));
     }
     
     /**
      * Draw a square with the rest of the parameters
      * @param t the arguments needed for the parameters of the Circle
-     * @param paint of AsciiPaint
      */
-    public void drawCircle (String [] t, AsciiPaint paint)
+    public void drawCircle (String [] t)
     {
-        paint.newCircle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
+        asciiPaint.newCircle(Integer.parseInt(t[2]), Integer.parseInt(t[3]), Double.parseDouble(t[4]), t[5].charAt(0));
     }
 }

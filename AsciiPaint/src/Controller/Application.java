@@ -9,22 +9,35 @@ import View.View;
  */
 public class Application {
     
-    private static AsciiPaint paint;
-    private static View v = new View();
+    private AsciiPaint paint;
+    private View v = new View();
+    private Controller c = new Controller(paint, v);
     
     /**
      * Starts the game by creating a new controller and beginning it
      */
-    public static void start(){
-        Controller c = new Controller(paint, v);
-        c.beginning();
+    public void start(){
+//        Controller c = new Controller(paint, v);
+//        c.beginning();
+        String command;
+        String [] t;
+        boolean continuing = true;
+        v.beginning();
+        
+        while (continuing) {            
+            command = v.doNext();
+            t = command.split(" ");
+            continuing = c.addShowExit(t, this.paint);
+        }
     }
     
     /**
      * Implements the start() method
      * @param args
      */
-    public static void main(String[] args) {
-        start();
+    public static void main(String[] args)
+    {
+        Application app = new Application();
+        app.start();
     }
 }
