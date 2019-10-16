@@ -9,7 +9,7 @@ import View.View;
  */
 public class Application {
     
-    private AsciiPaint paint;
+    private AsciiPaint paint = new AsciiPaint();
     private View v = new View();
     private Controller c = new Controller(paint, v);
     

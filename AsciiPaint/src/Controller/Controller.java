@@ -2,6 +2,7 @@ package Controller;
 
 import Models.AsciiPaint;
 import View.View;
+import java.util.Arrays;
 
 /**
  *
@@ -135,7 +136,8 @@ public class Controller {
     public void newShape (String [] t, AsciiPaint paint)
     {
         try
-        {            
+        {         
+            System.out.println(paint);
             switch (t[1].toLowerCase())
             {
                 case "square" :
@@ -173,8 +175,9 @@ public class Controller {
                     view.error();
                     break;
             }
-        } catch (Exception e)
+        }catch (Exception e)
         {
+            System.out.println(e);
             System.out.println("CONTROLLER newShape()");
             this.view.error();
             view.doNext();

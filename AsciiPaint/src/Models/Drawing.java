@@ -1,6 +1,10 @@
 package Models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -17,6 +21,7 @@ public class Drawing {
      */
     public Drawing()
     {
+        this.shapes = new ArrayList<Shape>();
         this.height = 30;
         this.width = 30;
     }
@@ -28,6 +33,7 @@ public class Drawing {
      */
     public Drawing(int height, int width)
     {
+        this.shapes = new ArrayList<Shape>();
         this.height = height;
         this.width = width;
     }

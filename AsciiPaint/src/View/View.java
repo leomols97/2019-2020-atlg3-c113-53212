@@ -31,13 +31,13 @@ public class View {
         System.out.println("What do you want to do now ?\n");
 //        while (!correctAns)
 //        {
-        System.out.println("1 - Add a shape (STYLE :\n");
+        System.out.println(" - Add a shape : \n"); // (STYLE :\n");
 //                    + "SQUARE : \"add square int (upperLeft corner X) int (upperLeft corner Y) double (side length) char (color)\"\n"
 //                    + "RECTANGLE : \"add rectangle int (upperLeft corner X) int (upperLeft corner Y) double (width length) double (height length) char (color)\"\n"
 //                    + "CIRCLE : \"add circle int (center X) int (center Y) double (radius length) char (color)\")\n");
-        System.out.println("2 - Show the grid : \n");
+        System.out.println(" - Show the grid : \n");
 //                    + "show\n");
-        System.out.println("3 - Exit : \n");
+        System.out.println(" - Exit : \n");
 //                    + "exit\n");
         System.out.print("Your answer : ");
         
