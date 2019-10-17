@@ -20,10 +20,12 @@ public class Rectangle extends ColoredShape {
     public Rectangle(Point upperLeft, double width, double height, char color)
     {
         super(color);
-        this.upperLeft = upperLeft;
+        this.upperLeft = upperLeft;// APA : Copie défensive
         this.width = width;
         this.height = height;
     }
+    
+    // APA : Copie défensive pour le getCenter.
     
     /**
      * Move the rectangle upperleft corner
@@ -41,6 +43,8 @@ public class Rectangle extends ColoredShape {
      * @param p the point that should be inside the Rectangle
      * @return true if the point is in the rectangle and false else
      */
+    
+    // APA : Attentoin aux tests!
     @Override
     public boolean isInside(Point p)
     {

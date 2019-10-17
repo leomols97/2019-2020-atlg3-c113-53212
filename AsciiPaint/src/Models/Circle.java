@@ -18,7 +18,7 @@ public class Circle extends ColoredShape {
     public Circle(Point center, double radius, char color)
     {
         super(color);
-        this.center = center;
+        this.center = center; // APA : Copie défensive
         this.radius = radius;
         
     }
@@ -30,6 +30,8 @@ public class Circle extends ColoredShape {
      */
     public void move(double dx, double dy)
     {
+        // APA : Pourquoi créer un nouveau point
+        //center.move(dx,dy);
         center = new Point(center.getX() + dx, center.getY() + dy);
     }
 
@@ -41,6 +43,7 @@ public class Circle extends ColoredShape {
     @Override
     public boolean isInside(Point p)
     {
+        // APA : radius >= center distanceTo(p)
         return radius <= center.distanceTo(p);
     }
 

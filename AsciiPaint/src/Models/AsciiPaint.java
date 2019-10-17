@@ -86,6 +86,7 @@ public class AsciiPaint {
      */
     public String asAscii()
     {
+        // APA : StringBuilder/StringBuffer
         String display = "";
         for (int i = 0; i < drawing.getWidth(); i++) {
             for (int j = 0; j < drawing.getHeight(); j++) {
@@ -97,7 +98,9 @@ public class AsciiPaint {
                     display += s.getColor();
                 }
             }
-            System.out.println("\n");
+            // APA 
+                            display+="\n";
+
         }
         return display;
     }

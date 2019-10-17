@@ -21,6 +21,7 @@ public class Drawing {
      */
     public Drawing()
     {
+        // APA : Pourquoi une arrayList ? 
         this.shapes = new ArrayList<Shape>();
         this.height = 30;
         this.width = 30;
@@ -54,12 +55,22 @@ public class Drawing {
      */
     public Shape getShapeAt (Point p)
     {
+        boolean trouve = false;
+        Shape result = null;
+       // APA
+        for(int i =0;i<shapes.size()&& !trouve;i++){
+            if (shapes.get(i).isInside(p)) {
+                result = shapes.get(i);
+                trouve = true;
+            }
+        }
+            
         for (Shape shape : shapes) {
             if (shape.isInside(p)) {
                 return shape;
             }
         }
-        return null;
+        return result;
     }
 
     /**

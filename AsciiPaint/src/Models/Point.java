@@ -21,6 +21,7 @@ public class Point {
         this.y = y;
     }
     
+    // APA : constructeur Point(Point p)
     /**
      * Get the point abscissa
      * @return the asbcissa
@@ -39,6 +40,7 @@ public class Point {
      * @param dy the distance to move the y of the center
      * @return the new point
      */
+    // APA : devrait etre une void
     public Point move(double dx, double dy)
     {
         x += dx;
