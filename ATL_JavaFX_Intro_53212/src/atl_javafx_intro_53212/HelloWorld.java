@@ -56,6 +56,7 @@ import javafx.stage.Stage;
 import static javafx.application.Application.launch;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.StageStyle;
 
 public class HelloWorld extends Application {
 
@@ -79,9 +80,15 @@ public class HelloWorld extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("My First JavaFX App");
         
+        primaryStage.initStyle(StageStyle.DECORATED);
+        
         BorderPane root = new BorderPane();
         Text helloText = new Text("Hello World");
         root.setCenter(helloText);
+//        root.setTop(helloText);
+//        root.setBottom(helloText);
+//        root.setLeft(helloText);
+//        root.setRight(helloText);
         Scene scene = new Scene(root, 250, 100);
         helloText.setFont(Font.font("Times New Roman", 40));
         helloText.setFill(Color.RED);
