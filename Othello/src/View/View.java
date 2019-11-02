@@ -2,6 +2,7 @@ package View;
 
 import Models.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -116,7 +117,7 @@ public class View {
      */
     private void displaySquares(Square square, Player current, boolean quitGame)
     {
-        String resCol = ".";
+        //String resCol = ".";
         String color = "";
         String piece = "";
         
@@ -124,9 +125,22 @@ public class View {
         {
             if (square.isMyOwn(current.getColor()) || quitGame)
             {
-                piece = this.pieces(square.getPiece().getColor());
+                piece = this.piece(square.getPiece().getColor());
             }
+            /*
+            if (square.getPiece().getColor() == 0)
+            {
+                color = "0";
+            }
+            else
+            {
+                color = "1";
+            }*/
         }
+        
+        System.out.println(color);
+        System.out.println(piece);
+        
 //        String resCol = ".";
 //        String color = "";
 //        String piece = "  ";
@@ -147,7 +161,22 @@ public class View {
 //        System.out.print(resCol + "" + color);
 //        System.out.print("  " + piece + "  " + resCol + " ");
 //        System.out.print(resCol);
-                }
+    }
+    
+    
+    private String piece (String color)
+    {
+        if (color.equals("0") && color.equals("1"))
+        {
+            throw new IllegalArgumentException("La couleur reçue en paramètre n'est pas correcte : " + color);
+        }
+        String piece = "0";
+        if (color.equals("1"))
+        {
+            piece = "1";
+        }
+        return piece;
+    }
     
     public void displayBoard (Square [][] square, Player current, boolean quitgame)
     {

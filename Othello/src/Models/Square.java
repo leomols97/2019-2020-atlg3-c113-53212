@@ -57,8 +57,8 @@ public class Square {
      * @param color the color that has to match with the color of the player
      * @return true if the piece exists and false if the color is different from RED or BLUE or if the colors don't match
      */
-    public boolean isMyOwn(int color) {
-         return !isFree() && piece.getColor() == color;
+    public boolean isMyOwn(Color color) {
+         return !isFree() && piece.getColor().equals(color);
     }
     
     /**

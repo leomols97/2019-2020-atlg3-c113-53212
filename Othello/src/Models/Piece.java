@@ -6,16 +6,19 @@ package Models;
  */
 public class Piece {
     
-    private Piece piece;
-    
-    private final int color;
-    
-    private Piece (int color)
-    {
+//    private Piece piece;
+    private final Color color;
+
+    /*public Piece getPiece() {
+        return piece;
+    }*/
+
+    public Piece(/*Piece piece,*/ Color color) {
+//        this.piece = piece;
         this.color = color;
     }
     
-    public int getColor()
+    public Color getColor()
     {
         return color;
     }
