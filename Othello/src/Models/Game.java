@@ -65,7 +65,14 @@ public class Game implements Model{
      */
     @Override
     public boolean isOver() {
-        return boardIsFull(board);
+        for (int i = 0; i < board.getSquares().length; i++) {
+            for (int j = 0; j < board.getSquares()[i].length; j++) {
+                if (board.getSquares()[i][j] == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -80,7 +87,7 @@ public class Game implements Model{
     @Override
     public void select(int row, int column)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        board.getPiece(board.getSquares[row][column]);
     }
 
     @Override
@@ -106,16 +113,10 @@ public class Game implements Model{
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public boolean boardIsFull(Square [][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == null) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+    
+//    @Override
+//    public void put (Position pos)
+//    {
+//        board.put(piece, pos);
+//    }
 }

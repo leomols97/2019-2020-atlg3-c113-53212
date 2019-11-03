@@ -107,14 +107,16 @@ public class Controller {
             { // compare the string that is in the first place in the table "separate"
                 case "show" :
                     correctCom = true;
-                    view.displayBoard(square, current, end);
+                    view.displayBoard(game.getBoard(), game.getCurrent(), end);
+                    view.displayHelp();
+                    System.out.println(game.getCurrent());
                     break;
                 case "score" :
                     correctCom = true;
                     int cptNoirs = 0;
                     int cptBlancs = 0;
                     for (int i = 0; i < game.getBoard().length; i++) {
-                        if (game.getBoard()) {
+                        if (view.) {
                             
                         }
                     }
@@ -140,9 +142,8 @@ public class Controller {
                         System.out.println("La commande n'est pas correctement entrée ! Ce n'est peut-être plus à votre tour...");
                     } finally
                     {
-                        game.getBoard().
+                        game.
                     }
-                    break;
                 default : 
                     view.displayError("La commande n'est pas correctement entrée ! Suivez les instruction proposées !");
             }

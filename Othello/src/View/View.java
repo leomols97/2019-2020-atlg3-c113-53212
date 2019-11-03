@@ -43,6 +43,9 @@ public class View {
         System.out.println(message);
     }
     
+    /**
+     * Shows only the first line to display the different commands for the player
+     */
     public void displayHelp()
     {
         System.out.println("Commandes possibles : ");

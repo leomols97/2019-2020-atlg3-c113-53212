@@ -72,11 +72,10 @@ public interface Model {
      */
     List<Player> getLoosers();
     
-    /**
-     * Verifies if the board is full of pieces or not
-     * 
-     * @param board the playing board to verify
-     * @return true if the board is full and false else
-     */
-    boolean boardIsFull(Board board);
+//    /**
+//     * Inserts a piece on the playing board if this is possible
+//     * 
+//     * @param pos the position where to pu the piece
+//     */
+//    void put (Position pos);
 }
