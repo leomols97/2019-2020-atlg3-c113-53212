@@ -15,7 +15,8 @@ import javafx.stage.Stage;
 public class Othello extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)
+    {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -39,7 +40,8 @@ public class Othello extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
     

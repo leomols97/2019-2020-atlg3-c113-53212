@@ -13,7 +13,8 @@ public class Piece {
         return piece;
     }*/
 
-    public Piece(/*Piece piece,*/ Color color) {
+    public Piece(/*Piece piece,*/ Color color)
+    {
 //        this.piece = piece;
         this.color = color;
     }

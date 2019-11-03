@@ -6,6 +6,7 @@ import java.util.List;
  *
  * @author leopoldmols
  */
+
 public class Game implements Model{
     
     private Board board;
@@ -45,48 +46,76 @@ public class Game implements Model{
      * This method throws a IllegalArgumentException("La partie est terminée !") if the game is finished
      */
     @Override
-    public void start() {
-        if (board == null) {
+    public void start()
+    {
+        if (board == null)
+        {
             throw new IllegalStateException("Le plateau de jeu n'a pas été initialisé !");
         }
-        if (isOver() == true) {
+        if (isOver() == true)
+        {
             throw new IllegalArgumentException("La partie est terminée !");
         }
     }
 
+    /**
+     * Overrides the method "isOver()" that comes from the class Model.
+     * Verifies if both players have moves left and if both of them still have their own flags
+     * @return true if both players have moves left and if both of them still have their own flags and false either
+     */
     @Override
     public boolean isOver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return boardIsFull(board);
     }
 
+    /**
+     * Overrides the method "getBoard()" from the class Model.
+     * @return the playing board from the current playing board
+     */
     @Override
     public Square[][] getBoard() {
+        return this.board.getSquares();
+    }
+
+    @Override
+    public void select(int row, int column)
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void select(int row, int column) {
+    public Piece getSelected()
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Piece getSelected() {
+    public Player getCurrent()
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Player getCurrent() {
+    public List<Player> getWinners()
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Player> getWinners() {
+    public List<Player> getLoosers()
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Player> getLoosers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean boardIsFull(Square [][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
-    
 }

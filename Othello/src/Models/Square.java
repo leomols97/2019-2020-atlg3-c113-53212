@@ -15,7 +15,8 @@ public class Square {
     /**
      * This constructs the object Square
      */
-    protected Square() {
+    protected Square()
+    {
         this.piece = null;
     }
     
@@ -23,7 +24,8 @@ public class Square {
      * This allows the other classes to know the piece that stays on the current position
      * @return the current object "piece"
      */
-    public Piece getPiece() {
+    public Piece getPiece()
+    {
         return piece;
     }
     
@@ -34,11 +36,14 @@ public class Square {
      * Throws a NullPointerException("La pièce n'existe pas !") if the object received as parameters "piece" doesn't exist
      * Throws a IllegalStateException("La pièce n'existe pas !") the current object "Piece" doesn't exist
      */
-    protected void put (Piece piece) {
-        if (piece == null) {
+    protected void put (Piece piece)
+    {
+        if (piece == null)
+        {
             throw new NullPointerException("La pièce n'existe pas !");
         }
-        if (this.piece != null) {
+        if (this.piece != null)
+        {
             throw new IllegalStateException("La pièce n'existe pas !");
         }
         this.piece = piece;
@@ -48,7 +53,8 @@ public class Square {
      * Verifies if the square already contains an object "piece" or not.
      * @return true is the square is free and false if not
      */
-    public boolean isFree() {
+    public boolean isFree()
+    {
         return this.piece == null;
     }
     
@@ -57,7 +63,8 @@ public class Square {
      * @param color the color that has to match with the color of the player
      * @return true if the piece exists and false if the color is different from RED or BLUE or if the colors don't match
      */
-    public boolean isMyOwn(Color color) {
+    public boolean isMyOwn(Color color)
+    {
          return !isFree() && piece.getColor().equals(color);
     }
     
@@ -66,7 +73,8 @@ public class Square {
      * @return the hashcode from the Object
      */
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.piece);
         return hash;
@@ -77,14 +85,18 @@ public class Square {
      * @return the boolean value of the Object
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
             return true;
         }
-        if (obj == null) {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final Square other = (Square) obj;
@@ -96,7 +108,8 @@ public class Square {
      * @return the current piece
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "La piece est " + piece;
     }
 }

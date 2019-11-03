@@ -10,11 +10,13 @@ public enum Color {
     
     private final int color;
 
-    private Color(int color) {
+    private Color(int color)
+    {
         this.color = color;
     }
 
-    public int getColor() {
+    public int getColor()
+    {
         return color;
     }
 }

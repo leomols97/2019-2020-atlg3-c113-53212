@@ -63,11 +63,14 @@ public class View {
      * Displays the user that the game is finished
      * @param winners the list of winner(s) of a whole game
      */
-    public void displayOver(List<Player> winners, List<Player> loosers) {
+    public void displayOver(List<Player> winners, List<Player> loosers)
+    {
         System.out.println("Partie terminée.");
-        if (winners.size() == 2) {
+        if (winners.size() == 2)
+        {
             System.out.println("Vous avez tous les deux ni gagné, ni perdu !");
-        } else {
+        } else
+        {
             System.out.print("Le joueur " + winners.get(0).getColor() + " a gagné");
         }
     }
@@ -77,7 +80,8 @@ public class View {
      * This message only shows which player has to play now
      * @param player helps the message to be colored in the color of the player
      */
-    public void displayCurrentPlayer(Player player) {
+    public void displayCurrentPlayer(Player player)
+    {
         //TODO
     }
     
@@ -85,8 +89,10 @@ public class View {
      * Shows the top row of the playing board that shows the number of the columns
      * @param squares the playing game that is received as parameters to know which step of the game it has to return
      */
-    private void topRow (Square[][] square) {
-        for (int i = 0; i < square[0].length; i++) {
+    private void topRow (Square[][] square)
+    {
+        for (int i = 0; i < square[0].length; i++)
+        {
             System.out.print("" + i + " ");
         }
         System.out.println();
@@ -100,11 +106,13 @@ public class View {
      * @param current the current player. It allows the program to know which player's pieces has to be hidden by putting them "PI"
      * @param rowNum the number of the row only to display to the user where his pieces exctly are
      */
-    private void row (Square[][] squares, Player current, int rowNum, boolean quitGame) {
+    private void row (Square[][] squares, Player current, int rowNum, boolean quitGame)
+    {
         
         System.out.print("Row#0" + rowNum + " | ");
         
-        for (Square square : squares[rowNum]) {
+        for (Square square : squares[rowNum])
+        {
             displaySquares(square, current, quitGame);
         }
         System.out.println();
@@ -126,7 +134,17 @@ public class View {
             if (square.isMyOwn(current.getColor()) || quitGame)
             {
                 piece = this.piece(square.getPiece().getColor());
+            } else {
             }
+            /*
+            if (square.getPiece().getColor() == 0)
+            {
+            color = "0";
+            }
+            else
+            {
+            color = "1";
+            }*/ 
             /*
             if (square.getPiece().getColor() == 0)
             {
@@ -140,27 +158,6 @@ public class View {
         
         System.out.println(color);
         System.out.println(piece);
-        
-//        String resCol = ".";
-//        String color = "";
-//        String piece = "  ";
-//
-//        if (!square.isFree()) {
-//            if (square.isMyOwn(current.getColor()) || quitGame) {
-//                piece = this.pieces(square.getPiece().getRank);
-//            } else {
-//                piece = "PI";
-//            }
-//            if (square.getPiece().getColor() == WHITE) {
-//                color = "0";
-//            } else {
-//                color = "1";
-//            }
-//        }
-//
-//        System.out.print(resCol + "" + color);
-//        System.out.print("  " + piece + "  " + resCol + " ");
-//        System.out.print(resCol);
     }
     
     
@@ -182,12 +179,14 @@ public class View {
     {
         topRow(square);
         
-        for (Square squares : square[0]) {
+        for (Square squares : square[0])
+        {
             System.out.println("--------");
         }
         System.out.println();
         
-        for (int i = 0; i < square.length; i++) {
+        for (int i = 0; i < square.length; i++)
+        {
             row(square, current, i, quitgame);
         }
     }

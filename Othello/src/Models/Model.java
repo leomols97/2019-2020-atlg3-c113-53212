@@ -71,4 +71,12 @@ public interface Model {
      * @return the list of the loosers of a hole game
      */
     List<Player> getLoosers();
+    
+    /**
+     * Verifies if the board is full of pieces or not
+     * 
+     * @param board the playing board to verify
+     * @return true if the board is full and false else
+     */
+    boolean boardIsFull(Board board);
 }
