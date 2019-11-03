@@ -1,6 +1,7 @@
 package Models;
 
 /**
+ * This is the way we have to give the different possibilities of colors for the player so that any other color will be rejected
  *
  * @author leopoldmols
  */

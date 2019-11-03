@@ -14,6 +14,16 @@ import javafx.stage.Stage;
  */
 public class Othello extends Application {
     
+    
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+    
     @Override
     public void start(Stage primaryStage)
     {
@@ -35,14 +45,6 @@ public class Othello extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args)
-    {
-        launch(args);
     }
     
 }

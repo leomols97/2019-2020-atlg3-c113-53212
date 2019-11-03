@@ -57,7 +57,7 @@ public class Game implements Model{
             throw new IllegalArgumentException("La partie est terminée !");
         }
     }
-
+    
     /**
      * Overrides the method "isOver()" that comes from the class Model.
      * Verifies if both players have moves left and if both of them still have their own flags
@@ -74,7 +74,7 @@ public class Game implements Model{
         }
         return true;
     }
-
+    
     /**
      * Overrides the method "getBoard()" from the class Model.
      * @return the playing board from the current playing board
@@ -83,40 +83,45 @@ public class Game implements Model{
     public Square[][] getBoard() {
         return this.board.getSquares();
     }
-
+    
+    /**
+     * Overrides the method "select(int row, int column)" from the class Model.
+     */
     @Override
     public void select(int row, int column)
     {
         board.getPiece(board.getSquares[row][column]);
     }
-
+    
+    /**
+     * Overrides the method "getSelected()" from the class Model.
+     */
     @Override
     public Piece getSelected()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    /**
+     * Overrides the method "getCurrent()" from the class Model.
+     */
     @Override
     public Player getCurrent()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<Player> getWinners()
+    
+    /**
+     * Overrides the method "put(Position pos)" from the class Model.
+     */
+//    @Override
+    public void put (Position pos)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Player> getLoosers()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        board.put(piece, pos);
     }
     
-//    @Override
-//    public void put (Position pos)
-//    {
-//        board.put(piece, pos);
-//    }
+    public Square getSquare(Position pos)
+    {
+        return board.getSquare(pos);
+    }
 }

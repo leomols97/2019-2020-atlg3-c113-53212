@@ -12,6 +12,9 @@ import java.util.List;
  */
 public class Board {
     
+    /**
+     * The initial board
+     */
     private final Square [][] squares;
     
     /**

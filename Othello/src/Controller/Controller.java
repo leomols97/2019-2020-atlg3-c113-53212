@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ * This class controls the way the game will begin, keep on and finish
+ * 
  * @author leopoldmols
  */
 public class Controller {
@@ -86,13 +87,13 @@ public class Controller {
     }
     
     /**
-     * Handel the  different possible commands entered by the user
-     * @param com the command entered by the user
+     * Handels the  different possible commands entered by the user
      */
     private boolean command ()
     {
-        int row;
-        int col;
+        int row = 0;
+        int col = 0;
+        Position pos = null;
         String[] separate;
         boolean end = false;
         boolean correctCom = false;
@@ -123,10 +124,12 @@ public class Controller {
                     break;
                 case "play" :
                     correctCom = true;
+                    int i = 0;
+                    int j = 0;
                     try
                     {
-                        int i = Integer.parseInt(separate[1]);
-                        int j = Integer.parseInt(separate[2]);
+                        i = Integer.parseInt(separate[1]);
+                        j = Integer.parseInt(separate[2]);
                         Square [][] squareTest = null; // To verify if there's a piece next to the one the player wants to put
                         try {
                             squareTest[i+1][j] = null;
@@ -142,7 +145,7 @@ public class Controller {
                         System.out.println("La commande n'est pas correctement entrée ! Ce n'est peut-être plus à votre tour...");
                     } finally
                     {
-                        game.
+                        game.getSquare(pos[i][j]);
                     }
                 default : 
                     view.displayError("La commande n'est pas correctement entrée ! Suivez les instruction proposées !");

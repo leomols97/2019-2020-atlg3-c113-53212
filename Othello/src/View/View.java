@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
+ * Initializes the View of the game to make the view of the game understandable to the player
  *
  * @author leopoldmols
  */
@@ -163,7 +164,12 @@ public class View {
         System.out.println(piece);
     }
     
-    
+    /**
+     * Shows a piece
+     * 
+     * @param color the color of the piec eto show
+     * @return the piece
+     */
     private String piece (String color)
     {
         if (color.equals("0") && color.equals("1"))
@@ -178,6 +184,13 @@ public class View {
         return piece;
     }
     
+    /**
+     * Shows the board
+     * 
+     * @param square the squares
+     * @param current the current player
+     * @param quitgame to know if the game is finished or not
+     */
     public void displayBoard (Square [][] square, Player current, boolean quitgame)
     {
         topRow(square);

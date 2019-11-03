@@ -3,7 +3,8 @@ package Models;
 import java.util.List;
 
 /**
- *
+ *  Model of Othello for the class "Game"
+ * 
  * @author leopoldmols
  */
 public interface Model {
@@ -58,24 +59,17 @@ public interface Model {
      */
     Player getCurrent();
     
-    /**
-     * Gets the list of winners (even if there will only be one winner)
-     * 
-     * @return the list of the winners of a hole game
-     */
-    List<Player> getWinners();
-    
-    /**
-     * Gets the list of loosers (even if there will only be one looser)
-     * 
-     * @return the list of the loosers of a hole game
-     */
-    List<Player> getLoosers();
-    
 //    /**
 //     * Inserts a piece on the playing board if this is possible
 //     * 
 //     * @param pos the position where to pu the piece
 //     */
 //    void put (Position pos);
+    
+    /**
+     * Gets the quare on a position
+     * @param pos the position where to find the square
+     * @return the square
+     */
+    Square getSquare(Position pos);
 }

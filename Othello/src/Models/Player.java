@@ -3,13 +3,23 @@ package Models;
 import java.util.Objects;
 
 /**
- *
+ * Initializes a new object called "Player"
+ * 
  * @author leopoldmols
  */
 public class Player {
 
+    /**
+     * color of the new object "player"
+     */
     private final Color color;
 
+    /**
+     * This constructs the object Player with the parameters "color" and "listPieces" received as class parameters
+     * @param color The color received as parameters to give a color to the object Player
+     * 
+     * Throws a NullPointerException("La couleur du joueur n'est pas valide (Ni blanche (0), ni noire (1)) ! ") if the color is neither 0 neither 1
+     */
     public Player(Color color)
     {
         if (color == null) {
@@ -18,6 +28,10 @@ public class Player {
         this.color = color;
     }
     
+    /**
+     * Allows the other classes to know the color of the player
+     * @return the color of the player
+     */
     public Color getColor()
     {
         return color;
@@ -54,6 +68,10 @@ public class Player {
         return true;
     }
 
+    /**
+     * Overrides the method "toString()" from Java API
+     * @return the color and the listPieces of the current Player with a sentence
+     */
     @Override
     public String toString()
     {
