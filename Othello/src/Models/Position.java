@@ -101,4 +101,14 @@ public class Position {
     {
         return new Position(this.row + direction.getRow(), this.column + direction.getColumn());
     }
+
+    /**
+     * Purpose to the program the next position possible by a piece on the playing board
+     * @param direction the next position of the piece
+     * @return a new position by adding the row of the new direction to the row of the actual position of the piece
+     * and by adding the column of the new direction to the column of the actual position of the piece
+     */
+    Position move(Direction dir) {
+        return new Position(this.row + dir.getRow(), this.column + dir.getColumn());
+    }
 }

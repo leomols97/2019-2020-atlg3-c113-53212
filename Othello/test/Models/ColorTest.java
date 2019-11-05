@@ -57,5 +57,19 @@ public class ColorTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of invert method, of class Color.
+     */
+    @Test
+    public void testInvert() {
+        System.out.println("invert");
+        Color instance = null;
+        Color expResult = null;
+        Color result = instance.invert();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

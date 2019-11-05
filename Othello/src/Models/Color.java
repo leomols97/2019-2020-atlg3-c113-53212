@@ -33,4 +33,19 @@ public enum Color {
     {
         return color;
     }
+    
+    /**
+     * Change the color of the piece from BLACK to WHITE or invert
+     * @return BLACK if the current color is WHITE and WHITE else
+     */
+    public Color invert ()
+    {
+        if (this == Color.WHITE) {
+            return Color.BLACK;
+        }
+        else
+        {
+            return Color.WHITE;
+        }
+    }
 }

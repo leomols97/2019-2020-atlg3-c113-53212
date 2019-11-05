@@ -90,7 +90,7 @@ public class Game implements Model{
     @Override
     public void select(int row, int column)
     {
-        board.getPiece(board.getSquares[row][column]);
+        //board.getPiece(board.getSquares()[row][column]);
     }
     
     /**
@@ -114,14 +114,140 @@ public class Game implements Model{
     /**
      * Overrides the method "put(Position pos)" from the class Model.
      */
-//    @Override
+    @Override
     public void put (Position pos)
     {
-        board.put(piece, pos);
+        //board.put(piece, pos);
     }
     
+    /**
+     * Overrides the method "getSquare(Position pos)" from the class Model.
+     */
+    @Override
     public Square getSquare(Position pos)
     {
         return board.getSquare(pos);
+    }
+    
+    /**
+     * Change of current player
+     */
+    @Override
+    public void changePlayer()
+    {
+        Player tmp;
+        tmp = oponent;
+        oponent = current;
+        current = tmp;
+    }
+    
+    /**
+     * Verifies if the place is okay belonging the rules
+     * @param pos the position where to put the piece
+     * @return true if the player can put the piece or not
+     */
+    @Override
+    public boolean legalPlace(Position pos) {
+        
+        boolean legal = false;
+        if (board.isInside(pos))
+        {
+            for (Direction dir : Direction.values())
+            {
+                try
+                {
+                    Position p = pos.move(dir);
+                    if (!board.isFree(pos)
+                            && board.isInside(pos)
+                            && board.getSquare(pos).getPiece().getColor() == /*board.getCurrent().getColor().invert()*/ oponent.getColor())
+                    {
+                        Position newPos = pos.move(dir);
+                        while (board.isFree(pos)
+                                && board.isInside(pos)
+                                && !legal)
+                        {
+                            if (board.getSquare(newPos).getPiece().getColor() == current.getColor())
+                            {
+                                legal = true;
+                            }
+                            newPos  = newPos.move(dir);
+                        }
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println("La piece ne peut pas être placée à cet endroit !");
+                }
+            }
+        }
+        return legal;
+    }
+    
+    /**
+     * Verifies if the player can place a piece at a certain position
+     * @param pos the position where to place the piece
+     * @return true if he can and false else
+     */
+    @Override
+    public boolean canPlace(Position pos) {
+        return board.getSquares()[pos.getRow()][pos.getColumn()].isFree();
+    }
+    
+    /**
+     * Verifies if the player can even place a piece on the playing board
+     * @return true if he can and false else
+     */
+    @Override
+    public boolean canPlaceSmw() {
+        for (int i = 0; i < board.getSquares().length; i++) {
+            for (int j = 0; j < board.getSquares()[0].length; j++) {
+                if (board.getSquares()[i][j].isFree()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * gets the score of the White player
+     * @return the score of the White player
+     */
+    @Override
+    public int getScoreWhite() {
+        int cpt = 0;
+        for (int i = 0; i < board.getSquares().length; i++) {
+            for (int j = 0; j < board.getSquares()[0].length; j++) {
+                if (board.getSquares()[i][j].getPiece().getColor() == Color.WHITE) {
+                    cpt++;
+                }
+            }
+        }
+        return cpt;
+    }
+    
+    /**
+     * gets the score of the Black player
+     * @return the score of the Black player
+     */
+    @Override
+    public int getScoreBlack() {
+        int cpt = 0;
+        for (int i = 0; i < board.getSquares().length; i++) {
+            for (int j = 0; j < board.getSquares()[0].length; j++) {
+                if (board.getSquares()[i][j].getPiece().getColor() == Color.BLACK) {
+                    cpt++;
+                }
+            }
+        }
+        return cpt;
+    }
+
+    /**
+     * Place a piece at a certain position
+     * @param pos the position where to place the piece
+     */
+    @Override
+    public void place(Position pos) {
+        board.getSquare(pos).put(board.getPiece(pos));
     }
 }

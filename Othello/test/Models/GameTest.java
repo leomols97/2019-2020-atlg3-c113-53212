@@ -138,5 +138,102 @@ public class GameTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of changePlayer method, of class Game.
+     */
+    @Test
+    public void testChangePlayer() {
+        System.out.println("changePlayer");
+        Game instance = new Game();
+        instance.changePlayer();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of legalPlace method, of class Game.
+     */
+    @Test
+    public void testLegalPlace() {
+        System.out.println("legalPlace");
+        Position pos = null;
+        Game instance = new Game();
+        boolean expResult = false;
+        boolean result = instance.legalPlace(pos);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of canPlace method, of class Game.
+     */
+    @Test
+    public void testCanPlace() {
+        System.out.println("canPlace");
+        Position pos = null;
+        Game instance = new Game();
+        boolean expResult = false;
+        boolean result = instance.canPlace(pos);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of canPlaceSmw method, of class Game.
+     */
+    @Test
+    public void testCanPlaceSmw() {
+        System.out.println("canPlaceSmw");
+        Game instance = new Game();
+        boolean expResult = false;
+        boolean result = instance.canPlaceSmw();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getScoreWhite method, of class Game.
+     */
+    @Test
+    public void testGetScoreWhite() {
+        System.out.println("getScoreWhite");
+        Game instance = new Game();
+        int expResult = 0;
+        int result = instance.getScoreWhite();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getScoreBlack method, of class Game.
+     */
+    @Test
+    public void testGetScoreBlack() {
+        System.out.println("getScoreBlack");
+        Game instance = new Game();
+        int expResult = 0;
+        int result = instance.getScoreBlack();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of place method, of class Game.
+     */
+    @Test
+    public void testPlace() {
+        System.out.println("place");
+        Position pos = null;
+        Game instance = new Game();
+        instance.place(pos);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

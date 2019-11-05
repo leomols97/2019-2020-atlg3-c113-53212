@@ -10,7 +10,7 @@ public class Piece {
     /**
      * The initial color
      */
-    private final Color color;
+    private Color color;
 
     /*public Piece getPiece() {
         return piece;
@@ -33,5 +33,13 @@ public class Piece {
     public Color getColor()
     {
         return color;
+    }
+    
+    /**
+     * Change the color of the piece from BLACK to WHITE or invert
+     */
+    public void invert ()
+    {
+        color = color.invert();
     }
 }

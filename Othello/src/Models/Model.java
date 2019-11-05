@@ -59,12 +59,12 @@ public interface Model {
      */
     Player getCurrent();
     
-//    /**
-//     * Inserts a piece on the playing board if this is possible
-//     * 
-//     * @param pos the position where to pu the piece
-//     */
-//    void put (Position pos);
+    /**
+     * Inserts a piece on the playing board if this is possible
+     * 
+     * @param pos the position where to pu the piece
+     */
+    void put (Position pos);
     
     /**
      * Gets the quare on a position
@@ -72,4 +72,47 @@ public interface Model {
      * @return the square
      */
     Square getSquare(Position pos);
+    
+    /**
+     * Change of current player
+     */
+    void changePlayer();
+    
+    /**
+     * Verifies if the place is okay belonging the rules
+     * @param pos the position where to put the piece
+     * @return true if the player can put the piece or not
+     */
+    boolean legalPlace(Position pos);
+
+    /**
+     * Verifies if the player can place a piece at a certain position
+     * @param pos the position where to place the piece
+     * @return true if he can and false else
+     */
+    boolean canPlace(Position pos);
+    
+    /**
+     * Verifies if the player can even place a piece on the playing board
+     * @return true if he can and false else
+     */
+    boolean canPlaceSmw();
+    
+    /**
+     * gets the score of the White player
+     * @return the score of the White player
+     */
+    int getScoreWhite();
+    
+    /**
+     * gets the score of the Black player
+     * @return the score of the Black player
+     */
+    int getScoreBlack();
+    
+    /**
+     * Place a piece at a certain position
+     * @param pos the position where to place the piece
+     */
+    void place (Position pos);
 }

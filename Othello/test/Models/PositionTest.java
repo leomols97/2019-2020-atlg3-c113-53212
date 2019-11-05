@@ -102,5 +102,20 @@ public class PositionTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of move method, of class Position.
+     */
+    @Test
+    public void testMove() {
+        System.out.println("move");
+        Direction dir = null;
+        Position instance = null;
+        Position expResult = null;
+        Position result = instance.move(dir);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

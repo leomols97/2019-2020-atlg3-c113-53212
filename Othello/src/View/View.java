@@ -50,6 +50,10 @@ public class View {
     public void displayHelp()
     {
         System.out.println("Commandes possibles : ");
+        System.out.println(" - 'show' : afficher le plateau de jeu");
+        System.out.println(" - 'score' : afficher le score des joueurs");
+        System.out.println(" - 'play i j' : jouer où 'i' représente la ligne dans laquelle placer votre pion et 'j' la colonne");
+        System.out.println(" - 'quit' : quitter le jeu");
     }
     
     /**
@@ -67,16 +71,9 @@ public class View {
      * Displays the user that the game is finished
      * @param winners the list of winner(s) of a whole game
      */
-    public void displayOver(List<Player> winners, List<Player> loosers)
+    public void displayOver()
     {
         System.out.println("Partie terminée.");
-        if (winners.size() == 2)
-        {
-            System.out.println("Vous avez tous les deux ni gagné, ni perdu !");
-        } else
-        {
-            System.out.print("Le joueur " + winners.get(0).getColor() + " a gagné");
-        }
     }
     
     /**
@@ -137,7 +134,7 @@ public class View {
         {
             if (square.isMyOwn(current.getColor()) || quitGame)
             {
-                piece = this.piece(square.getPiece().getColor());
+                //piece = this.piece(square.getPiece().getColor());
             } else {
             }
             /*
