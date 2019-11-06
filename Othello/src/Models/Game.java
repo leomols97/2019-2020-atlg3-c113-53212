@@ -90,7 +90,14 @@ public class Game implements Model{
     @Override
     public void select(int row, int column)
     {
-        //board.getPiece(board.getSquares()[row][column]);
+        Position position = new Position(row, column);
+        if (!this.board.isInside(position)) {
+            throw new NullPointerException("La position sélectionnée n'est pas dans le plateau de jeu !");
+        }
+        if (this.board.isFree(position)) {
+            throw new NullPointerException("La position ne contient pas de pièce !");
+        }
+        this.selected = position;
     }
     
     /**
@@ -99,7 +106,7 @@ public class Game implements Model{
     @Override
     public Piece getSelected()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.board.getPiece(selected);
     }
     
     /**
@@ -108,7 +115,7 @@ public class Game implements Model{
     @Override
     public Player getCurrent()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.current;
     }
     
     /**
@@ -117,7 +124,7 @@ public class Game implements Model{
     @Override
     public void put (Position pos)
     {
-        //board.put(piece, pos);
+        //pos = current.getColor()
     }
     
     /**

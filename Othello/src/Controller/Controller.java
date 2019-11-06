@@ -85,6 +85,8 @@ public class Controller {
 //            view.displayOver(game.getWinners(), game.getLoosers());
 //        }
         
+        game.start();
+        
         boolean end = false;
         boolean newTurn = false;
         boolean correctCom = false;

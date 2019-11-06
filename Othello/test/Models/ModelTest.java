@@ -328,5 +328,66 @@ public class ModelTest {
         public void place(Position pos) {
         }
     }
+
+    public class ModelImpl implements Model {
+
+        public void initialize() {
+        }
+
+        public void start() {
+        }
+
+        public boolean isOver() {
+            return false;
+        }
+
+        public Square[][] getBoard() {
+            return null;
+        }
+
+        public void select(int row, int column) {
+        }
+
+        public Piece getSelected() {
+            return null;
+        }
+
+        public Player getCurrent() {
+            return null;
+        }
+
+        public void put(Position pos) {
+        }
+
+        public Square getSquare(Position pos) {
+            return null;
+        }
+
+        public void changePlayer() {
+        }
+
+        public boolean legalPlace(Position pos) {
+            return false;
+        }
+
+        public boolean canPlace(Position pos) {
+            return false;
+        }
+
+        public boolean canPlaceSmw() {
+            return false;
+        }
+
+        public int getScoreWhite() {
+            return 0;
+        }
+
+        public int getScoreBlack() {
+            return 0;
+        }
+
+        public void place(Position pos) {
+        }
+    }
     
 }
