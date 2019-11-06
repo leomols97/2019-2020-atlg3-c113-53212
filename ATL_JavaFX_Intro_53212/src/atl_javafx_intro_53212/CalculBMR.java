@@ -1,5 +1,8 @@
 package atl_javafx_intro_53212;
 
+import View.DataView;
+import View.ResultView;
+import View.View;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -25,6 +28,18 @@ public class CalculBMR
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+        
+        primaryStage.setMinHeight(300);
+        primaryStage.setMinWidth(300);
+        
+        View view = new View();
+        DataView dataView = new DataView();
+        ResultView resultView = new ResultView();
+        Scene principal = new Scene(view);
+//        Scene principal = new Scene(resultView);
+        
+        
+        
         primaryStage.setTitle("Calcul du BMR");
         GridPane root = new GridPane();
         
@@ -32,43 +47,10 @@ public class CalculBMR
         root.setHgap(10);
         root.setVgap(5);
         
-        Label lblDonnees = new Label("Données");
-        GridPane.setHalignment(lblDonnees, HPos.RIGHT);
-        root.add(lblDonnees, 0, 0);
-        
-        Label lblTaille = new Label("Taille (cm)");
-        GridPane.setHalignment(lblTaille, HPos.RIGHT);
-        root.add(lblTaille, 0, 1);
-        
-        TextField tfdTaille = new TextField();
-        tfdTaille.setText("Taille en cm");
-        tfdTaille.setPrefColumnCount(20);
-        root.add(tfdTaille, 1, 1);
-        
-        Label lblName = new Label("Poids (kg)");
-        GridPane.setHalignment(lblName, HPos.RIGHT);
-        root.add(lblName, 0, 2);
-        
-        TextField tfdPoids = new TextField();
-        tfdPoids.setPrefColumnCount(20);
-        root.add(tfdPoids, 1, 2);
-        
-        Label lblPassword = new Label("Age (années)");
-        root.add(lblPassword, 0, 3);
-        
-        TextField tfdAge = new TextField();
-        tfdAge.setPrefColumnCount(20);
-        root.add(tfdAge, 1, 3);
-        
-        RadioButton rbSexe = new RadioButton();
-        rbSexe.setText("Sexe");
-        root.add(rbSexe, 1, 4);
-        
-        GridPane.setHalignment(lblPassword, HPos.RIGHT);
-        GridPane.setFillWidth(tfdAge, false);
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(principal);
         primaryStage.show();
+
     }
     
 }
