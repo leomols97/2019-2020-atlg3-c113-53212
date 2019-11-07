@@ -1,6 +1,9 @@
 package View;
 
+import javafx.geometry.HPos;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -8,12 +11,15 @@ import javafx.scene.layout.VBox;
  */
 public class View extends VBox {
     
-    MainView mView = new MainView();
+    MainView mView;
+    Button button;
     
     public View ()
     {
         this.mView = new MainView();
-        
-        this.getChildren().addAll(mView);
+        this.button = new Button("Calcul du BMR");
+        button.setMinWidth(700);
+        GridPane.setHalignment(button, HPos.RIGHT);
+        this.getChildren().addAll(mView, button);
     }
 }

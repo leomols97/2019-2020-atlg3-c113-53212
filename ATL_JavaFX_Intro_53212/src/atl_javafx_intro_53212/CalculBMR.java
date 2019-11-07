@@ -4,20 +4,11 @@ import View.DataView;
 import View.ResultView;
 import View.View;
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import static javafx.application.Application.launch;
-import javafx.scene.control.RadioButton;
-import javafx.scene.layout.HBox;
 
 public class CalculBMR
         extends Application {
@@ -36,7 +27,6 @@ public class CalculBMR
         DataView dataView = new DataView();
         ResultView resultView = new ResultView();
         Scene principal = new Scene(view);
-//        Scene principal = new Scene(resultView);
         
         
         

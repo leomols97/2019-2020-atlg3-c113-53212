@@ -1,10 +1,6 @@
 package View;
 
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 /**
  *
