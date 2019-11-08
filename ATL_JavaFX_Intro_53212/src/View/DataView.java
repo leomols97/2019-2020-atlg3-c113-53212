@@ -23,7 +23,7 @@ public class DataView extends GridPane {
     Label lblName = new Label("Poids (kg)");
     Label lblAge = new Label("Âge (années)");
     Label lblSexe = new Label("Sexe");
-    Label lblStyleDeVie = new Label("Style de vie");
+    Label lblStyleDeVie = new Label("Style de vie sportif");
     TextField tfdTaille = new TextField();
     TextField tfdPoids = new TextField();
     TextField tfdAge = new TextField();
@@ -91,24 +91,8 @@ public class DataView extends GridPane {
         return tfdTaille.getText();
     }
 
-    public Label getLblDonnees() {
-        return lblDonnees;
-    }
-
-    public Label getLblTaille() {
-        return lblTaille;
-    }
-
     public TextField getTfdTaille() {
         return tfdTaille;
-    }
-
-    public Label getLblName() {
-        return lblName;
-    }
-
-    public Label getLblAge() {
-        return lblAge;
     }
 
     public TextField getTfdPoids() {
@@ -119,11 +103,7 @@ public class DataView extends GridPane {
         return tfdAge;
     }
 
-    public Label getLblSexe() {
-        return lblSexe;
-    }
-
-    public ToggleGroup sexes() {
+    public ToggleGroup getSexes() {
         return sexes;
     }
 

@@ -1,7 +1,5 @@
 package atl_javafx_intro_53212;
 
-import View.DataView;
-import View.ResultView;
 import View.View;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -24,8 +22,8 @@ public class CalculBMR
         primaryStage.setMinWidth(300);
         
         View view = new View();
-        DataView dataView = new DataView();
-        ResultView resultView = new ResultView();
+//        DataView dataView = new DataView();
+//        ResultView resultView = new ResultView();
         Scene principal = new Scene(view);
         
         

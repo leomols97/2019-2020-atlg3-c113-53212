@@ -5,13 +5,11 @@ package View;
  * @author leopoldmols
  */
 public enum StyleDeVie {
-    SEM1 ("1 fois par semaine"),
-    SEM2 ("2 fois par semaine"),
-    SEM3 ("3 fois par semaine"),
-    SEM4 ("4 fois par semaine"),
-    SEM5 ("5 fois par semaine"),
-    SEM6 ("6 fois par semaine"),
-    SEM7 ("7 fois par semaine");
+    SEM1 ("Sédentaire"),
+    SEM2 ("Peu actif"),
+    SEM3 ("Actif"),
+    SEM4 ("Fort actif"),
+    SEM5 ("Extrêmement actif");
     
     private String style;
     private StyleDeVie (String style)

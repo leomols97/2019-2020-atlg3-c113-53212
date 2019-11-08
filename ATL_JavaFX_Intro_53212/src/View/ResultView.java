@@ -49,4 +49,20 @@ public class ResultView extends GridPane {
         tfdCal.setPrefColumnCount(20);
         this.add(tfdCal, 3, 2);
     }
+
+    public void setTfdBMR(TextField tfdBMR) {
+        this.tfdBMR = tfdBMR;
+    }
+
+    public void setTfdCal(TextField tfdCal) {
+        this.tfdCal = tfdCal;
+    }
+
+    public void setBMR(Label BMR) {
+        this.BMR = BMR;
+    }
+
+    public void setCalories(Label Calories) {
+        this.Calories = Calories;
+    }
 }
