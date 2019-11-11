@@ -217,16 +217,19 @@ public class Board {
     {
         Position pos1 = new Position(pos.getRow() + 1, pos.getColumn() + 1);
         LinkedList<Color> list = new LinkedList<>();
-        while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY)
-        {            
-            pos1.setRow(pos1.getRow() + 1);
-            pos1.setColumn(pos1.getColumn() + 1);
-            list.add(board[pos1.getRow()][pos1.getColumn()].getColor());
+        if (board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY) {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY)
+            {
+                pos1.setRow(pos1.getRow() + 1);
+                pos1.setColumn(pos1.getColumn() + 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()].getColor());
+            }
         }
         if (list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != color && list.lastIndexOf(pos).getColor() == color)
         {
             return true;
         }
+        return false;
     }
     
     /**
