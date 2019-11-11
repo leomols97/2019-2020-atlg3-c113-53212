@@ -10,8 +10,14 @@ import java.util.Scanner;
  */
 public class View {
     
+    /**
+     * To let the user enter some commands
+     */
     private final Scanner in;
     
+    /**
+     * Constructs a new View
+     */
     public View()
     {
         in = new Scanner(System.in);
@@ -35,6 +41,7 @@ public class View {
     
     /**
      * This shows an error containeing the message that is received as parameters
+     * 
      * @param message the error message that should be shown when an error occurs
      */
     public void displayError(String message)
@@ -56,6 +63,7 @@ public class View {
     
     /**
      * Asks the user to enter a command that has to be entered
+     * 
      * @return the command the user entered
      */
     public String askCommand()
@@ -67,7 +75,6 @@ public class View {
     
     /**
      * Displays the user that the game is finished
-     * @param winners the list of winner(s) of a whole game
      */
     public void displayOver()
     {
@@ -76,23 +83,26 @@ public class View {
     
     /**
      * Displays a message with a color belonging the current player color.
+     * 
      * This message only shows which player has to play now
      * @param player helps the message to be colored in the color of the player
      */
+    /*
     public void displayCurrentPlayer(Player player)
     {
-        //TODO
-    }
+    //TODO
+    }*/
     
     /**
      * Shows the top row of the playing board that shows the number of the columns
-     * @param squares the playing game that is received as parameters to know which step of the game it has to return
+     * 
+     * @param plateaus the playing game that is received as parameters to know which step of the game it has to return
      */
-    private void topRow (Square[][] square)
+    private void topRow (Piece[][] plateau)
     {
-        for (int i = 0; i < square[0].length; i++)
+        for (int i = 1; i <= plateau[0].length; i++)
         {
-            System.out.print("" + i + " ");
+            System.out.print(" " + i + " ");
         }
         System.out.println();
     }
@@ -101,116 +111,138 @@ public class View {
     
     /**
      * Shows each lines of the playing board beginning with "Row#0" following the row's number
-     * @param squares the playing game that is received as parameters to know which step of the game it has to return
+     * 
+     * @param plateaus the playing game that is received as parameters to know which step of the game it has to return
      * @param current the current player. It allows the program to know which player's pieces has to be hidden by putting them "PI"
      * @param rowNum the number of the row only to display to the user where his pieces exctly are
      */
-    private void row (Square[][] squares, Player current, int rowNum, boolean quitGame)
+    /*
+    private void row (Piece[][] plateaus, Player current, int rowNum, boolean quitGame)
     {
-        
-        System.out.print("Row#0" + rowNum + " | ");
-        
-        for (Square square : squares[rowNum])
-        {
-            displaySquares(square, current, quitGame);
-        }
-        System.out.println();
+    
+    
+    System.out.print("Row#0" + rowNum + " | ");
+    
+    for (Piece plateau : plateaus[rowNum])
+    {
+    displayplateaus(plateau, current, quitGame);
     }
+    System.out.println();
+    
+    
+    }
+    */
     
     /**
-     * Displays the different squares with the piece that it contains (if it contains one) and the background belonging the square is a land or is water
-     * @param square the square to show
+     * Displays the different plateaus with the piece that it contains (if it contains one) and the background belonging the plateau is a land or is water
+     * 
+     * @param plateau the plateau to show
      * @param current the player's piece that let the method know which player's pieces it has to show or hide by showing "PI"
      */
-    private void displaySquares(Square square, Player current, boolean quitGame)
+    /*
+    private void displaySquares(Piece plateau /*, Player current, boolean quitGame )
     {
-        //String resCol = ".";
-        String color = "";
-        String piece = "";
-        
-        if (!square.isFree())
-        {
-            if (square.isMyOwn(current.getColor()) || quitGame)
-            {
-                //piece = this.piece(square.getPiece().getColor());
-            } else {
-            }
-            /*
-            if (square.getPiece().getColor() == 0)
-            {
-            color = "0";
-            }
-            else
-            {
-            color = "1";
-            }*/ 
-            /*
-            if (square.getPiece().getColor() == 0)
-            {
-                color = "0";
-            }
-            else
-            {
-                color = "1";
-            }*/
-        }
-        
-        System.out.println(color);
-        System.out.println(piece);
+    //String resCol = ".";
+    String color = "";
+    String piece = "";
+    
+    if (!plateau.isFree())
+    {
+    if (plateau.isMyOwn(current.getColor()) || quitGame)
+    {
+    //piece = this.piece(plateau.getPiece().getColor());
+    } else {
     }
+    */
+    /*
+    if (plateau.getPiece().getColor() == 0)
+    {
+    color = "0";
+    }
+    else
+    {
+    color = "1";
+    }*/
+    /*
+    if (plateau.getPiece().getColor() == 0)
+    {
+    color = "0";
+    }
+    else
+    {
+    color = "1";
+    }
+    }*/
+    /*
+    
+    System.out.println(color);
+    System.out.println(piece);
+    }
+    */
     
     /**
      * Shows a piece
-     * 
+     *
      * @param color the color of the piec eto show
      * @return the piece
      */
+    /*
     private String piece (String color)
     {
-        if (color.equals("0") && color.equals("1"))
-        {
-            throw new IllegalArgumentException("La couleur reçue en paramètre n'est pas correcte : " + color);
-        }
-        String piece = "0";
-        if (color.equals("1"))
-        {
-            piece = "1";
-        }
-        return piece;
+    if (color.equals("0") && color.equals("1"))
+    {
+    throw new IllegalArgumentException("La couleur reçue en paramètre n'est pas correcte : " + color);
     }
+    String piece = "0";
+    if (color.equals("1"))
+    {
+    piece = "1";
+    }
+    return piece;
+    }
+    */
     
     /**
      * Shows the board
-     * 
-     * @param square the squares
+     *
+     * @param plateau the plateaus
      * @param current the current player
      * @param quitgame to know if the game is finished or not
      */
-    public void displayBoard (Square [][] square, Player current /*, boolean quitgame */)
+    public void displayBoard (Piece[][] plateau /*, Player current, boolean quitgame */)
     {
         
-        for (Square squares : square[0])
+        for (Piece plateaus : plateau[0])
         {
-            System.out.print("--");
+            System.out.print("---");
         }
         System.out.println();
         
-        topRow(square);
+        topRow(plateau);
         
-        for (int i = 0; i < square.length; i++)
+        for (Piece[] plateau1 : plateau)
         {
-//            row(square, current, i, quitgame);
-            for (int j = 0; j < square[i].length; j++) {
-                if (/*quitgame &&*/ square[i][j].getPiece().getColor() == null) {
-                    System.out.print(" . ");
-                } else
-                if (/*quitgame &&*/ square[i][j].getPiece().getColor() == Color.BLACK) {
-                    System.out.print(" 0 ");
-                } else
-                if (/*quitgame &&*/ square[i][j].getPiece().getColor() == Color.WHITE) {
-                    System.out.print(" 1 ");
+//            row(plateau, current, i, quitgame);
+            for (Piece item : plateau1)
+                
+                if (null != item.getColor())
+                {
+                    switch (item.getColor())
+                    {
+                        case EMPTY:
+                            System.out.print(" 0 ");
+                            break;
+                        case BLACK:
+                            System.out.print(" 2 ");
+                            break;
+                        case WHITE:
+                            System.out.print(" 1 ");
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
+            System.out.println();
         }
     }
 }

@@ -36,18 +36,18 @@ public class Square {
      * Throws a NullPointerException("La pièce n'existe pas !") if the object received as parameters "piece" doesn't exist
      * Throws a IllegalStateException("La pièce n'existe pas !") the current object "Piece" doesn't exist
      */
-    protected void put (Piece piece)
-    {
-        if (piece == null)
-        {
-            throw new NullPointerException("La pièce n'existe pas !");
-        }
-        if (this.piece != null)
-        {
-            throw new IllegalStateException("La pièce n'existe pas !");
-        }
-        this.piece = piece;
-    }
+//    protected void put (Piece piece)
+//    {
+//        if (piece == null)
+//        {
+//            throw new NullPointerException("La pièce n'existe pas !");
+//        }
+//        if (this.piece == null)
+//        {
+//            throw new IllegalStateException("La pièce n'existe pas !");
+//        }
+//        this.piece = piece;
+//    }
     
     /**
      * Verifies if the square already contains an object "piece" or not.

@@ -21,7 +21,7 @@ public class View extends VBox {
         this.button = new Button("Calcul du BMR");
         button.setMinWidth(750);
         GridPane.setHalignment(button, HPos.CENTER);
-        int savedPoids = Integer.parseInt(mView.dView.getTfdPoids().getText());
+        Integer savedPoids = Integer.parseInt(mView.dView.getTfdPoids().getText());
         this.button.setOnAction((event) ->
         {
             BMRView(Integer.parseInt(mView.dView.getTaille()), savedPoids, mView.dView.getTfdAge(), mView.dView.getSexes(), mView.dView.getCBStyleDeVie());

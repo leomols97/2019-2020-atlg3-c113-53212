@@ -16,14 +16,16 @@ public class Game implements Model{
     
     public Game()
     {
-        current = new Player(Color.WHITE);
-        oponent = new Player(Color.BLACK);
+        initialize();
     }
     
     @Override
     public void initialize()
     {
         this.board = new Board ();
+        
+        current = new Player(Color.WHITE);
+        oponent = new Player(Color.BLACK);
         
         Piece p1 = new Piece(current.getColor());
         Piece p2 = new Piece(current.getColor());
@@ -34,7 +36,6 @@ public class Game implements Model{
         Position posp2 = new Position(5, 6);
         Position posp3 = new Position(6, 5);
         Position posp4 = new Position(6, 6);
-        
         
     }
     
@@ -52,10 +53,11 @@ public class Game implements Model{
         {
             throw new IllegalStateException("Le plateau de jeu n'a pas été initialisé !");
         }
-        if (isOver() == true)
+        if (isOver())
         {
             throw new IllegalArgumentException("La partie est terminée !");
         }
+//        System.out.println(board.getSquares());
     }
     
     /**
@@ -67,7 +69,7 @@ public class Game implements Model{
     public boolean isOver() {
         for (int i = 0; i < board.getSquares().length; i++) {
             for (int j = 0; j < board.getSquares()[i].length; j++) {
-                if (board.getSquares()[i][j] == null) {
+                if (board.getSquares()[i][j].getPiece().getColor() == null) {
                     return false;
                 }
             }
@@ -80,7 +82,9 @@ public class Game implements Model{
      * @return the playing board from the current playing board
      */
     @Override
-    public Square[][] getBoard() {
+    public Square[][] getBoard()
+    {
+        initialize();
         return this.board.getSquares();
     }
     
@@ -124,7 +128,8 @@ public class Game implements Model{
     @Override
     public void put (Position pos)
     {
-        //pos = current.getColor()
+        
+//        pos = current.getColor();
     }
     
     /**

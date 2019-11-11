@@ -3,7 +3,6 @@ package Controller;
 import Models.*;
 import View.View;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -120,7 +119,7 @@ public class Controller {
                     break;
                 case "show" :
                     correctCom = true;
-                    view.displayBoard(game.getBoard(), game.getCurrent(), end);
+                    view.displayBoard(game.getBoard(), game.getCurrent()/*, end*/);
                     view.displayHelp();
                     System.out.println(game.getCurrent());
                     break;
@@ -189,7 +188,7 @@ public class Controller {
                     break;
                 case "show" :
                     correctCom = true;
-                    view.displayBoard(game.getBoard(), game.getCurrent(), end);
+                    view.displayBoard(game.getBoard(), game.getCurrent()/*, end*/);
                     view.displayHelp();
                     System.out.println(game.getCurrent());
                     break;

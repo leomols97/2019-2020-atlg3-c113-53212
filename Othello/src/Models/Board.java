@@ -26,7 +26,7 @@ public class Board {
         
         for (int i = 0; i < squares.length; i++)
         {
-            for (int j = 0; j < squares[0].length; j++)
+            for (int j = 0; j < squares[i].length; j++)
             {
                 squares[i][j] = new Square();
             }
@@ -77,7 +77,7 @@ public class Board {
      * 
      * This throws an IllegalArgumentException("La pièce n'est pas sur le plateau de jeu !") if the method isInside() retturns false
      */
-    protected void put(Piece piece, Position pos)
+    public void put(Piece piece, Position pos)
     {
         
         if (!isInside(pos))
