@@ -210,22 +210,21 @@ public class Board {
      * Verifies if there are some piece to "eat" in the up direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the up direction and false else
      */
-    public boolean verifDirUp (Position pos, Color color)
+    public boolean verifDirUp (Position pos, Piece piece)
     {
-        Position pos1 = new Position(pos.getRow() + 1, pos.getColumn() + 1);
-        LinkedList<Color> list = new LinkedList<>();
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
         if (board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY) {
             while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY)
             {
-                pos1.setRow(pos1.getRow() + 1);
-                pos1.setColumn(pos1.getColumn() + 1);
-                list.add(board[pos1.getRow()][pos1.getColumn()].getColor());
+                pos1.setRow(pos1.getRow() - 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
             }
         }
-        if (list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != color && list.lastIndexOf(pos).getColor() == color)
+        if (list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor())
         {
             return true;
         }
