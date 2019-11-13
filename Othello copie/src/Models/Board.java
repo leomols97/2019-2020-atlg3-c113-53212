@@ -277,6 +277,7 @@ public class Board {
                     {
                         /*dir1.setRow(pos.getRow() + dir1.getRow());
                         dir1.setColumn(pos.getColumn() + dir1.getColumn());*/
+        
                         pos1.setRow(pos1.getRow() + dir1.getRow());
                         pos1.setColumn(pos1.getColumn() + dir1.getColumn());
                         pieceList.add(board[pos1.getRow()][pos1.getColumn()]);
@@ -286,7 +287,9 @@ public class Board {
                 }
             }
         }
+        //verifDirDown(pos, piece);
         flip(posToFlip);
+        
         for (int i = 0; i < pieceList.size(); i++)
         {
             if (pieceList.get(i).getColor() != piece.getColor())
@@ -297,6 +300,8 @@ public class Board {
         return pieceList.get(0).getColor() != Color.EMPTY
                 && pieceList.get(0).getColor() != piece.getColor()
                 && pieceList.get(flippableList.lastIndexOf(piece) + 1).getColor() == piece.getColor();
+        
+        //return false;
     }
     
     /**
@@ -380,7 +385,6 @@ public class Board {
      */
     public boolean verifDirDown (Position pos, Piece piece)
     {
-        /*
         Position pos1 = new Position(pos.getRow(), pos.getColumn());
         LinkedList<Piece> list = new LinkedList<>();
         if (board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY && board[pos1.getRow() + 1][pos1.getColumn()].getColor() != null)
@@ -392,9 +396,21 @@ public class Board {
             }
         }
         return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
-    */
+    
+        /*
         LinkedList<Position> posToFlip = new LinkedList<>();
-        return false;
+        Position posInit = pos;
+        posInit.setRow(pos.getRow() +1);
+        posInit.setColumn(pos.getColumn());
+        while (isInside(posInit) && board[posInit.getRow()][posInit.getColumn()].getColor()!= Color.EMPTY &&  board[posInit.getRow()][posInit.getColumn()].getColor()!= piece.getColor()){
+            posToFlip.add(posInit);
+            posInit.setRow(posInit.getRow()+1);
+            posInit.setColumn(posInit.getColumn());
+            
+        }
+        System.out.println(posToFlip.get(0));
+        flip(posToFlip);
+        */
     }
     
     /**
