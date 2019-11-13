@@ -206,16 +206,54 @@ public class Board {
                 );
     }
     
-    public boolean verifDirection (Direction dir, Position pos, Piece piece)
+    /**
+     * Flips the color of each piece that stands between the one that we put and the one on the other side
+     * 
+     * @param direction the direction where to flip the pieces
+     * @param pos the position where to put the new piece
+     * @param piece the piece to put
+     */
+    public void flip (Direction direction, Position pos, Piece piece)
+    {
+        LinkedList<Direction> dirList = new LinkedList<>();
+        LinkedList<Piece> pieceList = new LinkedList<>();
+        for (Direction dir1 : dirList)
+        {
+            if (pieceList.get(0).getColor() == piece.getColor() || pieceList.get(0).getColor() != Color.EMPTY)
+            {
+                if (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
+                        && board[dir1.getRow()][dir1.getColumn()].getColor() != null
+                        && board[direction.getRow()][direction.getColumn()].getColor() != piece.getColor())
+                {
+                    while (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
+                            && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
+                    {
+                        dir1.setRow(dir1.getRow());
+                        dir1.setColumn(dir1.getColumn());
+                        pieceList.add(board[dir1.getRow()][dir1.getColumn()]);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < pieceList.size(); i++) {
+            pieceList.get(i).setColor(piece.getColor());
+        }
+    }
+    
+    public boolean verifDirection (Direction direction, Position pos, Piece piece)
     {
 //        Position pos1 = new Position(pos.getRow(), pos.getColumn());
         LinkedList<Piece> pieceList = new LinkedList<>();
         LinkedList<Direction> dirList = new LinkedList<>();
+        LinkedList<Piece> flippableList = new LinkedList<>();
         for (Direction dir1 : dirList)
         {
-            if (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
+            if (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
+                    && board[dir1.getRow()][dir1.getColumn()].getColor() != null
+                    && board[direction.getRow()][direction.getColumn()].getColor() != piece.getColor())
             {
-                while (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
+                while (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
+                        && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
                 {                    
                     dir1.setRow(dir1.getRow());
                     dir1.setColumn(dir1.getColumn());
@@ -223,7 +261,16 @@ public class Board {
                 }
             }
         }
-        return pieceList.get(1).getColor() != Color.EMPTY && pieceList.get(1).getColor() != piece.getColor() && pieceList.get(pieceList.lastIndexOf(piece)).getColor() == piece.getColor();
+        for (int i = 0; i < pieceList.size(); i++)
+        {
+            while (pieceList.get(i + 1).getColor() != piece.getColor())
+            {     
+                flippableList.add(pieceList.get(i));
+            }
+        }
+        return pieceList.get(1).getColor() != Color.EMPTY
+                && pieceList.get(1).getColor() != piece.getColor()
+                && pieceList.get(flippableList.lastIndexOf(piece)/* + 1*/).getColor() == piece.getColor();
     }
     
     /**
