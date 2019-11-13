@@ -1,8 +1,6 @@
 package Controller;
 
 import Models.*;
-import View.View;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -33,7 +31,7 @@ public class Controller
             pos.setRow(in.nextInt()-1);
             pos.setColumn(in.nextInt()-1);
         }
-        board.flip(pos, piece);
+        //board.flip(pos, piece);
         board.addPiece(piece, pos);
     }
 }

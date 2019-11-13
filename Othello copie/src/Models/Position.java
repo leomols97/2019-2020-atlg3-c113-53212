@@ -65,4 +65,10 @@ public class Position {
     {
         this.column = column;
     }
+
+    @Override
+    public String toString() {
+        return "Position{" + "row=" + row + ", column=" + column + '}';
+    }
+    
 }
