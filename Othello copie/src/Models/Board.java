@@ -1,6 +1,5 @@
 package Models;
 
-import apple.laf.JRSUIConstants;
 import java.util.LinkedList;
 
 /**
@@ -27,6 +26,10 @@ public class Board {
         {
             for (int j = 0; j < board1.length; j++)
             {
+                if (j == 0)
+                {
+                    board1[j] = new Piece(Color.WHITE);
+                }
                 board1[j] = new Piece(Color.EMPTY);
             }
         }
@@ -213,24 +216,30 @@ public class Board {
      * @param pos the position where to put the new piece
      * @param piece the piece to put
      */
-    public void flip (Direction direction, Position pos, Piece piece)
+    public void flip (/*Direction direction,*/ Position pos, Piece piece)
     {
-        LinkedList<Direction> dirList = new LinkedList<>();
+        //LinkedList<Direction> dirList = new LinkedList<>();
         LinkedList<Piece> pieceList = new LinkedList<>();
-        for (Direction dir1 : dirList)
+        for (Direction dir1 : Direction.values())
         {
-            if (pieceList.get(0).getColor() == piece.getColor() || pieceList.get(0).getColor() != Color.EMPTY)
+            Position pos1 = new Position(pos.getRow() + dir1.getRow(), pos.getColumn() + dir1.getColumn());
+            if (isInside(pos1))
             {
-                if (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
-                        && board[dir1.getRow()][dir1.getColumn()].getColor() != null
-                        && board[direction.getRow()][direction.getColumn()].getColor() != piece.getColor())
+                if (pieceList.get(0).getColor() == piece.getColor() || pieceList.get(0).getColor() != Color.EMPTY)
                 {
-                    while (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
-                            && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
+                    if (board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != Color.EMPTY
+                            && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != null
+                            && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != piece.getColor())
                     {
-                        dir1.setRow(dir1.getRow());
-                        dir1.setColumn(dir1.getColumn());
-                        pieceList.add(board[dir1.getRow()][dir1.getColumn()]);
+                        while (board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != Color.EMPTY
+                                && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != null
+                                && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != piece.getColor()
+                                && isInside(pos1))
+                        {
+                            dir1.setRow(pos.getRow() + dir1.getRow());
+                            dir1.setColumn(pos.getColumn() + dir1.getColumn());
+                            pieceList.add(board[dir1.getRow()][dir1.getColumn()]);
+                        }
                     }
                 }
             }
@@ -240,31 +249,39 @@ public class Board {
         }
     }
     
-    public boolean verifDirection (Direction direction, Position pos, Piece piece)
+    public boolean verifDirection (/*Direction direction,*/ Position pos, Piece piece)
     {
-//        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        //Position pos1 = new Position(pos.getRow(), pos.getColumn());
         LinkedList<Piece> pieceList = new LinkedList<>();
-        LinkedList<Direction> dirList = new LinkedList<>();
+        //LinkedList<Direction> dirList = new LinkedList<>();
         LinkedList<Piece> flippableList = new LinkedList<>();
-        for (Direction dir1 : dirList)
+        for (Direction dir1 : Direction.values())
         {
-            if (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
-                    && board[dir1.getRow()][dir1.getColumn()].getColor() != null
-                    && board[direction.getRow()][direction.getColumn()].getColor() != piece.getColor())
+            Position pos1 = new Position(pos.getRow() + dir1.getRow(), pos.getColumn() + dir1.getColumn());
+            if (isInside(pos1))
             {
-                while (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY
-                        && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
-                {                    
-                    dir1.setRow(dir1.getRow());
-                    dir1.setColumn(dir1.getColumn());
-                    pieceList.add(board[dir1.getRow()][dir1.getColumn()]);
+                if (board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != Color.EMPTY
+                        && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != null
+                        && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != piece.getColor())
+                {
+                    while (board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != Color.EMPTY
+                            && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != null
+                            && board[pos.getRow() + dir1.getRow()][pos.getColumn() + dir1.getColumn()].getColor() != piece.getColor()
+                            && isInside(pos1))
+                    {
+                        /*dir1.setRow(pos.getRow() + dir1.getRow());
+                        dir1.setColumn(pos.getColumn() + dir1.getColumn());*/
+                        pieceList.add(board[pos1.getRow()][pos1.getColumn()]);
+                        pos1.setRow(pos1.getRow() + dir1.getRow());
+                        pos1.setColumn(pos1.getColumn() + dir1.getColumn());
+                    }
                 }
             }
         }
         for (int i = 0; i < pieceList.size(); i++)
         {
             while (pieceList.get(i + 1).getColor() != piece.getColor())
-            {     
+            {
                 flippableList.add(pieceList.get(i));
             }
         }
@@ -502,13 +519,14 @@ public class Board {
      * @param pos the position given by the methods that calls this one to be able to know if the following is contained by the playing board or not
      * @return true if the position given in the parameters is contained by the playing board, and false if not
      */
-    /*
-    protected boolean isInside (Position pos)
+    public boolean isInside (Position pos)
     {
-        return this.getboard().length > pos.getRow() && this.getboard()[0].length > pos.getColumn() 
-                && pos.getRow() >= 0 && pos.getColumn() >= 0;
+        return pos.getColumn() >= 0
+                && pos.getColumn() <= 7
+                && pos.getRow()>= 0
+                && pos.getRow()<= 7;
     }
-    */
+    
     
     /**
      * Allows the other classes to know where's a position on the playing board of the position given in the parameters

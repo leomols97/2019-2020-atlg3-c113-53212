@@ -8,8 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import static javafx.application.Application.launch;
 
-public class CalculBMR
-        extends Application {
+public class CalculBMR extends Application {
     
     public static void main(String[] args) {
         launch(args);

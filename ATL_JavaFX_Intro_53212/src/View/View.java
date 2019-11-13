@@ -24,7 +24,7 @@ public class View extends VBox {
         Integer savedPoids = Integer.parseInt(mView.dView.getTfdPoids().getText());
         this.button.setOnAction((event) ->
         {
-            BMRView(Integer.parseInt(mView.dView.getTaille()), savedPoids, mView.dView.getTfdAge(), mView.dView.getSexes(), mView.dView.getCBStyleDeVie());
+            //BMRView(Integer.parseInt(mView.dView.getTaille()), savedPoids, mView.dView.getTfdAge(), mView.dView.getSexes(), mView.dView.getCBStyleDeVie());
         });
         this.getChildren().addAll(mView, button);
     }

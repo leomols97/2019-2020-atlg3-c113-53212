@@ -11,7 +11,7 @@ public enum Direction {
     /**
      * Possible directions
      */
-    STAND (0, 0),
+    /*STAND (0, 0),*/
     UP (-1, 0),
     DOWN (1, 0),
     LEFT (0, -1),
