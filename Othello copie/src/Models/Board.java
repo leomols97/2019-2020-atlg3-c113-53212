@@ -209,6 +209,21 @@ public class Board {
                 );
     }
     
+    public LinkedList<Piece> piecesToFlip (Direction dir, Position position)
+    {
+        LinkedList<Piece> piToFlip = new LinkedList<>();
+        Position pos = new Position(position.getRow(), position.getColumn());
+        while ((isInside(pos)
+                || board[pos.getRow() + dir.getRow()][pos.getColumn() + dir.getColumn()].getColor() != Color.EMPTY)
+                && board[pos.getRow() + dir.getRow()][pos.getColumn() + dir.getColumn()].getColor() != board[pos.getRow()][pos.getColumn()].getColor())
+        {            
+            piToFlip.add(board[pos.getRow() + dir.getRow()][pos.getColumn() + dir.getColumn()]);
+            pos.setRow(pos.getRow() + dir.getRow());
+            pos.setColumn(pos.getColumn() + dir.getColumn());
+        }
+        return piToFlip;
+    }
+    
     /**
      * Flips the color of each piece that stands between the one that we put and the one on the other side
      * 
