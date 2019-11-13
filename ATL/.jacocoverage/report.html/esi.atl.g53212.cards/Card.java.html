@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Card.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ATL&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">esi.atl.g53212.cards</a> &gt; <span class="el_source">Card.java</span></div><h1>Card.java</h1><pre class="source lang-java linenums">package esi.atl.g53212.cards;
+
+import java.util.Objects;
+
+/**
+ * This class initializes a card defined by a value and by a color
+ * @author leopoldmols
+ */
+public class Card {
+    
+    private Color color;
+    private Value value;
+
+    /**
+     * This constructor initialize both class arguments
+     * @param color the card color
+     * @param value the card value
+     * Throws an IllegalArgumentException(&quot;La couleur de la carte n'est pas correcte !&quot;) if the card color is null
+     * Throws an IllegalArgumentException(&quot;La valeur de la carte n'est pas correcte !&quot;) if the card value is null
+     */
+<span class="fc" id="L21">    public Card(Color color, Value value) {</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if (color == null) {</span>
+<span class="nc" id="L23">            throw new IllegalArgumentException(&quot;La couleur de la carte n'est pas correcte !&quot;);</span>
+        }
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if (value == null) {</span>
+<span class="nc" id="L26">            throw new IllegalArgumentException(&quot;La valeur de la carte n'est pas correcte !&quot;);</span>
+        }
+<span class="fc" id="L28">        this.color = color;</span>
+<span class="fc" id="L29">        this.value = value;</span>
+<span class="fc" id="L30">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L34">        int hash = 3;</span>
+<span class="nc" id="L35">        hash = 83 * hash + Objects.hashCode(this.color);</span>
+<span class="nc" id="L36">        hash = 83 * hash + Objects.hashCode(this.value);</span>
+<span class="nc" id="L37">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L43">            return true;</span>
+        }
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L46">            return false;</span>
+        }
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L49">            return false;</span>
+        }
+<span class="nc" id="L51">        final Card other = (Card) obj;</span>
+        
+        // APA :
+        /*
+            return this.color== other.color &amp;&amp; this.value == other.value
+        */
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (this.color != other.color) {</span>
+<span class="nc" id="L58">            return false;</span>
+        }
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (this.value != other.value) {</span>
+<span class="nc" id="L61">            return false;</span>
+        }
+<span class="nc" id="L63">        return true;</span>
+    }
+
+    /**
+     * This method only shows a more beautiful message to show which card and which card value is taken
+     * @return the more beautiful message
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L72">        return this.value + &quot; de &quot; + this.color;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
