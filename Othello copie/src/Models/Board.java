@@ -1,5 +1,6 @@
 package Models;
 
+import apple.laf.JRSUIConstants;
 import java.util.LinkedList;
 
 /**
@@ -22,11 +23,11 @@ public class Board {
     public Board()
     {
         this.board = new Piece[8][8];
-        for (int i = 0; i < board.length; i++)
+        for (Piece[] board1 : board)
         {
-            for (int j = 0; j < board[i].length; j++)
+            for (int j = 0; j < board1.length; j++)
             {
-                board[i][j] = new Piece(Color.EMPTY);
+                board1[j] = new Piece(Color.EMPTY);
             }
         }
         board[3][3].setColor(Color.WHITE);
@@ -63,11 +64,11 @@ public class Board {
      */
     public boolean isOver()
     {
-        for (int i = 0; i < board.length; i++)
+        for (Piece[] board1 : board)
         {
-            for (int j = 0; j < board[i].length; j++)
+            for (Piece board11 : board1)
             {
-                if (board[i][j].getColor() == Color.EMPTY)
+                if (board11.getColor() == Color.EMPTY)
                 {
                     return false;
                 }
@@ -75,6 +76,11 @@ public class Board {
         }
         return true;
     }
+    /*
+    public boolean flippable ()
+    {
+        
+    }*/
     
     /**
      * Verifies if a position can welcome a piece or not
@@ -90,33 +96,33 @@ public class Board {
             if (pos.getColumn() == 0)
             {
                 return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                        && board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                        && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
                         || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                        && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                        && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                         || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                        && board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                        && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
                         );
             } else
                 if (pos.getColumn() == 7)
                 {
                     return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                            && board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                            && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
                             || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                            && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                            && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                             || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                            && board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                            && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY)
                             );
                 }
             return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
                 || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 );
         } else
             if (pos.getRow() == 7)
@@ -124,87 +130,101 @@ public class Board {
                 if (pos.getColumn() == 0)
                 {
                     return ((board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                            && board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                            && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
                             || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                            && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                            && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                             || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                            && board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                            && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
                             );
                 } else
                     if (pos.getColumn() == 7)
                     {
                         return ((board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                                && board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                                && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
                                 || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                                 || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                                && board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                                && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY)
                                 );
                     }
                 return ((board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 );
             }
         if (pos.getColumn() == 0)
         {
             return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
                 || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
                 );
         }
         if (pos.getColumn() == 7)
         {
             return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
                 || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 );
         }
         return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
                 || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
                 || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor().EMPTY)
+                && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY)
                 );
     }
     
-    /*
-    public Position direction (Position pos, Piece piece)
+    public boolean verifDirection (Direction dir, Position pos, Piece piece)
     {
-        
-    }*/
+//        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> pieceList = new LinkedList<>();
+        LinkedList<Direction> dirList = new LinkedList<>();
+        for (Direction dir1 : dirList)
+        {
+            if (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
+            {
+                while (board[dir1.getRow()][dir1.getColumn()].getColor() != Color.EMPTY && board[dir1.getRow()][dir1.getColumn()].getColor() != null)
+                {                    
+                    dir1.setRow(dir1.getRow());
+                    dir1.setColumn(dir1.getColumn());
+                    pieceList.add(board[dir1.getRow()][dir1.getColumn()]);
+                }
+            }
+        }
+        return pieceList.get(1).getColor() != Color.EMPTY && pieceList.get(1).getColor() != piece.getColor() && pieceList.get(pieceList.lastIndexOf(piece)).getColor() == piece.getColor();
+    }
     
     /**
      * Verifies if there are some piece to "eat" in the up direction belonging the position of the piece
@@ -217,8 +237,9 @@ public class Board {
     {
         Position pos1 = new Position(pos.getRow(), pos.getColumn());
         LinkedList<Piece> list = new LinkedList<>();
-        if (board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY) {
-            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY)
+        if (board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY && board[pos1.getRow() - 1][pos1.getColumn()].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
             {
                 pos1.setRow(pos1.getRow() - 1);
                 list.add(board[pos1.getRow()][pos1.getColumn()]);
@@ -235,84 +256,158 @@ public class Board {
      * Verifies if there are some piece to "eat" in the upLeft direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the upLeft direction and false else
      */
     public boolean verifDirUpLeft (Position pos, Piece piece)
     {
-        
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
+        if (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY && board[pos1.getRow() - 1][pos1.getColumn() - 1].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
+            {
+                pos1.setRow(pos1.getRow() - 1);
+                pos1.setColumn(pos1.getColumn() - 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
+            }
+        }
+        return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
     }
     
     /**
      * Verifies if there are some piece to "eat" in the upRight direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the upRight direction and false else
      */
     public boolean verifDirUpRight (Position pos, Piece piece)
     {
-        
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
+        if (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY && board[pos1.getRow() - 1][pos1.getColumn() + 1].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
+            {
+                pos1.setRow(pos1.getRow() - 1);
+                pos1.setColumn(pos1.getColumn() + 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
+            }
+        }
+        return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
     }
     
     /**
      * Verifies if there are some piece to "eat" in the down direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the down direction and false else
      */
     public boolean verifDirDown (Position pos, Piece piece)
     {
-        
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
+        if (board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY && board[pos1.getRow() + 1][pos1.getColumn()].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
+            {
+                pos1.setRow(pos1.getRow() + 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
+            }
+        }
+        return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
     }
     
     /**
      * Verifies if there are some piece to "eat" in the downLeft direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the DownLeft direction and false else
      */
     public boolean verifDirDownLeft (Position pos, Piece piece)
     {
-        
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
+        if (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY && board[pos1.getRow() + 1][pos1.getColumn() - 1].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
+            {
+                pos1.setRow(pos1.getRow() + 1);
+                pos1.setColumn(pos1.getColumn() - 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
+            }
+        }
+        return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
     }
     
     /**
      * Verifies if there are some piece to "eat" in the downRight direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the downRight direction and false else
      */
     public boolean verifDirDownRight (Position pos, Piece piece)
     {
-        
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
+        if (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY && board[pos1.getRow() + 1][pos1.getColumn() + 1].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
+            {
+                pos1.setRow(pos1.getRow() + 1);
+                pos1.setColumn(pos1.getColumn() + 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
+            }
+        }
+        return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
     }
     
     /**
      * Verifies if there are some piece to "eat" in the right direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the right direction and false else
      */
     public boolean verifDirRight (Position pos, Piece piece)
     {
-        
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
+        if (board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY && board[pos1.getRow()][pos1.getColumn() + 1].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
+            {
+                pos1.setColumn(pos1.getColumn() + 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
+            }
+        }
+        return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
     }
     
     /**
      * Verifies if there are some piece to "eat" in the left direction belonging the position of the piece
      * 
      * @param pos the position of the piece
-     * @param color the color of the piece
+     * @param piece the color of the piece
      * @return true of there are some piece to "eat" in the left direction and false else
      */
     public boolean verifDirLeft (Position pos, Piece piece)
     {
-        
+        Position pos1 = new Position(pos.getRow(), pos.getColumn());
+        LinkedList<Piece> list = new LinkedList<>();
+        if (board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY && board[pos1.getRow()][pos1.getColumn() - 1].getColor() != null)
+        {
+            while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY || board[pos1.getRow()][pos1.getColumn()].getColor() != null)
+            {
+                pos1.setColumn(pos1.getColumn() - 1);
+                list.add(board[pos1.getRow()][pos1.getColumn()]);
+            }
+        }
+        return list.get(1).getColor() != Color.EMPTY && list.get(1).getColor() != piece.getColor() && list.get(list.lastIndexOf(piece)).getColor() == piece.getColor();
     }
     
     /**

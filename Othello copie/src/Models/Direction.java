@@ -25,8 +25,8 @@ public enum Direction {
      * As the directions are moves, it is necessary to know the row and the column
      * that will be the values of the different directions
      */
-    private final int row;
-    private final int column;
+    private int row;
+    private int column;
 
     /**
      * Constructs the parameters of the class that makes the new position that is made by a new row and a new Column
@@ -58,5 +58,13 @@ public enum Direction {
     public int getColumn()
     {
         return column;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 }
