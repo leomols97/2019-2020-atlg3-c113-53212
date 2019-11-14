@@ -14,13 +14,15 @@ public class View {
      * To let the user enter some commands
      */
     private final Scanner in;
+    //private Model board;
     
     /**
      * Constructs a new View
      */
-    public View()
+    public View(/*Model board*/)
     {
         in = new Scanner(System.in);
+        /*this.board = board;*/
     }
     
     /**
@@ -229,9 +231,6 @@ public class View {
                 {
                     switch (item.getColor())
                     {
-                        case EMPTY:
-                            System.out.print(" 0 ");
-                            break;
                         case BLACK:
                             System.out.print(" 2 ");
                             break;

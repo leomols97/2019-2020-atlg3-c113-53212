@@ -21,6 +21,7 @@ public class Controller
     {
         Piece piece = new Piece(playerColor);
         Position pos = new Position(in.nextInt() - 1, in.nextInt() - 1);
+        
         while (!(board.positionable(pos, piece)
                 || !board.isInside(pos)
                 || !board.isFree(pos))
@@ -32,6 +33,7 @@ public class Controller
             pos.setColumn(in.nextInt()-1);
         }
         //board.flip(pos, piece);
+        board.flipB(listDirOfListPiecesToFlip, pos);
         board.addPiece(piece, pos);
     }
 }

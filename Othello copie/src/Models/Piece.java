@@ -45,7 +45,7 @@ public class Piece {
         if (this.color == Color.WHITE)
         {
             this.color = Color.BLACK;
-        }
+        } else
         if (this.color == Color.BLACK)
         {
             this.color = Color.WHITE;
@@ -60,5 +60,9 @@ public class Piece {
     public void setColor(Color color)
     {
         this.color = color;
+    }
+
+    public boolean isMyOwn(Color color) {
+        return this.color == color;
     }
 }

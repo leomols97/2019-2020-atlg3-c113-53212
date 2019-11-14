@@ -65,6 +65,16 @@ public class Position {
     {
         this.column = column;
     }
+    
+    /**
+     * Purpose to the program the next position possible by a piece on the playing board
+     * @param direction the next position of the piece
+     * @return a new position by adding the row of the new direction to the row of the actual position of the piece
+     * and by adding the column of the new direction to the column of the actual position of the piece
+     */
+    public Position next(Direction direction) {
+        return new Position(this.row + direction.getRow(), this.column + direction.getColumn());
+    }
 
     @Override
     public String toString() {
