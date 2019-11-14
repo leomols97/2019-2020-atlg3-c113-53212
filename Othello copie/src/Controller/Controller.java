@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.*;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -21,7 +22,16 @@ public class Controller
     {
         Piece piece = new Piece(playerColor);
         Position pos = new Position(in.nextInt() - 1, in.nextInt() - 1);
-        
+        Position pos1 = new Position(5, 3);
+        LinkedList<Direction> dirList = board.listDirection(pos, playerColor);
+        /*
+        LinkedList<Piece> pieceList = null;
+        for (Direction dir : dirList) {
+            pieceList = board.listPieces(dir, pos);
+        }
+        LinkedList<Piece> pieceListToFlip = board.listPiecesToFlip(pieceList);
+*/
+        LinkedList<LinkedList<Piece>> listDirsOfPieceToFlip = board.dirsToFlip(pos);
         while (!(board.positionable(pos, piece)
                 || !board.isInside(pos)
                 || !board.isFree(pos))
@@ -33,7 +43,10 @@ public class Controller
             pos.setColumn(in.nextInt()-1);
         }
         //board.flip(pos, piece);
-        board.flipB(listDirOfListPiecesToFlip, pos);
+        
+        board.addPiece(piece, pos1);
+        board.getBoard()[5][3].invert();
+//        board.flipB(listDirsOfPieceToFlip, pos);
         board.addPiece(piece, pos);
     }
 }

@@ -30,7 +30,7 @@ public class Board /* implements Model */{
                 {
                     board1[j] = new Piece(Color.WHITE);
                 }
-                //board1[j] = new Piece(Color.EMPTY);
+                board1[j] = new Piece(Color.EMPTY);
             }
         }
         board[3][3].setColor(Color.WHITE);
@@ -259,7 +259,7 @@ public class Board /* implements Model */{
      * @param color the color of the piece around which it has to add the differnet directions
      * @return the list of directions
      */
-    protected LinkedList<Direction> listDirection (Position pos, Color color)
+    public LinkedList<Direction> listDirection (Position pos, Color color)
     {
         LinkedList<Direction> listDir = new LinkedList<>();
         for (Direction dir : Direction.values()) {
@@ -270,11 +270,11 @@ public class Board /* implements Model */{
         return listDir;
     }
     
-    protected LinkedList<Piece> listPieces (Direction direction, Position position)
+    public LinkedList<Piece> listPieces (Direction direction, Position position)
     {
         LinkedList<Piece> piToFlip = new LinkedList<>();
-        while (board[position.getRow()][position.getColumn()].getColor() != Color.EMPTY
-                || isInside(position))
+        while (isInside(position)
+                && board[position.getRow()][position.getColumn()].getColor() != Color.EMPTY)
         {
             for (Direction dir : Direction.values()) {
                 if (dir == direction) {
@@ -292,7 +292,7 @@ public class Board /* implements Model */{
         return piToFlip;
     }
     
-    protected LinkedList<Piece> listPiecesToFlip (LinkedList<Piece> listToGoFlipable)
+    public LinkedList<Piece> listPiecesToFlip (LinkedList<Piece> listToGoFlipable)
     {
         LinkedList<Piece> flippingList = new LinkedList<>();
         for (int i = 0; i < listToGoFlipable.size(); i++) {
@@ -313,7 +313,7 @@ public class Board /* implements Model */{
         return flippingList;
     }
     
-    protected LinkedList<LinkedList<Piece>> dirsToFlip (Position position /*, LinkedList<Piece> listPiToFlip*/ )
+    public LinkedList<LinkedList<Piece>> dirsToFlip (Position position /*, LinkedList<Piece> listPiToFlip*/ )
     {
         //LinkedList<Direction> flipableDirs = new LinkedList<>();
         LinkedList<LinkedList<Piece>> listOfDirectionOfListOfPiecesToFlip = new LinkedList<>();

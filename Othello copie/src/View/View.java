@@ -231,6 +231,9 @@ public class View {
                 {
                     switch (item.getColor())
                     {
+                        case EMPTY:
+                            System.out.print(" 0 ");
+                            break;
                         case BLACK:
                             System.out.print(" 2 ");
                             break;
