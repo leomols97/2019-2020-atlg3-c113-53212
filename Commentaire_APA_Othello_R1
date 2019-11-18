@@ -1,0 +1,20 @@
+Commentaire APA OThello R1 (basé sur Othello copie)
+
+Il te faut une classe game.java qui implémente le modèle pour tout ce qui est propre à la logique de jeu de Othello (player+board+règle du jeu).
+
+Main.java : Dans cette classe tu crées ton modèle, ta vue et ton controleur puis tu démarres ton crontrolleur qui prend le contrôle du jeu. La boucle while et l'inteprétation des commandes de l'utilisateur se fait dans le controleur.		
+
+
+Board.java : cette classe ne doit contenir que des méthodes propres au plateau de jeu put une pièce, flip une pièce, is full,.. rien qui concerne le jeu.
+
+Ta méthode positionable est beaucoup trop compliquée.
+	Un joueur peut positionner une pièce à condition :
+		- Que la case soit sur le plateau de jeu (méthode isInside)
+		- Que la case soit vide (il faut une méthode isEmpty/isFree
+		- Qu'en positionnant le pion il puisse prendre un pion dans au moins une direction.
+			- Il faut que la case adjacente dans cette directin soit occupée par un pion d'une autre couleur isAdj
+			- Il faut qu'il y ait un pion de sa couleur dans cette direction.
+
+Board.java : Le but des directions est d'éviter toutes les méthodes verifDir* qui sont toutes les mêmes à part quelques arguments. Il faut donner la direction en paramètre à une méthode verifDir générale.
+
+Board.java : Ne met pas des pièces vide partout sur le plateau. Ca ne correspond pas vraiment à la réalité et n'est pas nécessaire. Une case vide est une case sans pion posé dessus et non une case avec un pion vide.
