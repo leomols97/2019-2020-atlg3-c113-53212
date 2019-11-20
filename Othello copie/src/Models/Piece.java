@@ -42,14 +42,7 @@ public class Piece {
      */
     public void invert ()
     {
-        if (this.color == Color.WHITE)
-        {
-            this.color = Color.BLACK;
-        } else
-        if (this.color == Color.BLACK)
-        {
-            this.color = Color.WHITE;
-        }
+        this.color = this.color.invert();
     }
 
     /**

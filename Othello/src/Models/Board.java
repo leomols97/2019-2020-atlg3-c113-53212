@@ -60,14 +60,13 @@ public class Board {
      * 
      * This throws an IllegalArgumentException("La pièce n'est pas sur le plateau de jeu !") if the method isInside() retturns false
      */
-    protected Square getSquare(Position pos)
+    protected Piece getPiece(Position pos)
     {
-        
         if (!isInside(pos))
         {
             throw new IllegalArgumentException("La position n'est pas sur le plateau de jeu !");
         }
-        return this.squares[pos.getRow()][pos.getColumn()];
+        return this.board[pos.getRow()][pos.getColumn()];
     }
     
     /**

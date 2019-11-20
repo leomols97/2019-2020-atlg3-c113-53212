@@ -76,9 +76,13 @@ public class Position {
         return new Position(this.row + direction.getRow(), this.column + direction.getColumn());
     }
 
+    /*public Position move(Direction dir)
+    {
+        return new Position(row + dir.getRow(), column + dir.getColumn());
+    }*/
+
     @Override
     public String toString() {
         return "Position{" + "row=" + row + ", column=" + column + '}';
     }
-    
 }

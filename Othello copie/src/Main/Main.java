@@ -17,15 +17,18 @@ public class Main {
      */
     public static void main(String[] args)
     {
-        View vue = new View();
-        Controller controller = new Controller();
-        Player current = new Player(Color.WHITE);
-        Board board = new Board();
-        while (!board.isOver())
+        View view = new View();
+        Game game = new Game();
+        Controller controller = new Controller(game, view);
+        controller.startGame();
+        //Player current = new Player(Color.WHITE);
+        //Board board = new Board();
+        /*while (!board.isOver())
         {
-            vue.displayBoard(board.getBoard());
+            view.askCommand();
+            view.displayBoard(board.getBoard());
             controller.addPiece(current.getColor(), board);
             current.invert();
-        }
+        }*/
     }
 }

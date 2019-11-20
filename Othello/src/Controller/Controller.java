@@ -58,41 +58,15 @@ public class Controller {
      */
     public void startGame()
     {
-        
-//        game.start();
-//        
-//        boolean quitGame = false;
-//        
-//        while (!game.isOver() && !quitGame)
-//        {
-//            System.out.println();
-//            this.view.displayBoard(game.getBoard(), game.getCurrent(), false);
-//            System.out.println();
-//            view.displayCurrentPlayer(game.getCurrent()); // shows the player that has to play now
-//            System.out.println();
-//            view.displayHelp(); // shows the different commands the player can do
-//            System.out.println();
-//            quitGame = command();
-//        }
-//        
-//        if (!quitGame)
-//        {
-//            this.view.displayBoard(game.getBoard(), game.getCurrent(), true);
-//            System.out.println();
-//            game.getWinners();
-//            System.out.println();
-//            view.displayOver(game.getWinners(), game.getLoosers());
-//        }
-        
         game.start();
         
-        boolean end = false;
+        boolean endCom = false;
         boolean newTurn = false;
         boolean correctCom = false;
         String[] separate;
         view.displayCurrentPlayer(game.getCurrent());
         
-        while (!game.isOver() && !end)
+        while (!game.isOver() && !endCom)
         {
             if (newTurn)
             {
@@ -129,7 +103,7 @@ public class Controller {
                     break;
                 case "quit" :
                     correctCom = true;
-                    end = true;
+                    endCom = true;
                 case "play" :
                     correctCom = true;
                     Position newPos;
@@ -149,7 +123,7 @@ public class Controller {
                     view.displayError("La commande n'est pas correctement entrée ! Suivez les instruction proposées !");
             }
         }
-        if (end) {
+        if (endCom) {
             view.displayOver();
             game.getScoreBlack();
             game.getScoreWhite();

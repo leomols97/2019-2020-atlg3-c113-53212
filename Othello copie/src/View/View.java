@@ -30,13 +30,13 @@ public class View {
      */
     public void initialize()
     {
-        System.out.println("Un petit Othello ? Go :");
+        System.out.println("Bienvenue dans le jeu Othello");
     }
     
     /**
      * This show a goobye message to the user
      */
-    public void quit()
+    public void displayQuit()
     {
         System.out.println("\nA la prochaine, et merci d'avoir joué !");
     }
@@ -208,10 +208,8 @@ public class View {
      * Shows the board
      *
      * @param plateau the plateaus
-     * @param current the current player
-     * @param quitgame to know if the game is finished or not
      */
-    public void displayBoard (Piece[][] plateau /*, Player current, boolean quitgame */)
+    public void displayBoard (Piece[][] plateau)
     {
         
         for (Piece plateaus : plateau[0])

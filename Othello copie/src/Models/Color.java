@@ -13,6 +13,17 @@ public enum Color {
     WHITE,
     BLACK,
     EMPTY;
+
+    public Color invert() {
+        if (this == WHITE)
+        {
+            return BLACK;
+        }
+        else
+        {
+            return WHITE;
+        }
+    }
     
     //private int color;
 

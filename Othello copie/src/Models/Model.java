@@ -35,7 +35,7 @@ public interface Model {
      * 
      * @return the board.
      */
-    //Square [][] getBoard();
+    Piece [][] getBoard();
     
     /**
      * Select a position at a position to make it change of color
@@ -57,7 +57,7 @@ public interface Model {
      * 
      * @return the player that has to play now
      */
-    //Player getCurrent();
+    Player getCurrent();
     
     /**
      * Inserts a piece on the playing board if this is possible
@@ -72,7 +72,7 @@ public interface Model {
      * @param pos the position where to find the square
      * @return the square
      */
-    //Square getSquare(Position pos);
+    Piece getPiece(Position pos);
     
     /**
      * Change of current player
@@ -122,4 +122,11 @@ public interface Model {
      * @param pos the position where to place the piece
      */
     void place (Position pos);
+    
+    /**
+     * Displays the player
+     * 
+     * @param over 
+     */
+    //void Player (boolean over);
 }

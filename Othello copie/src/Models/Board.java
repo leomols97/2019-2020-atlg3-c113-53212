@@ -46,8 +46,14 @@ public class Board /* implements Model */{
      */
     public Piece[][] getBoard()
     {
-        // MAUVAIS ! Il faut utiliser des méthodes qui existent dans l'API java pour les tableaux 
+        // MAUVAIS ! Il faut utiliser des méthodes qui existent dans l'API java pour les tableaux
         return board;
+    }
+    
+    
+    public Piece getPiece (int row, int column)
+    {
+        return null;
     }
     
     /**
@@ -58,7 +64,7 @@ public class Board /* implements Model */{
      */
     public void addPiece(Piece piece, Position pos)
     {
-        this.board[pos.getRow()][pos.getColumn()] = piece;
+        this.board[pos.getRow()][pos.getColumn()].setColor(piece.getColor());
     }
     
     /**
@@ -93,6 +99,8 @@ public class Board /* implements Model */{
      * @param piece the piece that has to come
      * @return true if the position can welcome a piece with the current color and false else
      */
+    
+    
     public boolean positionable (Position pos, Piece piece)
     {
         if (pos.getRow() == 0)
@@ -210,42 +218,6 @@ public class Board /* implements Model */{
                 );
     }
     
-    /**
-     * Verifies if the piece that stands on a square on the playing board the playing board has the same color than a color
-     * @param position where the method has to verify if there's a piece on it and if well, if it has the same color than the second parameter
-     * @param color the color that has to be compared to the piece on the position given as first parameter
-     * @return true if the piece has the same color than the color given in the parameters and true either
-     * 
-     * This metho throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
-     * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not insiade the playing board
-     */
-    public boolean isMyOwn(Position position, Color color)
-    {
-        if (position == null)
-        {
-            throw new NullPointerException("La position n'existe pas !");
-        }
-        if (!isInside(position))
-        {
-            throw new IllegalStateException("La position ne fait pas partie du tableau de jeu !");
-        }
-        return this.getPiece(position).isMyOwn(color);
-    }
-    /**
-     * Allows the other classes to know where's a position on the playing board of the position given in the parameters
-     * @param position the parameters that allows the method to know what is the place to return
-     * @return the exact place of the position given in the parameters on the playing board
-     * 
-     * This throws an IllegalArgumentException("La pièce n'est pas sur le plateau de jeu !") if the method isInside() retturns false
-     */
-    protected Piece getPiece(Position position)
-    {
-        if (!isInside(position))
-        {
-            throw new IllegalArgumentException("La position n'est pas sur le plateau de jeu !");
-        }
-        return this.board[position.getRow()][position.getColumn()];
-    }
     
     
     
@@ -270,18 +242,26 @@ public class Board /* implements Model */{
         return listDir;
     }
     
-    public LinkedList<Piece> listPieces (Direction direction, Position position)
+    public void flipPos(LinkedList<LinkedList<Piece>> listDirsOfPieceToFlip){
+        for(int i = 0; i < listDirsOfPieceToFlip.size(); i++){
+            for(int j =0; j < listDirsOfPieceToFlip.get(i).size(); j++){
+                
+            }
+        }
+    }
+    
+    public LinkedList<Position> listPieces (Direction direction, Position position)
     {
-        LinkedList<Piece> piToFlip = new LinkedList<>();
+        LinkedList<Position> piToFlip = new LinkedList<>();
+        
         while (isInside(position)
                 && board[position.getRow()][position.getColumn()].getColor() != Color.EMPTY)
         {
-            for (Direction dir : Direction.values()) {
-                if (dir == direction) {
-                    piToFlip.add(board[position.getRow()][position.getColumn()]);
-                    position.setRow(position.getRow() + dir.getRow());
-                    position.setColumn(position.getColumn() + dir.getColumn());
-                }
+            for (Direction dir : Direction.values())
+            {
+                piToFlip.add(position);
+                position.setRow(position.getRow() + direction.getRow());
+                position.setColumn(position.getColumn() + direction.getColumn());
             }
             /*
             piToFlip.add(board[position.getRow()][position.getColumn()]);
@@ -289,63 +269,82 @@ public class Board /* implements Model */{
             position.setColumn(position.getColumn() + direction.getColumn());
             */
         }
+        System.out.println("-1" + piToFlip.toString());
         return piToFlip;
     }
     
-    public LinkedList<Piece> listPiecesToFlip (LinkedList<Piece> listToGoFlipable)
+    public LinkedList<Position> listPiecesToFlip (LinkedList<Position> listToGoFlipable)
     {
-        LinkedList<Piece> flippingList = new LinkedList<>();
+        LinkedList<Position> flippingList = new LinkedList<>();
         for (int i = 0; i < listToGoFlipable.size(); i++) {
-            if (listToGoFlipable.get(i).getColor() == listToGoFlipable.get(2).getColor())
+            //if (listToGoFlipable.get(0).getColor() == listToGoFlipable.get(listToGoFlipable.size() - 1).getColor())
+            if (board[listToGoFlipable.get(i).getRow()][listToGoFlipable.get(i).getColumn()].getColor() == board[listToGoFlipable.get(listToGoFlipable.size() - 1).getRow()][listToGoFlipable.get(listToGoFlipable.size() - 1).getColumn()].getColor())
             {
+                /*System.out.println("0" + flippingList.toString());
                 return flippingList;
-            } else
-                for (int j = 1; j < listToGoFlipable.size() - 1; j++) {
-                    if (listToGoFlipable.get(i) != listToGoFlipable.get(listToGoFlipable.size()-1)) {
-                        return flippingList;
-                    }
-                    else
+                } else*/
+                System.out.println("1" + flippingList.toString());
+                for (int j = 1; j < listToGoFlipable.size(); j++) {
+                    System.out.println("2" + flippingList.toString());
+                    if (board[listToGoFlipable.get(i).getRow()][listToGoFlipable.get(i).getColumn()].getColor() != board[listToGoFlipable.get(listToGoFlipable.size() - 1).getRow()][listToGoFlipable.get(listToGoFlipable.size() - 1).getColumn()].getColor())
                     {
                         flippingList.add(listToGoFlipable.get(j));
+                        System.out.println("3" + flippingList.toString());
                     }
+                    /*else
+                    {
+                    System.out.println("4" + flippingList.toString());
+                    flippingList.add(listToGoFlipable.get(j));
+                    }*/
+                    System.out.println("4" + flippingList.toString());
                 }
+            }
         }
+        System.out.println("5" + flippingList.toString());
         return flippingList;
     }
-    
-    public LinkedList<LinkedList<Piece>> dirsToFlip (Position position /*, LinkedList<Piece> listPiToFlip*/ )
+    /*
+    public void dirsToFlip (Position position)
     {
         //LinkedList<Direction> flipableDirs = new LinkedList<>();
-        LinkedList<LinkedList<Piece>> listOfDirectionOfListOfPiecesToFlip = new LinkedList<>();
+        LinkedList<LinkedList<Position>> listOfDirectionOfListOfPiecesToFlip = new LinkedList<>();
         for (Direction dir : Direction.values())
         {
+            LinkedList<Position> listAFlip = new LinkedList<>();
             Position next = position.next(dir);
+            System.out.println(isInside(next));
+            System.out.println(board[next.getRow()][next.getColumn()].getColor() != Color.EMPTY);
+            System.out.println(!isMyOwn(next, board[position.getRow()][position.getColumn()].getColor()));
             if (isInside(next)
                     && board[next.getRow()][next.getColumn()].getColor() != Color.EMPTY
-                    && !isMyOwn(next, board[position.getRow()][position.getColumn()].getColor())
-                    && !listPiecesToFlip(listPieces(dir, position)).isEmpty())
+                    && !isMyOwn(next, board[position.getRow()][position.getColumn()].getColor()))
             {
-                listOfDirectionOfListOfPiecesToFlip.add(listPiecesToFlip(listPieces(dir, position)));
+                System.out.println(listOfDirectionOfListOfPiecesToFlip.toString());
+                //listOfDirectionOfListOfPiecesToFlip.add(listPiecesToFlip(listPieces(dir, next)));
                 // Faire appel à la méthode qui renverra une liste de pieces dont la couleur de la dernière différera de la couleur des autres.
                 // si elle est vide, passer à la direction suivante
                 //      donc, si elle n'est pas vide, s'occuper de la direction
                 //flipableDirs.add(dir);
+                listAFlip = listPieces(dir, position);
             }
+            flipB(listAFlip);
         }
-        return listOfDirectionOfListOfPiecesToFlip;
+        System.out.println(listOfDirectionOfListOfPiecesToFlip.toString());
+        
     }
+    */
     
-    public void flipB (LinkedList<LinkedList<Piece>> listDirOfListPiecesToFlip, Position position)
+    public void flipB (LinkedList<Position> listPosToFlip/*LinkedList<LinkedList<Position>> listDirOfListPiecesToFlip*/ /*, Position position*/)
     {
-        for (int i = 0; i < listDirOfListPiecesToFlip.size(); i++) {
+        //listDirOfListPiecesToFlip = dirsToFlip(position);
+        for (int i = 0; i < listPosToFlip.size(); i++) {
             //listPiecesToFlip(directionsToFlip.get(i));
             /*for (int j = 0; j < dirsToFlip.get(i).size(); j++) {
                 Direction get = dirsToFlip.get(j);
-                
             }*/
-            for (int j = 0; j < listDirOfListPiecesToFlip.get(i).size(); j++) {
-                listDirOfListPiecesToFlip.get(i).get(j).invert();
-            }
+            //for (int j = 0; j < listDirOfListPiecesToFlip.get(i).size(); j++) {
+                board[listPosToFlip.get(i).getColumn()][listPosToFlip.get(i).getRow()].invert();
+            //}
             //board[directionsToFlip.get(i).getRow()][directionsToFlip.get(i).getColumn()].invert();
         }
     }
@@ -353,7 +352,10 @@ public class Board /* implements Model */{
     
     
     
+    /*
     
+    
+    */
     
     
     public LinkedList<Position> positionsToFlip (Direction dir, Position position)
@@ -783,22 +785,20 @@ public class Board /* implements Model */{
     */
     
     /**
-     * Shows  the caracteristics of the object "Piece" that stands on the position given as parameters
+     * Shows the caracteristics of the object "Piece" that stands on the position given as parameters
      * @param pos the position where the piece has to be returned
      * @return the piece that stands on the position given as paramters
      * 
      * This throws a new ArrayIndexOutOfBoundsException("La position ne fait pas partie du tableau de jeu !") if the position is not insiade the playing board
      */
-    /*
     public Piece getPiece(Position pos)
     {
         if (!isInside(pos))
         {
             throw new IllegalArgumentException("La position ne fait pas partie du tableau de jeu !");
         }
-        return getSquare(pos).getPiece();
+        return this.board[pos.getRow()][pos.getColumn()];
     }
-    */
     
     /**
      * Count the number of pieces that belongs to the player received as parameter

@@ -36,7 +36,6 @@ public class Game implements Model{
         Position posp2 = new Position(5, 6);
         Position posp3 = new Position(6, 5);
         Position posp4 = new Position(6, 6);
-        
     }
     
     /**
