@@ -28,7 +28,7 @@ public class View {
     /**
      * This shows a welcoming message to the user
      */
-    public void initialize()
+    public void displayStart()
     {
         System.out.println("Bienvenue dans le jeu Othello");
     }
@@ -56,11 +56,11 @@ public class View {
      */
     public void displayHelp()
     {
-        System.out.println("Commandes possibles : ");
+        System.out.println("\nCommandes possibles : ");
         System.out.println(" - 'show' : afficher le plateau de jeu");
         System.out.println(" - 'score' : afficher le score des joueurs");
         System.out.println(" - 'play i j' : jouer où 'i' représente la ligne dans laquelle placer votre pion et 'j' la colonne");
-        System.out.println(" - 'quit' : quitter le jeu");
+        System.out.println(" - 'quit' : quitter le jeu\n");
     }
     
     /**
@@ -70,7 +70,7 @@ public class View {
      */
     public String askCommand()
     {
-        System.out.print("Entrez votre commande :");
+        System.out.print("Entrez votre commande : ");
         String command = in.nextLine();
         return command;
     }
@@ -211,7 +211,6 @@ public class View {
      */
     public void displayBoard (Piece[][] plateau)
     {
-        
         for (Piece plateaus : plateau[0])
         {
             System.out.print("---");
@@ -222,7 +221,7 @@ public class View {
         
         for (Piece[] plateau1 : plateau)
         {
-//            row(plateau, current, i, quitgame);
+            //row(plateau, current, i, quitgame);
             for (Piece item : plateau1)
                 
                 if (null != item.getColor())
@@ -243,6 +242,10 @@ public class View {
                     }
                 }
             System.out.println();
+        }
+        for (Piece plateaus : plateau[0])
+        {
+            System.out.print("---");
         }
     }
 }

@@ -681,7 +681,7 @@ public class Board /* implements Model */{
      */
     public boolean isFree (Position pos)
     {
-        return board[pos.getRow()][pos.getColumn()].getColor() != Color.EMPTY;
+        return this.board[pos.getRow()][pos.getColumn()].getColor() == Color.EMPTY;
     }
     
     /**

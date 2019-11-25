@@ -38,14 +38,6 @@ public interface Model {
     Piece [][] getBoard();
     
     /**
-     * Select a position at a position to make it change of color
-     * 
-     * @param row the row of the position
-     * @param column the column of the position
-     */
-    void select (int row, int column);
-    
-    /**
      * Gets the piece at a selected position
      * 
      * @return the position of a selected piece
@@ -78,14 +70,6 @@ public interface Model {
      * Change of current player
      */
     void changePlayer();
-    
-    /**
-     * Verifies if the place is okay belonging the rules
-     * 
-     * @param pos the position where to put the piece
-     * @return true if the player can put the piece or not
-     */
-    boolean legalPlace(Position pos);
 
     /**
      * Verifies if the player can place a piece at a certain position

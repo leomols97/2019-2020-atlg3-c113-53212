@@ -68,11 +68,12 @@ public class Controller
      * by calling the appropriate method ("initialize")
      * respectively in the Model Package and the View package
      */
-    public void initialize()
+    
+    /*public void initialize()
     {
         game.initialize();
-        view.initialize();
-    }
+        view.displayStart();
+    }*/
 
     /**
      * This starts a game by calling the method "start()" in the package Model.
@@ -83,79 +84,86 @@ public class Controller
      */
     public void startGame()
     {
+        this.game.start();
         boolean endCom = false;
         boolean newTurn = false;
         
-        turn();
+        this.view.displayStart();
+        this.view.displayBoard(this.game.getBoard());
+        this.view.displayHelp();
+        //turn();
         
-        while (!this.game.isOver() && !endCom)
-        {            
+        String command = this.view.askCommand();
+        String[] separate = command.split(" ");
+        separate[0].toLowerCase();
+        
+        while (!this.game.isOver()
+                && !endCom)
+        {
             if (newTurn)
             {
                 this.game.changePlayer();
-                turn();
                 if (!this.game.canPlaceSmw())
                 {
-                    System.out.println("Le joueur actuel ne peut pas jouer lors de ce tour !");
+                    this.view.displayError("Ce joueur ne peut pas jouer lors de ce tour.");
                     this.game.changePlayer();
-                    turn();
                 }
-                newTurn = false;
+                turn();
+            }
+            switch(separate[0])
+            {
+                case "quit" :
+                    endCom = true;
+                    break;
+                case "help" :
+                    view.displayHelp();
+                    break;
+                case "score" :
+                    System.out.println("Score du joueur noir (2) : " + game.getScoreBlack());
+                    System.out.println("Score du joueur blanc (1) : " + game.getScoreWhite());
+                    break;
+                case "play" :
+                    Position pos;
+                    try
+                    {
+                        pos = new Position(Integer.parseInt(separate[1]), Integer.parseInt(separate[2]));
+                        this.game.place(pos);
+                        newTurn = true;
+                    }
+                    catch (NumberFormatException e)
+                    {
+                        System.out.println("Les 2 derniers arguments ne sont pas des chiffres !");
+                        this.view.askCommand();
+                    }
+                    catch (IndexOutOfBoundsException e)
+                    {
+                        System.out.println("La commande comporte pas assez ou trop d'arguments !");
+                        this.view.askCommand();
+                    }
+                    catch (Exception e)
+                    {
+                        view.displayError(e.getMessage());
+                        this.view.askCommand();
+                    }
+                    break;
+                default :
+                    System.out.println("zut");
+                    System.out.println("La commande n'est pas correctement entrée");
+                    this.view.askCommand();
             }
         }
-        
-        String[] separate = this.view.askCommand().split(" ");
-        for (int i = 0; i < separate.length; i++)
-        {
-            separate[i].toLowerCase();
-        }
-        switch(separate[0])
-        {
-            case "quit" :
-                endCom = true;
-                break;
-            case "help" :
-                view.displayHelp();
-                break;
-            case "score" :
-                System.out.println("Score du joueur noir : " + game.getScoreBlack());
-                System.out.println("Score du joueur blanc : " + game.getScoreWhite());
-                break;
-            case "play" :
-                Position pos;
-                try
-                {
-                    pos = new Position(Integer.parseInt(separate[1]), Integer.parseInt(separate[2]));
-                    this.game.place(pos);
-                    newTurn = true;
-                }
-                catch (NumberFormatException e)
-                {
-                    System.out.println("Les 2 derniers arguments ne sont pas des chiffres !");
-                }
-                catch (IndexOutOfBoundsException e)
-                {
-                    System.out.println("La commande comporte trop ou pas assez d'arguments !");
-                }
-                catch (Exception e)
-                {
-                    view.displayError(e.getMessage());
-                }
-                break;
-            default :
-                System.out.println("La commande n'est pas correctement entrée");
-        }
-        if (endCom)
+        if (endCom == true)
         {
             this.view.displayQuit();
         }
         else
         {
-            this.view.displayOver();
             this.game.getScoreBlack();
             this.game.getScoreWhite();
+            this.view.displayOver();
+            this.view.displayQuit();
         }
-    
+        
     }
     
     /**
@@ -165,11 +173,11 @@ public class Controller
     {
         if (game.getCurrent().getColor() == Color.BLACK)
         {
-            System.out.println("Au tour du joueur noir !");
+            System.out.println("Au tour du joueur noir (2) : ");
         }
         else
         {
-            System.out.println("Au tour du joueur blanc !");
+            System.out.println("Au tour du joueur blanc (1) : ");
         }
     }
 }

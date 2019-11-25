@@ -2,6 +2,7 @@ package Models;
 
 import java.util.LinkedList;
 import java.util.List;
+import javafx.scene.control.SelectionMode;
 
 /**
  *
@@ -87,22 +88,6 @@ public class Game implements Model{
     {
         initialize();
         return this.board.getBoard();
-    }
-    
-    /**
-     * Overrides the method "select(int row, int column)" from the class Model.
-     */
-    @Override
-    public void select(int row, int column)
-    {
-        Position position = new Position(row, column);
-        if (!this.board.isInside(position)) {
-            throw new NullPointerException("La position sélectionnée n'est pas dans le plateau de jeu !");
-        }
-        if (this.board.isFree(position)) {
-            throw new NullPointerException("La position ne contient pas de pièce !");
-        }
-        this.selected = position;
     }
     
     /**
@@ -197,33 +182,42 @@ public class Game implements Model{
     
     /**
      * Verifies if the player can place a piece at a certain position
-     * @param pos the position where to place the piece
+     * @param position the position where to place the piece
      * @return true if he can and false else
      */
     @Override
     public boolean canPlace(Position position)
     {
         boolean legalPlace = false;
-        
         if (this.board.isInside(position))
         {
+            System.out.println("1");
             if (this.board.isFree(position))
             {
+                System.out.println("2");
                 for (Direction dir : Direction.values())
                 {
-                    try {
+                    System.out.println("3");
+                    try
+                    {
+                        System.out.println("4");
+                        System.out.println(position);
                         Position pos = position.next(dir);
+                        System.out.println(pos);
                         if (this.board.isInside(pos)
                                 && !this.board.isFree(pos)
-                                && this.board.getBoard()[pos.getRow()][pos.getColumn()].getColor() == this.current.getColor().invert())
+                                && this.board.getPiece(pos).getColor() == this.current.getColor().invert())
                         {
+                            System.out.println("5");
                             Position next = pos.next(dir);
                             while (!legalPlace
                                     && this.board.isInside(next)
                                     && !this.board.isFree(next))
                             {
-                                if (this.board.getBoard()[next.getRow()][next.getColumn()].getColor() == this.current.getColor())
+                                System.out.println("6");
+                                if (this.board.getPiece(next).getColor() == this.current.getColor())
                                 {
+                                    System.out.println("7");
                                     legalPlace = true;
                                 }
                                 next = next.next(dir);
@@ -232,6 +226,7 @@ public class Game implements Model{
                     }
                     catch (Exception e)
                     {
+                        System.out.println("8");
                         throw new IllegalArgumentException("Vous ne pouvez pas place votre pièce à cet endroit !");
                     }
                 }
@@ -240,6 +235,7 @@ public class Game implements Model{
         }
         else
         {
+            System.out.println("9");
             throw new IllegalArgumentException("Cette position est en dehors du plateau de jeu !");
         }
     }
@@ -248,7 +244,7 @@ public class Game implements Model{
      * Verifies if the player can even place a piece on the playing board
      * @return true if he can and false else
      */
-    
+    // PAS BONNE. IL NE FAUT PAS VERIFIER CELA MAIS SI LE JOUEUR PEUT PLACER UNE DE SES PIECES QQUE PART
     @Override
     public boolean canPlaceSmw()
     {
@@ -320,34 +316,40 @@ public class Game implements Model{
     @Override
     public void place(Position position)
     {
-        if (this.canPlace(position)
-                && this.board.positionable(position, this.board.getPiece(position)))
+        if (this.canPlace(position))
         {
+            System.out.println("A");
             this.board.getPiece(position).setColor(current.getColor());
             for (Direction dir : Direction.values())
             {
+                System.out.println("B");
                 try
                 {
+                    System.out.println("C");
                     Position pos = position.next(dir);
                     if (this.board.isInside(pos)
                             && !this.board.isFree(pos)
                             && this.board.getPiece(pos).getColor() == this.current.getColor().invert())
                     {
+                        System.out.println("D");
                         Position next = pos.next(dir);
                         LinkedList<Position> previousPos = new LinkedList<>();
                         previousPos.add(pos);
                         boolean endPreviousPos = false;
                         while (!endPreviousPos
                                 && this.board.isInside(next)
-                                && this.getPiece(next).getColor() != Color.EMPTY)
-                        {     
+                                && !this.board.isFree(next))
+                        {
+                            System.out.println("E");
                             if (this.board.getPiece(next).getColor() == this.current.getColor())
                             {
+                                System.out.println("F");
                                 previousPos.forEach(prevPos -> this.board.getPiece(prevPos).invert());
                                 endPreviousPos = true;
                             }
                             else
                             {
+                                System.out.println("G");
                                 previousPos.add(next);
                                 next = next.next(dir);
                             }
@@ -356,12 +358,14 @@ public class Game implements Model{
                 }
                 catch (Exception e)
                 {
+                    System.out.println("H");
                     System.out.println("Vous ne pouvez pas placer de pièce à cet endroit !");
                 }
             }
         }
         else
         {
+            System.out.println("I");
             throw new IllegalArgumentException("Vous ne pouvez pas placer de pièce à cet endroit !");
         }
     }
@@ -391,10 +395,5 @@ public class Game implements Model{
             throw new IllegalStateException("La position ne fait pas partie du tableau de jeu !");
         }
         return this.getPiece(position).isMyOwn(color);
-    }
-
-    @Override
-    public boolean legalPlace(Position pos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
