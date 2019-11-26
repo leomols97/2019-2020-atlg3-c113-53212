@@ -10,7 +10,8 @@ import java.util.LinkedList;
  *
  * @author leopoldmols
  */
-public class Board /* implements Model */ {
+public class Board /* implements Model */
+{
 
     /**
      * The initial board
@@ -21,20 +22,20 @@ public class Board /* implements Model */ {
      * This constructs the object Board with the parameter "board" received as
      * class parameter
      */
-    public Board() {
+    public Board()
+    {
         this.board = new Piece[8][8];
-        for(int i = 0; i < 8; i++) {
-            
-            for(int j = 0; j < 8; j++) {
-
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
                 this.board[i][j] = new Piece(Color.EMPTY);
-                
             }
-            
         }
     }
 
-    public void initialize() {
+    public void initialize()
+    {
 
         board[3][3].setColor(Color.WHITE);
         board[3][4].setColor(Color.BLACK);
@@ -48,12 +49,14 @@ public class Board /* implements Model */ {
      *
      * @return the playing board
      */
-    public Piece[][] getBoard() {
+    public Piece[][] getBoard()
+    {
         // MAUVAIS ! Il faut utiliser des méthodes qui existent dans l'API java pour les tableaux
         return board;
     }
 
-    public Piece getPiece(int row, int column) {
+    public Piece getPiece(int row, int column)
+    {
         return null;
     }
 
@@ -63,7 +66,8 @@ public class Board /* implements Model */ {
      * @param piece the piece to add
      * @param pos the position where to add the piece
      */
-    public void addPiece(Piece piece, Position pos) {
+    public void addPiece(Piece piece, Position pos)
+    {
         this.board[pos.getRow()][pos.getColumn()].setColor(piece.getColor());
     }
 
@@ -72,15 +76,19 @@ public class Board /* implements Model */ {
      *
      * @return true of the game is over and false else
      */
-    public boolean isOver() {
-        for (Piece[] board1 : board) {
-            for (Piece board11 : board1) {
-                if (board11.getColor() == Color.EMPTY) {
-                    return false;
+    public boolean isOver()
+    {
+        for (Piece[] board1 : board)
+        {
+            for (Piece board11 : board1)
+            {
+                if (board11.getColor() != Color.EMPTY)
+                {
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     /*

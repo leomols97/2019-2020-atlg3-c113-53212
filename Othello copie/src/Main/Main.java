@@ -21,14 +21,5 @@ public class Main {
         Game game = new Game();
         Controller controller = new Controller(game, view);
         controller.startGame();
-        //Player current = new Player(Color.WHITE);
-        //Board board = new Board();
-        /*while (!board.isOver())
-        {
-            view.askCommand();
-            view.displayBoard(board.getBoard());
-            controller.addPiece(current.getColor(), board);
-            current.invert();
-        }*/
     }
 }
