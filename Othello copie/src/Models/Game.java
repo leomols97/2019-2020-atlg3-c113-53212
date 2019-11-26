@@ -18,26 +18,16 @@ public class Game implements Model{
     
     public Game()
     {
-        initialize();
+        this.board = new Board();
+        this.current = new Player(Color.WHITE);
+        this.oponent = new Player(Color.BLACK);
+        
     }
     
     @Override
     public void initialize()
     {
-        this.board = new Board ();
-        
-        current = new Player(Color.WHITE);
-        oponent = new Player(Color.BLACK);
-        
-        Piece p1 = new Piece(current.getColor());
-        Piece p2 = new Piece(current.getColor());
-        Piece p3 = new Piece(current.getColor());
-        Piece p4 = new Piece(current.getColor());
-        
-        Position posp1 = new Position(5, 5);
-        Position posp2 = new Position(5, 6);
-        Position posp3 = new Position(6, 5);
-        Position posp4 = new Position(6, 6);
+        this.board.initialize();
         
     }
     
@@ -204,6 +194,10 @@ public class Game implements Model{
                         System.out.println(position);
                         Position pos = position.next(dir);
                         System.out.println(pos);
+                        System.out.println("isinside " + this.board.isInside(pos));
+                        System.out.println("isfree " + this.board.isFree(pos));
+                        System.out.println("Piececolor " + this.board.getPiece(pos).getColor());
+                        System.out.println("ennemyColor " + this.current.getColor().invert());
                         if (this.board.isInside(pos)
                                 && !this.board.isFree(pos)
                                 && this.board.getPiece(pos).getColor() == this.current.getColor().invert())
@@ -344,7 +338,14 @@ public class Game implements Model{
                             if (this.board.getPiece(next).getColor() == this.current.getColor())
                             {
                                 System.out.println("F");
-                                previousPos.forEach(prevPos -> this.board.getPiece(prevPos).invert());
+                                System.out.println(previousPos.size());
+                                previousPos.forEach(prevPos -> {
+                                    System.out.println("Foreach");
+                                    System.out.println(pos);
+                                    System.out.println(this.board.getPiece(prevPos).getColor());
+                                    this.board.getPiece(prevPos).invert();
+                                    System.out.println(this.board.getPiece(prevPos).getColor());
+                                });
                                 endPreviousPos = true;
                             }
                             else

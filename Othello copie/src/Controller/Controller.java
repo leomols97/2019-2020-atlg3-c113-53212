@@ -91,16 +91,13 @@ public class Controller
         this.view.displayStart();
         this.view.displayBoard(this.game.getBoard());
         this.view.displayHelp();
-        //turn();
+        turn();
         
-        String command = this.view.askCommand();
-        String[] separate = command.split(" ");
-        separate[0].toLowerCase();
         
         while (!this.game.isOver()
                 && !endCom)
         {
-            if (newTurn)
+                     if (newTurn)
             {
                 this.game.changePlayer();
                 if (!this.game.canPlaceSmw())
@@ -110,6 +107,8 @@ public class Controller
                 }
                 turn();
             }
+            String command = this.view.askCommand();
+            String[] separate = command.split(" ");
             switch(separate[0])
             {
                 case "quit" :
@@ -126,30 +125,29 @@ public class Controller
                     Position pos;
                     try
                     {
-                        pos = new Position(Integer.parseInt(separate[1]), Integer.parseInt(separate[2]));
+                        pos = new Position(Integer.parseInt(separate[1]) - 1, Integer.parseInt(separate[2]) - 1);
                         this.game.place(pos);
                         newTurn = true;
                     }
                     catch (NumberFormatException e)
                     {
                         System.out.println("Les 2 derniers arguments ne sont pas des chiffres !");
-                        this.view.askCommand();
                     }
                     catch (IndexOutOfBoundsException e)
                     {
                         System.out.println("La commande comporte pas assez ou trop d'arguments !");
-                        this.view.askCommand();
                     }
                     catch (Exception e)
                     {
                         view.displayError(e.getMessage());
-                        this.view.askCommand();
                     }
+                    break;
+                case "show":
+                    this.view.displayBoard(this.game.getBoard());
                     break;
                 default :
                     System.out.println("zut");
                     System.out.println("La commande n'est pas correctement entrée");
-                    this.view.askCommand();
             }
         }
         if (endCom == true)
