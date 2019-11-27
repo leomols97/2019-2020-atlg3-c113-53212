@@ -24,30 +24,4 @@ public enum Color {
             return WHITE;
         }
     }
-    
-    //private int color;
-
-    /**
-     * Constructs the color
-     * 
-     * @param color the actual color
-     */
-    /*
-    private Color(int color)
-    {
-        this.color = color;
-    }
-    */
-
-    /**
-     * Gets the current color
-     * 
-     * @return the actual color
-     */
-    /*
-    public int getColor()
-    {
-        return color;
-    }
-*/
 }

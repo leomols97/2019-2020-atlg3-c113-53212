@@ -87,18 +87,11 @@ public interface Model {
     boolean canPlaceSmw();
     
     /**
-     * gets the score of the White player
+     * gets the score of a player
      * 
-     * @return the score of the White player
+     * @return the score of the player
      */
-    int getScoreWhite();
-    
-    /**
-     * gets the score of the Black player
-     * 
-     * @return the score of the Black player
-     */
-    int getScoreBlack();
+    int getScore(Color color);
     
     /**
      * Place a piece at a certain position

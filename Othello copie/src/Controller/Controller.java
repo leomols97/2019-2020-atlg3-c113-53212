@@ -77,8 +77,8 @@ public class Controller
                     view.displayHelp();
                     break;
                 case "score" :
-                    System.out.println("Score du joueur noir (2) : " + game.getScoreBlack());
-                    System.out.println("Score du joueur blanc (1) : " + game.getScoreWhite());
+                    System.out.println("Score du joueur noir (2) : " + game.getScore(Color.BLACK));
+                    System.out.println("Score du joueur blanc (1) : " + game.getScore(Color.WHITE));
                     break;
                 case "play" :
                     Position pos;
@@ -115,8 +115,8 @@ public class Controller
         }
         else
         {
-            this.game.getScoreBlack();
-            this.game.getScoreWhite();
+            this.game.getScore(Color.BLACK);
+            this.game.getScore(Color.WHITE);
             this.view.displayOver();
             this.view.displayQuit();
         }

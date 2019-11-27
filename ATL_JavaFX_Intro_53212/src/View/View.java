@@ -1,6 +1,7 @@
 package View;
 
-import Model.Sexe;
+import Model.*;
+import static java.lang.Double.MAX_VALUE;
 import javafx.geometry.HPos;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
@@ -12,39 +13,25 @@ import javafx.scene.layout.GridPane;
  */
 public class View extends VBox {
     
-    MainView mView;
-    Button button;
+    private MainView mView;
+    private final Button button;
     
     public View ()
     {
         this.mView = new MainView();
         this.button = new Button("Calcul du BMR");
-        button.setMinWidth(750);
+        button.setMaxWidth(MAX_VALUE);
         GridPane.setHalignment(button, HPos.CENTER);
-        Integer savedPoids = Integer.parseInt(mView.dView.getTfdPoids().getText());
         this.button.setOnAction((event) ->
         {
-            //BMRView(Integer.parseInt(mView.dView.getTaille()), savedPoids, mView.dView.getTfdAge(), mView.dView.getSexes(), mView.dView.getCBStyleDeVie());
+            BMRView(mView.dView.getTfdTaille(), mView.dView.getTfdPoids(), mView.dView.getTfdAge(), mView.dView.getSexes(), mView.dView.getCBStyleDeVie());
         });
         this.getChildren().addAll(mView, button);
     }
-    public void BMRView (int taille, int poids, int age, Sexe sexe, StyleDeVie style)
+    public void BMRView (double taille, double poids, int age, Sexe sexe, StyleDeVie style)
     {
-        double BMR = 0;
-        String result;
-        if (sexe == Sexe.MALE)
-        {
-            BMR = 13.7 * poids + 5 * taille - 6.8 * age + 66;
-            result = String.valueOf(BMR);
-            // setText(result);
-            mView.rView.tfdBMR.setText(result);
-        } else
-        {
-            BMR = 9.6 * poids + 1.8 * taille - 4.7 * age + 655;
-            result = String.valueOf(BMR);
-            System.out.println(result);
-            // setText(result);
-            mView.rView.tfdBMR.setText(result);
-        }
+        Person pers = new Person(taille, poids, age, sexe, style);
+        mView.rView.tfdBMR.setText(String.valueOf(pers.getBMR()));
+        mView.rView.tfdCal.setText(String.valueOf(pers.getCalories()));
     }
 }

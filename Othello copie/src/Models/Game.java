@@ -58,10 +58,14 @@ public class Game implements Model{
      * @return true if both players have moves left and if both of them still have their own flags and false either
      */
     @Override
-    public boolean isOver() {
-        for (int i = 0; i < board.getBoard().length; i++) {
-            for (int j = 0; j < board.getBoard()[i].length; j++) {
-                if (board.getBoard()[i][j].getColor() == Color.EMPTY) {
+    public boolean isOver()
+    {
+        for (int i = 0; i < board.getBoard().length; i++)
+        {
+            for (int j = 0; j < board.getBoard()[i].length; j++)
+            {
+                if (board.getBoard()[i][j].getColor() == Color.EMPTY)
+                {
                     return false;
                 }
             }
@@ -104,7 +108,7 @@ public class Game implements Model{
     @Override
     public void put (Position pos)
     {
-        this.board.addPiece(this.board.getPiece(pos), pos);
+        this.board.addPiece(this.current, pos);
     }
     
     /**
@@ -127,48 +131,6 @@ public class Game implements Model{
         oponent = current;
         current = tmp;
     }
-    
-    /**
-     * Verifies if the place is okay belonging the rules
-     * @param pos the position where to put the piece
-     * @return true if the player can put the piece or not
-     */
-    /*
-    @Override
-    public boolean legalPlace(Position pos) {
-        
-        boolean legal = false;
-        if (board.isInside(pos))
-        {
-            for (Direction dir : Direction.values())
-            {
-                try
-                {
-                    Position p = pos.move(dir);
-                    if (!board.isFree(pos)
-                            && board.isInside(pos)
-                            && board.getSquare(pos).getPiece().getColor() == oponent.getColor())
-                    {
-                        Position newPos = pos.move(dir);
-                        while (board.isFree(pos)
-                                && board.isInside(pos)
-                                && !legal)
-                        {
-                            if (board.getSquare(newPos).getPiece().getColor() == current.getColor())
-                            {
-                                legal = true;
-                            }
-                            newPos  = newPos.move(dir);
-                        }
-                    }
-                } catch (Exception e)
-                {
-                    System.out.println("La piece ne peut pas être placée à cet endroit !");
-                }
-            }
-        }
-        return legal;
-    }*/
     
     /**
      * Verifies if the player can place a piece at a certain position
@@ -257,17 +219,20 @@ public class Game implements Model{
     
     /**
      * gets the score of the White player
+     * 
+     * @param color The color of the player that has to know its score
+     * 
      * @return the score of the White player
      */
     @Override
-    public int getScoreWhite()
+    public int getScore (Color color)
     {
         int cpt = 0;
         for (int i = 0; i < board.getBoard().length; i++)
         {
             for (int j = 0; j < board.getBoard()[0].length; j++)
             {
-                if (board.getBoard()[i][j].getColor() == Color.WHITE)
+                if (board.getBoard()[i][j].getColor() == color)
                 {
                     cpt++;
                 }
@@ -275,33 +240,6 @@ public class Game implements Model{
         }
         return cpt;
     }
-    
-    /**
-     * gets the score of the Black player
-     * @return the score of the Black player
-     */
-    @Override
-    public int getScoreBlack()
-    {
-        int cpt = 0;
-        for (int i = 0; i < board.getBoard().length; i++)
-        {
-            for (int j = 0; j < board.getBoard()[0].length; j++)
-            {
-                if (board.getBoard()[i][j].getColor() == Color.BLACK)
-                {
-                    cpt++;
-                }
-            }
-        }
-        return cpt;
-    }
-
-    
-    
-    
-    
-    
     
     /**
      * Place a piece at a certain position
@@ -398,3 +336,46 @@ public class Game implements Model{
         return this.getPiece(position).isMyOwn(color);
     }
 }
+
+
+    /**
+     * Verifies if the place is okay belonging the rules
+     * @param pos the position where to put the piece
+     * @return true if the player can put the piece or not
+     */
+    /*
+    @Override
+    public boolean legalPlace(Position pos) {
+        
+        boolean legal = false;
+        if (board.isInside(pos))
+        {
+            for (Direction dir : Direction.values())
+            {
+                try
+                {
+                    Position p = pos.move(dir);
+                    if (!board.isFree(pos)
+                            && board.isInside(pos)
+                            && board.getSquare(pos).getPiece().getColor() == oponent.getColor())
+                    {
+                        Position newPos = pos.move(dir);
+                        while (board.isFree(pos)
+                                && board.isInside(pos)
+                                && !legal)
+                        {
+                            if (board.getSquare(newPos).getPiece().getColor() == current.getColor())
+                            {
+                                legal = true;
+                            }
+                            newPos  = newPos.move(dir);
+                        }
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println("La piece ne peut pas être placée à cet endroit !");
+                }
+            }
+        }
+        return legal;
+    }*/

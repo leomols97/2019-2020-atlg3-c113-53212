@@ -1,5 +1,7 @@
 package View;
 
+import Model.Sexe;
+import Model.StyleDeVie;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -86,28 +88,24 @@ public class DataView extends GridPane {
         CBStyleDeVie.setMaxWidth(Double.POSITIVE_INFINITY);
         this.add(CBStyleDeVie, 1, 5);
     }
-    
-    public String getTaille(){
-        return tfdTaille.getText();
+
+    public double getTfdTaille() {
+        return Double.parseDouble(tfdTaille.getText());
     }
 
-    public TextField getTfdTaille() {
-        return tfdTaille;
+    public double getTfdPoids() {
+        return Double.parseDouble(tfdPoids.getText());
     }
 
-    public TextField getTfdPoids() {
-        return tfdPoids;
+    public int getTfdAge() {
+        return Integer.parseInt(tfdAge.getText());
     }
 
-    public TextField getTfdAge() {
-        return tfdAge;
+    public Sexe getSexes() {
+        return (Sexe) sexes.getUserData();
     }
 
-    public ToggleGroup getSexes() {
-        return sexes;
-    }
-
-    public ChoiceBox getCBStyleDeVie() {
-        return CBStyleDeVie;
+    public StyleDeVie getCBStyleDeVie() {
+        return (StyleDeVie) CBStyleDeVie.getValue();
     }
 }

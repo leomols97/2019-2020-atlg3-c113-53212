@@ -21,11 +21,7 @@ public class CalculBMR extends Application {
         primaryStage.setMinWidth(300);
         
         View view = new View();
-//        DataView dataView = new DataView();
-//        ResultView resultView = new ResultView();
         Scene principal = new Scene(view);
-        
-        
         
         primaryStage.setTitle("Calcul du BMR");
         GridPane root = new GridPane();
