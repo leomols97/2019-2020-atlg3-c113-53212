@@ -42,6 +42,7 @@ public class Controller
      */
     public void startGame()
     {
+        initialize();
         this.game.start();
         boolean endCom = false;
         boolean newTurn = false;
@@ -56,12 +57,12 @@ public class Controller
         {
             if (newTurn)
             {
-                this.game.changePlayer();
-                if (!this.game.canPlaceSmw())
+                //this.game.changePlayer();
+                /*if (!this.game.canPlaceSmw())
                 {
                     this.view.displayError("Ce joueur ne peut pas jouer lors de ce tour.");
-                    this.game.changePlayer();
-                }
+                    //this.game.changePlayer();
+                }*/
                 turn();
             }
             String command = this.view.askCommand();
@@ -82,8 +83,8 @@ public class Controller
                     Position pos;
                     try
                     {
-                        pos = new Position(Integer.parseInt(separate[1]), Integer.parseInt(separate[2]));
-                        this.game.place(pos);
+                        pos = new Position(Integer.parseInt(separate[1]) - 1, Integer.parseInt(separate[2]) - 1);
+                        this.game.play(pos);
                         newTurn = true;
                     }
                     catch (NumberFormatException e)

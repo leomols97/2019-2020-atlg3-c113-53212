@@ -114,7 +114,7 @@ public class View {
         
         for (int i = 0; i < plateau.length; i++)
         {
-            if (null != plateau[i][0].getColor())
+            if (plateau[i][0].getColor() != null)
             {
                 System.out.print(" " + (i + 1) + " ");
             }

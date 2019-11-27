@@ -87,6 +87,7 @@ public class Board
      *
      * @param pos the position in which the method has to verify if any piece
      * stays or not
+     * 
      * @return true if the square at the position is free of piece and false
      * either
      *
@@ -108,6 +109,7 @@ public class Board
      *
      * @param pos the position given by the methods that calls this one to be
      * able to know if the following is contained by the playing board or not
+     * 
      * @return true if the position given in the parameters is contained by the
      * playing board, and false if not
      */
@@ -132,8 +134,7 @@ public class Board
      */
     public Piece getPiece(Position pos)
     {
-        if (isFree(pos)
-                || isInside(pos))
+        if (!isInside(pos))
         {
             throw new ArrayIndexOutOfBoundsException("La position n'est pas dans le tableau ou est vide !");
         }

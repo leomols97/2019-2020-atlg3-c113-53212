@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  *
@@ -77,17 +78,8 @@ public class Game implements Model{
     @Override
     public Piece [][] getBoard()
     {
-        initialize();
+        //initialize();
         return this.board.getBoard();
-    }
-    
-    /**
-     * Overrides the method "getSelected()" from the class Model.
-     */
-    @Override
-    public Piece getSelected()
-    {
-        return this.board.getPiece(selected);
     }
     
     /**
@@ -100,28 +92,9 @@ public class Game implements Model{
     }
     
     /**
-     * Overrides the method "put(Position pos)" from the class Model.
-     */
-    @Override
-    public void put (Position pos)
-    {
-        this.board.addPiece(this.current, pos);
-    }
-    
-    /**
-     * Overrides the method "getSquare(Position pos)" from the class Model.
-     */
-    @Override
-    public Piece getPiece(Position pos)
-    {
-        return board.getPiece(pos);
-    }
-    
-    /**
      * Change of current player
      */
-    @Override
-    public void changePlayer()
+    private void changePlayer()
     {
         Player tmp;
         tmp = oponent;
@@ -134,7 +107,7 @@ public class Game implements Model{
      * @param position the position where to place the piece
      * @return true if he can and false else
      */
-    @Override
+    /*@Override
     public boolean canPlace(Position position)
     {
         boolean legalPlace = false;
@@ -155,8 +128,11 @@ public class Game implements Model{
                         System.out.println(pos);
                         System.out.println("isinside " + this.board.isInside(pos));
                         System.out.println("isfree " + this.board.isFree(pos));
+                        System.out.println("W");
                         System.out.println("Piececolor " + this.board.getPiece(pos).getColor());
+                        System.out.println("Y");
                         System.out.println("ennemyColor " + this.current.getColor().invert());
+                        System.out.println("X");
                         if (this.board.isInside(pos)
                                 && !this.board.isFree(pos)
                                 && this.board.getPiece(pos).getColor() == this.current.getColor().invert())
@@ -180,7 +156,6 @@ public class Game implements Model{
                     catch (Exception e)
                     {
                         System.out.println("8");
-                        throw new IllegalArgumentException("Vous ne pouvez pas place votre pièce à cet endroit !");
                     }
                 }
             }
@@ -189,16 +164,16 @@ public class Game implements Model{
         else
         {
             System.out.println("9");
-            throw new IllegalArgumentException("Cette position est en dehors du plateau de jeu !");
+            throw new IllegalArgumentException("Vous ne pouvez pas placer de piece à cet endroit !");
         }
-    }
+    }*/
     
     /**
      * Verifies if the player can even place a piece on the playing board
      * @return true if he can and false else
      */
     // PAS BONNE. IL NE FAUT PAS VERIFIER CELA MAIS SI LE JOUEUR PEUT PLACER UNE DE SES PIECES QQUE PART
-    @Override
+    /*@Override
     public boolean canPlaceSmw()
     {
         for (int i = 0; i < board.getBoard().length; i++)
@@ -212,7 +187,7 @@ public class Game implements Model{
             }
         }
         return false;
-    }
+    }*/
     
     /**
      * gets the score of the White player
@@ -242,70 +217,141 @@ public class Game implements Model{
      * Place a piece at a certain position
      * @param position the position where to place the piece
      */
-    @Override
+    /*@Override
     public void place(Position position)
     {
-        if (this.canPlace(position))
+        if (!this.canPlace(position))
         {
-            System.out.println("A");
-            this.board.getPiece(position).setColor(current.getColor());
-            for (Direction dir : Direction.values())
+            throw new IllegalArgumentException("Vous ne pouvez pas placer de pièce à cet endroit !");
+        }
+        System.out.println("A");
+        this.board.getPiece(position).setColor(current.getColor());
+        for (Direction dir : Direction.values())
+        {
+            System.out.println("B");
+            try
             {
-                System.out.println("B");
-                try
+                System.out.println("C");
+                Position pos = position.next(dir);
+                if (this.board.isInside(pos)
+                        && !this.board.isFree(pos)
+                        && this.isMyOwn(pos, this.oponent.getColor()))
                 {
-                    System.out.println("C");
-                    Position pos = position.next(dir);
-                    if (this.board.isInside(pos)
-                            && !this.board.isFree(pos)
-                            && this.board.getPiece(pos).getColor() == this.current.getColor().invert())
+                    System.out.println("D");
+                    Position next = pos.next(dir);
+                    LinkedList<Position> previousPos = new LinkedList<>();
+                    previousPos.add(pos);
+                    boolean endPreviousPos = false;
+                    while (!endPreviousPos
+                            && this.board.isInside(next)
+                            && !this.board.isFree(next))
                     {
-                        System.out.println("D");
-                        Position next = pos.next(dir);
-                        LinkedList<Position> previousPos = new LinkedList<>();
-                        previousPos.add(pos);
-                        boolean endPreviousPos = false;
-                        while (!endPreviousPos
-                                && this.board.isInside(next)
-                                && !this.board.isFree(next))
+                        System.out.println("E");
+                        if (this.board.getPiece(next).getColor() == this.current.getColor())
                         {
-                            System.out.println("E");
-                            if (this.board.getPiece(next).getColor() == this.current.getColor())
-                            {
-                                System.out.println("F");
-                                System.out.println(previousPos.size());
-                                previousPos.forEach(prevPos -> {
-                                    System.out.println("Foreach");
-                                    System.out.println(pos);
-                                    System.out.println(this.board.getPiece(prevPos).getColor());
-                                    this.board.getPiece(prevPos).invert();
-                                    System.out.println(this.board.getPiece(prevPos).getColor());
-                                });
-                                endPreviousPos = true;
-                            }
-                            else
-                            {
-                                System.out.println("G");
-                                previousPos.add(next);
-                                next = next.next(dir);
-                            }
+                            System.out.println("F");
+                            System.out.println(previousPos.size());
+                            previousPos.forEach(prevPos -> {
+                                System.out.println("Foreach");
+                                System.out.println(pos);
+                                System.out.println(this.board.getPiece(prevPos).getColor());
+                                this.board.getPiece(prevPos).invert();
+                                System.out.println(this.board.getPiece(prevPos).getColor());
+                            });
+                            endPreviousPos = true;
+                        }
+                        else
+                        {
+                            System.out.println("G");
+                            previousPos.add(next);
+                            next = next.next(dir);
                         }
                     }
                 }
-                catch (Exception e)
+            }
+            catch (Exception e)
+            {
+                System.out.println("H");
+            }
+        }
+        
+    }*/
+    
+    
+    @Override
+    public void play (Position position)
+    {
+        Objects.requireNonNull(position, "La position est vide !");
+        if (!this.board.isInside(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas dans le tableau !");
+        }
+        if (!this.board.isFree(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas libre !");
+        }
+        if (canPlay(position))
+        {
+            this.board.addPiece(current, position);
+            for (Direction dir : Direction.values())
+            {
+                if (canFlip(position, dir))
                 {
-                    System.out.println("H");
-                    System.out.println("Vous ne pouvez pas placer de pièce à cet endroit !");
+                    Position pos;
+                    do
+                    {
+                        pos = position.next(dir);
+                        this.board.getPiece(pos).invert();
+                    } while (isMyOwn(pos.next(dir), this.current.getColor().invert()));
                 }
             }
         }
-        else
-        {
-            System.out.println("I");
-            throw new IllegalArgumentException("Vous ne pouvez pas placer de pièce à cet endroit !");
-        }
+        changePlayer();
     }
     
+    private boolean canPlay (Position position)
+    {
+        Objects.requireNonNull(position, "La position est vide !");
+        if (!this.board.isInside(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas dans le tableau !");
+        }
+        if (!this.board.isFree(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas libre !");
+        }
+        for (Direction dir : Direction.values())
+        {
+            if (canFlip(position, dir))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean canFlip (Position position, Direction direction)
+    {
+        Objects.requireNonNull(position, "La position est vide !");
+        Objects.requireNonNull(direction, "La direction n'exite pas !");
+        if (!this.board.isInside(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas dans le tableau !");
+        }
+        System.out.println(position);
+        boolean isOponentPos = false;
+        do
+        {
+            position = position.next(direction);
+            isOponentPos = this.board.isInside(position)
+                    && !this.board.isFree(position)
+                    && isMyOwn(position, this.current.getColor().invert());
+            System.out.println(position);
+        } while (isOponentPos);
+        return this.board.isInside(position)
+                && !this.board.isFree(position)
+                && isMyOwn(position, this.current.getColor());
+    }
     
     
     
@@ -320,17 +366,18 @@ public class Game implements Model{
      * This metho throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
      * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not insiade the playing board
      */
-    public boolean isMyOwn(Position position, Color color)
+    private boolean isMyOwn(Position position, Color color)
     {
-        if (position == null)
-        {
-            throw new NullPointerException("La position n'existe pas !");
-        }
+        Objects.requireNonNull(position, "La position n'existe pas !");
         if (!this.board.isInside(position))
         {
             throw new IllegalStateException("La position ne fait pas partie du tableau de jeu !");
         }
-        return this.getPiece(position).isMyOwn(color);
+        if (this.board.isFree(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas libre !");
+        }
+        return this.board.getPiece(position).isMyOwn(color);
     }
 }
 

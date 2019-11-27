@@ -38,38 +38,11 @@ public interface Model {
     Piece [][] getBoard();
     
     /**
-     * Gets the piece at a selected position
-     * 
-     * @return the position of a selected piece
-     */
-    Piece getSelected();
-    
-    /**
      * This method gives the current player
      * 
      * @return the player that has to play now
      */
     Player getCurrent();
-    
-    /**
-     * Inserts a piece on the playing board if this is possible
-     * 
-     * @param pos the position where to pu the piece
-     */
-    void put (Position pos);
-    
-    /**
-     * Gets the quare on a position
-     * 
-     * @param pos the position where to find the square
-     * @return the square
-     */
-    Piece getPiece(Position pos);
-    
-    /**
-     * Change of current player
-     */
-    void changePlayer();
 
     /**
      * Verifies if the player can place a piece at a certain position
@@ -77,14 +50,14 @@ public interface Model {
      * @param pos the position where to place the piece
      * @return true if he can and false else
      */
-    boolean canPlace(Position pos);
+//    boolean canPlace(Position pos);
     
     /**
      * Verifies if the player can even place a piece on the playing board
      * 
      * @return true if he can and false else
      */
-    boolean canPlaceSmw();
+//    boolean canPlaceSmw();
     
     /**
      * gets the score of a player
@@ -100,16 +73,7 @@ public interface Model {
      * 
      * @param pos the position where to place the piece
      */
-    void place (Position pos);
-    
-    /**
-     * Verifies if a selected position contains a piece that belongs to the current player
-     * 
-     * @param position the position where to look
-     * @param color the color of the current player
-     * @return true if the position contains a piece that is the same color than the current color and false else
-     */
-    boolean isMyOwn(Position position, Color color);
+//    void place (Position pos);
     
     /**
      * Displays the player
@@ -117,4 +81,6 @@ public interface Model {
      * @param over 
      */
     //void Player (boolean over);
+    
+    void play(Position position);
 }

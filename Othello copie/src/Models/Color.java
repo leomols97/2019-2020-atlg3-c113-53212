@@ -19,9 +19,13 @@ public enum Color {
         {
             return BLACK;
         }
-        else
+        else if (this == BLACK)
         {
             return WHITE;
+        }
+        else
+        {
+            return EMPTY;
         }
     }
 }
