@@ -21,9 +21,8 @@ public class Piece {
      * 
      * @param color the initial color
      */
-    public Piece(/*Piece piece,*/ Color color)
+    public Piece(Color color)
     {
-//        this.piece = piece;
         this.color = color;
     }
     

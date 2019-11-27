@@ -2,8 +2,6 @@ package Controller;
 
 import Models.*;
 import View.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -29,11 +27,11 @@ public class Controller
      * respectively in the Model Package and the View package
      */
     
-    /*public void initialize()
+    public void initialize()
     {
         game.initialize();
         view.displayStart();
-    }*/
+    }
 
     /**
      * This starts a game by calling the method "start()" in the package Model.
@@ -56,7 +54,7 @@ public class Controller
         while (!this.game.isOver()
                 && !endCom)
         {
-                     if (newTurn)
+            if (newTurn)
             {
                 this.game.changePlayer();
                 if (!this.game.canPlaceSmw())
@@ -84,7 +82,7 @@ public class Controller
                     Position pos;
                     try
                     {
-                        pos = new Position(Integer.parseInt(separate[1]) - 1, Integer.parseInt(separate[2]) - 1);
+                        pos = new Position(Integer.parseInt(separate[1]), Integer.parseInt(separate[2]));
                         this.game.place(pos);
                         newTurn = true;
                     }
@@ -130,11 +128,11 @@ public class Controller
     {
         if (game.getCurrent().getColor() == Color.BLACK)
         {
-            System.out.println("Au tour du joueur noir (2) : ");
+            System.out.println("\nAu tour du joueur noir (2) : ");
         }
         else
         {
-            System.out.println("Au tour du joueur blanc (1) : ");
+            System.out.println("\nAu tour du joueur blanc (1) : ");
         }
     }
 }

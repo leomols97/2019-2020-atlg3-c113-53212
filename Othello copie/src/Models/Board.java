@@ -1,7 +1,5 @@
 package Models;
 
-import java.util.LinkedList;
-
 /**
  * This class initialize a game board to welcome the Pieces to play It also
  * halps the other classes to know all the information that directly concerns
@@ -10,13 +8,15 @@ import java.util.LinkedList;
  *
  * @author leopoldmols
  */
-public class Board /* implements Model */
+public class Board
 {
 
     /**
      * The initial board
      */
     private final Piece[][] board;
+    private final int rowLength = 8;
+    private final int colLength = 8;
 
     /**
      * This constructs the object Board with the parameter "board" received as
@@ -24,10 +24,10 @@ public class Board /* implements Model */
      */
     public Board()
     {
-        this.board = new Piece[8][8];
-        for(int i = 0; i < 8; i++)
+        this.board = new Piece[this.rowLength][this.colLength];
+        for(int i = 0; i < rowLength; i++)
         {
-            for(int j = 0; j < 8; j++)
+            for(int j = 0; j < colLength; j++)
             {
                 this.board[i][j] = new Piece(Color.EMPTY);
             }
@@ -36,14 +36,14 @@ public class Board /* implements Model */
 
     public void initialize()
     {
-
-        board[3][3].setColor(Color.WHITE);
-        board[3][4].setColor(Color.BLACK);
-        board[4][4].setColor(Color.WHITE);
-        board[4][3].setColor(Color.BLACK);
-
+        this.board[3][3].setColor(Color.WHITE);
+        this.board[3][4].setColor(Color.BLACK);
+        this.board[4][4].setColor(Color.WHITE);
+        this.board[4][3].setColor(Color.BLACK);
     }
 
+    
+    
     /**
      * This method helps the other class to be able to access to the value of
      * the playing board. This get the value of the variable "board"
@@ -53,9 +53,23 @@ public class Board /* implements Model */
     public Piece[][] getBoard()
     {
         // MAUVAIS ! Il faut utiliser des méthodes qui existent dans l'API java pour les tableaux
-        return board;
+        return copieDefensiveBoard();
     }
-
+    
+    public Piece[][] copieDefensiveBoard()
+    {
+        Piece[][] copyBoard = new Piece[rowLength][colLength];
+        for (int i = 0; i < this.board.length; i++)
+        {
+            for (int j = 0; j < this.board[i].length; j++)
+            {
+                copyBoard[i][j] = new Piece(Color.EMPTY);
+                copyBoard[i][j].setColor(this.board[i][j].getColor());
+            }
+        }
+        return copyBoard;
+    }
+    
     /**
      * Adds a piece on the playing board
      *

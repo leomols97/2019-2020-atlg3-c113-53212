@@ -89,6 +89,8 @@ public interface Model {
     /**
      * gets the score of a player
      * 
+     * @param color the color of the player that wants his score
+     * 
      * @return the score of the player
      */
     int getScore(Color color);
@@ -99,6 +101,15 @@ public interface Model {
      * @param pos the position where to place the piece
      */
     void place (Position pos);
+    
+    /**
+     * Verifies if a selected position contains a piece that belongs to the current player
+     * 
+     * @param position the position where to look
+     * @param color the color of the current player
+     * @return true if the position contains a piece that is the same color than the current color and false else
+     */
+    boolean isMyOwn(Position position, Color color);
     
     /**
      * Displays the player

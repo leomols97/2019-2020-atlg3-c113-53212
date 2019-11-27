@@ -1,8 +1,6 @@
 package Models;
 
 import java.util.LinkedList;
-import java.util.List;
-import javafx.scene.control.SelectionMode;
 
 /**
  *
@@ -11,7 +9,7 @@ import javafx.scene.control.SelectionMode;
 
 public class Game implements Model{
     
-    private Board board;
+    private final Board board;
     private Player current;
     private Player oponent;
     private Position selected;
@@ -28,7 +26,6 @@ public class Game implements Model{
     public void initialize()
     {
         this.board.initialize();
-        
     }
     
     /**
