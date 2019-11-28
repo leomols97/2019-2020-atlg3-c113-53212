@@ -66,7 +66,7 @@ public class Controller
                 turn();
             }
             String command = this.view.askCommand();
-            String[] separate = command.split(" ");
+            String[] separate = command.toLowerCase().split(" ");
             switch(separate[0])
             {
                 case "quit" :
@@ -91,14 +91,15 @@ public class Controller
                     {
                         System.out.println("Les 2 derniers arguments ne sont pas des chiffres !");
                     }
-                    catch (IndexOutOfBoundsException e)
-                    {
-                        System.out.println("La commande comporte pas assez ou trop d'arguments !");
-                    }
-                    catch (Exception e)
-                    {
-                        view.displayError(e.getMessage());
-                    }
+                    //catch (ArrayIndexOutOfBoundsException e)
+                    //{
+                      //  System.out.println(e.getMessage());
+                        //System.out.println("La commande comporte pas assez ou trop d'arguments !");
+                    //}
+//                    catch (Exception e)
+//                    {
+//                        view.displayError(e.getMessage());
+//                    }
                     break;
                 case "show":
                     this.view.displayBoard(this.game.getBoard());
