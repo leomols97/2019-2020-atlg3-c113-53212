@@ -14,7 +14,7 @@ public class Main {
     /**
      * This calls all the methods to create and begin a hole game
      * @param args the command line arguments
-     */
+    */
     public static void main(String[] args)
     {
         Game game = new Game();

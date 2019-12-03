@@ -103,6 +103,207 @@ public class Game implements Model{
     }
     
     /**
+     * gets the score of the White player
+     * 
+     * @param color The color of the player that has to know its score
+     * 
+     * @return the score of the White player
+     */
+    @Override
+    public int getScore (Color color)
+    {
+        int cpt = 0;
+        for (int i = 0; i < board.getBoard().length; i++)
+        {
+            for (int j = 0; j < board.getBoard()[0].length; j++)
+            {
+                if (board.getBoard()[i][j].getColor() == color)
+                {
+                    cpt++;
+                }
+            }
+        }
+        return cpt;
+    }
+    
+    @Override
+    public void play (Position position)
+    {
+        Objects.requireNonNull(position, "La position est vide !");
+        if (!this.board.isInside(position))
+        {
+            throw new IllegalArgumentException("sout du play La position n'est pas dans le tableau !");
+        }
+        if (canPlay(position))
+        {
+            this.board.addPiece(current, position);
+            for (Direction dir : Direction.values())
+            {
+                //if (canFlip(position, dir))
+                //{
+                try {
+                    System.out.println("Verification du play " + dir.toString());
+                    Position pos = new Position(position);
+                    do
+                    {
+                        //pos = pos.next(dir);
+                        if (canFlip(pos, dir))
+                        {
+                            pos = pos.next(dir);
+                            this.board.getPiece(pos).invert();
+                        }
+                        //System.out.println(pos.next(dir));
+                        //System.out.println(dir);
+                    } while (this.board.isInside(pos.next(dir))
+                            && this.board.isInside(pos.next(dir).next(dir))
+                            && this.board.isFree(pos.next(dir))
+                            && isMyOwn(pos.next(dir), this.current.getColor().invert()));
+                    //}
+                }
+                catch (Exception e){
+                    throw e;
+                }
+            }
+            changePlayer();
+        } else {
+            throw new IllegalArgumentException("Le joueur ne peut pas placer de pion sur cette case !");
+        }
+    }
+    
+    private boolean canPlay (Position position)
+    {
+        Objects.requireNonNull(position, "La position est vide !");
+        if (!this.board.isInside(position))
+        {
+            throw new IllegalArgumentException("can play La position n'est pas dans le tableau !");
+        }
+        if (!this.board.isFree(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas libre !");
+        }
+        for (Direction dir : Direction.values())
+        {
+            if (canFlip(position, dir))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean canFlip (Position position, Direction direction)
+    {
+        Objects.requireNonNull(position, "La position est vide !");
+        Objects.requireNonNull(direction, "La direction n'exite pas !");
+        if (!this.board.isInside(position))
+        {
+            throw new IllegalArgumentException("can Play La position n'est pas dans le tableau !");
+        }
+        boolean isOponentPos = false;
+        System.out.println("\ncanFlip en position " + position + " ? " + isOponentPos);
+        Position pos = position;
+        do
+        {
+            pos = pos.next(direction);
+            /*if (this.board.isInside(position)
+                    && this.board.isFree(position))
+            {*/
+                isOponentPos = this.board.isInside(pos)
+                        && !this.board.isFree(pos)
+                        && isMyOwn(pos, this.current.getColor().invert());
+                System.out.println("canFlip en direction " + direction + " " + pos + " ? " + isOponentPos);
+            //}
+        } while (isOponentPos
+                /*&& this.board.getPiece(position).getColor() == this.current.getColor().invert()*/);
+        /*while (this.board.isInside(position)
+                && isOponentPos
+                && this.board.getPiece(position).getColor() == Color.EMPTY);*/
+        return this.board.isInside(pos)
+                && !this.board.isFree(pos)
+                && isMyOwn(pos, this.current.getColor());
+    }
+    
+    
+    
+    
+    
+    /**
+     * Verifies if the piece that stands on a square on the playing board the playing board has the same color than a color
+     * @param position where the method has to verify if there's a piece on it and if well, if it has the same color than the second parameter
+     * @param color the color that has to be compared to the piece on the position given as first parameter
+     * @return true if the piece has the same color than the color given in the parameters and true either
+     * 
+     * This metho throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
+     * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not insiade the playing board
+     */
+    private boolean isMyOwn(Position position, Color color)
+    {
+        Objects.requireNonNull(position, "La position n'existe pas !");
+        if (!this.board.isInside(position))
+        {
+            throw new IllegalStateException("La position ne fait pas partie du tableau de jeu !");
+        }
+        /*if (this.board.isFree(position))
+        {
+            System.out.println("A");
+            System.out.println(position);
+            throw new IllegalArgumentException("La position ne contient pas de pièce !");
+        }*/
+        return this.board.getPiece(position).isMyOwn(color);
+    }
+}
+
+
+    /**
+     * Verifies if the place is okay belonging the rules
+     * @param pos the position where to put the piece
+     * @return true if the player can put the piece or not
+     */
+    /*
+    @Override
+    public boolean legalPlace(Position pos) {
+        
+        boolean legal = false;
+        if (board.isInside(pos))
+        {
+            for (Direction dir : Direction.values())
+            {
+                try
+                {
+                    Position p = pos.move(dir);
+                    if (!board.isFree(pos)
+                            && board.isInside(pos)
+                            && board.getSquare(pos).getPiece().getColor() == oponent.getColor())
+                    {
+                        Position newPos = pos.move(dir);
+                        while (board.isFree(pos)
+                                && board.isInside(pos)
+                                && !legal)
+                        {
+                            if (board.getSquare(newPos).getPiece().getColor() == current.getColor())
+                            {
+                                legal = true;
+                            }
+                            newPos  = newPos.move(dir);
+                        }
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println("La piece ne peut pas être placée à cet endroit !");
+                }
+            }
+        }
+        return legal;
+    }*/
+
+
+
+
+
+
+
+
+    /**
      * Verifies if the player can place a piece at a certain position
      * @param position the position where to place the piece
      * @return true if he can and false else
@@ -188,31 +389,6 @@ public class Game implements Model{
         }
         return false;
     }*/
-    
-    /**
-     * gets the score of the White player
-     * 
-     * @param color The color of the player that has to know its score
-     * 
-     * @return the score of the White player
-     */
-    @Override
-    public int getScore (Color color)
-    {
-        int cpt = 0;
-        for (int i = 0; i < board.getBoard().length; i++)
-        {
-            for (int j = 0; j < board.getBoard()[0].length; j++)
-            {
-                if (board.getBoard()[i][j].getColor() == color)
-                {
-                    cpt++;
-                }
-            }
-        }
-        return cpt;
-    }
-    
     /**
      * Place a piece at a certain position
      * @param position the position where to place the piece
@@ -275,176 +451,4 @@ public class Game implements Model{
             }
         }
         
-    }*/
-    
-    
-    @Override
-    public void play (Position position)
-    {
-        Objects.requireNonNull(position, "La position est vide !");
-        if (!this.board.isInside(position))
-        {
-            throw new IllegalArgumentException("La position n'est pas dans le tableau !");
-        }
-        if (!this.board.isFree(position))
-        {
-            throw new IllegalArgumentException("La position n'est pas libre !");
-        }
-        if (canPlay(position))
-        {
-            this.board.addPiece(current, position);
-            for (Direction dir : Direction.values())
-            {
-                //if (canFlip(position, dir))
-                //{
-                try {
-                System.out.println(dir.toString());
-                Position pos = new Position(position);
-                do
-                {
-                    pos = pos.next(dir);
-                    if (canFlip(pos, dir))
-                    {
-                       this.board.getPiece(pos).invert();
-                    }
-                    //System.out.println(pos.next(dir));
-                    //System.out.println(dir);
-                } while (this.board.isInside(pos.next(dir))
-                        && this.board.isInside(pos.next(dir).next(dir))
-                        && this.board.isFree(pos)
-                        && isMyOwn(pos.next(dir), this.current.getColor().invert())); /// FAIRE UN WHILE ET NON UN DO WHILE
-                //}
-                }
-                catch (Exception e){
-                    throw e;
-                }
-            }
-        }
-        changePlayer();
-    }
-    
-    private boolean canPlay (Position position)
-    {
-        Objects.requireNonNull(position, "La position est vide !");
-        if (!this.board.isInside(position))
-        {
-            throw new IllegalArgumentException("La position n'est pas dans le tableau !");
-        }
-        if (!this.board.isFree(position))
-        {
-            throw new IllegalArgumentException("La position n'est pas libre !");
-        }
-        for (Direction dir : Direction.values())
-        {
-            if (canFlip(position, dir))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private boolean canFlip (Position position, Direction direction)
-    {
-        Objects.requireNonNull(position, "La position est vide !");
-        Objects.requireNonNull(direction, "La direction n'exite pas !");
-        if (!this.board.isInside(position))
-        {
-            throw new IllegalArgumentException("La position n'est pas dans le tableau !");
-        }
-        System.out.println(position);
-        boolean isOponentPos = false;
-        Position pos = position;
-        do
-        {
-            pos = pos.next(direction);
-            /*if (this.board.isInside(position)
-                    && this.board.isFree(position))
-            {*/
-                isOponentPos = this.board.isInside(pos)
-                        && !this.board.isFree(pos)
-                        && isMyOwn(pos, this.current.getColor().invert());
-                System.out.println(pos);
-            //}
-        } while (isOponentPos
-                /*&& this.board.getPiece(position).getColor() == this.current.getColor().invert()*/);
-        /*while (this.board.isInside(position)
-                && isOponentPos
-                && this.board.getPiece(position).getColor() == Color.EMPTY);*/
-        return this.board.isInside(pos)
-                && !this.board.isFree(pos)
-                && isMyOwn(pos, this.current.getColor());
-    }
-    
-    
-    
-    
-    
-    /**
-     * Verifies if the piece that stands on a square on the playing board the playing board has the same color than a color
-     * @param position where the method has to verify if there's a piece on it and if well, if it has the same color than the second parameter
-     * @param color the color that has to be compared to the piece on the position given as first parameter
-     * @return true if the piece has the same color than the color given in the parameters and true either
-     * 
-     * This metho throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
-     * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not insiade the playing board
-     */
-    private boolean isMyOwn(Position position, Color color)
-    {
-        Objects.requireNonNull(position, "La position n'existe pas !");
-        if (!this.board.isInside(position))
-        {
-            throw new IllegalStateException("La position ne fait pas partie du tableau de jeu !");
-        }
-        /*if (this.board.isFree(position))
-        {
-            System.out.println("A");
-            System.out.println(position);
-            throw new IllegalArgumentException("La position ne contient pas de pièce !");
-        }*/
-        return this.board.getPiece(position).isMyOwn(color);
-    }
-}
-
-
-    /**
-     * Verifies if the place is okay belonging the rules
-     * @param pos the position where to put the piece
-     * @return true if the player can put the piece or not
-     */
-    /*
-    @Override
-    public boolean legalPlace(Position pos) {
-        
-        boolean legal = false;
-        if (board.isInside(pos))
-        {
-            for (Direction dir : Direction.values())
-            {
-                try
-                {
-                    Position p = pos.move(dir);
-                    if (!board.isFree(pos)
-                            && board.isInside(pos)
-                            && board.getSquare(pos).getPiece().getColor() == oponent.getColor())
-                    {
-                        Position newPos = pos.move(dir);
-                        while (board.isFree(pos)
-                                && board.isInside(pos)
-                                && !legal)
-                        {
-                            if (board.getSquare(newPos).getPiece().getColor() == current.getColor())
-                            {
-                                legal = true;
-                            }
-                            newPos  = newPos.move(dir);
-                        }
-                    }
-                } catch (Exception e)
-                {
-                    System.out.println("La piece ne peut pas être placée à cet endroit !");
-                }
-            }
-        }
-        return legal;
     }*/

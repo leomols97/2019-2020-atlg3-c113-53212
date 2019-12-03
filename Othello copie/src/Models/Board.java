@@ -36,10 +36,10 @@ public class Board
 
     public void initialize()
     {
-        this.board[3][3].setColor(Color.WHITE);
-        this.board[3][4].setColor(Color.BLACK);
-        this.board[4][4].setColor(Color.WHITE);
-        this.board[4][3].setColor(Color.BLACK);
+        this.board[5][5].setColor(Color.WHITE);
+        this.board[5][6].setColor(Color.BLACK);
+        this.board[6][6].setColor(Color.WHITE);
+        this.board[6][5].setColor(Color.BLACK);
     }
 
     

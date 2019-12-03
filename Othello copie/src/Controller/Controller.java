@@ -30,7 +30,6 @@ public class Controller
     public void initialize()
     {
         game.initialize();
-        view.displayStart();
     }
 
     /**
@@ -43,7 +42,6 @@ public class Controller
     public void startGame()
     {
         initialize();
-        this.game.start();
         boolean endCom = false;
         boolean newTurn = false;
         
@@ -91,15 +89,15 @@ public class Controller
                     {
                         System.out.println("Les 2 derniers arguments ne sont pas des chiffres !");
                     }
-                    //catch (ArrayIndexOutOfBoundsException e)
-                    //{
-                      //  System.out.println(e.getMessage());
-                        //System.out.println("La commande comporte pas assez ou trop d'arguments !");
-                    //}
-//                    catch (Exception e)
-//                    {
-//                        view.displayError(e.getMessage());
-//                    }
+                    catch (ArrayIndexOutOfBoundsException e)
+                    {
+                        //System.out.println(e.getMessage());
+                        System.out.println("La commande comporte pas assez ou trop d'arguments !");
+                    }
+                    catch (Exception e)
+                    {
+                        view.displayError(e.getMessage());
+                    }
                     break;
                 case "show":
                     this.view.displayBoard(this.game.getBoard());
