@@ -46,4 +46,12 @@ public class Player
     {
         return color;
     }
+    
+    public boolean hasPieces ()
+    {
+        for (int i = 0; i < 10; i++) {
+            
+        }
+        return false;
+    }
 }

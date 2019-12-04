@@ -145,6 +145,15 @@ public class Game implements Model{
             /* + position + " longueur : " + this.board.getBoard().length 
             + " hauteur : " + this.board.getBoard()[1].length*/);
         }
+        if (!this.board.isFree(position))
+        {
+            throw new IllegalArgumentException("sout du play La position n'est pas libre ! "
+            /* + position + " longueur : " + this.board.getBoard().length 
+            + " hauteur : " + this.board.getBoard()[1].length*/);
+        }
+        if (true) {
+            
+        }
         if (canPlay(position))
         {
             this.board.addPiece(current, position);
@@ -152,31 +161,41 @@ public class Game implements Model{
             {
                 //if (canFlip(position, dir))
                 //{
-                try {
-                    System.out.println("Verification du play " + dir.toString());
-                    Position pos = new Position(position);
-                    do
+                //try {
+                System.out.println("Verification du play " + dir.toString());
+                //Position pos = new Position(position);
+                //do
+                //{
+                //pos = pos.next(dir);
+                if (canFlip(position, dir))
+                {
+                    System.out.println("1");
+                    Position pos = position.next(dir);
+                    while (!this.board.isFree(pos)
+                           && !isMyOwn(pos, current.getColor()))
                     {
-                        //pos = pos.next(dir);
-                        if (canFlip(pos, dir))
-                        {
-                            pos = pos.next(dir);
-                            this.board.getPiece(pos).invert();
-                        }
-                        //System.out.println(pos.next(dir));
-                        //System.out.println(dir);
-                    } while (this.board.isInside(pos.next(dir))
-                            && this.board.isInside(pos.next(dir).next(dir))
-                            && this.board.isFree(pos.next(dir))
-                            && isMyOwn(pos.next(dir), this.current.getColor().invert()));
-                    //}
+                        System.out.println("2");
+                        this.board.getPiece(pos).invert();
+                        pos = pos.next(dir);
+                    }
+                    //this.board.getPiece(pos).invert();
                 }
-                catch (Exception e){
-                    throw e;
-                }
+                //System.out.println(pos.next(dir));
+                //System.out.println(dir);
+                /*} while (this.board.isInside(pos.next(dir))
+                && this.board.isInside(pos.next(dir).next(dir))
+                && this.board.isFree(pos.next(dir))
+                && isMyOwn(pos.next(dir), this.current.getColor().invert()));*/
+                //}
+                //}
+                //catch (Exception e){
+                //  throw e;
+                //}
             }
             changePlayer();
-        } else {
+        }
+        else
+        {
             throw new IllegalArgumentException("Le joueur ne peut pas placer de pion sur cette case !");
         }
     }
@@ -190,15 +209,19 @@ public class Game implements Model{
         }
         if (!this.board.isFree(position))
         {
-            throw new IllegalArgumentException("La position n'est pas libre !");
+            System.out.println("11");
+            return false;
         }
         for (Direction dir : Direction.values())
         {
+            System.out.println("1111");
             if (canFlip(position, dir))
             {
+                System.out.println("22");
                 return true;
             }
         }
+        System.out.println("33");
         return false;
     }
     
@@ -210,28 +233,32 @@ public class Game implements Model{
         {
             throw new IllegalArgumentException("can Play La position n'est pas dans le tableau !");
         }
-        boolean isOponentPos = false;
-        System.out.println("\ncanFlip en position " + position + " ? " + isOponentPos);
-        Position pos = position;
+            System.out.println("A");
+        Position pos = new Position(position);
         do
         {
+            System.out.println("B");
             pos = pos.next(direction);
             /*if (this.board.isInside(position)
                     && this.board.isFree(position))
             {*/
-                isOponentPos = this.board.isInside(pos)
+                /*isOponentPos = this.board.isInside(pos)
                         && !this.board.isFree(pos)
-                        && isMyOwn(pos, this.current.getColor().invert());
-                System.out.println("canFlip en direction " + direction + " " + pos + " ? " + isOponentPos);
+                        && !isMyOwn(pos, this.current.getColor());
+                System.out.println("canFlip en direction " + direction + " " + pos + " ? " + isOponentPos);*/
             //}
-        } while (isOponentPos
-                /*&& this.board.getPiece(position).getColor() == this.current.getColor().invert()*/);
+        } while (this.board.isInside(pos)
+                && !this.board.isFree(pos)
+                && isMyOwn(pos, this.current.getColor()));
+        System.out.println("C");
+        
+                /*&& this.board.getPiece(position).getColor() == this.current.getColor().invert()*/
         /*while (this.board.isInside(position)
                 && isOponentPos
                 && this.board.getPiece(position).getColor() == Color.EMPTY);*/
         return this.board.isInside(pos)
                 && !this.board.isFree(pos)
-                && isMyOwn(pos, this.current.getColor());
+                && !isMyOwn(pos, this.current.getColor());
     }
     
     
