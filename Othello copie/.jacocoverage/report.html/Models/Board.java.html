@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Othello_copie&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Models</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">package Models;
+
+/**
+ * This class initialize a game board to welcome the Pieces to play It also
+ * halps the other classes to know all the information that directly concerns
+ * the playing board and its contained pieces, like if a piece is inside the
+ * playing board or not
+ *
+ * @author leopoldmols
+ */
+public class Board
+{
+
+    /**
+     * The initial board
+     */
+    private final Piece[][] board;
+<span class="fc" id="L18">    private final int rowLength = 8;</span>
+<span class="fc" id="L19">    private final int colLength = 8;</span>
+
+    /**
+     * This constructs the object Board with the parameter &quot;board&quot; received as
+     * class parameter
+     */
+    public Board()
+<span class="fc" id="L26">    {</span>
+<span class="fc" id="L27">        this.board = new Piece[this.rowLength][this.colLength];</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for(int i = 0; i &lt; rowLength; i++)</span>
+        {
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            for(int j = 0; j &lt; colLength; j++)</span>
+            {
+<span class="fc" id="L32">                this.board[i][j] = new Piece(Color.EMPTY);</span>
+            }
+        }
+<span class="fc" id="L35">    }</span>
+
+    public void initialize()
+    {
+<span class="fc" id="L39">        this.board[5][5].setColor(Color.WHITE);</span>
+<span class="fc" id="L40">        this.board[5][6].setColor(Color.BLACK);</span>
+<span class="fc" id="L41">        this.board[6][6].setColor(Color.WHITE);</span>
+<span class="fc" id="L42">        this.board[6][5].setColor(Color.BLACK);</span>
+<span class="fc" id="L43">    }</span>
+
+    
+    
+    /**
+     * This method helps the other class to be able to access to the value of
+     * the playing board. This get the value of the variable &quot;board&quot;
+     *
+     * @return board that returns the dimensions of the playing board
+     */
+    public Piece[][] getBoard()
+    {
+        // MAUVAIS ! Il faut utiliser des méthodes qui existent dans l'API java pour les tableaux
+<span class="fc" id="L56">        return copieDefensiveBoard();</span>
+    }
+    
+    public Piece[][] copieDefensiveBoard()
+    {
+<span class="fc" id="L61">        Piece[][] copyBoard = new Piece[rowLength][colLength];</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (int i = 0; i &lt; this.board.length; i++)</span>
+        {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            for (int j = 0; j &lt; this.board[i].length; j++)</span>
+            {
+<span class="fc" id="L66">                copyBoard[i][j] = new Piece(Color.EMPTY);</span>
+<span class="fc" id="L67">                copyBoard[i][j].setColor(this.board[i][j].getColor());</span>
+            }
+        }
+<span class="fc" id="L70">        return copyBoard;</span>
+    }
+    
+    /**
+     * Adds a piece on the playing board
+     *
+     * @param player the player that wants to add a piece
+     * @param pos the position where to add the piece
+     */
+    public void addPiece(Player player, Position pos)
+    {
+<span class="nc" id="L81">        this.board[pos.getRow()][pos.getColumn()].setColor(player.getColor());</span>
+<span class="nc" id="L82">    }</span>
+
+    /**
+     * Verifies if the square of position received as parameters contains any
+     * piece or not
+     *
+     * @param pos the position in which the method has to verify if any piece
+     * stays or not
+     * 
+     * @return true if the square at the position is free of piece and false
+     * either
+     *
+     * throws an IllegalArgumentException(&quot;La position ne fait pas partie du tableau de jeu !&quot;)
+     * if the position is outside the board
+     */
+    public boolean isFree(Position pos)
+    {
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (!isInside(pos))</span>
+        {
+<span class="fc" id="L101">            throw new IllegalArgumentException(&quot;La position ne fait pas partie du tableau de jeu !&quot;);</span>
+        }
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        return this.board[pos.getRow()][pos.getColumn()].getColor() == Color.EMPTY;</span>
+    }
+    
+    /**
+     * Boolean method that returns true if the position given in the parameters
+     * is contained in the playing board and false either
+     *
+     * @param pos the position given by the methods that calls this one to be
+     * able to know if the following is contained by the playing board or not
+     * 
+     * @return true if the position given in the parameters is contained by the
+     * playing board, and false if not
+     */
+    public boolean isInside(Position pos)
+    {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        return pos.getColumn() &gt; 0</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">                &amp;&amp; pos.getColumn() &lt; this.board.length</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">                &amp;&amp; pos.getRow() &gt; 0</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                &amp;&amp; pos.getRow() &lt; this.board[0].length;</span>
+    }
+    
+    /**
+     * Shows the caracteristics of the object &quot;Piece&quot; that stands on the
+     * position given as parameters
+     *
+     * @param pos the position where the piece has to be returned
+     * @return the piece that stands on the position given as paramters
+     *
+     * This throws a new ArrayIndexOutOfBoundsException(&quot;La position ne fait pas
+     * partie du tableau de jeu !&quot;) if the position is not insiade the playing
+     * board
+     */
+    public Piece getPiece(Position pos)
+    {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if (!isInside(pos))</span>
+        {
+<span class="nc" id="L139">            throw new ArrayIndexOutOfBoundsException(&quot;La position n'est pas dans le tableau ou est vide !&quot;);</span>
+        }
+<span class="nc" id="L141">        return this.board[pos.getRow()][pos.getColumn()];</span>
+    }
+}
+
+    /**
+     * Verifies if a position can welcome a piece or not
+     *
+     * @param pos the position where a piece should come
+     * @param piece the piece that has to come
+     * @return true if the position can welcome a piece with the current color
+     * and false else
+     */
+    /*public boolean positionable(Position pos, Piece piece) {
+        if (pos.getRow() == 0) {
+            if (pos.getColumn() == 0) {
+                return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
+                        || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                        || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY));
+            } else if (pos.getColumn() == 7) {
+                return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
+                        || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                        || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
+            }
+            return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
+        } else if (pos.getRow() == 7) {
+            if (pos.getColumn() == 0) {
+                return ((board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                        || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                        || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY));
+            } else if (pos.getColumn() == 7) {
+                return ((board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
+                        || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                        || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
+                        &amp;&amp; board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
+            }
+            return ((board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
+        }
+        if (pos.getColumn() == 0) {
+            return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY));
+        }
+        if (pos.getColumn() == 7) {
+            return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                    || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
+                    &amp;&amp; board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
+        }
+        return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
+                || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
+                || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
+                || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
+                || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
+                &amp;&amp; board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
+    }*/
+    
+    
+    /*public boolean verifDirection(Position pos, Piece piece)
+    {
+        LinkedList&lt;Piece&gt; pieceList = new LinkedList&lt;&gt;();
+        LinkedList&lt;Piece&gt; flippableList = new LinkedList&lt;&gt;();
+        LinkedList&lt;Position&gt; posToFlip = new LinkedList&lt;&gt;();
+        for (Direction dir1 : Direction.values())
+        {
+            posToFlip.clear();
+            Position pos1 = new Position(pos.getRow() + dir1.getRow(), pos.getColumn() + dir1.getColumn());
+            if (isInside(pos1))
+            {
+                if (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY
+                        &amp;&amp; board[pos1.getRow()][pos1.getColumn()].getColor() != null
+                        &amp;&amp; board[pos1.getRow()][pos1.getColumn()].getColor() != piece.getColor())
+                {
+                    while (board[pos1.getRow()][pos1.getColumn()].getColor() != Color.EMPTY
+                            &amp;&amp; board[pos1.getRow()][pos1.getColumn()].getColor() != null
+                            &amp;&amp; board[pos1.getRow()][pos1.getColumn()].getColor() != piece.getColor()
+                            &amp;&amp; isInside(pos1))
+                    {
+
+                        pos1.setRow(pos1.getRow() + dir1.getRow());
+                        pos1.setColumn(pos1.getColumn() + dir1.getColumn());
+                        pieceList.add(board[pos1.getRow()][pos1.getColumn()]);
+                        posToFlip.add(pos1);
+                        System.out.println(pos1.toString() + &quot;0&quot;);
+                    }
+                    System.out.println(posToFlip.toString());
+                    flip(positionsToFlip(dir1, pos1));
+                }
+            }
+        }
+        for (int i = 0; i &lt; pieceList.size(); i++)
+        {
+            if (pieceList.get(i).getColor() != piece.getColor())
+            {
+                flippableList.add(pieceList.get(i));
+            }
+        }
+        return pieceList.get(0).getColor() != Color.EMPTY
+                &amp;&amp; pieceList.get(0).getColor() != piece.getColor()
+                &amp;&amp; pieceList.get(flippableList.lastIndexOf(piece) + 1).getColor() == piece.getColor();
+    }*/
+    
+    
+
+    /**
+     * Flips the color of each piece that stands between the one that we put and
+     * the one on the other side
+     *
+     * @param list the list of Positions to flip
+     */
+    /*public void flip(LinkedList&lt;Position&gt; list)
+    {
+        for (int i = 0; i &lt; list.size(); i++) {
+            board[list.get(i).getRow()][list.get(i).getColumn()].invert();
+        }
+    }*/
+    
+    
+    
+    /*public void dirsToFlip (Position position)
+    {
+        //LinkedList&lt;Direction&gt; flipableDirs = new LinkedList&lt;&gt;();
+        LinkedList&lt;LinkedList&lt;Position&gt;&gt; listOfDirectionOfListOfPiecesToFlip = new LinkedList&lt;&gt;();
+        for (Direction dir : Direction.values())
+        {
+            LinkedList&lt;Position&gt; listAFlip = new LinkedList&lt;&gt;();
+            Position next = position.next(dir);
+            System.out.println(isInside(next));
+            System.out.println(board[next.getRow()][next.getColumn()].getColor() != Color.EMPTY);
+            System.out.println(!isMyOwn(next, board[position.getRow()][position.getColumn()].getColor()));
+            if (isInside(next)
+                    &amp;&amp; board[next.getRow()][next.getColumn()].getColor() != Color.EMPTY
+                    &amp;&amp; !isMyOwn(next, board[position.getRow()][position.getColumn()].getColor()))
+            {
+                System.out.println(listOfDirectionOfListOfPiecesToFlip.toString());
+                //listOfDirectionOfListOfPiecesToFlip.add(listPiecesToFlip(listPieces(dir, next)));
+                // Faire appel à la méthode qui renverra une liste de pieces dont la couleur de la dernière différera de la couleur des autres.
+                // si elle est vide, passer à la direction suivante
+                //      donc, si elle n'est pas vide, s'occuper de la direction
+                //flipableDirs.add(dir);
+                listAFlip = listPieces(dir, position);
+            }
+            flipB(listAFlip);
+        }
+        System.out.println(listOfDirectionOfListOfPiecesToFlip.toString());
+        
+    }
+    
+    public void flipB(LinkedList&lt;Position&gt; listPosToFlip)
+    {
+        for (int i = 0; i &lt; listPosToFlip.size(); i++)
+        {
+            board[listPosToFlip.get(i).getColumn()][listPosToFlip.get(i).getRow()].invert();
+        }
+    }*/
+    
+    
+    
+    /**
+     * Makes a list of directions belonging a position and a color
+     *
+     * @param pos the position around which it has to add the differnet
+     * directions
+     * @param color the color of the piece around which it has to add the
+     * differnet directions
+     * @return the list of directions
+     */
+    /*public LinkedList&lt;Direction&gt; listDirection(Position pos, Color color) {
+        LinkedList&lt;Direction&gt; listDir = new LinkedList&lt;&gt;();
+        for (Direction dir : Direction.values()) {
+            if (board[pos.getRow()][pos.getColumn()].getColor() != color) {
+                listDir.add(dir);
+            }
+        }
+        return listDir;
+    }
+
+    public void flipPos(LinkedList&lt;LinkedList&lt;Piece&gt;&gt; listDirsOfPieceToFlip) {
+        for (int i = 0; i &lt; listDirsOfPieceToFlip.size(); i++) {
+            for (int j = 0; j &lt; listDirsOfPieceToFlip.get(i).size(); j++) {
+
+            }
+        }
+    }
+
+    public LinkedList&lt;Position&gt; listPieces(Direction direction, Position position) {
+        LinkedList&lt;Position&gt; piToFlip = new LinkedList&lt;&gt;();
+
+        while (isInside(position)
+                &amp;&amp; board[position.getRow()][position.getColumn()].getColor() != Color.EMPTY) {
+            for (Direction dir : Direction.values()) {
+                piToFlip.add(position);
+                position.setRow(position.getRow() + direction.getRow());
+                position.setColumn(position.getColumn() + direction.getColumn());
+            }
+        }
+        System.out.println(&quot;-1&quot; + piToFlip.toString());
+        return piToFlip;
+    }
+    
+    public LinkedList&lt;Position&gt; listPiecesToFlip(LinkedList&lt;Position&gt; listToGoFlipable)
+    {
+        LinkedList&lt;Position&gt; flippingList = new LinkedList&lt;&gt;();
+        for (int i = 0; i &lt; listToGoFlipable.size(); i++)
+        {
+            if (board[listToGoFlipable.get(i).getRow()][listToGoFlipable.get(i).getColumn()].getColor() == board[listToGoFlipable.get(listToGoFlipable.size() - 1).getRow()][listToGoFlipable.get(listToGoFlipable.size() - 1).getColumn()].getColor())
+            {
+                System.out.println(&quot;1&quot; + flippingList.toString());
+                for (int j = 1; j &lt; listToGoFlipable.size(); j++)
+                {
+                    System.out.println(&quot;2&quot; + flippingList.toString());
+                    if (board[listToGoFlipable.get(i).getRow()][listToGoFlipable.get(i).getColumn()].getColor() != board[listToGoFlipable.get(listToGoFlipable.size() - 1).getRow()][listToGoFlipable.get(listToGoFlipable.size() - 1).getColumn()].getColor())
+                    {
+                        flippingList.add(listToGoFlipable.get(j));
+                        System.out.println(&quot;3&quot; + flippingList.toString());
+                    }
+                    System.out.println(&quot;4&quot; + flippingList.toString());
+                }
+            }
+        }
+        System.out.println(&quot;5&quot; + flippingList.toString());
+        return flippingList;
+    }
+
+    
+    public LinkedList&lt;Position&gt; positionsToFlip(Direction dir, Position position) {
+        LinkedList&lt;Position&gt; piToFlip = new LinkedList&lt;&gt;();
+        Position pos = new Position(position.getRow(), position.getColumn());
+        Position nextPos = new Position(pos.getRow() + dir.getRow(), pos.getColumn() + dir.getColumn());
+        while (isInside(nextPos)
+                &amp;&amp; isInside(pos)
+                &amp;&amp; board[nextPos.getRow()][nextPos.getColumn()].getColor() != Color.EMPTY
+                &amp;&amp; board[nextPos.getRow()][nextPos.getColumn()].getColor() != board[position.getRow()][position.getColumn()].getColor()) {
+            piToFlip.add(nextPos);
+            pos.setRow(nextPos.getRow());
+            pos.setColumn(nextPos.getColumn());
+            nextPos.setRow(nextPos.getRow() + dir.getRow());
+            nextPos.setColumn(nextPos.getColumn() + dir.getColumn());
+        }
+        return piToFlip;
+    }*/
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -13,64 +13,131 @@ import static org.junit.Assert.*;
  * @author leopoldmols
  */
 public class BoardTest {
-    
-    public BoardTest() {
-    }
 
     /**
-     * Test of getSquares method, of class Board.
+     * Test of isInside method, of class Board.
      */
     @Test
-    public void testGetSquares() {
-        System.out.println("getSquares");
-        Board instance = new Board();
-        Square[][] expResult = null;
-        Square[][] result = instance.getSquares();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIsInsideTRUE11() {
+        System.out.println("isInsideTRUE11");
+        Position pos = new Position(1, 1);
+        Board b = new Board();
+        boolean result = b.isInside(pos);
+        assertTrue(result);
     }
 
     /**
      * Test of isInside method, of class Board.
      */
     @Test
-    public void testIsInside() {
-        System.out.println("isInside");
+    public void testIsInsideTRUE88() {
+        System.out.println("isInsideTRUE88");
+        Position pos = new Position(7, 7);
+        Board b = new Board();
+        boolean result = b.isInside(pos);
+        assertTrue(result);
+    }
+    
+    /**
+     * Test of isInside method, of class Board.
+     */
+    @Test
+    public void testIsInsideFALSE00() {
+        System.out.println("isInsideFALSE00");
+        Position pos = new Position(0, 0);
+        Board b = new Board();
+        boolean result = b.isInside(pos);
+        assertFalse(result);
+    }
+    
+    /**
+     * Test of isInside method, of class Board.
+     */
+    @Test
+    public void testIsInsideFALSE99() {
+        System.out.println("isInsideFALSE99");
+        Position pos = new Position(9, 9);
+        Board b = new Board();
+        boolean result = b.isInside(pos);
+        assertFalse(result);
+    }
+
+    /**
+     * Test of isFree method, of class Board.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testIsFreeEXCEPTION() {
+        System.out.println("isFreeEXCEPTION");
+        Position pos = new Position(0, 0);
+        Board instance = new Board();
+        instance.isFree(pos);
+    }
+
+    /**
+     * Test of getPiece method, of class Board.
+     */
+    @Test
+    public void testGetPiece() {
+        System.out.println("getPiece");
         Position pos = null;
         Board instance = new Board();
-        boolean expResult = false;
-        boolean result = instance.isInside(pos);
+        Piece expResult = null;
+        Piece result = instance.getPiece(pos);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getSquare method, of class Board.
+     * Test of initialize method, of class Board.
      */
     @Test
-    public void testGetSquare() {
-        System.out.println("getSquare");
-        Position pos = null;
+    public void testInitialize() {
+        System.out.println("initialize");
         Board instance = new Board();
-        Square expResult = null;
-        Square result = instance.getSquare(pos);
-        assertEquals(expResult, result);
+        instance.initialize();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of put method, of class Board.
+     * Test of getBoard method, of class Board.
      */
     @Test
-    public void testPut() {
-        System.out.println("put");
-        Piece piece = null;
+    public void testGetBoard() {
+        System.out.println("getBoard");
+        Board instance = new Board();
+        Piece[][] expResult = null;
+        Piece[][] result = instance.getBoard();
+        assertArrayEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of copieDefensiveBoard method, of class Board.
+     */
+    @Test
+    public void testCopieDefensiveBoard() {
+        System.out.println("copieDefensiveBoard");
+        Board instance = new Board();
+        Piece[][] expResult = null;
+        Piece[][] result = instance.copieDefensiveBoard();
+        assertArrayEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of addPiece method, of class Board.
+     */
+    @Test
+    public void testAddPiece() {
+        System.out.println("addPiece");
+        Player player = null;
         Position pos = null;
         Board instance = new Board();
-        instance.put(piece, pos);
+        instance.addPiece(player, pos);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -91,30 +158,15 @@ public class BoardTest {
     }
 
     /**
-     * Test of getPiece method, of class Board.
+     * Test of isInside method, of class Board.
      */
     @Test
-    public void testGetPiece() {
-        System.out.println("getPiece");
+    public void testIsInside() {
+        System.out.println("isInside");
         Position pos = null;
         Board instance = new Board();
-        Piece expResult = null;
-        Piece result = instance.getPiece(pos);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getNumberOwnPieces method, of class Board.
-     */
-    @Test
-    public void testGetNumberOwnPieces() {
-        System.out.println("getNumberOwnPieces");
-        Player player = null;
-        Board instance = new Board();
-        int expResult = 0;
-        int result = instance.getNumberOwnPieces(player);
+        boolean expResult = false;
+        boolean result = instance.isInside(pos);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

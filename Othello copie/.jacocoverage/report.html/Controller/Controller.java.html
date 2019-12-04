@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Controller.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Othello_copie&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controller</a> &gt; <span class="el_source">Controller.java</span></div><h1>Controller.java</h1><pre class="source lang-java linenums">package Controller;
+
+import Models.*;
+import View.*;
+import java.util.Scanner;
+
+/**
+ * This class controls the way the game will begin, keep on and finish
+ *
+ * @author leopoldmols
+ */
+public class Controller
+{
+    private Model game;
+    private View view;
+<span class="fc" id="L16">    Scanner in = new Scanner(System.in);</span>
+    
+    public Controller(Model game, View view)
+<span class="fc" id="L19">    {</span>
+<span class="fc" id="L20">        this.game = game;</span>
+<span class="fc" id="L21">        this.view = view;</span>
+<span class="fc" id="L22">    }</span>
+    
+    /**
+     * This initialize the current game and the current view
+     * by calling the appropriate method (&quot;initialize&quot;)
+     * respectively in the Model Package and the View package
+     */
+    
+    public void initialize()
+    {
+<span class="fc" id="L32">        game.initialize();</span>
+<span class="fc" id="L33">    }</span>
+    
+    /**
+     * This starts a game by calling the method &quot;start()&quot; in the package Model.
+     * It will create a new variable &quot;arretJeu&quot; that will automatically take the value given by the method &quot;isOver()&quot; from the class &quot;Game&quot;
+     * This also creates a variable &quot;arretJeu&quot; to stop a while that creates a new variable &quot;board&quot; of Square type and a new variable &quot;arret&quot; of String type.
+     * Still in the while, &quot;board&quot; will be displayed  and the variable &quot;arretJeu&quot;
+     * will change to true if the variable &quot;arret&quot; typed in by the user takes the value &quot;quit&quot;
+     */
+    public void startGame()
+    {
+<span class="fc" id="L44">        initialize();</span>
+<span class="fc" id="L45">        boolean endCom = false;</span>
+<span class="fc" id="L46">        boolean newTurn = false;</span>
+        
+<span class="fc" id="L48">        this.view.displayStart();</span>
+<span class="fc" id="L49">        this.view.displayBoard(this.game.getBoard());</span>
+<span class="fc" id="L50">        this.view.displayHelp();</span>
+<span class="fc" id="L51">        turn();</span>
+        
+<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        while (!this.game.isOver()</span>
+                &amp;&amp; !endCom)
+        {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (newTurn)</span>
+            {
+                //this.game.changePlayer();
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                if (!this.game.canPlaceSmw())</span>
+                {
+<span class="nc" id="L61">                    this.view.displayError(&quot;Ce joueur ne peut pas jouer lors de ce tour.&quot;);</span>
+                    //this.game.changePlayer();
+                }
+                //turn();
+            }
+<span class="nc" id="L66">            String command = this.view.askCommand();</span>
+<span class="nc" id="L67">            String[] separate = command.toLowerCase().split(&quot; &quot;);</span>
+<span class="nc bnc" id="L68" title="All 22 branches missed.">            switch(separate[0])</span>
+            {
+                case &quot;quit&quot; :
+<span class="nc" id="L71">                    endCom = true;</span>
+<span class="nc" id="L72">                    break;</span>
+                case &quot;help&quot; :
+<span class="nc" id="L74">                    view.displayHelp();</span>
+<span class="nc" id="L75">                    break;</span>
+                case &quot;score&quot; :
+<span class="nc" id="L77">                    System.out.println(&quot;Score du joueur noir (2) : &quot; + game.getScore(Color.BLACK));</span>
+<span class="nc" id="L78">                    System.out.println(&quot;Score du joueur blanc (1) : &quot; + game.getScore(Color.WHITE));</span>
+<span class="nc" id="L79">                    break;</span>
+                case &quot;play&quot; :
+                    Position pos;
+                    try
+                    {
+<span class="nc" id="L84">                        pos = new Position(Integer.parseInt(separate[1]) - 1, Integer.parseInt(separate[2]) - 1);</span>
+<span class="nc" id="L85">                        this.game.play(pos);</span>
+<span class="nc" id="L86">                        newTurn = true;</span>
+<span class="nc" id="L87">                        turn();</span>
+                    }
+<span class="nc" id="L89">                    catch (NumberFormatException e)</span>
+                    {
+<span class="nc" id="L91">                        System.out.println(&quot;Les 2 derniers arguments ne sont pas des chiffres !&quot;);</span>
+                    }
+<span class="nc" id="L93">                    catch (ArrayIndexOutOfBoundsException e)</span>
+                    {
+                        //System.out.println(e.getMessage());
+<span class="nc" id="L96">                        System.out.println(&quot;La commande comporte pas assez ou trop d'arguments !&quot;);</span>
+                    }
+<span class="nc" id="L98">                    catch (Exception e)</span>
+                    {
+<span class="nc" id="L100">                        view.displayError(e.getMessage());</span>
+<span class="nc" id="L101">                    }</span>
+<span class="nc" id="L102">                    break;</span>
+                case &quot;show&quot;:
+<span class="nc" id="L104">                    this.view.displayBoard(this.game.getBoard());</span>
+<span class="nc" id="L105">                    break;</span>
+                default :
+<span class="nc" id="L107">                    System.out.println(&quot;zut&quot;);</span>
+<span class="nc" id="L108">                    System.out.println(&quot;La commande n'est pas correctement entrée&quot;);</span>
+            }
+<span class="nc" id="L110">        }</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (endCom == true)</span>
+        {
+<span class="nc" id="L113">            this.view.displayQuit();</span>
+        }
+        else
+        {
+<span class="nc" id="L117">            this.game.getScore(Color.BLACK);</span>
+<span class="nc" id="L118">            this.game.getScore(Color.WHITE);</span>
+<span class="nc" id="L119">            this.view.displayOver();</span>
+<span class="nc" id="L120">            this.view.displayQuit();</span>
+        }
+        
+<span class="nc" id="L123">    }</span>
+    
+    /**
+     * Displays who's turn it is
+     */
+    private void turn ()
+    {
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        if (game.getCurrent().getColor() == Color.BLACK)</span>
+        {
+<span class="nc" id="L132">            System.out.println(&quot;\nAu tour du joueur noir (2) : &quot;);</span>
+        }
+        else
+        {
+<span class="fc" id="L136">            System.out.println(&quot;\nAu tour du joueur blanc (1) : &quot;);</span>
+        }
+<span class="fc" id="L138">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

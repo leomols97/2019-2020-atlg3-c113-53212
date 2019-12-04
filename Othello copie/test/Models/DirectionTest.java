@@ -71,5 +71,31 @@ public class DirectionTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of setRow method, of class Direction.
+     */
+    @Test
+    public void testSetRow() {
+        System.out.println("setRow");
+        int row = 0;
+        Direction instance = null;
+        instance.setRow(row);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setColumn method, of class Direction.
+     */
+    @Test
+    public void testSetColumn() {
+        System.out.println("setColumn");
+        int column = 0;
+        Direction instance = null;
+        instance.setColumn(column);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

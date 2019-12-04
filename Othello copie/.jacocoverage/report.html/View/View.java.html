@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>View.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Othello_copie&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">View.java</span></div><h1>View.java</h1><pre class="source lang-java linenums">package View;
+
+import Models.*;
+import java.util.Scanner;
+
+/**
+ * Initializes the View of the game to make the view of the game understandable to the player
+ *
+ * @author leopoldmols
+ */
+public class View {
+    
+    /**
+     * To let the user enter some commands
+     */
+    private final Scanner in;
+    private Model game;
+    
+    /**
+     * Constructs a new View
+     */
+    public View(Model game)
+<span class="fc" id="L23">    {</span>
+<span class="fc" id="L24">        in = new Scanner(System.in);</span>
+<span class="fc" id="L25">        this.game = game;</span>
+<span class="fc" id="L26">    }</span>
+    
+    /**
+     * This shows a welcoming message to the user
+     */
+    public void displayStart()
+    {
+<span class="fc" id="L33">        System.out.println(&quot;Bienvenue dans le jeu Othello&quot;);</span>
+<span class="fc" id="L34">    }</span>
+    
+    /**
+     * This show a goobye message to the user
+     */
+    public void displayQuit()
+    {
+<span class="nc" id="L41">        System.out.println(&quot;\nA la prochaine, et merci d'avoir joué !&quot;);</span>
+<span class="nc" id="L42">    }</span>
+    
+    /**
+     * This shows an error containeing the message that is received as parameters
+     *
+     * @param message the error message that should be shown when an error occurs
+     */
+    public void displayError(String message)
+    {
+<span class="nc" id="L51">        System.out.println(message);</span>
+<span class="nc" id="L52">    }</span>
+    
+    /**
+     * Shows only the first line to display the different commands for the player
+     */
+    public void displayHelp()
+    {
+<span class="fc" id="L59">        System.out.println(&quot;\nCommandes possibles : &quot;);</span>
+<span class="fc" id="L60">        System.out.println(&quot; - 'show' : afficher le plateau de jeu&quot;);</span>
+<span class="fc" id="L61">        System.out.println(&quot; - 'score' : afficher le score des joueurs&quot;);</span>
+<span class="fc" id="L62">        System.out.println(&quot; - 'play i j' : jouer où 'i' représente la ligne dans laquelle placer votre pion et 'j' la colonne&quot;);</span>
+<span class="fc" id="L63">        System.out.println(&quot; - 'quit' : quitter le jeu\n&quot;);</span>
+<span class="fc" id="L64">    }</span>
+    
+    /**
+     * Asks the user to enter a command that has to be entered
+     *
+     * @return the command the user entered
+     */
+    public String askCommand()
+    {
+<span class="fc" id="L73">        System.out.print(&quot;\nEntrez votre commande : &quot;);</span>
+<span class="nc" id="L74">        String command = in.nextLine();</span>
+<span class="nc" id="L75">        return command;</span>
+    }
+    
+    /**
+     * Displays the user that the game is finished
+     */
+    public void displayOver()
+    {
+<span class="nc" id="L83">        System.out.println(&quot;Partie terminée.&quot;);</span>
+<span class="nc" id="L84">    }</span>
+    
+    /**
+     * Shows the top row of the playing board that shows the number of the columns
+     *
+     * @param plateaus the playing game that is received as parameters to know which step of the game it has to return
+     */
+    private void topRow (Piece[][] plateau)
+    {
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (int i = 0; i &lt;= plateau[0].length; i++)</span>
+        {
+<span class="fc" id="L95">            System.out.print(&quot; &quot; + i + &quot; &quot;);</span>
+        }
+<span class="fc" id="L97">        System.out.println();</span>
+<span class="fc" id="L98">    }</span>
+    
+    /**
+     * Shows the board
+     *
+     * @param plateau the plateaus
+     */
+    public void displayBoard (Piece[][] plateau)
+    {
+        
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (int i = -1; i &lt; plateau.length; i++) {</span>
+<span class="fc" id="L109">            System.out.print(&quot;---&quot;);</span>
+        }
+<span class="fc" id="L111">        System.out.println();</span>
+        
+<span class="fc" id="L113">        topRow(plateau);</span>
+        
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        for (int i = 0; i &lt; plateau.length; i++)</span>
+        {
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">            if (plateau[i][0].getColor() != null)</span>
+            {
+<span class="fc" id="L119">                System.out.print(&quot; &quot; + (i + 1) + &quot; &quot;);</span>
+            }
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            for (int j = 0; j &lt; plateau[i].length; j++)</span>
+            {
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">                if (null != plateau[i][j].getColor())</span>
+                {
+<span class="pc bpc" id="L125" title="1 of 4 branches missed.">                    switch (plateau[i][j].getColor())</span>
+                    {
+                        case EMPTY:
+<span class="fc" id="L128">                            System.out.print(&quot; 0 &quot;);</span>
+<span class="fc" id="L129">                            break;</span>
+                        case BLACK:
+<span class="fc" id="L131">                            System.out.print(&quot; 2 &quot;);</span>
+<span class="fc" id="L132">                            break;</span>
+                        case WHITE:
+<span class="fc" id="L134">                            System.out.print(&quot; 1 &quot;);</span>
+<span class="fc" id="L135">                            break;</span>
+                        default:
+                            break;
+                    }
+                }
+            }
+<span class="fc" id="L141">            System.out.println();</span>
+        }
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        for (int i = -1; i &lt; plateau.length; i++) {</span>
+<span class="fc" id="L144">            System.out.print(&quot;---&quot;);</span>
+        }
+<span class="fc" id="L146">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

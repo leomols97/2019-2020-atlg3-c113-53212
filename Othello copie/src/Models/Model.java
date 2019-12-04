@@ -57,7 +57,7 @@ public interface Model {
      * 
      * @return true if he can and false else
      */
-//    boolean canPlaceSmw();
+    boolean canPlaceSmw();
     
     /**
      * gets the score of a player
@@ -83,4 +83,9 @@ public interface Model {
     //void Player (boolean over);
     
     void play(Position position);
+    
+    /**
+     * Change the current player
+     */
+    void changePlayer();
 }

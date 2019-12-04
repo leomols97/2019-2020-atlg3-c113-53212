@@ -45,20 +45,6 @@ public class ColorTest {
     }
 
     /**
-     * Test of getColor method, of class Color.
-     */
-    @Test
-    public void testGetColor() {
-        System.out.println("getColor");
-        Color instance = null;
-        int expResult = 0;
-        int result = instance.getColor();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of invert method, of class Color.
      */
     @Test

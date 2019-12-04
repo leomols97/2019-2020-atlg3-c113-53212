@@ -41,8 +41,6 @@ public class Board
         this.board[6][6].setColor(Color.WHITE);
         this.board[6][5].setColor(Color.BLACK);
     }
-
-    
     
     /**
      * This method helps the other class to be able to access to the value of
@@ -98,7 +96,7 @@ public class Board
     {
         if (!isInside(pos))
         {
-            throw new IllegalArgumentException("La position ne fait pas partie du tableau de jeu !");
+            throw new IllegalArgumentException("Game : isFree : La position ne fait pas partie du tableau de jeu !");
         }
         return this.board[pos.getRow()][pos.getColumn()].getColor() == Color.EMPTY;
     }
@@ -115,10 +113,10 @@ public class Board
      */
     public boolean isInside(Position pos)
     {
-        return pos.getColumn() >= 0
-                && pos.getColumn() <= this.board.length
-                && pos.getRow() >= 0
-                && pos.getRow() <= this.board[0].length;
+        return pos.getColumn() > 0
+                && pos.getColumn() < this.board.length
+                && pos.getRow() > 0
+                && pos.getRow() < this.board[0].length;
     }
     
     /**

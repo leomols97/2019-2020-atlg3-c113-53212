@@ -62,37 +62,9 @@ public class ModelTest {
     public void testGetBoard() {
         System.out.println("getBoard");
         Model instance = new ModelImpl();
-        Square[][] expResult = null;
-        Square[][] result = instance.getBoard();
+        Piece[][] expResult = null;
+        Piece[][] result = instance.getBoard();
         assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of select method, of class Model.
-     */
-    @Test
-    public void testSelect() {
-        System.out.println("select");
-        int row = 0;
-        int column = 0;
-        Model instance = new ModelImpl();
-        instance.select(row, column);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getSelected method, of class Model.
-     */
-    @Test
-    public void testGetSelected() {
-        System.out.println("getSelected");
-        Model instance = new ModelImpl();
-        Piece expResult = null;
-        Piece result = instance.getSelected();
-        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -106,108 +78,6 @@ public class ModelTest {
         Model instance = new ModelImpl();
         Player expResult = null;
         Player result = instance.getCurrent();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getSquare method, of class Model.
-     */
-    @Test
-    public void testGetSquare() {
-        System.out.println("getSquare");
-        Position pos = null;
-        Model instance = new ModelImpl();
-        Square expResult = null;
-        Square result = instance.getSquare(pos);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    public class ModelImpl implements Model {
-
-        public void initialize() {
-        }
-
-        public void start() {
-        }
-
-        public boolean isOver() {
-            return false;
-        }
-
-        public Square[][] getBoard() {
-            return null;
-        }
-
-        public void select(int row, int column) {
-        }
-
-        public Piece getSelected() {
-            return null;
-        }
-
-        public Player getCurrent() {
-            return null;
-        }
-
-        public Square getSquare(Position pos) {
-            return null;
-        }
-    }
-
-    /**
-     * Test of put method, of class Model.
-     */
-    @Test
-    public void testPut() {
-        System.out.println("put");
-        Position pos = null;
-        Model instance = new ModelImpl();
-        instance.put(pos);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of changePlayer method, of class Model.
-     */
-    @Test
-    public void testChangePlayer() {
-        System.out.println("changePlayer");
-        Model instance = new ModelImpl();
-        instance.changePlayer();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of legalPlace method, of class Model.
-     */
-    @Test
-    public void testLegalPlace() {
-        System.out.println("legalPlace");
-        Position pos = null;
-        Model instance = new ModelImpl();
-        boolean expResult = false;
-        boolean result = instance.legalPlace(pos);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of canPlace method, of class Model.
-     */
-    @Test
-    public void testCanPlace() {
-        System.out.println("canPlace");
-        Position pos = null;
-        Model instance = new ModelImpl();
-        boolean expResult = false;
-        boolean result = instance.canPlace(pos);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -228,42 +98,41 @@ public class ModelTest {
     }
 
     /**
-     * Test of getScoreWhite method, of class Model.
+     * Test of getScore method, of class Model.
      */
     @Test
-    public void testGetScoreWhite() {
-        System.out.println("getScoreWhite");
+    public void testGetScore() {
+        System.out.println("getScore");
+        Color color = null;
         Model instance = new ModelImpl();
         int expResult = 0;
-        int result = instance.getScoreWhite();
+        int result = instance.getScore(color);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getScoreBlack method, of class Model.
+     * Test of play method, of class Model.
      */
     @Test
-    public void testGetScoreBlack() {
-        System.out.println("getScoreBlack");
+    public void testPlay() {
+        System.out.println("play");
+        Position position = null;
         Model instance = new ModelImpl();
-        int expResult = 0;
-        int result = instance.getScoreBlack();
-        assertEquals(expResult, result);
+        instance.play(position);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of place method, of class Model.
+     * Test of changePlayer method, of class Model.
      */
     @Test
-    public void testPlace() {
-        System.out.println("place");
-        Position pos = null;
+    public void testChangePlayer() {
+        System.out.println("changePlayer");
         Model instance = new ModelImpl();
-        instance.place(pos);
+        instance.changePlayer();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -280,14 +149,7 @@ public class ModelTest {
             return false;
         }
 
-        public Square[][] getBoard() {
-            return null;
-        }
-
-        public void select(int row, int column) {
-        }
-
-        public Piece getSelected() {
+        public Piece[][] getBoard() {
             return null;
         }
 
@@ -295,98 +157,18 @@ public class ModelTest {
             return null;
         }
 
-        public void put(Position pos) {
-        }
-
-        public Square getSquare(Position pos) {
-            return null;
-        }
-
-        public void changePlayer() {
-        }
-
-        public boolean legalPlace(Position pos) {
-            return false;
-        }
-
-        public boolean canPlace(Position pos) {
-            return false;
-        }
-
         public boolean canPlaceSmw() {
             return false;
         }
 
-        public int getScoreWhite() {
+        public int getScore(Color color) {
             return 0;
         }
 
-        public int getScoreBlack() {
-            return 0;
-        }
-
-        public void place(Position pos) {
-        }
-    }
-
-    public class ModelImpl implements Model {
-
-        public void initialize() {
-        }
-
-        public void start() {
-        }
-
-        public boolean isOver() {
-            return false;
-        }
-
-        public Square[][] getBoard() {
-            return null;
-        }
-
-        public void select(int row, int column) {
-        }
-
-        public Piece getSelected() {
-            return null;
-        }
-
-        public Player getCurrent() {
-            return null;
-        }
-
-        public void put(Position pos) {
-        }
-
-        public Square getSquare(Position pos) {
-            return null;
+        public void play(Position position) {
         }
 
         public void changePlayer() {
-        }
-
-        public boolean legalPlace(Position pos) {
-            return false;
-        }
-
-        public boolean canPlace(Position pos) {
-            return false;
-        }
-
-        public boolean canPlaceSmw() {
-            return false;
-        }
-
-        public int getScoreWhite() {
-            return 0;
-        }
-
-        public int getScoreBlack() {
-            return 0;
-        }
-
-        public void place(Position pos) {
         }
     }
     

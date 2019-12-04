@@ -26,9 +26,9 @@ public class Position {
         this.column = column;
     }
     
-    Position(Position next) {
-        this.row = next.getRow();
-        this.column = next.getColumn();
+    Position(Position pos) {
+        this.row = pos.getRow();
+        this.column = pos.getColumn();
     }
     
     /**

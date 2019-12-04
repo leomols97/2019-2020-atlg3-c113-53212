@@ -94,7 +94,16 @@ public class Game implements Model{
     /**
      * Change of current player
      */
-    private void changePlayer()
+    @Override
+    public void changePlayer()
+    {
+        changePlayerDefensive();
+    }
+    
+    /**
+     * Defensive copy of the moethod changePlayer
+     */
+    private void changePlayerDefensive()
     {
         Player tmp;
         tmp = oponent;
@@ -132,7 +141,9 @@ public class Game implements Model{
         Objects.requireNonNull(position, "La position est vide !");
         if (!this.board.isInside(position))
         {
-            throw new IllegalArgumentException("sout du play La position n'est pas dans le tableau !");
+            throw new IllegalArgumentException("sout du play La position n'est pas dans le tableau ! "
+            /* + position + " longueur : " + this.board.getBoard().length 
+            + " hauteur : " + this.board.getBoard()[1].length*/);
         }
         if (canPlay(position))
         {
@@ -234,14 +245,14 @@ public class Game implements Model{
      * @return true if the piece has the same color than the color given in the parameters and true either
      * 
      * This metho throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
-     * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not insiade the playing board
+     * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not inside the playing board
      */
     private boolean isMyOwn(Position position, Color color)
     {
         Objects.requireNonNull(position, "La position n'existe pas !");
         if (!this.board.isInside(position))
         {
-            throw new IllegalStateException("La position ne fait pas partie du tableau de jeu !");
+            throw new IllegalStateException("Game : isMyOwn : La position ne fait pas partie du tableau de jeu !");
         }
         /*if (this.board.isFree(position))
         {
@@ -251,6 +262,28 @@ public class Game implements Model{
         }*/
         return this.board.getPiece(position).isMyOwn(color);
     }
+    
+    /**
+     * Verifies if the player can even place a piece on the playing board
+     * @return true if he can and false else
+     */
+    // PAS BONNE. IL NE FAUT PAS VERIFIER CELA MAIS SI LE JOUEUR PEUT PLACER UNE DE SES PIECES QQUE PART
+    @Override
+    public boolean canPlaceSmw()
+    {
+        for (int i = 0; i < board.getBoard().length; i++)
+        {
+            for (int j = 0; j < board.getBoard()[0].length; j++)
+            {
+                if (board.getBoard()[i][j].getColor() == Color.EMPTY)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 }
 
 
@@ -368,27 +401,7 @@ public class Game implements Model{
             throw new IllegalArgumentException("Vous ne pouvez pas placer de piece à cet endroit !");
         }
     }*/
-    
-    /**
-     * Verifies if the player can even place a piece on the playing board
-     * @return true if he can and false else
-     */
-    // PAS BONNE. IL NE FAUT PAS VERIFIER CELA MAIS SI LE JOUEUR PEUT PLACER UNE DE SES PIECES QQUE PART
-    /*@Override
-    public boolean canPlaceSmw()
-    {
-        for (int i = 0; i < board.getBoard().length; i++)
-        {
-            for (int j = 0; j < board.getBoard()[0].length; j++)
-            {
-                if (board.getBoard()[i][j].getColor() == Color.EMPTY)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
+
     /**
      * Place a piece at a certain position
      * @param position the position where to place the piece

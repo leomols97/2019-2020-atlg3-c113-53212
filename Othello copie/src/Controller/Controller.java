@@ -14,7 +14,7 @@ public class Controller
     private Model game;
     private View view;
     Scanner in = new Scanner(System.in);
-
+    
     public Controller(Model game, View view)
     {
         this.game = game;
@@ -31,7 +31,7 @@ public class Controller
     {
         game.initialize();
     }
-
+    
     /**
      * This starts a game by calling the method "start()" in the package Model.
      * It will create a new variable "arretJeu" that will automatically take the value given by the method "isOver()" from the class "Game"
@@ -56,12 +56,12 @@ public class Controller
             if (newTurn)
             {
                 //this.game.changePlayer();
-                /*if (!this.game.canPlaceSmw())
+                if (!this.game.canPlaceSmw())
                 {
                     this.view.displayError("Ce joueur ne peut pas jouer lors de ce tour.");
                     //this.game.changePlayer();
-                }*/
-                turn();
+                }
+                //turn();
             }
             String command = this.view.askCommand();
             String[] separate = command.toLowerCase().split(" ");
@@ -84,6 +84,7 @@ public class Controller
                         pos = new Position(Integer.parseInt(separate[1]) - 1, Integer.parseInt(separate[2]) - 1);
                         this.game.play(pos);
                         newTurn = true;
+                        turn();
                     }
                     catch (NumberFormatException e)
                     {

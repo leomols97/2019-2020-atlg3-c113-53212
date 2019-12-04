@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 
-import Controller.ControllerSuite;
-import Main.MainSuite;
-import Models.ModelsSuite;
-import View.ViewSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -16,7 +12,7 @@ import org.junit.runners.Suite;
  * @author leopoldmols
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ViewSuite.class, MainSuite.class, ModelsSuite.class, ControllerSuite.class})
+@Suite.SuiteClasses({Controller.ControllerSuite.class, Main.MainSuite.class, Models.ModelsSuite.class, View.ViewSuite.class, GuiFx.GuiFxSuite.class})
 public class RootSuite {
     
 }

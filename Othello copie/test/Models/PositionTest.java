@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
 import org.junit.Test;
@@ -104,16 +99,27 @@ public class PositionTest {
     }
 
     /**
-     * Test of move method, of class Position.
+     * Test of setRow method, of class Position.
      */
     @Test
-    public void testMove() {
-        System.out.println("move");
-        Direction dir = null;
+    public void testSetRow() {
+        System.out.println("setRow");
+        int row = 0;
         Position instance = null;
-        Position expResult = null;
-        Position result = instance.move(dir);
-        assertEquals(expResult, result);
+        instance.setRow(row);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setColumn method, of class Position.
+     */
+    @Test
+    public void testSetColumn() {
+        System.out.println("setColumn");
+        int column = 0;
+        Position instance = null;
+        instance.setColumn(column);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

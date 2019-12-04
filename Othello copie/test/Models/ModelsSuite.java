@@ -13,7 +13,7 @@ import org.junit.runners.Suite;
  * @author leopoldmols
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({Models.PieceTest.class, Models.PositionTest.class, Models.BoardTest.class, Models.PlayerTest.class, Models.SquareTest.class, Models.PlayerColorTest.class, Models.DirectionTest.class, Models.GameTest.class, Models.ColorTest.class, Models.ModelTest.class})
+@Suite.SuiteClasses({Models.ColorTest.class, Models.PlayerTest.class, Models.PositionTest.class, Models.DirectionTest.class, Models.PieceTest.class, Models.ModelTest.class, Models.GameTest.class, Models.BoardTest.class})
 public class ModelsSuite {
     
 }

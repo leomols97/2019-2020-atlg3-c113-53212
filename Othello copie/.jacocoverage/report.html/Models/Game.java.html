@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Othello_copie&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Models</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package Models;
+
+import java.util.LinkedList;
+import java.util.Objects;
+
+/**
+ *
+ * @author leopoldmols
+ */
+
+public class Game implements Model{
+    
+    private final Board board;
+    private Player current;
+    private Player oponent;
+    private Position selected;
+    
+    public Game()
+<span class="fc" id="L19">    {</span>
+<span class="fc" id="L20">        this.board = new Board();</span>
+<span class="fc" id="L21">        this.current = new Player(Color.WHITE);</span>
+<span class="fc" id="L22">        this.oponent = new Player(Color.BLACK);</span>
+        
+<span class="fc" id="L24">    }</span>
+    
+    @Override
+    public void initialize()
+    {
+<span class="fc" id="L29">        this.board.initialize();</span>
+<span class="fc" id="L30">    }</span>
+    
+    /**
+     * This methods overrides the methods &quot;start()&quot; received from the class Model and verifies if the playing board exists and
+     * if any piece is over any other piece via the following method in this class
+     *
+     * This method throws a IllegalStateException(&quot;Le plateau de jeu n'a pas été initialisé !&quot;) if the board doesn't exist
+     * This method throws a IllegalArgumentException(&quot;La partie est terminée !&quot;) if the game is finished
+     */
+    @Override
+    public void start()
+    {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (board == null)</span>
+        {
+<span class="nc" id="L44">            throw new IllegalStateException(&quot;Le plateau de jeu n'a pas été initialisé !&quot;);</span>
+        }
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (isOver())</span>
+        {
+<span class="nc" id="L48">            throw new IllegalArgumentException(&quot;La partie est terminée !&quot;);</span>
+        }
+<span class="fc" id="L50">        System.out.println(board.getBoard());</span>
+<span class="fc" id="L51">    }</span>
+    
+    /**
+     * Overrides the method &quot;isOver()&quot; that comes from the class Model.
+     * Verifies if both players have moves left and if both of them still have their own flags
+     * @return true if both players have moves left and if both of them still have their own flags and false either
+     */
+    @Override
+    public boolean isOver()
+    {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        for (int i = 0; i &lt; board.getBoard().length; i++)</span>
+        {
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">            for (int j = 0; j &lt; board.getBoard()[i].length; j++)</span>
+            {
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">                if (board.getBoard()[i][j].getColor() == Color.EMPTY)</span>
+                {
+<span class="fc" id="L67">                    return false;</span>
+                }
+            }
+        }
+<span class="nc" id="L71">        return true;</span>
+    }
+    
+    /**
+     * Overrides the method &quot;getBoard()&quot; from the class Model.
+     * @return the playing board from the current playing board
+     */
+    @Override
+    public Piece [][] getBoard()
+    {
+        //initialize();
+<span class="fc" id="L82">        return this.board.getBoard();</span>
+    }
+    
+    /**
+     * Overrides the method &quot;getCurrent()&quot; from the class Model.
+     */
+    @Override
+    public Player getCurrent()
+    {
+<span class="fc" id="L91">        return this.current;</span>
+    }
+    
+    public void changePlayer()
+    {
+<span class="fc" id="L96">        changePlayerDefensive();</span>
+<span class="fc" id="L97">    }</span>
+    
+    /**
+     * Change of current player
+     */
+    private void changePlayerDefensive()
+    {
+        Player tmp;
+<span class="fc" id="L105">        tmp = oponent;</span>
+<span class="fc" id="L106">        oponent = current;</span>
+<span class="fc" id="L107">        current = tmp;</span>
+<span class="fc" id="L108">    }</span>
+    
+    /**
+     * gets the score of the White player
+     * 
+     * @param color The color of the player that has to know its score
+     * 
+     * @return the score of the White player
+     */
+    @Override
+    public int getScore (Color color)
+    {
+<span class="fc" id="L120">        int cpt = 0;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        for (int i = 0; i &lt; board.getBoard().length; i++)</span>
+        {
+<span class="fc bfc" id="L123" title="All 2 branches covered.">            for (int j = 0; j &lt; board.getBoard()[0].length; j++)</span>
+            {
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">                if (board.getBoard()[i][j].getColor() == color)</span>
+                {
+<span class="nc" id="L127">                    cpt++;</span>
+                }
+            }
+        }
+<span class="fc" id="L131">        return cpt;</span>
+    }
+    
+    @Override
+    public void play (Position position)
+    {
+<span class="nc" id="L137">        Objects.requireNonNull(position, &quot;La position est vide !&quot;);</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (!this.board.isInside(position))</span>
+        {
+<span class="nc" id="L140">            throw new IllegalArgumentException(&quot;sout du play La position n'est pas dans le tableau !&quot;);</span>
+        }
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (canPlay(position))</span>
+        {
+<span class="nc" id="L144">            this.board.addPiece(current, position);</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            for (Direction dir : Direction.values())</span>
+            {
+                //if (canFlip(position, dir))
+                //{
+                try {
+<span class="nc" id="L150">                    System.out.println(&quot;Verification du play &quot; + dir.toString());</span>
+<span class="nc" id="L151">                    Position pos = new Position(position);</span>
+                    do
+                    {
+                        //pos = pos.next(dir);
+<span class="nc bnc" id="L155" title="All 2 branches missed.">                        if (canFlip(pos, dir))</span>
+                        {
+<span class="nc" id="L157">                            pos = pos.next(dir);</span>
+<span class="nc" id="L158">                            this.board.getPiece(pos).invert();</span>
+                        }
+                        //System.out.println(pos.next(dir));
+                        //System.out.println(dir);
+<span class="nc bnc" id="L162" title="All 2 branches missed.">                    } while (this.board.isInside(pos.next(dir))</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">                            &amp;&amp; this.board.isInside(pos.next(dir).next(dir))</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">                            &amp;&amp; this.board.isFree(pos.next(dir))</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                            &amp;&amp; isMyOwn(pos.next(dir), this.current.getColor().invert()));</span>
+                    //}
+                }
+<span class="nc" id="L168">                catch (Exception e){</span>
+<span class="nc" id="L169">                    throw e;</span>
+<span class="nc" id="L170">                }</span>
+            }
+<span class="nc" id="L172">            changePlayer();</span>
+        } else {
+<span class="nc" id="L174">            throw new IllegalArgumentException(&quot;Le joueur ne peut pas placer de pion sur cette case !&quot;);</span>
+        }
+<span class="nc" id="L176">    }</span>
+    
+    private boolean canPlay (Position position)
+    {
+<span class="nc" id="L180">        Objects.requireNonNull(position, &quot;La position est vide !&quot;);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        if (!this.board.isInside(position))</span>
+        {
+<span class="nc" id="L183">            throw new IllegalArgumentException(&quot;can play La position n'est pas dans le tableau !&quot;);</span>
+        }
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        if (!this.board.isFree(position))</span>
+        {
+<span class="nc" id="L187">            throw new IllegalArgumentException(&quot;La position n'est pas libre !&quot;);</span>
+        }
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        for (Direction dir : Direction.values())</span>
+        {
+<span class="nc bnc" id="L191" title="All 2 branches missed.">            if (canFlip(position, dir))</span>
+            {
+<span class="nc" id="L193">                return true;</span>
+            }
+        }
+<span class="nc" id="L196">        return false;</span>
+    }
+    
+    private boolean canFlip (Position position, Direction direction)
+    {
+<span class="nc" id="L201">        Objects.requireNonNull(position, &quot;La position est vide !&quot;);</span>
+<span class="nc" id="L202">        Objects.requireNonNull(direction, &quot;La direction n'exite pas !&quot;);</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        if (!this.board.isInside(position))</span>
+        {
+<span class="nc" id="L205">            throw new IllegalArgumentException(&quot;can Play La position n'est pas dans le tableau !&quot;);</span>
+        }
+<span class="nc" id="L207">        boolean isOponentPos = false;</span>
+<span class="nc" id="L208">        System.out.println(&quot;\ncanFlip en position &quot; + position + &quot; ? &quot; + isOponentPos);</span>
+<span class="nc" id="L209">        Position pos = position;</span>
+        do
+        {
+<span class="nc" id="L212">            pos = pos.next(direction);</span>
+            /*if (this.board.isInside(position)
+                    &amp;&amp; this.board.isFree(position))
+            {*/
+<span class="nc bnc" id="L216" title="All 2 branches missed.">                isOponentPos = this.board.isInside(pos)</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">                        &amp;&amp; !this.board.isFree(pos)</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">                        &amp;&amp; isMyOwn(pos, this.current.getColor().invert());</span>
+<span class="nc" id="L219">                System.out.println(&quot;canFlip en direction &quot; + direction + &quot; &quot; + pos + &quot; ? &quot; + isOponentPos);</span>
+            //}
+<span class="nc bnc" id="L221" title="All 2 branches missed.">        } while (isOponentPos</span>
+                /*&amp;&amp; this.board.getPiece(position).getColor() == this.current.getColor().invert()*/);
+        /*while (this.board.isInside(position)
+                &amp;&amp; isOponentPos
+                &amp;&amp; this.board.getPiece(position).getColor() == Color.EMPTY);*/
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        return this.board.isInside(pos)</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">                &amp;&amp; !this.board.isFree(pos)</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">                &amp;&amp; isMyOwn(pos, this.current.getColor());</span>
+    }
+    
+    
+    
+    
+    
+    /**
+     * Verifies if the piece that stands on a square on the playing board the playing board has the same color than a color
+     * @param position where the method has to verify if there's a piece on it and if well, if it has the same color than the second parameter
+     * @param color the color that has to be compared to the piece on the position given as first parameter
+     * @return true if the piece has the same color than the color given in the parameters and true either
+     * 
+     * This metho throws a NullPointerException(&quot;La position n'existe pas !&quot;) if the piece doesn't exist
+     * This throws a new IllegalStateException(&quot;La position ne fait pas partie du tableau de jeu !&quot;) if the position is not insiade the playing board
+     */
+    private boolean isMyOwn(Position position, Color color)
+    {
+<span class="nc" id="L246">        Objects.requireNonNull(position, &quot;La position n'existe pas !&quot;);</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">        if (!this.board.isInside(position))</span>
+        {
+<span class="nc" id="L249">            throw new IllegalStateException(&quot;La position ne fait pas partie du tableau de jeu !&quot;);</span>
+        }
+        /*if (this.board.isFree(position))
+        {
+            System.out.println(&quot;A&quot;);
+            System.out.println(position);
+            throw new IllegalArgumentException(&quot;La position ne contient pas de pièce !&quot;);
+        }*/
+<span class="nc" id="L257">        return this.board.getPiece(position).isMyOwn(color);</span>
+    }
+    
+    /**
+     * Verifies if the player can even place a piece on the playing board
+     * @return true if he can and false else
+     */
+    // PAS BONNE. IL NE FAUT PAS VERIFIER CELA MAIS SI LE JOUEUR PEUT PLACER UNE DE SES PIECES QQUE PART
+    @Override
+    public boolean canPlaceSmw()
+    {
+<span class="pc bpc" id="L268" title="1 of 2 branches missed.">        for (int i = 0; i &lt; board.getBoard().length; i++)</span>
+        {
+<span class="pc bpc" id="L270" title="1 of 2 branches missed.">            for (int j = 0; j &lt; board.getBoard()[0].length; j++)</span>
+            {
+<span class="pc bpc" id="L272" title="1 of 2 branches missed.">                if (board.getBoard()[i][j].getColor() == Color.EMPTY)</span>
+                {
+<span class="fc" id="L274">                    return true;</span>
+                }
+            }
+        }
+<span class="nc" id="L278">        return false;</span>
+    }
+    
+}
+
+
+    /**
+     * Verifies if the place is okay belonging the rules
+     * @param pos the position where to put the piece
+     * @return true if the player can put the piece or not
+     */
+    /*
+    @Override
+    public boolean legalPlace(Position pos) {
+        
+        boolean legal = false;
+        if (board.isInside(pos))
+        {
+            for (Direction dir : Direction.values())
+            {
+                try
+                {
+                    Position p = pos.move(dir);
+                    if (!board.isFree(pos)
+                            &amp;&amp; board.isInside(pos)
+                            &amp;&amp; board.getSquare(pos).getPiece().getColor() == oponent.getColor())
+                    {
+                        Position newPos = pos.move(dir);
+                        while (board.isFree(pos)
+                                &amp;&amp; board.isInside(pos)
+                                &amp;&amp; !legal)
+                        {
+                            if (board.getSquare(newPos).getPiece().getColor() == current.getColor())
+                            {
+                                legal = true;
+                            }
+                            newPos  = newPos.move(dir);
+                        }
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println(&quot;La piece ne peut pas être placée à cet endroit !&quot;);
+                }
+            }
+        }
+        return legal;
+    }*/
+
+
+
+
+
+
+
+
+    /**
+     * Verifies if the player can place a piece at a certain position
+     * @param position the position where to place the piece
+     * @return true if he can and false else
+     */
+    /*@Override
+    public boolean canPlace(Position position)
+    {
+        boolean legalPlace = false;
+        if (this.board.isInside(position))
+        {
+            System.out.println(&quot;1&quot;);
+            if (this.board.isFree(position))
+            {
+                System.out.println(&quot;2&quot;);
+                for (Direction dir : Direction.values())
+                {
+                    System.out.println(&quot;3&quot;);
+                    try
+                    {
+                        System.out.println(&quot;4&quot;);
+                        System.out.println(position);
+                        Position pos = position.next(dir);
+                        System.out.println(pos);
+                        System.out.println(&quot;isinside &quot; + this.board.isInside(pos));
+                        System.out.println(&quot;isfree &quot; + this.board.isFree(pos));
+                        System.out.println(&quot;W&quot;);
+                        System.out.println(&quot;Piececolor &quot; + this.board.getPiece(pos).getColor());
+                        System.out.println(&quot;Y&quot;);
+                        System.out.println(&quot;ennemyColor &quot; + this.current.getColor().invert());
+                        System.out.println(&quot;X&quot;);
+                        if (this.board.isInside(pos)
+                                &amp;&amp; !this.board.isFree(pos)
+                                &amp;&amp; this.board.getPiece(pos).getColor() == this.current.getColor().invert())
+                        {
+                            System.out.println(&quot;5&quot;);
+                            Position next = pos.next(dir);
+                            while (!legalPlace
+                                    &amp;&amp; this.board.isInside(next)
+                                    &amp;&amp; !this.board.isFree(next))
+                            {
+                                System.out.println(&quot;6&quot;);
+                                if (this.board.getPiece(next).getColor() == this.current.getColor())
+                                {
+                                    System.out.println(&quot;7&quot;);
+                                    legalPlace = true;
+                                }
+                                next = next.next(dir);
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println(&quot;8&quot;);
+                    }
+                }
+            }
+            return legalPlace;
+        }
+        else
+        {
+            System.out.println(&quot;9&quot;);
+            throw new IllegalArgumentException(&quot;Vous ne pouvez pas placer de piece à cet endroit !&quot;);
+        }
+    }*/
+
+    /**
+     * Place a piece at a certain position
+     * @param position the position where to place the piece
+     */
+    /*@Override
+    public void place(Position position)
+    {
+        if (!this.canPlace(position))
+        {
+            throw new IllegalArgumentException(&quot;Vous ne pouvez pas placer de pièce à cet endroit !&quot;);
+        }
+        System.out.println(&quot;A&quot;);
+        this.board.getPiece(position).setColor(current.getColor());
+        for (Direction dir : Direction.values())
+        {
+            System.out.println(&quot;B&quot;);
+            try
+            {
+                System.out.println(&quot;C&quot;);
+                Position pos = position.next(dir);
+                if (this.board.isInside(pos)
+                        &amp;&amp; !this.board.isFree(pos)
+                        &amp;&amp; this.isMyOwn(pos, this.oponent.getColor()))
+                {
+                    System.out.println(&quot;D&quot;);
+                    Position next = pos.next(dir);
+                    LinkedList&lt;Position&gt; previousPos = new LinkedList&lt;&gt;();
+                    previousPos.add(pos);
+                    boolean endPreviousPos = false;
+                    while (!endPreviousPos
+                            &amp;&amp; this.board.isInside(next)
+                            &amp;&amp; !this.board.isFree(next))
+                    {
+                        System.out.println(&quot;E&quot;);
+                        if (this.board.getPiece(next).getColor() == this.current.getColor())
+                        {
+                            System.out.println(&quot;F&quot;);
+                            System.out.println(previousPos.size());
+                            previousPos.forEach(prevPos -&gt; {
+                                System.out.println(&quot;Foreach&quot;);
+                                System.out.println(pos);
+                                System.out.println(this.board.getPiece(prevPos).getColor());
+                                this.board.getPiece(prevPos).invert();
+                                System.out.println(this.board.getPiece(prevPos).getColor());
+                            });
+                            endPreviousPos = true;
+                        }
+                        else
+                        {
+                            System.out.println(&quot;G&quot;);
+                            previousPos.add(next);
+                            next = next.next(dir);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println(&quot;H&quot;);
+            }
+        }
+        
+    }*/
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

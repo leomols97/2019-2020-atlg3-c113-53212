@@ -5,9 +5,7 @@
  */
 package View;
 
-import Models.Player;
-import Models.Square;
-import java.util.List;
+import Models.Piece;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,25 +19,25 @@ public class ViewTest {
     }
 
     /**
-     * Test of initialize method, of class View.
+     * Test of displayStart method, of class View.
      */
     @Test
-    public void testInitialize() {
-        System.out.println("initialize");
-        View instance = new View();
-        instance.initialize();
+    public void testDisplayStart() {
+        System.out.println("displayStart");
+        View instance = null;
+        instance.displayStart();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of quit method, of class View.
+     * Test of displayQuit method, of class View.
      */
     @Test
-    public void testQuit() {
-        System.out.println("quit");
-        View instance = new View();
-        instance.quit();
+    public void testDisplayQuit() {
+        System.out.println("displayQuit");
+        View instance = null;
+        instance.displayQuit();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -51,7 +49,7 @@ public class ViewTest {
     public void testDisplayError() {
         System.out.println("displayError");
         String message = "";
-        View instance = new View();
+        View instance = null;
         instance.displayError(message);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -63,7 +61,7 @@ public class ViewTest {
     @Test
     public void testDisplayHelp() {
         System.out.println("displayHelp");
-        View instance = new View();
+        View instance = null;
         instance.displayHelp();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -75,7 +73,7 @@ public class ViewTest {
     @Test
     public void testAskCommand() {
         System.out.println("askCommand");
-        View instance = new View();
+        View instance = null;
         String expResult = "";
         String result = instance.askCommand();
         assertEquals(expResult, result);
@@ -89,23 +87,8 @@ public class ViewTest {
     @Test
     public void testDisplayOver() {
         System.out.println("displayOver");
-        List<Player> winners = null;
-        List<Player> loosers = null;
-        View instance = new View();
-        instance.displayOver(winners, loosers);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of displayCurrentPlayer method, of class View.
-     */
-    @Test
-    public void testDisplayCurrentPlayer() {
-        System.out.println("displayCurrentPlayer");
-        Player player = null;
-        View instance = new View();
-        instance.displayCurrentPlayer(player);
+        View instance = null;
+        instance.displayOver();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -116,11 +99,9 @@ public class ViewTest {
     @Test
     public void testDisplayBoard() {
         System.out.println("displayBoard");
-        Square[][] square = null;
-        Player current = null;
-        boolean quitgame = false;
-        View instance = new View();
-        instance.displayBoard(square, current, quitgame);
+        Piece[][] plateau = null;
+        View instance = null;
+        instance.displayBoard(plateau);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
