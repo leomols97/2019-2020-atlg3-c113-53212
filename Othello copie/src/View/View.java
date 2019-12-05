@@ -70,7 +70,7 @@ public class View {
      */
     public String askCommand()
     {
-        System.out.print("\nEntrez votre commande : ");
+        System.out.print("Entrez votre commande : ");
         String command = in.nextLine();
         return command;
     }

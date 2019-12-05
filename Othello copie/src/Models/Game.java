@@ -144,29 +144,17 @@ public class Game implements Model{
         Objects.requireNonNull(position, "La position est vide !");
         if (!this.board.isInside(position))
         {
-            throw new IllegalArgumentException("sout du play La position n'est pas dans le tableau ! "
-            /* + position + " longueur : " + this.board.getBoard().length 
-            + " hauteur : " + this.board.getBoard()[1].length*/);
+            throw new IllegalArgumentException("sout du play La position n'est pas dans le tableau ! ");
         }
         if (!this.board.isFree(position))
         {
-            throw new IllegalArgumentException("sout du play La position n'est pas libre ! "
-            /* + position + " longueur : " + this.board.getBoard().length 
-            + " hauteur : " + this.board.getBoard()[1].length*/);
-        }
-        if (true) {
-            
+            throw new IllegalArgumentException("sout du play La position n'est pas libre ! ");
         }
         if (canPlay(position))
         {
             this.board.addPiece(current, position);
             for (Direction dir : Direction.values())
             {
-                //ArrayList<Boolean> correctDirs = new ArrayList(Collections.nCopies(8, canFlip(position, dir)));
-                //Collections.fill(correctDirs, canFlip(position, dir));
-                //System.out.println(dir + " : " + correctDirs.get(i));
-                //if (correctDirs.get(i))
-                //{
                 Position pos = position.next(dir);
                 Position posFin = pos.next(dir);
                 do
@@ -175,25 +163,19 @@ public class Game implements Model{
                 } while (this.board.isInside(posFin)
                         && !this.board.isFree(posFin)
                         && !isMyOwn(posFin, this.current.getColor()));
-                System.out.println("Verification du play " + dir.toString() + " " + canFlip(position, dir));
-                //for (int i = 0; i < correctDirs.size(); i++)
-                //{
-                    if (canFlip(position, dir)/* || correctDirs.get(i)*/)
+                //System.out.println("Verification du play " + dir.toString() + " " + canFlip(position, dir));
+                if (canFlip(position, dir))
+                {
+                    while (this.board.isInside(pos)
+                            && !this.board.isFree(pos)
+                            && !isMyOwn(pos, current.getColor())
+                            /*&& this.board.isInside(posFin)
+                            && !isMyOwn(posFin, this.current.getColor())*/)
                     {
-                        System.out.println("A");
-                        while (this.board.isInside(pos)
-                                && !this.board.isFree(pos)
-                                && !isMyOwn(pos, current.getColor())
-                                && this.board.isInside(posFin)
-                                && !isMyOwn(posFin, this.current.getColor()))
-                        {
-                            System.out.println("B");
-                            this.board.getPiece(pos).invert();
-                            pos = pos.next(dir);
-                        }
+                        this.board.getPiece(pos).invert();
+                        pos = pos.next(dir);
                     }
-                    //}
-                //}
+                }
             }
             changePlayer();
         }
@@ -217,20 +199,7 @@ public class Game implements Model{
         //Position posFin = position;
         for (Direction dir : Direction.values())
         {
-            /*while (this.board.isInside(posFin)
-                    && isMyOwn(posFin, this.current.getColor()))
-            {
-                posFin = posFin.next(dir);
-            }*/
-            /*do
-            {                
-                posFin = posFin.next(dir);
-            } while (this.board.isInside(posFin)
-                && !this.board.isFree(posFin)
-                && !isMyOwn(posFin, this.current.getColor()));*/
-            //posFin = posFin.next(dir);
-            if (canFlip(position, dir)
-                    /*&& isMyOwn(posFin, this.current.getColor())*/)
+            if (canFlip(position, dir))
             {
                 return true;
             }

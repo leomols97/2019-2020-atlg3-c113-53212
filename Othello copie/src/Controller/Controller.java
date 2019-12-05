@@ -63,6 +63,7 @@ public class Controller
                 }
                 //turn();
             }
+            this.view.displayHelp();
             String command = this.view.askCommand();
             String[] separate = command.toLowerCase().split(" ");
             switch(separate[0])
