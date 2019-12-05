@@ -1,22 +1,33 @@
 package Models;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Objects;
 
+
 /**
- *
+ * This class rules all the game thanks to the objects of the other classes
+ * 
  * @author leopoldmols
  */
 
-public class Game implements Model{
+public class Game implements Model
+{
     
+    
+    /**
+     * @Board the playong board of the game
+     * @current the current player
+     * @oponent the oponent player
+     */
     private final Board board;
     private Player current;
     private Player oponent;
+    
+    
+    /**
+     * Constructs the game by creating a new playing board,
+     * a new current player
+     * and a new oponent player
+     */
     
     public Game()
     {
@@ -26,11 +37,17 @@ public class Game implements Model{
         
     }
     
+    
+    /**
+     * Initiates the board by calling the method "initialize()" in the Board class
+     */
+    
     @Override
     public void initialize()
     {
         this.board.initialize();
     }
+    
     
     /**
      * This methods overrides the methods "start()" received from the class Model and verifies if the playing board exists and
@@ -39,6 +56,7 @@ public class Game implements Model{
      * This method throws a IllegalStateException("Le plateau de jeu n'a pas été initialisé !") if the board doesn't exist
      * This method throws a IllegalArgumentException("La partie est terminée !") if the game is finished
      */
+    
     @Override
     public void start()
     {
@@ -53,11 +71,14 @@ public class Game implements Model{
         System.out.println(board.getBoard());
     }
     
+    
     /**
      * Overrides the method "isOver()" that comes from the class Model.
      * Verifies if both players have moves left and if both of them still have their own flags
+     *
      * @return true if both players have moves left and if both of them still have their own flags and false either
      */
+    
     @Override
     public boolean isOver()
     {
@@ -74,10 +95,12 @@ public class Game implements Model{
         return true;
     }
     
+    
     /**
      * Overrides the method "getBoard()" from the class Model.
      * @return the playing board from the current playing board
      */
+    
     @Override
     public Piece [][] getBoard()
     {

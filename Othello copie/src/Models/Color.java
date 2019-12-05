@@ -1,11 +1,12 @@
 package Models;
 
 /**
- * Enumerates both possible colors and values for the colors
+ * Enumerates the different possible colors 
  * 
  * @author leopoldmols
  */
-public enum Color {
+public enum Color
+{
     
     /**
      * Possible colors
@@ -14,6 +15,13 @@ public enum Color {
     BLACK,
     EMPTY;
 
+    
+    /**
+     * Inverts the color of a caracteristic peice
+     * 
+     * @return the nexw color of this piece
+     */
+    
     public Color invert() {
         if (this == WHITE)
         {

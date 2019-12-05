@@ -15,11 +15,18 @@ public class Controller
     private View view;
     Scanner in = new Scanner(System.in);
     
+    
+    /**
+     * Constructs the controller that will control every class
+     * @param game the class that rules the game
+     * @param view the class that manages everything that will be shown on screen
+     */
     public Controller(Model game, View view)
     {
         this.game = game;
         this.view = view;
     }
+    
     
     /**
      * This initialize the current game and the current view
@@ -32,6 +39,7 @@ public class Controller
         game.initialize();
     }
     
+    
     /**
      * This starts a game by calling the method "start()" in the package Model.
      * It will create a new variable "arretJeu" that will automatically take the value given by the method "isOver()" from the class "Game"
@@ -39,12 +47,12 @@ public class Controller
      * Still in the while, "board" will be displayed  and the variable "arretJeu"
      * will change to true if the variable "arret" typed in by the user takes the value "quit"
      */
+    
     public void startGame()
     {
         initialize();
         boolean endCom = false;
         boolean newTurn = false;
-        
         this.view.displayStart();
         this.view.displayBoard(this.game.getBoard());
         this.view.displayHelp();
@@ -55,13 +63,10 @@ public class Controller
         {
             if (newTurn)
             {
-                //this.game.changePlayer();
                 if (!this.game.canPlaceSmw())
                 {
                     this.view.displayError("Ce joueur ne peut pas jouer lors de ce tour.");
-                    //this.game.changePlayer();
                 }
-                //turn();
             }
             this.view.displayHelp();
             String command = this.view.askCommand();
@@ -93,7 +98,6 @@ public class Controller
                     }
                     catch (ArrayIndexOutOfBoundsException e)
                     {
-                        //System.out.println(e.getMessage());
                         System.out.println("La commande comporte pas assez ou trop d'arguments !");
                     }
                     catch (Exception e)
@@ -120,12 +124,13 @@ public class Controller
             this.view.displayOver();
             this.view.displayQuit();
         }
-        
     }
+    
     
     /**
      * Displays who's turn it is
      */
+    
     private void turn ()
     {
         if (game.getCurrent().getColor() == Color.BLACK)

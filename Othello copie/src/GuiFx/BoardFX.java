@@ -17,7 +17,4 @@ public class BoardFX extends GridPane {
         
         
     }
-    
-    
-    
 }

@@ -6,11 +6,13 @@ package Models;
  * 
  * @author leopoldmols
  */
-public enum Direction {
+public enum Direction
+{
     
     /**
      * Possible directions
      */
+    
     UP (-1, 0),
     DOWN (1, 0),
     LEFT (0, -1),
@@ -22,48 +24,47 @@ public enum Direction {
     
     /**
      * As the directions are moves, it is necessary to know the row and the column
-     * that will be the values of the different directions
+     * that will be the values of the different deltas of moves
      */
+    
     private int row;
     private int column;
 
+    
     /**
      * Constructs the parameters of the class that makes the new position that is made by a new row and a new Column
      * 
      * @param row the row of the direction standing
      * @param column the column of the direction standing
      */
+    
     private Direction(int row, int column)
     {
         this.row = row;
         this.column = column;
     }
 
+    
     /**
      * Allows the other classes to access the row of the direction
      * 
      * @return the row of the direction
      */
+    
     public int getRow()
     {
         return row;
     }
 
+    
     /**
      * Allows the other classes to access the column of the direction
      * 
      * @return the column of the direction
      */
+    
     public int getColumn()
     {
         return column;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
     }
 }

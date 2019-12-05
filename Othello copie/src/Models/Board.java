@@ -13,15 +13,20 @@ public class Board
 
     /**
      * The initial board
+     * It will have 8 rows
+     * It will have 8 columns
      */
+    
     private final Piece[][] board;
     private final int rowLength = 8;
     private final int colLength = 8;
 
+    
     /**
      * This constructs the object Board with the parameter "board" received as
      * class parameter
      */
+    
     public Board()
     {
         this.board = new Piece[this.rowLength][this.colLength];
@@ -34,6 +39,11 @@ public class Board
         }
     }
 
+    
+    /**
+     * Puts the four first pieces on the board
+     */
+    
     public void initialize()
     {
         this.board[3][3].setColor(Color.WHITE);
@@ -42,19 +52,27 @@ public class Board
         this.board[4][3].setColor(Color.BLACK);
     }
     
+    
     /**
      * This method helps the other class to be able to access to the value of
      * the playing board. This get the value of the variable "board"
      *
-     * @return board that returns the dimensions of the playing board
+     * @return a call to the private method that constructs the board
      */
+    
     public Piece[][] getBoard()
     {
-        // MAUVAIS ! Il faut utiliser des méthodes qui existent dans l'API java pour les tableaux
         return copieDefensiveBoard();
     }
     
-    public Piece[][] copieDefensiveBoard()
+    
+    /**
+     * Makes a defensive copy of the playong board
+     * 
+     * @return the playing board
+     */
+    
+    private Piece[][] copieDefensiveBoard()
     {
         Piece[][] copyBoard = new Piece[rowLength][colLength];
         for (int i = 0; i < this.board.length; i++)
@@ -68,17 +86,20 @@ public class Board
         return copyBoard;
     }
     
+    
     /**
      * Adds a piece on the playing board
      *
      * @param player the player that wants to add a piece
      * @param pos the position where to add the piece
      */
+    
     public void addPiece(Player player, Position pos)
     {
         this.board[pos.getRow()][pos.getColumn()].setColor(player.getColor());
     }
 
+    
     /**
      * Verifies if the square of position received as parameters contains any
      * piece or not
@@ -92,14 +113,16 @@ public class Board
      * throws an IllegalArgumentException("La position ne fait pas partie du tableau de jeu !")
      * if the position is outside the board
      */
+    
     public boolean isFree(Position pos)
     {
         if (!isInside(pos))
         {
-            throw new IllegalArgumentException("Game : isFree : La position ne fait pas partie du tableau de jeu !");
+            throw new IllegalArgumentException("La position ne fait pas partie du tableau de jeu !");
         }
         return this.board[pos.getRow()][pos.getColumn()].getColor() == Color.EMPTY;
     }
+    
     
     /**
      * Boolean method that returns true if the position given in the parameters
@@ -111,6 +134,7 @@ public class Board
      * @return true if the position given in the parameters is contained by the
      * playing board, and false if not
      */
+    
     public boolean isInside(Position pos)
     {
         return pos.getColumn() >= 0
@@ -118,18 +142,21 @@ public class Board
                 && pos.getRow() >= 0
                 && pos.getRow() < this.board[0].length;
     }
+   
     
     /**
      * Shows the caracteristics of the object "Piece" that stands on the
      * position given as parameters
      *
      * @param pos the position where the piece has to be returned
+     * 
      * @return the piece that stands on the position given as paramters
      *
      * This throws a new ArrayIndexOutOfBoundsException("La position ne fait pas
      * partie du tableau de jeu !") if the position is not insiade the playing
      * board
      */
+    
     public Piece getPiece(Position pos)
     {
         if (!isInside(pos))
@@ -139,111 +166,6 @@ public class Board
         return this.board[pos.getRow()][pos.getColumn()];
     }
 }
-
-    /**
-     * Verifies if a position can welcome a piece or not
-     *
-     * @param pos the position where a piece should come
-     * @param piece the piece that has to come
-     * @return true if the position can welcome a piece with the current color
-     * and false else
-     */
-    /*public boolean positionable(Position pos, Piece piece) {
-        if (pos.getRow() == 0) {
-            if (pos.getColumn() == 0) {
-                return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                        && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
-                        || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                        && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                        || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                        && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY));
-            } else if (pos.getColumn() == 7) {
-                return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                        && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
-                        || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                        && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                        || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                        && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
-            }
-            return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                    && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                    && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                    && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                    && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                    && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
-        } else if (pos.getRow() == 7) {
-            if (pos.getColumn() == 0) {
-                return ((board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                        && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                        || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                        && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                        || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                        && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY));
-            } else if (pos.getColumn() == 7) {
-                return ((board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                        && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
-                        || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                        && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                        || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                        && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
-            }
-            return ((board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                    && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                    && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                    && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                    && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                    && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
-        }
-        if (pos.getColumn() == 0) {
-            return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                    && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                    && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                    && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                    && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                    && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY));
-        }
-        if (pos.getColumn() == 7) {
-            return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                    && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                    && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                    && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                    && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                    || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                    && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
-        }
-        return ((board[pos.getRow() + 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn()].getColor() != Color.EMPTY)
-                || (board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                || (board[pos.getRow()][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                || (board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() + 1].getColor() != Color.EMPTY)
-                || (board[pos.getRow() - 1][pos.getColumn()].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn()].getColor() != Color.EMPTY)
-                || (board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() + 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                || (board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow() - 1][pos.getColumn() - 1].getColor() != Color.EMPTY)
-                || (board[pos.getRow()][pos.getColumn() - 1].getColor() != piece.getColor()
-                && board[pos.getRow()][pos.getColumn() - 1].getColor() != Color.EMPTY));
-    }*/
-    
     
     /*public boolean verifDirection(Position pos, Piece piece)
     {
@@ -352,8 +274,10 @@ public class Board
      * directions
      * @param color the color of the piece around which it has to add the
      * differnet directions
+     * 
      * @return the list of directions
      */
+    
     /*public LinkedList<Direction> listDirection(Position pos, Color color) {
         LinkedList<Direction> listDir = new LinkedList<>();
         for (Direction dir : Direction.values()) {
