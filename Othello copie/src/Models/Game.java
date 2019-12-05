@@ -1,5 +1,9 @@
 package Models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Objects;
 
@@ -158,38 +162,37 @@ public class Game implements Model{
             this.board.addPiece(current, position);
             for (Direction dir : Direction.values())
             {
-                //if (canFlip(position, dir))
+                //ArrayList<Boolean> correctDirs = new ArrayList(Collections.nCopies(8, canFlip(position, dir)));
+                //Collections.fill(correctDirs, canFlip(position, dir));
+                //System.out.println(dir + " : " + correctDirs.get(i));
+                //if (correctDirs.get(i))
                 //{
-                //try {
-                System.out.println("Verification du play " + dir.toString());
-                //Position pos = new Position(position);
-                //do
-                //{
-                //pos = pos.next(dir);
-                if (canFlip(position, dir))
+                Position pos = position.next(dir);
+                Position posFin = pos.next(dir);
+                do
                 {
-                    Position pos = position.next(dir);
-                    Position posFin = pos.next(dir);
-                    while (!this.board.isFree(pos)
-                            && !isMyOwn(pos, current.getColor())
-                            && this.board.isInside(posFin)
-                            && isMyOwn(posFin, this.current.getColor()))
+                    posFin = posFin.next(dir);
+                } while (this.board.isInside(posFin)
+                        && !this.board.isFree(posFin)
+                        && !isMyOwn(posFin, this.current.getColor()));
+                System.out.println("Verification du play " + dir.toString() + " " + canFlip(position, dir));
+                //for (int i = 0; i < correctDirs.size(); i++)
+                //{
+                    if (canFlip(position, dir)/* || correctDirs.get(i)*/)
                     {
-                        this.board.getPiece(pos).invert();
-                        pos = pos.next(dir);
+                        System.out.println("A");
+                        while (this.board.isInside(pos)
+                                && !this.board.isFree(pos)
+                                && !isMyOwn(pos, current.getColor())
+                                && this.board.isInside(posFin)
+                                && !isMyOwn(posFin, this.current.getColor()))
+                        {
+                            System.out.println("B");
+                            this.board.getPiece(pos).invert();
+                            pos = pos.next(dir);
+                        }
                     }
-                    //this.board.getPiece(pos).invert();
-                }
-                //System.out.println(pos.next(dir));
-                //System.out.println(dir);
-                /*} while (this.board.isInside(pos.next(dir))
-                && this.board.isInside(pos.next(dir).next(dir))
-                && this.board.isFree(pos.next(dir))
-                && isMyOwn(pos.next(dir), this.current.getColor().invert()));*/
-                //}
-                //}
-                //catch (Exception e){
-                //  throw e;
+                    //}
                 //}
             }
             changePlayer();
@@ -258,6 +261,9 @@ public class Game implements Model{
                 && !this.board.isFree(pos)
                 && isMyOwn(pos, this.current.getColor()));
         return this.board.isInside(pos)
+                && this.board.isInside(posFin)
+                && this.board.isInside(position.next(direction))
+                && !isMyOwn(position.next(direction), this.current.getColor())
                 && !this.board.isFree(pos)
                 && !isMyOwn(pos, this.current.getColor())
                 && !this.board.isFree(posFin)

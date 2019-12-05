@@ -2,7 +2,7 @@ package Models;
 
 /**
  * This class initialize a game board to welcome the Pieces to play It also
- * halps the other classes to know all the information that directly concerns
+ * helps the other classes to know all the information that directly concerns
  * the playing board and its contained pieces, like if a piece is inside the
  * playing board or not
  *
