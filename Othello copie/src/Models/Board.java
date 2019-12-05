@@ -113,9 +113,9 @@ public class Board
      */
     public boolean isInside(Position pos)
     {
-        return pos.getColumn() > 0
+        return pos.getColumn() >= 0
                 && pos.getColumn() < this.board.length
-                && pos.getRow() > 0
+                && pos.getRow() >= 0
                 && pos.getRow() < this.board[0].length;
     }
     

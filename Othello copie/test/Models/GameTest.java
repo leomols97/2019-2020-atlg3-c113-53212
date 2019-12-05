@@ -25,18 +25,6 @@ public class GameTest {
     }
 
     /**
-     * Test of start method, of class Game.
-     */
-    @Test
-    public void testStart() {
-        System.out.println("start");
-        Game instance = new Game();
-        instance.start();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of isOver method, of class Game.
      */
     @Test

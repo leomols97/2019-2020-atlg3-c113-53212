@@ -13,7 +13,6 @@ public class Game implements Model{
     private final Board board;
     private Player current;
     private Player oponent;
-    private Position selected;
     
     public Game()
     {
@@ -169,12 +168,13 @@ public class Game implements Model{
                 //pos = pos.next(dir);
                 if (canFlip(position, dir))
                 {
-                    System.out.println("1");
                     Position pos = position.next(dir);
+                    Position posFin = pos.next(dir);
                     while (!this.board.isFree(pos)
-                           && !isMyOwn(pos, current.getColor()))
+                            && !isMyOwn(pos, current.getColor())
+                            && this.board.isInside(posFin)
+                            && isMyOwn(posFin, this.current.getColor()))
                     {
-                        System.out.println("2");
                         this.board.getPiece(pos).invert();
                         pos = pos.next(dir);
                     }
@@ -209,19 +209,29 @@ public class Game implements Model{
         }
         if (!this.board.isFree(position))
         {
-            System.out.println("11");
             return false;
         }
+        //Position posFin = position;
         for (Direction dir : Direction.values())
         {
-            System.out.println("1111");
-            if (canFlip(position, dir))
+            /*while (this.board.isInside(posFin)
+                    && isMyOwn(posFin, this.current.getColor()))
             {
-                System.out.println("22");
+                posFin = posFin.next(dir);
+            }*/
+            /*do
+            {                
+                posFin = posFin.next(dir);
+            } while (this.board.isInside(posFin)
+                && !this.board.isFree(posFin)
+                && !isMyOwn(posFin, this.current.getColor()));*/
+            //posFin = posFin.next(dir);
+            if (canFlip(position, dir)
+                    /*&& isMyOwn(posFin, this.current.getColor())*/)
+            {
                 return true;
             }
         }
-        System.out.println("33");
         return false;
     }
     
@@ -233,32 +243,25 @@ public class Game implements Model{
         {
             throw new IllegalArgumentException("can Play La position n'est pas dans le tableau !");
         }
-            System.out.println("A");
         Position pos = new Position(position);
+        Position posFin = position;
         do
         {
-            System.out.println("B");
+            posFin = posFin.next(direction);
+        } while (this.board.isInside(posFin)
+                && !this.board.isFree(posFin)
+                && !isMyOwn(posFin, this.current.getColor()));
+        do
+        {
             pos = pos.next(direction);
-            /*if (this.board.isInside(position)
-                    && this.board.isFree(position))
-            {*/
-                /*isOponentPos = this.board.isInside(pos)
-                        && !this.board.isFree(pos)
-                        && !isMyOwn(pos, this.current.getColor());
-                System.out.println("canFlip en direction " + direction + " " + pos + " ? " + isOponentPos);*/
-            //}
         } while (this.board.isInside(pos)
                 && !this.board.isFree(pos)
                 && isMyOwn(pos, this.current.getColor()));
-        System.out.println("C");
-        
-                /*&& this.board.getPiece(position).getColor() == this.current.getColor().invert()*/
-        /*while (this.board.isInside(position)
-                && isOponentPos
-                && this.board.getPiece(position).getColor() == Color.EMPTY);*/
         return this.board.isInside(pos)
                 && !this.board.isFree(pos)
-                && !isMyOwn(pos, this.current.getColor());
+                && !isMyOwn(pos, this.current.getColor())
+                && !this.board.isFree(posFin)
+                && isMyOwn(posFin, this.current.getColor());
     }
     
     
