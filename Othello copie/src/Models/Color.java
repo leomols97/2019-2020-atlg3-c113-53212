@@ -8,9 +8,11 @@ package Models;
 public enum Color
 {
     
+    
     /**
      * Possible colors
      */
+    
     WHITE,
     BLACK,
     EMPTY;

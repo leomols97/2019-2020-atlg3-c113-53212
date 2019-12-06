@@ -104,31 +104,41 @@ public class Game implements Model
     @Override
     public Piece [][] getBoard()
     {
-        //initialize();
         return this.board.getBoard();
     }
+    
     
     /**
      * Overrides the method "getCurrent()" from the class Model.
      */
+    
+    /**
+     * Gets the current player
+     * @return the current player
+     */
+    
     @Override
     public Player getCurrent()
     {
         return this.current;
     }
     
+    
     /**
      * Change of current player
      */
+    
     @Override
     public void changePlayer()
     {
         changePlayerDefensive();
     }
     
+    
     /**
      * Defensive copy of the moethod changePlayer
      */
+    
     private void changePlayerDefensive()
     {
         Player tmp;
@@ -137,13 +147,15 @@ public class Game implements Model
         current = tmp;
     }
     
+    
     /**
-     * gets the score of the White player
+     * Gets the score of the White player
      * 
      * @param color The color of the player that has to know its score
      * 
      * @return the score of the White player
      */
+    
     @Override
     public int getScore (Color color)
     {
@@ -161,6 +173,13 @@ public class Game implements Model
         return cpt;
     }
     
+    
+    /**
+     * Makes the current player play at a certain position and flips the flippable pieces
+     * 
+     * @param position the position where the current player wants to put a piece
+     */
+    
     @Override
     public void play (Position position)
     {
@@ -173,6 +192,7 @@ public class Game implements Model
         {
             throw new IllegalArgumentException("sout du play La position n'est pas libre ! ");
         }
+        
         if (canPlay(position))
         {
             this.board.addPiece(current, position);
@@ -180,20 +200,19 @@ public class Game implements Model
             {
                 Position pos = position.next(dir);
                 Position posFin = pos.next(dir);
+                
                 do
                 {
                     posFin = posFin.next(dir);
                 } while (this.board.isInside(posFin)
                         && !this.board.isFree(posFin)
                         && !isMyOwn(posFin, this.current.getColor()));
-                //System.out.println("Verification du play " + dir.toString() + " " + canFlip(position, dir));
+                
                 if (canFlip(position, dir))
                 {
                     while (this.board.isInside(pos)
                             && !this.board.isFree(pos)
-                            && !isMyOwn(pos, current.getColor())
-                            /*&& this.board.isInside(posFin)
-                            && !isMyOwn(posFin, this.current.getColor())*/)
+                            && !isMyOwn(pos, current.getColor()))
                     {
                         this.board.getPiece(pos).invert();
                         pos = pos.next(dir);
@@ -202,11 +221,21 @@ public class Game implements Model
             }
             changePlayer();
         }
+        
         else
         {
             throw new IllegalArgumentException("Le joueur ne peut pas placer de pion sur cette case !");
         }
     }
+    
+    
+    /**
+     * Verifies if the current player can play at a certain position by verifying if at least a direction has flippable pieces
+     * 
+     * @param position the position where the player wants to put a new piece
+     * 
+     * @return true if the player can play and false else
+     */
     
     private boolean canPlay (Position position)
     {
@@ -215,11 +244,12 @@ public class Game implements Model
         {
             throw new IllegalArgumentException("can play La position n'est pas dans le tableau !");
         }
+        
         if (!this.board.isFree(position))
         {
             return false;
         }
-        //Position posFin = position;
+        
         for (Direction dir : Direction.values())
         {
             if (canFlip(position, dir))
@@ -227,9 +257,19 @@ public class Game implements Model
                 return true;
             }
         }
+        
         return false;
     }
     
+    
+    /**
+     * Verifies if a certain direction contains flippable pieces belonging a certain position
+     * 
+     * @param position the position where a new piece should be put
+     * @param direction the direction to verify if it contains flippable pieces
+     * 
+     * @return true of the direction contains flippable pieces
+     */
     private boolean canFlip (Position position, Direction direction)
     {
         Objects.requireNonNull(position, "La position est vide !");
@@ -238,20 +278,24 @@ public class Game implements Model
         {
             throw new IllegalArgumentException("can Play La position n'est pas dans le tableau !");
         }
+        
         Position pos = new Position(position);
         Position posFin = position;
+        
         do
         {
             posFin = posFin.next(direction);
         } while (this.board.isInside(posFin)
                 && !this.board.isFree(posFin)
                 && !isMyOwn(posFin, this.current.getColor()));
+        
         do
         {
             pos = pos.next(direction);
         } while (this.board.isInside(pos)
                 && !this.board.isFree(pos)
                 && isMyOwn(pos, this.current.getColor()));
+        
         return this.board.isInside(pos)
                 && this.board.isInside(posFin)
                 && this.board.isInside(position.next(direction))
@@ -263,39 +307,35 @@ public class Game implements Model
     }
     
     
-    
-    
-    
     /**
-     * Verifies if the piece that stands on a square on the playing board the playing board has the same color than a color
+     * Verifies if a piece standing at a certain position has the came color than a certain color
+     * 
      * @param position where the method has to verify if there's a piece on it and if well, if it has the same color than the second parameter
      * @param color the color that has to be compared to the piece on the position given as first parameter
-     * @return true if the piece has the same color than the color given in the parameters and true either
      * 
-     * This metho throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
+     * @return true if the piece has the same color than the color given as the second parameter and true either
+     * 
+     * This method throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
      * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not inside the playing board
      */
+    
     private boolean isMyOwn(Position position, Color color)
     {
         Objects.requireNonNull(position, "La position n'existe pas !");
         if (!this.board.isInside(position))
         {
-            throw new IllegalStateException("Game : isMyOwn : La position ne fait pas partie du tableau de jeu !");
+            throw new IllegalStateException("La position ne fait pas partie du tableau de jeu !");
         }
-        /*if (this.board.isFree(position))
-        {
-            System.out.println("A");
-            System.out.println(position);
-            throw new IllegalArgumentException("La position ne contient pas de pièce !");
-        }*/
         return this.board.getPiece(position).isMyOwn(color);
     }
     
+    
     /**
-     * Verifies if the player can even place a piece on the playing board
+     * Verifies if the player can even place a piece somewhere on the playing board
+     * 
      * @return true if he can and false else
      */
-    // PAS BONNE. IL NE FAUT PAS VERIFIER CELA MAIS SI LE JOUEUR PEUT PLACER UNE DE SES PIECES QQUE PART
+    
     @Override
     public boolean canPlaceSmw()
     {
@@ -311,8 +351,15 @@ public class Game implements Model
         }
         return false;
     }
-    
 }
+
+
+
+
+// La suite ne contient que des méthodes en commentaire
+
+
+
 
 
     /**

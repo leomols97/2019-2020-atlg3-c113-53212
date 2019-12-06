@@ -3,57 +3,74 @@ package View;
 import Models.*;
 import java.util.Scanner;
 
+
 /**
  * Initializes the View of the game to make the view of the game understandable to the player
  *
  * @author leopoldmols
  */
+
 public class View {
+
     
     /**
-     * To let the user enter some commands
+     * @param in to let the user enter some commands
+     * @param game to initiate a new game
      */
+
     private final Scanner in;
-    private Model game;
+    private final Model game;
+    
     
     /**
-     * Constructs a new View
+     * Constructs a new View with a game
+     * 
+     * @param game the game to construct
      */
+    
     public View(Model game)
     {
         in = new Scanner(System.in);
         this.game = game;
     }
     
+    
     /**
-     * This shows a welcoming message to the user
+     * This shows a welcome message to the user
      */
+    
     public void displayStart()
     {
-        System.out.println("Bienvenue dans le jeu Othello");
+        System.out.println("\n Bienvenue dans le jeu Othello");
     }
+    
     
     /**
      * This show a goobye message to the user
      */
+    
     public void displayQuit()
     {
         System.out.println("\nA la prochaine, et merci d'avoir joué !");
     }
     
+    
     /**
-     * This shows an error containeing the message that is received as parameters
+     * This shows an error containing the message that is received as parameters
      *
      * @param message the error message that should be shown when an error occurs
      */
+    
     public void displayError(String message)
     {
         System.out.println(message);
     }
     
+    
     /**
-     * Shows only the first line to display the different commands for the player
+     * Shows the different commands possible for the player
      */
+    
     public void displayHelp()
     {
         System.out.println("\nCommandes possibles : ");
@@ -63,11 +80,13 @@ public class View {
         System.out.println(" - 'quit' : quitter le jeu\n");
     }
     
+    
     /**
-     * Asks the user to enter a command that has to be entered
+     * Asks the user to enter a command
      *
      * @return the command the user entered
      */
+    
     public String askCommand()
     {
         System.out.print("Entrez votre commande : ");
@@ -75,20 +94,24 @@ public class View {
         return command;
     }
     
+    
     /**
      * Displays the user that the game is finished
      */
+    
     public void displayOver()
     {
         System.out.println("Partie terminée.");
     }
+    
     
     /**
      * Shows the top row of the playing board that shows the number of the columns
      *
      * @param plateaus the playing game that is received as parameters to know which step of the game it has to return
      */
-    private void topRow (Piece[][] plateau)
+    
+    private void topAndBottomRow (Piece[][] plateau)
     {
         for (int i = 0; i <= plateau[0].length; i++)
         {
@@ -97,11 +120,13 @@ public class View {
         System.out.println();
     }
     
+    
     /**
-     * Shows the board
+     * Shows the playing board
      *
-     * @param plateau the plateaus
+     * @param plateau the playing board
      */
+    
     public void displayBoard (Piece[][] plateau)
     {
         
@@ -110,7 +135,7 @@ public class View {
         }
         System.out.println();
         
-        topRow(plateau);
+        topAndBottomRow(plateau);
         
         for (int i = 0; i < plateau.length; i++)
         {
@@ -140,8 +165,6 @@ public class View {
             }
             System.out.println();
         }
-        for (int i = -1; i < plateau.length; i++) {
-            System.out.print("---");
-        }
+        topAndBottomRow(plateau);
     }
 }

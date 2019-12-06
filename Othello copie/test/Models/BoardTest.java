@@ -115,20 +115,6 @@ public class BoardTest {
     }
 
     /**
-     * Test of copieDefensiveBoard method, of class Board.
-     */
-    @Test
-    public void testCopieDefensiveBoard() {
-        System.out.println("copieDefensiveBoard");
-        Board instance = new Board();
-        Piece[][] expResult = null;
-        Piece[][] result = instance.copieDefensiveBoard();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of addPiece method, of class Board.
      */
     @Test

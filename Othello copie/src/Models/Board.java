@@ -166,6 +166,17 @@ public class Board
         return this.board[pos.getRow()][pos.getColumn()];
     }
 }
+
+
+
+
+
+// La suite ne contient que des méthodes en commentaire
+
+
+
+
+
     
     /*public boolean verifDirection(Position pos, Piece piece)
     {
