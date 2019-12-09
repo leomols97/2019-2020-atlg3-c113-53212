@@ -27,8 +27,8 @@ public enum Direction
      * that will be the values of the different deltas of moves
      */
     
-    private int row;
-    private int column;
+    private final int row;
+    private final int column;
 
     
     /**

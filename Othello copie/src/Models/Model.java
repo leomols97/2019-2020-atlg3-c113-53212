@@ -90,4 +90,14 @@ public interface Model
      */
     
     void changePlayer();
+    
+    
+    /**
+     * Verifies if a player can play at a certain position
+     * 
+     * @param position the position where to verify if the current player can play
+     * 
+     * @return true if he can play and false else
+     */
+    boolean canPlay(Position position);
 }

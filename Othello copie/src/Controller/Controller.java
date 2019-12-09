@@ -11,8 +11,8 @@ import java.util.Scanner;
  */
 public class Controller
 {
-    private Model game;
-    private View view;
+    private final Model game;
+    private final View view;
     Scanner in = new Scanner(System.in);
     
     

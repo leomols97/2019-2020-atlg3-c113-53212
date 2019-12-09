@@ -237,7 +237,7 @@ public class Game implements Model
      * @return true if the player can play and false else
      */
     
-    private boolean canPlay (Position position)
+    public boolean canPlay (Position position)
     {
         Objects.requireNonNull(position, "La position est vide !");
         if (!this.board.isInside(position))

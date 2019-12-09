@@ -8,19 +8,22 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import static javafx.application.Application.launch;
 
-public class CalculBMR extends Application {
+public class CalculBMR extends Application
+{
     
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
     
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        
+    public void start(Stage primaryStage) throws Exception
+    {
         primaryStage.setMinHeight(300);
         primaryStage.setMinWidth(300);
         
         View view = new View();
+        
         Scene principal = new Scene(view);
         
         primaryStage.setTitle("Calcul du BMR");
@@ -33,7 +36,5 @@ public class CalculBMR extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(principal);
         primaryStage.show();
-
     }
-    
 }

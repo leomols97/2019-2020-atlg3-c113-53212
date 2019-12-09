@@ -4,11 +4,13 @@ import Controller.*;
 import Models.*;
 import View.*;
 
+
 /**
  * This class uses all methods from the other classes and initializes a hole game from the beginning to the end
  *
  * @author leopoldmols
  */
+
 public class Main
 {
     
