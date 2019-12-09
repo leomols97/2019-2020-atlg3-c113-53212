@@ -17,7 +17,7 @@ public class SquareFX /*extends StackPane*/ extends Rectangle
 
     public SquareFX(int row, int column)
     {
-        super(60, 60);
+        super(40, 40);
         this.row = row;
         this.column = column;
         setStroke(Color.BLACK);
@@ -63,10 +63,22 @@ public class SquareFX /*extends StackPane*/ extends Rectangle
 
         }
     }
+    
+    public void playableSquare(boolean playable)
+    {
+        if (playable)
+        {
+            setFill(Paint.valueOf("#efd752")); //YELLOW
+        }
+        else
+        {
+            setFill(Paint.valueOf("#ef5252")); //RED
+        }
+    }
+}
     /*private PieceFX pieceFX;
     
     public SquareFX (PieceFX pieceFX)
     {
         this.pieceFX = pieceFX;
     }*/
-}

@@ -5,7 +5,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-import javafx.scene.shape.Rectangle;
 
 
 /**
@@ -35,9 +34,11 @@ public class BoardFX extends GridPane
             for (int j = 0; j < SIZE; j++)
             {
                 PieceFX case_ = new PieceFX(i, j);
-                case_.setOpacity(0.4);
+                //case_.setOpacity(0.4);
                 Shape shape = null;
-                Shape square = new Rectangle(40, 40, Paint.valueOf("#00FF00")); //GREEN
+                //Shape square = new Rectangle(40, 40, Paint.valueOf("#00FF00")); //GREEN
+                SquareFX square = new SquareFX(i, j);
+                square.setFill(Paint.valueOf("#00FF00"));
                 this.add(square, j, i);
                 Position position = new Position(i, j);
                 //try
@@ -45,34 +46,23 @@ public class BoardFX extends GridPane
                     switch (game.getBoard()[i][j].getColor())
                     {
                         case BLACK:
-                            //shape1 = new Rectangle(40, 40, Paint.valueOf("#00FF00")); //GREEN
-                            //this.add(shape1, j, i);
                             shape = new Circle(20, Paint.valueOf("#000000")); //BLACK
                             shape.setStroke(Paint.valueOf("#000000")); //BLACK
                             shape.setStrokeWidth(2);
+                            GridPane.
                             break;
                         case WHITE:
-                            //shape1 = new Rectangle(40, 40, Paint.valueOf("#00FF00")); //GREEN
-                            //this.add(shape1, j, i);
                             shape = new Circle(20, Paint.valueOf("#FFFFFF")); //WHITE
                             shape.setStroke(Paint.valueOf("#FFFFFF")); //WHITE
                             shape.setStrokeWidth(2);
                             break;
                         case EMPTY:
-                            shape = new Rectangle(40, 40, Paint.valueOf("#00FF00")); //GREEN
+                            shape = new SquareFX(i, j);
                             shape.setStroke(Paint.valueOf("#00FF00")); //GREEN
                             shape.setStrokeWidth(2);
                             shape.setOnMouseEntered(event ->
                             {
-                                // Créer une classe RectangleFX qui hérite de Rectangle et dans laquelle je vais une méthode qui change la couleur en rouge ou en jaune
-                                if (game.canPlay(position))
-                                {
-                                    shape.setFill(Paint.valueOf("#FF0000")); //YELLOW
-                                }
-                                else
-                                {
-                                    shape.setFill(Paint.valueOf("#FF0000")); //RED
-                                }
+                                square.playableSquare(game.canPlay(position));
                             });
                             //this.add(shape1, j, i);
                             break;
