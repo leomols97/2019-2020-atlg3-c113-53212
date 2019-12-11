@@ -5,12 +5,7 @@ import Model.StyleDeVie;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -18,7 +13,8 @@ import javafx.scene.layout.HBox;
  *
  * @author leopoldmols
  */
-public class DataView extends GridPane {
+public final class DataView extends GridPane
+{
     
     Label lblDonnees = new Label("Données");
     Label lblTaille = new Label("Taille (cm)");
@@ -33,7 +29,9 @@ public class DataView extends GridPane {
     RadioButton female = new RadioButton("F"); //A radio button with an empty string for its label
     ToggleGroup sexes = new ToggleGroup();
     ChoiceBox CBStyleDeVie = new ChoiceBox(FXCollections.observableArrayList(StyleDeVie.values()));
-    public DataView(){
+    
+    public DataView()
+    {
         super();
         initPosition();
     }
@@ -89,23 +87,28 @@ public class DataView extends GridPane {
         this.add(CBStyleDeVie, 1, 5);
     }
 
-    public double getTfdTaille() {
+    public double getTfdTaille()
+    {
         return Double.parseDouble(tfdTaille.getText());
     }
 
-    public double getTfdPoids() {
+    public double getTfdPoids()
+    {
         return Double.parseDouble(tfdPoids.getText());
     }
 
-    public int getTfdAge() {
+    public int getTfdAge()
+    {
         return Integer.parseInt(tfdAge.getText());
     }
 
-    public Sexe getSexes() {
+    public Sexe getSexes()
+    {
         return (Sexe) sexes.getUserData();
     }
 
-    public StyleDeVie getCBStyleDeVie() {
+    public StyleDeVie getCBStyleDeVie()
+    {
         return (StyleDeVie) CBStyleDeVie.getValue();
     }
 }

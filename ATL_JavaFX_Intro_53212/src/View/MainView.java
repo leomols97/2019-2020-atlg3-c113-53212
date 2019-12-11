@@ -6,7 +6,8 @@ import javafx.scene.layout.HBox;
  *
  * @author leopoldmols
  */
-public class MainView extends HBox {
+public class MainView extends HBox
+{
     
     DataView dView = new DataView();
     ResultView rView = new ResultView();

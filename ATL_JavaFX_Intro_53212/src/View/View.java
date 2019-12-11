@@ -11,7 +11,8 @@ import javafx.scene.layout.GridPane;
  *
  * @author leopoldmols
  */
-public class View extends VBox {
+public class View extends VBox
+{
     
     private MainView mView;
     private final Button button;

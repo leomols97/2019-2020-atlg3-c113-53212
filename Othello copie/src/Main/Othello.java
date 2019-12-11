@@ -1,11 +1,14 @@
 package Main;
 
-import GuiFx.BoardFX;
+import GuiFx.*;
 import Models.*;
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -17,9 +20,6 @@ import javafx.stage.Stage;
 
 public class Othello extends Application
 {
-
-    private Game game;
-
     /**
      * @param args the command line arguments
      */
@@ -29,50 +29,37 @@ public class Othello extends Application
         launch(args);
     }
     
+    private Game game;
+    
     @Override
     public void start(Stage primaryStage)
     {
         this.game = new Game();
         game.initialize();
         
-        primaryStage.setMinHeight(1000);
-        primaryStage.setMinWidth(1000);
+        primaryStage.setTitle("Othello");
+        primaryStage.setMinHeight(500);
+        primaryStage.setMinWidth(500);
+        
+        VBox fenetre = new VBox();
+        GridPane boardGridPane = new GridPane();
+        HBox buttonsAndProgression = new HBox();
+        GridPane.setHalignment(buttonsAndProgression, HPos.CENTER);
+        fenetre.getChildren().addAll(
+                boardGridPane, 
+                buttonsAndProgression);
         
         BoardFX board = new BoardFX(this.game);
+        boardGridPane.getChildren().add(board);
         
-        Scene principal = new Scene(board);
+        ButtonsFX buttonView = new ButtonsFX();
+        buttonView.buttonsPositions();
+        buttonsAndProgression.getChildren().add(buttonView);
         
-        primaryStage.setTitle("Othello");
-        HBox root = new HBox();
+        fenetre.setPadding(new Insets(10));
         
-        root.setPadding(new Insets(10));
-        root.getChildren().add(board);
-        
-        Scene scene = new Scene(root);
+        Scene principal = new Scene(fenetre);
         primaryStage.setScene(principal);
         primaryStage.show();
-        
-        /*GridPane root = new GridPane();
-        BoardFX board = new BoardFX();
-        Button btn = new Button();
-        board.showGrid();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>()
-        {    
-            @Override
-            public void handle(ActionEvent event)
-            {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 1000, 500);
-        
-        primaryStage.setTitle("Calcul du BMR");
-        primaryStage.setScene(scene);
-        primaryStage.show();*/
     }
-    
 }

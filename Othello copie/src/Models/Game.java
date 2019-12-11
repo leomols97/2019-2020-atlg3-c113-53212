@@ -32,8 +32,8 @@ public class Game implements Model
     public Game()
     {
         this.board = new Board();
-        this.current = new Player(Color.WHITE);
-        this.oponent = new Player(Color.BLACK);
+        this.current = new Player(Color.BLACK);
+        this.oponent = new Player(Color.WHITE);
         
     }
     
@@ -106,6 +106,30 @@ public class Game implements Model
     {
         return this.board.getBoard();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    public Piece getPiece(Position pos)
+    {
+        return this.board.getPiece(pos);
+    }
+    
+    public boolean isFree(Position pos)
+    {
+        return this.board.isFree(pos);
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     /**
@@ -237,6 +261,7 @@ public class Game implements Model
      * @return true if the player can play and false else
      */
     
+    @Override
     public boolean canPlay (Position position)
     {
         Objects.requireNonNull(position, "La position est vide !");

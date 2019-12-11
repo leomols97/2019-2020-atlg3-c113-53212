@@ -10,7 +10,8 @@ import javafx.scene.layout.GridPane;
  *
  * @author leopoldmols
  */
-public class ResultView extends GridPane {
+public final class ResultView extends GridPane
+{
     
     Label lblResults = new Label("Résultats");
     Label BMR = new Label("BMR");
@@ -18,7 +19,8 @@ public class ResultView extends GridPane {
     TextField tfdBMR = new TextField();
     TextField tfdCal = new TextField();
     
-    public ResultView(){
+    public ResultView()
+    {
         super();
         initPosition();
     }
@@ -50,11 +52,13 @@ public class ResultView extends GridPane {
         this.add(tfdCal, 3, 2);
     }
 
-    public void setBMR(Label BMR) {
+    public void setBMR(Label BMR)
+    {
         this.BMR = BMR;
     }
 
-    public void setCalories(Label Calories) {
+    public void setCalories(Label Calories)
+    {
         this.Calories = Calories;
     }
 }
