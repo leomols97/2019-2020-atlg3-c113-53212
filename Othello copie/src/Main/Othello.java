@@ -3,12 +3,7 @@ package Main;
 import GuiFx.*;
 import Models.*;
 import javafx.application.Application;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -35,12 +30,15 @@ public class Othello extends Application
     public void start(Stage primaryStage)
     {
         this.game = new Game();
-        game.initialize();
+        this.game.initialize();
+        ViewFX view = new ViewFX(this.game);
+        this.game.registerObserver(view);
         
         primaryStage.setTitle("Othello");
         primaryStage.setMinHeight(500);
         primaryStage.setMinWidth(500);
         
+        /*
         VBox fenetre = new VBox();
         GridPane boardGridPane = new GridPane();
         HBox buttonsAndProgression = new HBox();
@@ -57,8 +55,11 @@ public class Othello extends Application
         buttonsAndProgression.getChildren().add(buttonView);
         
         fenetre.setPadding(new Insets(10));
+        */
         
-        Scene principal = new Scene(fenetre);
+        
+        Scene principal = new Scene(view);
+        
         primaryStage.setScene(principal);
         primaryStage.show();
     }

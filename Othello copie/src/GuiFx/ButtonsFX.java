@@ -1,19 +1,18 @@
 package GuiFx;
 
-import static GuiFx.BoardFX.game;
-import Models.Color;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import Models.*;
+import javafx.geometry.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+
 
 /**
  *
  * @author leopoldmols
  */
-public class ButtonsFX extends HBox
+
+public class ButtonsFX extends HBox implements Observer
 {
-    
     private final Button abandon;
     private final Button pass;
     private final Button restart;
@@ -23,10 +22,10 @@ public class ButtonsFX extends HBox
         this.restart = new Button("Recommencer");
         this.abandon = new Button("Abandon");
         this.pass = new Button("Pass");
+        displayButtons();
     }
     
-    
-    public void buttonsPositions()
+    public void displayButtons()
     {
         HBox.setMargin(pass, Insets.EMPTY);
         this.setSpacing(10);
@@ -38,9 +37,15 @@ public class ButtonsFX extends HBox
         
         this.getChildren().addAll(abandon, pass, restart);
         
-        this.abandon.setOnAction((event) ->
+        abandon.setOnMouseClicked(event ->
         {
-            game.getScore(Color.WHITE);
+            
         });
+    }
+    
+    @Override
+    public void update()
+    {
+        displayButtons();
     }
 }
