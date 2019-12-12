@@ -3,10 +3,12 @@ package GuiFx;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+
 /**
  *
  * @author leopoldmols
  */
+
 public class SquareFX extends Rectangle
 {
     private final int row, column;

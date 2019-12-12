@@ -79,7 +79,7 @@ public final class BoardFX extends GridPane implements Observer
     private void addToGrid (Position position, Circle cercle)
     {
         game.play(position);
-        this.add(this, position.getRow(), position.getColumn());
+        this.add(cercle, position.getRow(), position.getColumn());
     }
     
     @Override

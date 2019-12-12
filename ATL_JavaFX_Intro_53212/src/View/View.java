@@ -1,7 +1,6 @@
 package View;
 
 import Model.*;
-import static java.lang.Double.MAX_VALUE;
 import javafx.geometry.HPos;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
@@ -21,7 +20,7 @@ public class View extends VBox
     {
         this.mView = new MainView();
         this.button = new Button("Calcul du BMR");
-        button.setMaxWidth(MAX_VALUE);
+        button.setMaxWidth(Double.MAX_VALUE);
         GridPane.setHalignment(button, HPos.CENTER);
         this.button.setOnAction((event) ->
         {
@@ -29,6 +28,7 @@ public class View extends VBox
         });
         this.getChildren().addAll(mView, button);
     }
+    
     public void BMRView (double taille, double poids, int age, Sexe sexe, StyleDeVie style)
     {
         Person pers = new Person(taille, poids, age, sexe, style);

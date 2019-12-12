@@ -34,12 +34,14 @@ public class ViewFX extends VBox implements Observer
     
     public void displayView ()
     {
-        GridPane.setHalignment(buttons, HPos.CENTER);
-        this.getChildren().addAll(
+        MenuView mView = new MenuView();
+        this.getChildren().add(mView);
+        //GridPane.setHalignment(buttons, HPos.CENTER);
+        /*this.getChildren().addAll(
                 board,
                 gameProgression,
                 currentWinner,
-                buttons);
+                buttons);*/
         
         this.setPadding(new Insets(10));
         

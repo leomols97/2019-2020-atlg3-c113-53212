@@ -16,23 +16,36 @@ import javafx.scene.layout.HBox;
 public final class DataView extends GridPane
 {
     
-    Label lblDonnees = new Label("Données");
-    Label lblTaille = new Label("Taille (cm)");
-    Label lblName = new Label("Poids (kg)");
-    Label lblAge = new Label("Âge (années)");
-    Label lblSexe = new Label("Sexe");
-    Label lblStyleDeVie = new Label("Style de vie sportif");
-    TextField tfdTaille = new TextField();
-    TextField tfdPoids = new TextField();
-    TextField tfdAge = new TextField();
-    RadioButton male = new RadioButton("H                         "); //A radio button with an empty string for its label
-    RadioButton female = new RadioButton("F"); //A radio button with an empty string for its label
-    ToggleGroup sexes = new ToggleGroup();
-    ChoiceBox CBStyleDeVie = new ChoiceBox(FXCollections.observableArrayList(StyleDeVie.values()));
+    Label lblDonnees;
+    Label lblTaille;
+    Label lblName;
+    Label lblAge;
+    Label lblSexe;
+    Label lblStyleDeVie;
+    TextField tfdTaille;
+    TextField tfdPoids;
+    TextField tfdAge;
+    RadioButton male; 
+    RadioButton female; 
+    ToggleGroup sexes;
+    ChoiceBox CBStyleDeVie;
     
     public DataView()
     {
         super();
+        this.sexes = new ToggleGroup();
+        this.tfdAge = new TextField();
+        this.tfdPoids = new TextField();
+        this.tfdTaille = new TextField();
+        this.lblSexe = new Label("Sexe");
+        this.lblName = new Label("Poids (kg)");
+        this.lblAge = new Label("Âge (années)");
+        this.lblTaille = new Label("Taille (cm)");
+        this.lblDonnees = new Label("Données");
+        this.lblStyleDeVie = new Label("Style de vie sportif");
+        this.female = new RadioButton("F");
+        this.male = new RadioButton("H                         ");
+        this.CBStyleDeVie = new ChoiceBox(FXCollections.observableArrayList(StyleDeVie.values()));
         initPosition();
     }
     

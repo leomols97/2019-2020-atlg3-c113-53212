@@ -1,10 +1,13 @@
 package Model;
 
+
 /**
  *
  * @author leopoldmols
  */
-public enum Sexe {
+
+public enum Sexe
+{
     MALE,
     FEMALE;
 }
