@@ -230,6 +230,11 @@ public class Game implements Observable, Model
             throw new IllegalArgumentException("La position n'est pas libre ! ");
         }
         
+        if (!canPlay(position))
+        {
+            changePlayer();
+        }
+        
         if (canPlay(position))
         {
             this.board.addPiece(current, position);
