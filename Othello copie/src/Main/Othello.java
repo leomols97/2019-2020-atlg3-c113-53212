@@ -1,7 +1,7 @@
 package Main;
 
 import GuiFx.*;
-import Models.*;
+import Models.Game;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -24,39 +24,20 @@ public class Othello extends Application
         launch(args);
     }
     
-    private Game game;
+    private GameFX game;
     
     @Override
     public void start(Stage primaryStage)
     {
-        this.game = new Game();
-        this.game.initialize();
-        ViewFX view = new ViewFX(this.game);
-        this.game.registerObserver(view);
+        Game g = new Game();
+        g.initialize();
+        ViewFX view = new ViewFX(g);
+        this.game = new GameFX(g);
+        this.game.getGame().registerObserver(view);
         
         primaryStage.setTitle("Othello");
-        primaryStage.setMinHeight(500);
-        primaryStage.setMinWidth(500);
-        
-        /*
-        VBox fenetre = new VBox();
-        GridPane boardGridPane = new GridPane();
-        HBox buttonsAndProgression = new HBox();
-        GridPane.setHalignment(buttonsAndProgression, HPos.CENTER);
-        fenetre.getChildren().addAll(
-                boardGridPane, 
-                buttonsAndProgression);
-        
-        BoardFX board = new BoardFX(this.game);
-        boardGridPane.getChildren().add(board);
-        
-        ButtonsFX buttonView = new ButtonsFX();
-        buttonView.buttonsPositions();
-        buttonsAndProgression.getChildren().add(buttonView);
-        
-        fenetre.setPadding(new Insets(10));
-        */
-        
+        primaryStage.setMinHeight(750);
+        primaryStage.setMinWidth(600);
         
         Scene principal = new Scene(view);
         

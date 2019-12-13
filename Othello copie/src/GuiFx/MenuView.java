@@ -1,35 +1,49 @@
 package GuiFx;
 
+import Models.Observer;
 import javafx.geometry.HPos;
-import javafx.scene.control.Button;
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+
 
 /**
  *
  * @author leopoldmols
  */
-public class MenuView extends GridPane
+
+public class MenuView extends VBox implements Observer
 {
-    
     private Menu menu;
-    private final Button play;
     
     public MenuView ()
     {
         this.menu = new Menu();
-        this.play = new Button("Jouer");
-        play.setMaxWidth(Double.MAX_VALUE);
-        GridPane.setHalignment(menu, HPos.LEFT);
-        GridPane.setHalignment(play, HPos.CENTER);
-        this.play.setOnAction((event) ->
-        {
-            
-        });
-        this.getChildren().addAll(menu, play);
+        
+        initMenuView();
     }
     
-    public void MenuViewFX ()
+    public void initMenuView ()
     {
+        this.setPadding(new Insets(10));
+        this.setHeight(40);
         
+        GridPane.setHalignment(menu, HPos.LEFT);
+        this.getChildren().addAll(menu);
+    }
+    
+    public void clickOnPlayButton ()
+    {
+        menu.setRegistered();
+    }
+    
+    public Menu getMenu()
+    {
+        return menu;
+    }
+
+    @Override
+    public void update()
+    {
     }
 }

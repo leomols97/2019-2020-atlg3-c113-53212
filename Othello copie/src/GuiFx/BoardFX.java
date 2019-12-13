@@ -11,7 +11,7 @@ import javafx.scene.shape.Circle;
  * @author leopoldmols
  */
 
-public final class BoardFX extends GridPane implements Observer
+public class BoardFX extends HBox implements Observer
 {
     
     private Game game;
@@ -19,14 +19,17 @@ public final class BoardFX extends GridPane implements Observer
     
     public BoardFX(Game game)
     {
-        setHgap(2);
-        setVgap(2);
+        //setHgap(2);
+        //setVgap(2);
         this.game = game;
-        showGrid();
+        //game.initialize();
+        //showGrid();
+        adding();
     }
     
-    public void showGrid()
+    public GridPane showGrid()
     {
+        GridPane plateau = new GridPane();
         getChildren().clear();
         for (int i = 0; i < SIZE; i++)
         {
@@ -34,27 +37,26 @@ public final class BoardFX extends GridPane implements Observer
             {
                 SquareFX square = new SquareFX(i, j);
                 square.setStroke(Paint.valueOf("#00FF00")); //GREEN
-                this.add(square, j, i);
+                plateau.add(square, j, i);
                 Position position = new Position(i, j);
-                
                 switch (game.getBoard()[i][j].getColor())
                 {
                     case BLACK:
                         Circle shapeB = new Circle(20, Paint.valueOf("#000000")); //BLACK
                         shapeB.setFill(Paint.valueOf("#000000")); //BLACK
                         shapeB.setTranslateX(2);
-                        this.add(shapeB, j, i);
+                        plateau.add(shapeB, j, i);
                         break;
                     case WHITE:
                         Circle shapeW = new Circle(20, Paint.valueOf("#FFFFFF")); //WHITE
                         shapeW.setFill(Paint.valueOf("#FFFFFF")); //WHITE
                         shapeW.setTranslateX(2);
-                        this.add(shapeW, j, i);
+                        plateau.add(shapeW, j, i);
                         break;
                     case EMPTY:
                         SquareFX square1 = new SquareFX(i, j);
                         square1.setFill(Paint.valueOf("#00FF00")); //GREEN
-                        this.add(square1, j, i);
+                        plateau.add(square1, j, i);
                         square1.setOnMouseEntered(event ->
                         {
                             square1.setTranslateX(2);
@@ -66,7 +68,7 @@ public final class BoardFX extends GridPane implements Observer
                         });
                         square1.setOnMouseClicked(event ->
                         {
-                            addToGrid(position, new Circle());
+                            game.play(position);
                         });
                         break;
                     default:
@@ -74,17 +76,24 @@ public final class BoardFX extends GridPane implements Observer
                 }
             }
         }
+        return plateau;
     }
     
-    private void addToGrid (Position position, Circle cercle)
+    public void adding()
+    {
+        this.getChildren().add(showGrid());
+    }
+    
+    /*private void addToGrid (Position position, Circle cercle)
     {
         game.play(position);
         this.add(cercle, position.getRow(), position.getColumn());
-    }
+    }*/
     
     @Override
     public void update()
     {
         showGrid();
+        adding();
     }
 }

@@ -8,7 +8,7 @@ package GuiFx;
 
 public enum PlayerFX
 {
-    HUMAIN,
+    HUMAN,
     BOT1,
     BOT2,
     BOT3;

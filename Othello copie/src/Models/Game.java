@@ -227,7 +227,7 @@ public class Game implements Observable, Model
         }
         if (!this.board.isFree(position))
         {
-            throw new IllegalArgumentException("sout du play La position n'est pas libre ! ");
+            throw new IllegalArgumentException("La position n'est pas libre ! ");
         }
         
         if (canPlay(position))
@@ -257,7 +257,6 @@ public class Game implements Observable, Model
                 }
             }
             changePlayer();
-            //setChanged();
             notifyObservers();
         }
         

@@ -22,6 +22,7 @@ public class ButtonsFX extends HBox implements Observer
         this.restart = new Button("Recommencer");
         this.abandon = new Button("Abandon");
         this.pass = new Button("Pass");
+        
         displayButtons();
     }
     
