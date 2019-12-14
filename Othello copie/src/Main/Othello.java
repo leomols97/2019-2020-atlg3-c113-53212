@@ -24,16 +24,13 @@ public class Othello extends Application
         launch(args);
     }
     
-    private GameFX game;
-    
     @Override
     public void start(Stage primaryStage)
     {
         Game g = new Game();
         g.initialize();
         ViewFX view = new ViewFX(g);
-        this.game = new GameFX(g);
-        this.game.getGame().registerObserver(view);
+        g.registerObserver(view);
         
         primaryStage.setTitle("Othello");
         primaryStage.setMinHeight(750);

@@ -45,5 +45,6 @@ public class MenuView extends VBox implements Observer
     @Override
     public void update()
     {
+        menu.update();
     }
 }

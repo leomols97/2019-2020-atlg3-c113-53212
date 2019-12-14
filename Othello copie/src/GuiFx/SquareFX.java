@@ -1,36 +1,69 @@
 package GuiFx;
 
+import Models.Color;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-
 
 /**
  *
  * @author leopoldmols
  */
-
-public class SquareFX extends Rectangle
+public class SquareFX extends StackPane
 {
-    private final int row, column;
 
-    public SquareFX(int row, int column)
+    private final Rectangle rect;
+    private final Circle piece;
+
+    private final Paint colorBlack = Paint.valueOf("#000000");
+    private final Paint colorWhite = Paint.valueOf("#FFFFFF");
+    private final Paint colorGreen = Paint.valueOf("#00FF00");
+
+    public SquareFX()
     {
-        super(40, 40);
-        this.row = row;
-        this.column = column;
-        setFill(Paint.valueOf("#00FF00"));
-        setStrokeWidth(4);
+        rect = new Rectangle(40, 40);
+        rect.setFill(Paint.valueOf("#00FF00"));
+        rect.setStrokeWidth(4);
+
+        piece = new Circle(20);
+        piece.setVisible(false);
+        
+        getChildren().addAll(rect, piece);
     }
     
-    public void playableSquare(boolean playable)
+    void drawPiece(Color color)
+    {
+        switch (color)
+        {
+            case BLACK:
+                piece.setFill(colorBlack);
+                piece.setVisible(true);
+                break;
+            case WHITE:
+                piece.setFill(colorWhite);
+                piece.setVisible(true);
+                break;
+            case EMPTY:
+                piece.setVisible(false);
+                break;
+        }
+    }
+    
+    void setBGGreen()
+    {
+        rect.setFill(colorGreen);
+    }
+
+    void playableSquare(boolean playable)
     {
         if (playable)
         {
-            setFill(Paint.valueOf("#efd752")); //YELLOW
+            rect.setFill(Paint.valueOf("#efd752")); //YELLOW
         }
         else
         {
-            setFill(Paint.valueOf("#ef5252")); //RED
+            rect.setFill(Paint.valueOf("#ef5252")); //RED
         }
     }
 }

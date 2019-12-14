@@ -6,10 +6,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+
 /**
  *
  * @author leopoldmols
  */
+
 public class View extends VBox
 {
     

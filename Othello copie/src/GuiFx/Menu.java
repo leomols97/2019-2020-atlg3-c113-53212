@@ -1,5 +1,7 @@
 package GuiFx;
 
+import Models.Observer;
+import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -9,24 +11,23 @@ import javafx.scene.layout.GridPane;
  *
  * @author leopoldmols
  */
-public class Menu extends GridPane
+public class Menu extends GridPane implements Observer
 {
-    
-    private Label lblPlayer1;
-    private Label lblPlayer2;
-    private Label lblTypePlayer1;;
-    private Label lblTypePlayer2;;
-    private TextField tfdPlayer1;
-    private TextField tfdPlayer2;
-    private ChoiceBox CBPlayer1;
-    private ChoiceBox CBPlayer2;
+    Label lblPlayer1;
+    Label lblPlayer2;
+    private Label lblTypePlayer1;
+    private Label lblTypePlayer2;
+    TextField tfdPlayer1;
+    TextField tfdPlayer2;
+    ChoiceBox CBPlayer1;
+    ChoiceBox CBPlayer2;
     
     public Menu ()
     {
-        this.lblPlayer1 = new Label("Joueur 1 : ");
-        this.lblPlayer2 = new Label("Joueur 2 : ");
-        this.lblTypePlayer1 = new Label("Sélectionnez le type du joueur 1 ->");
-        this.lblTypePlayer2 = new Label("Sélectionnez le type du joueur 2 ->");
+        this.lblPlayer1 = new Label("Joueur blanc : ");
+        this.lblPlayer2 = new Label("Joueur noir : ");
+        this.lblTypePlayer1 = new Label("Sélectionnez le type du joueur blanc ->");
+        this.lblTypePlayer2 = new Label("Sélectionnez le type du joueur noir ->");
         this.tfdPlayer1 = new TextField();
         this.tfdPlayer2 = new TextField();
         this.CBPlayer1 = new ChoiceBox(FXCollections.observableArrayList(PlayerFX.values()));
@@ -66,11 +67,11 @@ public class Menu extends GridPane
         this.add(lblPlayer2, 2, 1);
         
         
-        tfdPlayer1.setText("Pseudo du joueur 1");
+        //tfdPlayer1.setText("Pseudo du joueur blancsss");
         tfdPlayer1.setPrefColumnCount(20);
         this.add(tfdPlayer1, 3, 0);
         
-        tfdPlayer2.setText("Pseudo du joueur 2");
+        //tfdPlayer2.setText("Pseudo du joueur noir");
         tfdPlayer2.setPrefColumnCount(20);
         this.add(tfdPlayer2, 3, 1);
     }
@@ -83,9 +84,9 @@ public class Menu extends GridPane
         CBPlayer2.setDisable(true);
     }
     
-    public TextField getTfdPlayer1()
+    public String getTfdPlayer1()
     {
-        return tfdPlayer1;
+        return tfdPlayer1.getText();
     }
 
     public TextField getTfdPlayer2()
@@ -101,5 +102,11 @@ public class Menu extends GridPane
     public PlayerFX getCBPlayer2()
     {
         return (PlayerFX) CBPlayer2.getValue();
+    }
+
+    @Override
+    public void update()
+    {
+        getTfdPlayer1();
     }
 }

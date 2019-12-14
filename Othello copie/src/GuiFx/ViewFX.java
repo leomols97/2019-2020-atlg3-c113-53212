@@ -24,16 +24,17 @@ public class ViewFX extends VBox implements Observer
     // le joueur qui gagne pour le moment
     private final ProgressBar currentWinner;
     private final Button play;
+    private final WhitePlayerInfos whitePlayerInfos;
     
     public ViewFX (Game game)
     {
         this.game = new GameFX(game);
-        //this.board = new BoardFX(game);
         this.menuView = new MenuView();
-        this.buttons = new ButtonsFX();
+        this.buttons = new ButtonsFX(menuView);
         this.gameProgression = new ProgressIndicator();
         this.currentWinner = new ProgressBar();
         this.play = new Button("Jouer");
+        this.whitePlayerInfos = new WhitePlayerInfos();
         
         displayView();
         addMenu();
@@ -53,6 +54,11 @@ public class ViewFX extends VBox implements Observer
             addAll();
         });
         
+        this.buttons.getHistorique().setOnAction((event) ->
+        {
+            this.buttons.displayGameHistoric();
+        });
+        
         displayGameProgression();
     }
     
@@ -67,6 +73,7 @@ public class ViewFX extends VBox implements Observer
                 game,
                 gameProgression,
                 currentWinner,
+                whitePlayerInfos,
                 buttons
         );
     }
@@ -81,8 +88,8 @@ public class ViewFX extends VBox implements Observer
         double progression = (this.game.getGame().getNbPieces() / this.game.getGame().getNbCases());
         if (progression == 1)
         {
-            Label secondLabel = new Label("I'm a Label on new Window");
-            Label lblScorePlayer1 = new Label(menuView.getMenu().getTfdPlayer1().getText());
+            //Label secondLabel = new Label("I'm a Label on new Window");
+            Label lblScorePlayer1 = new Label(menuView.getMenu().getTfdPlayer1());
             displayScore();
             
             StackPane secondaryLayout = new StackPane();
@@ -122,21 +129,27 @@ public class ViewFX extends VBox implements Observer
             this.game.getGame().getScore(Color.WHITE);
         }
         //namePlayer1 = menuView.getMenu().getTfdPlayer1().getText();
-        results.add(menuView.getMenu().getTfdPlayer1(), 0, 0);
+        //results.add(menuView.getMenu().getTfdPlayer1(), 0, 0);
         //namePlayer2 = menuView.getMenu().getTfdPlayer2().getText();
         results.add(menuView.getMenu().getTfdPlayer2(), 0, 1);
         //menuView.getMenu().getTfdPlayer1().setText(menuView.getMenu().getTfdPlayer1());
         return results;
     }
     
-    public MenuView getMenuView()
+    public MenuView getMenuView ()
     {
         return menuView;
+    }
+    
+    public GameFX getGameFX ()
+    {
+        return this.game;
     }
     
     @Override
     public void update ()
     {
+        menuView.update();
         displayGameProgression();
     }
 }

@@ -2,98 +2,76 @@ package GuiFx;
 
 import Models.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-
 
 /**
  *
  * @author leopoldmols
  */
+public class BoardFX extends HBox implements Observer {
 
-public class BoardFX extends HBox implements Observer
-{
-    
-    private Game game;
+    private final Game game;
     private final int SIZE = 8;
-    
-    public BoardFX(Game game)
-    {
-        //setHgap(2);
-        //setVgap(2);
+
+    private final GridPane plateau;
+    private final SquareFX[][] squares;
+
+    public BoardFX(Game game) {
         this.game = game;
-        //game.initialize();
-        //showGrid();
-        adding();
+        plateau = new GridPane();
+
+        squares = new SquareFX[SIZE][SIZE];
+        createGrid();
+        
+        this.getChildren().add(plateau);
     }
-    
-    public GridPane showGrid()
-    {
-        GridPane plateau = new GridPane();
-        getChildren().clear();
-        for (int i = 0; i < SIZE; i++)
+
+    void createGrid() {
+        for (int y = 0; y < SIZE; y++)
         {
-            for (int j = 0; j < SIZE; j++)
+            for (int x = 0; x < SIZE; x++)
             {
-                SquareFX square = new SquareFX(i, j);
-                square.setStroke(Paint.valueOf("#00FF00")); //GREEN
-                plateau.add(square, j, i);
-                Position position = new Position(i, j);
-                switch (game.getBoard()[i][j].getColor())
-                {
-                    case BLACK:
-                        Circle shapeB = new Circle(20, Paint.valueOf("#000000")); //BLACK
-                        shapeB.setFill(Paint.valueOf("#000000")); //BLACK
-                        shapeB.setTranslateX(2);
-                        plateau.add(shapeB, j, i);
-                        break;
-                    case WHITE:
-                        Circle shapeW = new Circle(20, Paint.valueOf("#FFFFFF")); //WHITE
-                        shapeW.setFill(Paint.valueOf("#FFFFFF")); //WHITE
-                        shapeW.setTranslateX(2);
-                        plateau.add(shapeW, j, i);
-                        break;
-                    case EMPTY:
-                        SquareFX square1 = new SquareFX(i, j);
-                        square1.setFill(Paint.valueOf("#00FF00")); //GREEN
-                        plateau.add(square1, j, i);
-                        square1.setOnMouseEntered(event ->
-                        {
-                            square1.setTranslateX(2);
-                            square1.playableSquare(game.canPlay(position));
-                        });
-                        square1.setOnMouseExited(event ->
-                        {
-                            square1.setFill(Paint.valueOf("#00FF00"));
-                        });
-                        square1.setOnMouseClicked(event ->
-                        {
-                            game.play(position);
-                        });
-                        break;
-                    default:
-                        break;
-                }
+                squares[y][x] = new SquareFX();
+                addEvents(x, y);
+                plateau.add(squares[y][x], x, y);
             }
         }
-        return plateau;
+        
+        updatePieces();
+    }
+
+    void addEvents(int x, int y)
+    {
+        Position pos = new Position(x, y);
+        
+        squares[y][x].setOnMouseEntered(e ->
+        {
+            squares[y][x].playableSquare(game.canPlay(pos));
+        });
+        squares[y][x].setOnMouseExited(e ->
+        {
+            squares[y][x].setBGGreen();
+        });
+        squares[y][x].setOnMouseClicked(e ->
+        {
+            if (game.canPlay(pos))
+                game.play(pos);
+        });
     }
     
-    public void adding()
+    void updatePieces()
     {
-        this.getChildren().add(showGrid());
+        for (int y = 0; y < SIZE; y++)
+        {
+            for (int x = 0; x < SIZE; x++)
+            {
+                squares[y][x].drawPiece(game.getBoard()[x][y].getColor());
+            }
+        }
     }
-    
-    /*private void addToGrid (Position position, Circle cercle)
-    {
-        game.play(position);
-        this.add(cercle, position.getRow(), position.getColumn());
-    }*/
-    
+
     @Override
     public void update()
     {
-        showGrid();
-        adding();
+        updatePieces();
     }
 }
