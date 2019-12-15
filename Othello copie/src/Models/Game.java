@@ -230,7 +230,7 @@ public class Game implements Observable, Model
             throw new IllegalArgumentException("La position n'est pas libre ! ");
         }
         
-        if (!canPlay(position))
+        if (hasStrikes(current.getColor()))
         {
             changePlayer();
         }
@@ -396,17 +396,37 @@ public class Game implements Observable, Model
         return false;
     }
 
+    
+    /**
+     * Adds an observer in the observer list
+     * 
+     * @param obs the observer to add
+     */
+    
     @Override
     public void registerObserver(Observer obs)
     {
         this.observers.add(obs);
     }
     
+    
+    /**
+     * Remove an observer from the observer list
+     * 
+     * @param obs the observer to remove
+     */
+    
     @Override
     public void removeObserver(Observer obs)
     {
         this.observers.remove(obs);
     }
+    
+    
+    /**
+     * Calls each method update()
+     * from each observer from the observer list
+     */
     
     @Override
     public void notifyObservers()
@@ -416,6 +436,13 @@ public class Game implements Observable, Model
             this.observers.get(i).update();
         }
     }
+    
+    
+    /**
+     * Counts the number of white piece on the playing board
+     * 
+     * @return the number of white pieces that stands on the board
+     */
     
     public int getNbWhites ()
     {
@@ -436,6 +463,13 @@ public class Game implements Observable, Model
         return nbWhites;
     }
     
+    
+    /**
+     * Counts the number of pieces that stands on the playing board
+     * 
+     * @return the number of pieces that stands on the playing board
+     */
+    
     public double getNbPieces ()
     {
         double nbPieces = 0;
@@ -455,6 +489,13 @@ public class Game implements Observable, Model
         return nbPieces;
     }
     
+    
+    /**
+     * Count the number of squares that compose the playing board
+     * 
+     * @return the number of squares that compose on the playing board
+     */
+    
     public double getNbCases ()
     {
         double nbCases = 0;
@@ -466,6 +507,32 @@ public class Game implements Observable, Model
             }
         }
         return nbCases;
+    }
+    
+    /**
+     * Verifies if a player has strikes left
+     * 
+     * @param color the color of the player
+     * that the method has to verify if he has strikes left or not
+     * 
+     * @return true if he has at least one strike left and false else
+     */
+    
+    public boolean hasStrikes (Color color)
+    {
+        Position pos;
+        for (int i = 0; i < board.getBoard().length; i++)
+        {
+            for (int j = 0; j < board.getBoard()[i].length; j++)
+            {
+                pos = new Position(i, j);
+                if (canPlay(pos)) 
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

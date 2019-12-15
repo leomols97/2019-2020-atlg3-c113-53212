@@ -4,10 +4,12 @@ import Models.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 
+
 /**
  *
  * @author leopoldmols
  */
+
 public class BoardFX extends HBox implements Observer
 {
 

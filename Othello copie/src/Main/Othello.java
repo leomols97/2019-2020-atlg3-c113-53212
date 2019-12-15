@@ -40,5 +40,10 @@ public class Othello extends Application
         
         primaryStage.setScene(principal);
         primaryStage.show();
+        
+        view.getButtons().getQuit().setOnAction((event) ->
+        {
+            primaryStage.close();
+        });
     }
 }

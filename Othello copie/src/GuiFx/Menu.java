@@ -11,14 +11,14 @@ import javafx.scene.layout.GridPane;
  */
 public class Menu extends GridPane
 {
-    Label lblPlayer1;
-    Label lblPlayer2;
-    private Label lblTypePlayer1;
-    private Label lblTypePlayer2;
-    TextField tfdPlayer1;
-    TextField tfdPlayer2;
-    ChoiceBox CBPlayer1;
-    ChoiceBox CBPlayer2;
+    private final Label lblPlayer1;
+    private final Label lblPlayer2;
+    private final Label lblTypePlayer1;
+    private final Label lblTypePlayer2;
+    private final TextField tfdPlayer1;
+    private final TextField tfdPlayer2;
+    private final ChoiceBox CBPlayer1;
+    private final ChoiceBox CBPlayer2;
     
     public Menu ()
     {

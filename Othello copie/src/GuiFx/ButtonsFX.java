@@ -17,11 +17,12 @@ import javafx.stage.Stage;
 
 public class ButtonsFX extends HBox implements Observer
 {
-    private MenuView menu;
+    private final MenuView menu;
     private final Button abandon;
     private final Button pass;
     private final Button restart;
     private final Button actualScore;
+    private final Button quit;
     
     public ButtonsFX(MenuView menuView)
     {
@@ -30,6 +31,7 @@ public class ButtonsFX extends HBox implements Observer
         this.abandon = new Button("Abandon");
         this.pass = new Button("Pass");
         this.actualScore = new Button("Score actuel");
+        this.quit = new Button("Quitter");
         
         displayButtons();
     }
@@ -47,7 +49,8 @@ public class ButtonsFX extends HBox implements Observer
                 abandon, 
                 pass, 
                 restart, 
-                actualScore
+                actualScore,
+                quit
         );
         
         // Ce morceau ne sert à rien car on appelle le bouton dans ViewFX
@@ -81,6 +84,11 @@ public class ButtonsFX extends HBox implements Observer
     {
         return actualScore;
     }
+
+    public Button getQuit()
+    {
+        return quit;
+    }
     
     public GridPane displayGameHistoric (Game game)
     {
@@ -90,8 +98,12 @@ public class ButtonsFX extends HBox implements Observer
         newWindow.centerOnScreen();
         
         GridPane GPScore = new GridPane();
+        Button ok = new Button("Ok");
+        ok.setMaxWidth(Double.MAX_VALUE);
+        GPScore.setHalignment(ok, HPos.CENTER);
+        GPScore.setValignment(ok, VPos.CENTER);
         
-        Scene gameHisto = new Scene(GPScore, 300, 300);
+        Scene gameHisto = new Scene(GPScore, 300, 60);
         newWindow.setScene(gameHisto);
         
         Label lblScorePlayer1 = new Label(menu.getMenu().getTfdPlayer1() + " : ");
@@ -108,7 +120,14 @@ public class ButtonsFX extends HBox implements Observer
         Label scorePlayer2 = new Label("" + game.getScore(Color.BLACK));
         GPScore.add(scorePlayer2, 1, 1);
         
+        GPScore.add(ok, 1, 3);
+        
         newWindow.show();
+        
+        ok.setOnAction((event) ->
+        {
+            newWindow.close();
+        });
         
         return GPScore;
     }

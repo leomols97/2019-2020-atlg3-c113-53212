@@ -1,8 +1,6 @@
 package GuiFx;
 
 import Models.Color;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -24,15 +22,15 @@ public class SquareFX extends StackPane
 
     public SquareFX()
     {
-        rect = new Rectangle(40, 40);
-        rect.setFill(Paint.valueOf("#00FF00"));
-        rect.setStroke(colorGreen);
-        rect.setStrokeWidth(5);
+        this.rect = new Rectangle(40, 40);
+        this.rect.setFill(Paint.valueOf("#00FF00"));
+        this.rect.setStroke(colorGreen);
+        this.rect.setStrokeWidth(5);
 
-        piece = new Circle(20);
-        piece.setVisible(false);
+        this.piece = new Circle(20);
+        this.piece.setVisible(false);
         
-        getChildren().addAll(rect, piece);
+        this.getChildren().addAll(rect, piece);
     }
     
     void drawPiece(Color color)
