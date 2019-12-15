@@ -14,7 +14,15 @@ public enum Color
      */
     
     WHITE,
+
+    /**
+     *
+     */
     BLACK,
+
+    /**
+     *
+     */
     EMPTY;
     
     

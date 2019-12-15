@@ -9,11 +9,20 @@ import Models.*;
 public class BotLevel1 extends Player implements Bot
 {
     
+    /**
+     *
+     * @param color
+     */
     public BotLevel1(Color color)
     {
         super(color);
     }
     
+    /**
+     *
+     * @param position
+     * @param game
+     */
     @Override
     public void play(Position position, Model game)
     {

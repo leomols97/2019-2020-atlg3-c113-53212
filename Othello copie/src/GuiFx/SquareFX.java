@@ -20,6 +20,9 @@ public class SquareFX extends StackPane
     private final Paint colorWhite = Paint.valueOf("#FFFFFF");
     private final Paint colorGreen = Paint.valueOf("#00FF00");
 
+    /**
+     *
+     */
     public SquareFX()
     {
         this.rect = new Rectangle(44.2, 44.2);
@@ -68,6 +71,10 @@ public class SquareFX extends StackPane
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Paint getColorGreen()
     {
         return colorGreen;

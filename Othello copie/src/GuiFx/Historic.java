@@ -15,14 +15,27 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Historic extends TableView<Tour> implements Observer
 {
+    private int id = 0;
     private Model game;
+    private MenuView menuView;
+    ObservableList<Tour> list;
     
-    public Historic (Model game)
+    /**
+     *
+     * @param game
+     * @param menuView
+     */
+    public Historic (Model game, MenuView menuView)
     {
+        this.list = getUserList();
+        this.menuView = menuView;
         this.game = game;
         initHistoric();
     }
     
+    /**
+     *
+     */
     public void initHistoric ()
     {
         
@@ -63,29 +76,57 @@ public class Historic extends TableView<Tour> implements Observer
         
         getColumns().addAll(id, name, action, positions, nbPrises);
         
-        updateHistoric();
+        //updateHistoric();
     }
     
     private ObservableList<Tour> getUserList()
     {
-        Tour tour1 = new Tour(1, "Arnaud", Action.NOUVELLE_PARTIE, 5, 3, 1);
+        Tour tourX = new Tour(1, game.getCurrent().toString(), Action.NOUVELLE_PARTIE, 5, 3, 1);
+        /*if (current.getColor() == Color.WHITE)
+        {
+            tourX.setName(menuView.getMenu().getTfdPlayer1());
+        }
+        else
+        {
+            tourX.setName(menuView.getMenu().getTfdPlayer1());
+        }
+        tourX.setId(id);
+        tourX.setAction(Action.PLACE_PIECE);
+        tourX.setRow(7);
+        tourX.setColumn(4);*/
         Tour tour2 = new Tour(2, "Jean", Action.NOUVELLE_PARTIE, 5, 3, 1);
         Tour tour3 = new Tour(3, "Auguste", Action.NOUVELLE_PARTIE, 5, 3, 1);
         
-        ObservableList<Tour> list = FXCollections.observableArrayList(tour1, tour2, tour3);
+        game.notifyObservers();
+        
+        FXCollections.observableArrayList(tourX, tour2, tour3);
+        
+        this.setItems(list);
+        
         return list;
     }
     
-    void updateHistoric()
+    /*void updateHistoric()
     {
         // Display row data
-        ObservableList<Tour> list = getUserList();
+        getUserList(game.getCurrent());
+        list.add(getUserList(game.getCurrent()));
         setItems(list);
+    }*/
+    
+    private void increase ()
+    {
+        id++;
     }
     
+    /**
+     *
+     */
     @Override
     public void update()
     {
-        updateHistoric();
+        increase();
+        //updateHistoric();
+        getUserList();
     }
 }

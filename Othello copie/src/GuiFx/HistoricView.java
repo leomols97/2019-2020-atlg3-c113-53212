@@ -5,7 +5,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 /**
@@ -18,11 +17,18 @@ public class HistoricView extends VBox
     private Model game;
     private GridPane GPHisto; // Pour la partie gauche de l'écran
     private Historic historic;
+    private MenuView menuView;
     
-    public HistoricView (Model game)
+    /**
+     *
+     * @param game
+     * @param menuView
+     */
+    public HistoricView (Model game, MenuView menuView)
     {
         this.game = game;
-        this.historic = new Historic(this.game);
+        this.menuView = menuView;
+        this.historic = new Historic(this.game, this.menuView);
         
         intitHistoricView();
         
@@ -38,6 +44,10 @@ public class HistoricView extends VBox
         this.getChildren().addAll(historic);
     }
     
+    /**
+     *
+     * @return
+     */
     public Historic getHistoric ()
     {
         return historic;

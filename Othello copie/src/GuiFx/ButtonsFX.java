@@ -24,6 +24,10 @@ public class ButtonsFX extends HBox implements Observer
     private final Button actualScore;
     private final Button quit;
     
+    /**
+     *
+     * @param menuView
+     */
     public ButtonsFX(MenuView menuView)
     {
         this.menu = menuView;
@@ -36,6 +40,9 @@ public class ButtonsFX extends HBox implements Observer
         displayButtons();
     }
     
+    /**
+     *
+     */
     public void displayButtons()
     {
         this.setSpacing(10);
@@ -65,31 +72,56 @@ public class ButtonsFX extends HBox implements Observer
         });
     }
 
+    /**
+     *
+     * @return
+     */
     public Button getAbandon ()
     {
         return abandon;
     }
 
+    /**
+     *
+     * @return
+     */
     public Button getPass ()
     {
         return pass;
     }
 
+    /**
+     *
+     * @return
+     */
     public Button getRestart ()
     {
         return restart;
     }
     
+    /**
+     *
+     * @return
+     */
     public Button getActualScore ()
     {
         return actualScore;
     }
 
+    /**
+     *
+     * @return
+     */
     public Button getQuit()
     {
         return quit;
     }
     
+    /**
+     *
+     * @param game
+     * @return
+     */
     public GridPane displayEndGame (Model game)
     {
         // Nouvelle fenêtre
@@ -130,12 +162,18 @@ public class ButtonsFX extends HBox implements Observer
         
         ok.setOnAction((event) ->
         {
+            menu.getMenu().setGameVisible(false);
             newWindow.close();
         });
         
         return GPScore;
     }
     
+    /**
+     *
+     * @param game
+     * @return
+     */
     public GridPane displayActualScore (Model game)
     {
         // Nouvelle fenêtre
@@ -181,6 +219,7 @@ public class ButtonsFX extends HBox implements Observer
     
     /**
      * Shows a new window if the current player hasn't strikes left
+     * @param game
      */
     
     public void noStrikesLeft (Model game)
@@ -207,6 +246,9 @@ public class ButtonsFX extends HBox implements Observer
         });
     }
     
+    /**
+     *
+     */
     @Override
     public void update()
     {

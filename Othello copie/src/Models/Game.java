@@ -30,6 +30,7 @@ public class Game implements Observable, Model
      * Constructs the game by creating a new playing board,
      * a new current player
      * and a new oponent player
+     * @param bot
      */
     
     public Game(boolean bot)
@@ -358,7 +359,11 @@ public class Game implements Observable, Model
                 && isMyOwn(posFin, this.current.getColor());
     }
     
-    
+    /**
+     *
+     * @param position
+     * @return
+     */
     @Override
     public List<Position> possiblePositions (Position position)
     {

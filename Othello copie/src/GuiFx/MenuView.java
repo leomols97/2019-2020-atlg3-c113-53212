@@ -14,6 +14,9 @@ public class MenuView extends VBox
 {
     private Menu menu;
     
+    /**
+     *
+     */
     public MenuView ()
     {
         this.menu = new Menu();
@@ -23,6 +26,9 @@ public class MenuView extends VBox
         initMenuView();
     }
     
+    /**
+     *
+     */
     public void initMenuView ()
     {
         this.setPadding(new Insets(10));
@@ -31,16 +37,26 @@ public class MenuView extends VBox
         this.getChildren().addAll(menu);
     }
     
+    /**
+     *
+     */
     public void clickOnPlayButton ()
     {
         menu.setGameVisible(true);
     }
     
+    /**
+     *
+     */
     public void clickOnRestartButton ()
     {
         menu.setGameVisible(false);
     }
     
+    /**
+     *
+     * @return
+     */
     public Menu getMenu()
     {
         return menu;

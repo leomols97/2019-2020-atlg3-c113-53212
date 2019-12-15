@@ -20,6 +20,9 @@ public class Menu extends GridPane
     private final ChoiceBox CBPlayer1;
     private final ChoiceBox CBPlayer2;
     
+    /**
+     *
+     */
     public Menu ()
     {
         this.lblPlayer1 = new Label("Joueur blanc : ");
@@ -34,6 +37,9 @@ public class Menu extends GridPane
         initMenu();
     }
     
+    /**
+     *
+     */
     public void initMenu ()
     {
         this.setPadding(new Insets(10));
@@ -74,33 +80,53 @@ public class Menu extends GridPane
         this.add(tfdPlayer2, 3, 1);
     }
     
-    public void setGameVisible (boolean yes)
+    /**
+     *
+     * @param no
+     */
+    public void setGameVisible (boolean no)
     {
-        lblPlayer1.setDisable(yes);
-        lblPlayer2.setDisable(yes);
-        lblTypePlayer1.setDisable(yes);
-        lblTypePlayer2.setDisable(yes);
-        tfdPlayer1.setDisable(yes);
-        tfdPlayer2.setDisable(yes);
-        CBPlayer1.setDisable(yes);
-        CBPlayer2.setDisable(yes);
+        lblPlayer1.setDisable(no);
+        lblPlayer2.setDisable(no);
+        lblTypePlayer1.setDisable(no);
+        lblTypePlayer2.setDisable(no);
+        tfdPlayer1.setDisable(no);
+        tfdPlayer2.setDisable(no);
+        CBPlayer1.setDisable(no);
+        CBPlayer2.setDisable(no);
     }
     
+    /**
+     *
+     * @return
+     */
     public String getTfdPlayer1()
     {
         return tfdPlayer1.getText();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTfdPlayer2()
     {
         return tfdPlayer2.getText();
     }
 
+    /**
+     *
+     * @return
+     */
     public PlayerFX getCBPlayer1()
     {
         return (PlayerFX) CBPlayer1.getValue();
     }
 
+    /**
+     *
+     * @return
+     */
     public PlayerFX getCBPlayer2()
     {
         return (PlayerFX) CBPlayer2.getValue();

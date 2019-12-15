@@ -28,6 +28,11 @@ public class BlackPlayerInfos extends GridPane implements Observer
     private final Label name;
     private final Circle color;
     
+    /**
+     *
+     * @param game
+     * @param menuView
+     */
     public BlackPlayerInfos (Model game, MenuView menuView)
     {
         this.game = game;
@@ -45,6 +50,9 @@ public class BlackPlayerInfos extends GridPane implements Observer
         initPlayerInfos();
     }
     
+    /**
+     *
+     */
     public void initPlayerInfos ()
     {
         this.setHgap(98);
@@ -94,11 +102,17 @@ public class BlackPlayerInfos extends GridPane implements Observer
         )*/
     }
     
+    /**
+     *
+     */
     public void updateInfos ()
     {
         score.setText(String.valueOf(this.game.getScore(Color.BLACK)));
     }
 
+    /**
+     *
+     */
     @Override
     public void update()
     {

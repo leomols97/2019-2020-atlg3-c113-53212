@@ -8,9 +8,20 @@ package Models;
 public interface Observable
 {
 
+    /**
+     *
+     * @param obs
+     */
     void registerObserver(Observer obs);
 
+    /**
+     *
+     * @param obs
+     */
     void removeObserver(Observer obs);
 
+    /**
+     *
+     */
     void notifyObservers();
 }

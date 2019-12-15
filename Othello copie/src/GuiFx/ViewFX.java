@@ -4,6 +4,7 @@ import Models.*;
 import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -35,9 +36,19 @@ public class ViewFX extends VBox implements Observer
     private WhitePlayerInfos whitePlayerInfos;
     private BlackPlayerInfos blackPlayerInfos;
     private Historic historic;
+    private final MenuBar menuBar; // Shows a menu bar at the top of the window
+    private final VBox VBoxMenuBar;
+    private final Menu menu;
     
+    /**
+     *
+     * @param game
+     */
     public ViewFX (Model game)
     {
+        this.menu = new Menu("Othello");
+        this.menuBar = new MenuBar();
+        this.VBoxMenuBar = new VBox();
         this.up = new HBox();
         this.lblCurrentWinner = new Label("Partage NOIRS/BALNCS ");
         this.lblCompletion = new Label("Jeu complété à ");
@@ -47,7 +58,7 @@ public class ViewFX extends VBox implements Observer
         this.HBCompletion = new HBox();
         this.HBCurrentWinner = new HBox();
         this.game = new GameFX(game);
-        this.historic = new Historic(game);
+        this.historic = new Historic(game, menuView);
         this.menuView = new MenuView();
         this.buttons = new ButtonsFX(menuView);
         this.gameProgression = new ProgressIndicator();
@@ -60,8 +71,39 @@ public class ViewFX extends VBox implements Observer
         addMenu();
     }
     
+    /**
+     *
+     */
     public void displayView ()
     {
+        this.play.setDisable(true);
+        this.menuView.getMenu().setGameVisible(true);
+        this.menuBar.getMenus().add(menu);
+        //MenuItem partie = new MenuItem("Partie");
+        
+        Menu partie = new Menu("Partie");
+        MenuItem jouer = new MenuItem("Jouer");
+        MenuItem scoreActuel = new MenuItem("Score actuel");
+        partie.getItems().add(jouer);
+        partie.getItems().add(scoreActuel);
+        menu.getItems().add(partie);
+        
+        menu.getItems().add(partie);
+        
+        this.VBoxMenuBar.getChildren().addAll(this.menuBar);
+        
+        this.getChildren().add(VBoxMenuBar);
+        
+        jouer.setOnAction(e ->
+        {
+            this.play.setDisable(false);
+            this.menuView.getMenu().setGameVisible(false);
+        });
+        scoreActuel.setOnAction(e ->
+        {
+            this.buttons.displayActualScore(game.getGame());
+        });
+        
         this.setPadding(new Insets(10));
         
         play.setMaxWidth(Double.MAX_VALUE);
@@ -87,6 +129,7 @@ public class ViewFX extends VBox implements Observer
         
         this.buttons.getAbandon().setOnAction((event) ->
         {
+            this.play.setDisable(false);
             this.buttons.displayEndGame(game.getGame());
         });
         
@@ -108,8 +151,8 @@ public class ViewFX extends VBox implements Observer
     
     /**
      * Adds everything in the window or remove only the board and the historic
-     * 
-     * @param remove if false, the method only adds everything, 
+     *
+     * @param remove if false, the method only adds everything,
      * and else, removes the board and the historic
      */
     
@@ -159,7 +202,7 @@ public class ViewFX extends VBox implements Observer
         this.middle.getChildren().clear();
         
         this.game = new GameFX(game);
-        this.historic = new Historic(game);
+        this.historic = new Historic(game, menuView);
         this.game.getBoardFX().resetBoard(game);
         this.whitePlayerInfos = new WhitePlayerInfos(this.game.getGame(), this.menuView);
         this.blackPlayerInfos = new BlackPlayerInfos(this.game.getGame(), this.menuView);
@@ -176,6 +219,10 @@ public class ViewFX extends VBox implements Observer
         this.menuView.clickOnPlayButton();
     }
     
+    /**
+     *
+     * @return
+     */
     public GridPane displayGameProgression ()
     {
         GridPane GPScore = new GridPane();
@@ -226,45 +273,36 @@ public class ViewFX extends VBox implements Observer
         return GPScore;
     }
     
-    public GridPane displayScore ()
-    {
-        GridPane results = new GridPane();
-        Label lblScorePlayer1;
-        //String namePlayer1;
-        //String namePlayer2;
-        this.setPadding(new Insets(10));
-        //this.setHgap(10);
-        //this.setVgap(5);
-        
-        TextField whiteScore = new TextField("Score du joueur blanc : ");
-        TextField blackScore = new TextField("Score du joueur noir : ");
-        if (this.game.getGame().isOver())
-        {
-            this.game.getGame().getScore(Color.WHITE);
-        }
-        //namePlayer1 = menuView.getMenu().getTfdPlayer1().getText();
-        //results.add(menuView.getMenu().getTfdPlayer1(), 0, 0);
-        //namePlayer2 = menuView.getMenu().getTfdPlayer2().getText();
-        //results.add(menuView.getMenu().getTfdPlayer2(), 0, 1);
-        //menuView.getMenu().getTfdPlayer1().setText(menuView.getMenu().getTfdPlayer1());
-        return results;
-    }
-    
+    /**
+     *
+     * @return
+     */
     public MenuView getMenuView ()
     {
         return menuView;
     }
     
+    /**
+     *
+     * @return
+     */
     public GameFX getGameFX ()
     {
         return this.game;
     }
 
+    /**
+     *
+     * @return
+     */
     public ButtonsFX getButtons()
     {
         return buttons;
     }
     
+    /**
+     *
+     */
     @Override
     public void update ()
     {

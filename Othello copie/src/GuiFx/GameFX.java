@@ -16,6 +16,10 @@ public class GameFX extends VBox implements Observer
     private final Model game;
     private final BoardFX board;
     
+    /**
+     *
+     * @param game
+     */
     public GameFX (Model game)
     {
         this.game = game;
@@ -26,22 +30,36 @@ public class GameFX extends VBox implements Observer
         displayView();
     }
     
+    /**
+     *
+     */
     public void displayView ()
     {
         this.setPadding(new Insets(10));
         this.getChildren().add(board);
     }
     
+    /**
+     *
+     * @return
+     */
     public Model getGame()
     {
         return game;
     }
 
+    /**
+     *
+     * @return
+     */
     public BoardFX getBoardFX()
     {
         return board;
     }
     
+    /**
+     *
+     */
     @Override
     public void update()
     {

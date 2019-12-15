@@ -14,7 +14,16 @@ public class Tour
    private int column;
    private int nbPrises;
  
-   public Tour(int id, String name, Action action, int row, int column, int nbPrises)
+    /**
+     *
+     * @param id
+     * @param name
+     * @param action
+     * @param row
+     * @param column
+     * @param nbPrises
+     */
+    public Tour(int id, String name, Action action, int row, int column, int nbPrises)
    {
        this.id = id;
        this.name = name;
@@ -24,7 +33,11 @@ public class Tour
        this.nbPrises = nbPrises;
    }
  
-   public int getId()
+    /**
+     *
+     * @return
+     */
+    public int getId()
    {
        return id;
    }
@@ -33,57 +46,103 @@ public class Tour
    {
        this.id = id;
    }*/
+
+    /**
+     *
+     * @return
+     */
+
  
    public String getName()
    {
        return name;
    }
  
-   public void setName(String name)
+    /**
+     *
+     * @param name
+     */
+    public void setName(String name)
    {
        this.name = name;
    }
  
-   public Action getAction()
+    /**
+     *
+     * @return
+     */
+    public Action getAction()
    {
        return action;
    }
  
-   public void setAction(Action action)
+    /**
+     *
+     * @param action
+     */
+    public void setAction(Action action)
    {
        this.action = action;
    }
 
+    /**
+     *
+     * @return
+     */
     public int getRow()
     {
         return row;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getColumn()
     {
         return column;
     }
 
+    /**
+     *
+     * @param row
+     */
     public void setRow(int row)
     {
         this.row = row;
     }
 
+    /**
+     *
+     * @param column
+     */
     public void setColumn(int column)
     {
         this.column = column;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNbPrises()
     {
         return nbPrises;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id)
     {
         this.id = id;
     }
 
+    /**
+     *
+     * @param nbPrises
+     */
     public void setNbPrises(int nbPrises)
     {
         this.nbPrises = nbPrises;

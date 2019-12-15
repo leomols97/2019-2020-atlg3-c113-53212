@@ -19,6 +19,10 @@ public class BoardFX extends HBox implements Observer
     private GridPane plateau;
     private SquareFX[][] squares;
 
+    /**
+     *
+     * @param game
+     */
     public BoardFX(Model game)
     {
         this.game = game;
@@ -30,6 +34,9 @@ public class BoardFX extends HBox implements Observer
         this.getChildren().add(plateau);
     }
 
+    /**
+     *
+     */
     public void createBoard()
     {
         for (int y = 0; y < SIZE; y++)
@@ -46,6 +53,10 @@ public class BoardFX extends HBox implements Observer
         updatePieces();
     }
     
+    /**
+     *
+     * @param game
+     */
     public void resetBoard (Model game)
     {
         this.getChildren().clear();
@@ -59,6 +70,11 @@ public class BoardFX extends HBox implements Observer
         this.getChildren().add(plateau);
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public void addEvents(int x, int y)
     {
         Position pos = new Position(x, y);
@@ -89,6 +105,9 @@ public class BoardFX extends HBox implements Observer
         });
     }
     
+    /**
+     *
+     */
     public void updatePieces()
     {
         for (int y = 0; y < SIZE; y++)
@@ -100,6 +119,9 @@ public class BoardFX extends HBox implements Observer
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void update()
     {

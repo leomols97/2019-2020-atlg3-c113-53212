@@ -33,7 +33,7 @@ public class Othello extends Application
         game.registerObserver(view);
         
         primaryStage.setTitle("Othello");
-        primaryStage.setMinHeight(750);
+        primaryStage.setMinHeight(760);
         primaryStage.setMinWidth(914);
         
         Scene principal = new Scene(view);

@@ -147,5 +147,10 @@ public interface Model
     
     double getNbCases ();
     
+    /**
+     *
+     * @param position
+     * @return
+     */
     public List<Position> possiblePositions (Position position);
 }

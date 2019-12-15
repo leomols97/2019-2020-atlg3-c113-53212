@@ -10,5 +10,10 @@ import Models.Position;
 public interface Bot
 {
     
+    /**
+     *
+     * @param position
+     * @param game
+     */
     void play (Position position, Model game);
 }
