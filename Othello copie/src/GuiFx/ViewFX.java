@@ -15,29 +15,28 @@ import javafx.stage.Stage;
 
 public class ViewFX extends VBox implements Observer
 {
-    private final HBox up; // Contains all the players details 
-    private final HBox middle; // Contains the board and the historic
-    private final HBox down; // Contains the buttons and the game progressions
-    private final VBox progressionsAndButtons; // The buttons and progressions under the game
-    private final HBox HBCompletion; // The infos of the completion of the game
-    private final HBox HBCurrentWinner; // All the infos about the current winner
-    private final Label lblCompletion;
-    private final Label lblCurrentWinner;
-    private final GameFX game;
+    private HBox up; // Contains all the players details 
+    private HBox middle; // Contains the board and the historic
+    private HBox down; // Contains the buttons and the game progressions
+    private VBox progressionsAndButtons; // The buttons and progressions under the game
+    private HBox HBCompletion; // The infos of the completion of the game
+    private HBox HBCurrentWinner; // All the infos about the current winner
+    private Label lblCompletion;
+    private Label lblCurrentWinner;
+    private GameFX game;
     // La vue du menu d'enregistrement des joueurs
-    private final MenuView menuView;
-    private final ButtonsFX buttons;
-    private final ProgressIndicator gameProgression;
+    private MenuView menuView;
+    private ButtonsFX buttons;
+    private ProgressIndicator gameProgression;
     // La barre de progression qui montre
     // le joueur qui gagne pour le moment
-    private final ProgressBar currentWinner;
-    private final Button play;
-    private final WhitePlayerInfos whitePlayerInfos;
-    private final BlackPlayerInfos blackPlayerInfos;
-    private final Historic historic;
-    private final Stage stage; // Only to have the inital stage
+    private ProgressBar currentWinner;
+    private Button play;
+    private WhitePlayerInfos whitePlayerInfos;
+    private BlackPlayerInfos blackPlayerInfos;
+    private Historic historic;
     
-    public ViewFX (Model game, Stage stage)
+    public ViewFX (Model game)
     {
         this.up = new HBox();
         this.lblCurrentWinner = new Label("Partage NOIRS/BALNCS ");
@@ -48,8 +47,7 @@ public class ViewFX extends VBox implements Observer
         this.HBCompletion = new HBox();
         this.HBCurrentWinner = new HBox();
         this.game = new GameFX(game);
-        this.stage = stage;
-        this.historic = new Historic(game, stage);
+        this.historic = new Historic(game);
         this.menuView = new MenuView();
         this.buttons = new ButtonsFX(menuView);
         this.gameProgression = new ProgressIndicator();
@@ -73,18 +71,30 @@ public class ViewFX extends VBox implements Observer
         this.play.setOnAction((event) ->
         {
             beginGame();
-            addAll();
+            addAll(false);
         });
         
-        this.buttons.getHistorique().setOnAction((event) ->
+        this.buttons.getActualScore().setOnAction((event) ->
         {
-            this.buttons.displayGameHistoric(game.getGame());
+            this.buttons.displayActualScore(game.getGame());
         });
         
         this.buttons.getPass().setOnAction((event) ->
         {
-            game.getGame().changePlayer();
+            this.game.getGame().changePlayer();
             //this.buttons.noStrikesLeft(game.getGame());
+        });
+        
+        this.buttons.getAbandon().setOnAction((event) ->
+        {
+            this.buttons.displayEndGame(game.getGame());
+        });
+        
+        this.buttons.getRestart().setOnAction((event) ->
+        {
+            addAll(true);
+            //addAll(false);
+            //restartGame();
         });
         
         displayGameProgression();
@@ -95,34 +105,69 @@ public class ViewFX extends VBox implements Observer
         this.getChildren().addAll(menuView, play);
     }
     
-    private void addAll ()
+    
+    /**
+     * Adds everything in the window or remove only the board and the historic
+     * 
+     * @param remove if false, the method only adds everything, 
+     * and else, removes the board and the historic
+     */
+    
+    private void addAll (boolean remove)
     {
-        this.HBCompletion.setAlignment(Pos.BOTTOM_CENTER);
-        this.HBCurrentWinner.setAlignment(Pos.CENTER);
-        this.game.setAlignment(Pos.BOTTOM_LEFT);
-        this.whitePlayerInfos.setAlignment(Pos.CENTER_LEFT);
-        this.blackPlayerInfos.setAlignment(Pos.CENTER_LEFT);
-        this.buttons.setAlignment(Pos.CENTER);
-        this.up.setAlignment(Pos.CENTER);
+        if (!remove)
+        {
+            this.HBCompletion.setAlignment(Pos.BOTTOM_CENTER);
+            this.HBCurrentWinner.setAlignment(Pos.CENTER);
+            this.game.setAlignment(Pos.BOTTOM_LEFT);
+            this.whitePlayerInfos.setAlignment(Pos.CENTER_LEFT);
+            this.blackPlayerInfos.setAlignment(Pos.CENTER_LEFT);
+            this.buttons.setAlignment(Pos.CENTER);
+            this.up.setAlignment(Pos.CENTER);
+            
+            this.HBCompletion.getChildren().addAll(lblCompletion, gameProgression);
+            this.HBCurrentWinner.getChildren().addAll(lblCurrentWinner, currentWinner);
+            this.up.getChildren().addAll(
+                    whitePlayerInfos,
+                    blackPlayerInfos
+            );
+            this.middle.getChildren().addAll(
+                    game,
+                    historic
+            );
+            this.progressionsAndButtons.getChildren().addAll(
+                    HBCompletion,
+                    HBCurrentWinner,
+                    buttons
+            );
+            this.down.setAlignment(Pos.CENTER);
+            this.down.getChildren().add(progressionsAndButtons);
+            this.getChildren().addAll(up, middle, down);
+        }
+        else
+        {
+            this.middle.getChildren().clear();
+            restartGame(this.game.getGame());
+        }
+    }
+    
+    private void restartGame (Model game)
+    {
+        this.play.setDisable(false);
+        this.menuView.clickOnRestartButton();
         
-        this.HBCompletion.getChildren().addAll(lblCompletion, gameProgression);
-        this.HBCurrentWinner.getChildren().addAll(lblCurrentWinner, currentWinner);
-        this.up.getChildren().addAll(
-                whitePlayerInfos,
-                blackPlayerInfos
-        );
+        this.middle.getChildren().clear();
+        
+        this.game = new GameFX(game);
+        this.historic = new Historic(game);
+        this.game.getBoardFX().resetBoard(game);
+        this.whitePlayerInfos = new WhitePlayerInfos(this.game.getGame(), this.menuView);
+        this.blackPlayerInfos = new BlackPlayerInfos(this.game.getGame(), this.menuView);
+        
         this.middle.getChildren().addAll(
-                game,
+                this.game,
                 historic
         );
-        this.progressionsAndButtons.getChildren().addAll(
-                HBCompletion,
-                HBCurrentWinner,
-                buttons
-        );
-        this.down.setAlignment(Pos.CENTER);
-        this.down.getChildren().add(progressionsAndButtons);
-        this.getChildren().addAll(up, middle, down);
     }
     
     private void beginGame ()

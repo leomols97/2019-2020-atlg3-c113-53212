@@ -1,5 +1,6 @@
 package Models;
 
+import GuiFx.BotLevel1;
 import java.util.*;
 
 
@@ -18,7 +19,8 @@ public class Game implements Observable, Model
      * @current the current player
      * @oponent the oponent player
      */
-    private final Board board;
+    private Board board;
+    private Position selected;
     private Player current;
     private Player oponent;
     private final List<Observer> observers;
@@ -30,11 +32,17 @@ public class Game implements Observable, Model
      * and a new oponent player
      */
     
-    public Game()
+    public Game(boolean bot)
     {
-        this.board = new Board();
         this.current = new Player(Color.BLACK);
-        this.oponent = new Player(Color.WHITE);
+        if (bot)
+        {
+            this.oponent = new BotLevel1(Color.WHITE);
+        }
+        else
+        {
+            this.oponent = new Player(Color.WHITE);
+        }
         this.observers = new ArrayList<>();
     }
     
@@ -46,6 +54,7 @@ public class Game implements Observable, Model
     @Override
     public void initialize()
     {
+        this.board = new Board();
         this.board.initialize();
     }
     
@@ -172,6 +181,10 @@ public class Game implements Observable, Model
         tmp = oponent;
         oponent = current;
         current = tmp;
+        if (current instanceof BotLevel1)
+        {
+            ((BotLevel1) current).play(selected, this);
+        }
     }
     
     
@@ -210,6 +223,7 @@ public class Game implements Observable, Model
     @Override
     public void play (Position position)
     {
+        this.selected = position;
         Objects.requireNonNull(position, "La position est vide !");
         if (!this.board.isInside(position))
         {
@@ -342,6 +356,26 @@ public class Game implements Observable, Model
                 && !isMyOwn(pos, this.current.getColor())
                 && !this.board.isFree(posFin)
                 && isMyOwn(posFin, this.current.getColor());
+    }
+    
+    
+    @Override
+    public List<Position> possiblePositions (Position position)
+    {
+        List<Position> list = new ArrayList<>();
+        Position pos;
+        for (int i = 0; i < this.board.getBoard().length; i++)
+        {
+            for (int j = 0; j < this.board.getBoard()[i].length; j++)
+            {
+                pos = new Position(i, j);
+                if (canPlay(pos))
+                {
+                    list.add(position);
+                }
+            }
+        }
+        return list;
     }
     
     

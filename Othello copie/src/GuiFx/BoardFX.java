@@ -13,11 +13,11 @@ import javafx.scene.paint.Paint;
 public class BoardFX extends HBox implements Observer
 {
 
-    private final Model game;
+    private Model game;
     private final int SIZE = 8;
 
-    private final GridPane plateau;
-    private final SquareFX[][] squares;
+    private GridPane plateau;
+    private SquareFX[][] squares;
 
     public BoardFX(Model game)
     {
@@ -44,6 +44,19 @@ public class BoardFX extends HBox implements Observer
             }
         }
         updatePieces();
+    }
+    
+    public void resetBoard (Model game)
+    {
+        this.getChildren().clear();
+        
+        this.game = game;
+        plateau = new GridPane();
+
+        squares = new SquareFX[SIZE][SIZE];
+        createBoard();
+        
+        this.getChildren().add(plateau);
     }
 
     public void addEvents(int x, int y)

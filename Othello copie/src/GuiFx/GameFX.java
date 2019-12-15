@@ -37,7 +37,7 @@ public class GameFX extends VBox implements Observer
         return game;
     }
 
-    public BoardFX getBoard()
+    public BoardFX getBoardFX()
     {
         return board;
     }

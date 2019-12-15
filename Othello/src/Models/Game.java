@@ -1,13 +1,12 @@
 package Models;
 
-import java.util.List;
-
 /**
  *
  * @author leopoldmols
  */
 
-public class Game implements Model{
+public class Game implements Model
+{
     
     private Board board;
     private Player current;

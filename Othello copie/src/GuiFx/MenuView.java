@@ -33,7 +33,12 @@ public class MenuView extends VBox
     
     public void clickOnPlayButton ()
     {
-        menu.setRegistered();
+        menu.setGameVisible(true);
+    }
+    
+    public void clickOnRestartButton ()
+    {
+        menu.setGameVisible(false);
     }
     
     public Menu getMenu()

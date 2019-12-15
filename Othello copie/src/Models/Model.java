@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.List;
+
 
 /**
  *  Model of Othello for the class "Game"
@@ -144,4 +146,6 @@ public interface Model
      */
     
     double getNbCases ();
+    
+    public List<Position> possiblePositions (Position position);
 }

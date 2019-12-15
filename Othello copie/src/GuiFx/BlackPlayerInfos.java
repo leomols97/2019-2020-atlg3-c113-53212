@@ -20,7 +20,6 @@ public class BlackPlayerInfos extends GridPane implements Observer
     //private final Menu menu;
     private final MenuView menuView;
     // The background color of the rectangle that contains all the infos about the player
-    private Color backGroundColor;
     private final Rectangle infos;
     private final Label lblName;
     private final Label lblPion;
@@ -29,7 +28,7 @@ public class BlackPlayerInfos extends GridPane implements Observer
     private final Label name;
     private final Circle color;
     
-    public BlackPlayerInfos (Model game, /*Menu menu*/ MenuView menuView)
+    public BlackPlayerInfos (Model game, MenuView menuView)
     {
         this.game = game;
         //this.menu = menu;
@@ -57,7 +56,7 @@ public class BlackPlayerInfos extends GridPane implements Observer
                       "-fx-border-insets: 5;" + 
                       "-fx-border-radius: 5;" + 
                       "-fx-border-color: yellow;");
-        this.score.setText("" + this.game.getScore(Color.WHITE));
+        this.score.setText("" + this.game.getScore(Color.BLACK));
         //this.name.setText("" + this.menuView.getMenu().getTfdPlayer1());
         this.lblName.setStyle("-fx-font-weight: bold");
         

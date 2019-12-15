@@ -55,7 +55,7 @@ public class WhitePlayerInfos extends GridPane implements Observer
                       "-fx-border-insets: 5;" + 
                       "-fx-border-radius: 5;" + 
                       "-fx-border-color: blue;");
-        this.score.setText("" + this.game.getScore(Color.BLACK));
+        this.score.setText("" + this.game.getScore(Color.WHITE));
         this.name.setText("" + menuView.getMenu().getTfdPlayer2());
         this.lblName.setStyle("-fx-font-weight: bold");
         

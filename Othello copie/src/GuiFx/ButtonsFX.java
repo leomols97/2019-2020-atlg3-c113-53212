@@ -80,7 +80,7 @@ public class ButtonsFX extends HBox implements Observer
         return restart;
     }
     
-    public Button getHistorique ()
+    public Button getActualScore ()
     {
         return actualScore;
     }
@@ -90,7 +90,53 @@ public class ButtonsFX extends HBox implements Observer
         return quit;
     }
     
-    public GridPane displayGameHistoric (Model game)
+    public GridPane displayEndGame (Model game)
+    {
+        // Nouvelle fenêtre
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Abandon");
+        newWindow.centerOnScreen();
+        
+        GridPane GPScore = new GridPane();
+        Button ok = new Button("Ok");
+        ok.setMaxWidth(Double.MAX_VALUE);
+        GPScore.setHalignment(ok, HPos.CENTER);
+        GPScore.setValignment(ok, VPos.CENTER);
+        
+        Scene gameHisto = new Scene(GPScore, 300, 80);
+        newWindow.setScene(gameHisto);
+        
+        Label endGame = new Label("Fin de la partie");
+        endGame.setUnderline(true);
+        GPScore.add(endGame, 0, 0);
+        
+        Label lblScorePlayer1 = new Label(menu.getMenu().getTfdPlayer1() + " : ");
+        GridPane.setHalignment(lblScorePlayer1, HPos.CENTER);
+        GridPane.setValignment(lblScorePlayer1, VPos.CENTER);
+        GPScore.add(lblScorePlayer1, 0, 1);
+        
+        Label scorePlayer1 = new Label("" + game.getScore(Color.WHITE));
+        GPScore.add(scorePlayer1, 1, 1);
+        
+        Label lblScorePlayer2 = new Label(menu.getMenu().getTfdPlayer2() + " : ");
+        GPScore.add(lblScorePlayer2, 0, 2);
+        
+        Label scorePlayer2 = new Label("" + game.getScore(Color.BLACK));
+        GPScore.add(scorePlayer2, 1, 2);
+        
+        GPScore.add(ok, 1, 3);
+        
+        newWindow.show();
+        
+        ok.setOnAction((event) ->
+        {
+            newWindow.close();
+        });
+        
+        return GPScore;
+    }
+    
+    public GridPane displayActualScore (Model game)
     {
         // Nouvelle fenêtre
         Stage newWindow = new Stage();

@@ -10,7 +10,8 @@ import java.util.List;
  *
  * @author leopoldmols
  */
-public class Board {
+public class Board
+{
     
     /**
      * The initial board

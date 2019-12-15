@@ -22,7 +22,7 @@ public class Main
     
     public static void main(String[] args)
     {
-        Game game = new Game();
+        Game game = new Game(true);
         View view = new View(game);
         Controller controller = new Controller(game, view);
         controller.startGame();

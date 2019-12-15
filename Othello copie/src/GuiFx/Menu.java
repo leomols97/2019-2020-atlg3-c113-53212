@@ -74,16 +74,16 @@ public class Menu extends GridPane
         this.add(tfdPlayer2, 3, 1);
     }
     
-    public void setRegistered ()
+    public void setGameVisible (boolean yes)
     {
-        lblPlayer1.setDisable(true);
-        lblPlayer2.setDisable(true);
-        lblTypePlayer1.setDisable(true);
-        lblTypePlayer2.setDisable(true);
-        tfdPlayer1.setDisable(true);
-        tfdPlayer2.setDisable(true);
-        CBPlayer1.setDisable(true);
-        CBPlayer2.setDisable(true);
+        lblPlayer1.setDisable(yes);
+        lblPlayer2.setDisable(yes);
+        lblTypePlayer1.setDisable(yes);
+        lblTypePlayer2.setDisable(yes);
+        tfdPlayer1.setDisable(yes);
+        tfdPlayer2.setDisable(yes);
+        CBPlayer1.setDisable(yes);
+        CBPlayer2.setDisable(yes);
     }
     
     public String getTfdPlayer1()

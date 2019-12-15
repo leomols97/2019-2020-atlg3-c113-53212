@@ -1,4 +1,4 @@
-package GuiFx;
+package Models;
 
 /**
  *
