@@ -18,16 +18,15 @@ public class Historic extends TableView<Tour> implements Observer
     private int id = 0;
     private Model game;
     private MenuView menuView;
-    ObservableList<Tour> list;
     
     /**
+     * Constructs an object "Historic"
      *
-     * @param game
+     * @param game the game belonging which the historic has to be updated
      * @param menuView
      */
     public Historic (Model game, MenuView menuView)
     {
-        this.list = getUserList();
         this.menuView = menuView;
         this.game = game;
         initHistoric();
@@ -81,7 +80,8 @@ public class Historic extends TableView<Tour> implements Observer
     
     private ObservableList<Tour> getUserList()
     {
-        Tour tourX = new Tour(1, game.getCurrent().toString(), Action.NOUVELLE_PARTIE, 5, 3, 1);
+        ObservableList<Tour> list = getUserList();
+        Tour tourX = new Tour(1, "sdfgh", Action.NOUVELLE_PARTIE, 5, 3, 1);
         /*if (current.getColor() == Color.WHITE)
         {
             tourX.setName(menuView.getMenu().getTfdPlayer1());
@@ -101,7 +101,7 @@ public class Historic extends TableView<Tour> implements Observer
         
         FXCollections.observableArrayList(tourX, tour2, tour3);
         
-        this.setItems(list);
+        //this.setItems(list);
         
         return list;
     }

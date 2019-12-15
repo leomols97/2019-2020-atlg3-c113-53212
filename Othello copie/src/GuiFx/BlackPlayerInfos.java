@@ -17,7 +17,6 @@ import javafx.scene.shape.Rectangle;
 public class BlackPlayerInfos extends GridPane implements Observer
 {
     private final Model game;
-    //private final Menu menu;
     private final MenuView menuView;
     // The background color of the rectangle that contains all the infos about the player
     private final Rectangle infos;
@@ -29,14 +28,17 @@ public class BlackPlayerInfos extends GridPane implements Observer
     private final Circle color;
     
     /**
-     *
-     * @param game
-     * @param menuView
+     * Constructs an object BlackPlayerInfos
+     * to display the infos about the black player
+     * 
+     * @param game the game belonging which it has
+     * to show the infos of the black player
+     * @param menuView the menuView belonging which 
+     * the name of the player will be shown
      */
     public BlackPlayerInfos (Model game, MenuView menuView)
     {
         this.game = game;
-        //this.menu = menu;
         this.menuView = menuView;
         this.score = new Label();
         this.name = new Label(menuView.getMenu().getTfdPlayer1());
@@ -51,7 +53,7 @@ public class BlackPlayerInfos extends GridPane implements Observer
     }
     
     /**
-     *
+     * Initializes the rectangle that will contains the infos about the player
      */
     public void initPlayerInfos ()
     {
@@ -85,25 +87,10 @@ public class BlackPlayerInfos extends GridPane implements Observer
         
         GridPane.setHalignment(score, HPos.CENTER);
         this.add(score, 2, 1);
-        
-        /*this.lblName.setAlignment(Pos.TOP_LEFT);
-        this.lblPion.setAlignment(Pos.TOP_CENTER);
-        this.lblScore.setAlignment(Pos.TOP_RIGHT);
-        this.name.setAlignment(Pos.BOTTOM_LEFT);
-        this.score.setAlignment(Pos.BOTTOM_RIGHT);
-        this.getChildren().addAll(
-                score,
-                name,
-                color,
-                infos,
-                lblScore,
-                lblPion,
-                lblName
-        )*/
     }
     
     /**
-     *
+     * Updates the infos about the player at every strike
      */
     public void updateInfos ()
     {
@@ -111,7 +98,7 @@ public class BlackPlayerInfos extends GridPane implements Observer
     }
 
     /**
-     *
+     * Overrides the update() method form the Observer interface
      */
     @Override
     public void update()

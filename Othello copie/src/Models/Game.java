@@ -359,11 +359,15 @@ public class Game implements Observable, Model
                 && isMyOwn(posFin, this.current.getColor());
     }
     
+    
     /**
-     *
-     * @param position
-     * @return
+     * Looks for the playable positions
+     * 
+     * @param position the position where to pu a piece
+     * 
+     * @return a list of positions
      */
+    
     @Override
     public List<Position> possiblePositions (Position position)
     {

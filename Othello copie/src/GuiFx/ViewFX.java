@@ -40,10 +40,12 @@ public class ViewFX extends VBox implements Observer
     private final VBox VBoxMenuBar;
     private final Menu menu;
     
+    
     /**
      *
      * @param game
      */
+    
     public ViewFX (Model game)
     {
         this.menu = new Menu("Othello");
