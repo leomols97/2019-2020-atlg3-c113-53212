@@ -22,7 +22,7 @@ public class SquareFX extends StackPane
 
     public SquareFX()
     {
-        this.rect = new Rectangle(40, 40);
+        this.rect = new Rectangle(44.2, 44.2);
         this.rect.setFill(Paint.valueOf("#00FF00"));
         this.rect.setStroke(colorGreen);
         this.rect.setStrokeWidth(5);

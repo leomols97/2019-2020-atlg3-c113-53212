@@ -1,8 +1,7 @@
 package GuiFx;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
+import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 
@@ -19,6 +18,8 @@ public class MenuView extends VBox
     {
         this.menu = new Menu();
         
+        menu.setAlignment(Pos.CENTER);
+        
         initMenuView();
     }
     
@@ -27,7 +28,6 @@ public class MenuView extends VBox
         this.setPadding(new Insets(10));
         this.setHeight(40);
         
-        GridPane.setHalignment(menu, HPos.LEFT);
         this.getChildren().addAll(menu);
     }
     

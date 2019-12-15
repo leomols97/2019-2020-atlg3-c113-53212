@@ -1,8 +1,6 @@
 package GuiFx;
 
-import Models.UserAccount;
-import Models.Model;
-import Models.Observer;
+import Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -15,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author leopoldmols
  */
 
-public class Historic extends TableView<UserAccount> implements Observer
+public class Historic extends TableView<Tour> implements Observer
 {
     private Model game;
     
@@ -27,66 +25,61 @@ public class Historic extends TableView<UserAccount> implements Observer
     
     public void initHistoric ()
     {
-        // Create column UserName (Data type of String).
-        TableColumn<UserAccount, String> userNameCol //
-                = new TableColumn<>("User Name");
         
-        // Create column Email (Data type of String).
-        TableColumn<UserAccount, String> emailCol//
-                = new TableColumn<>("Email");
+        TableColumn<Tour, String> id = new TableColumn<>("ID");
         
-        // Create column FullName (Data type of String).
-        TableColumn<UserAccount, String> fullNameCol//
-                = new TableColumn<>("Full Name");
+        TableColumn<Tour, String> name = new TableColumn<>("Name");
         
-        // Create 2 sub column for FullName.
-        TableColumn<UserAccount, String> firstNameCol//
-                = new TableColumn<>("First Name");
+        TableColumn<Tour, String> action = new TableColumn<>("Action");
         
-        TableColumn<UserAccount, String> lastNameCol //
-                = new TableColumn<>("Last Name");
+        TableColumn<Tour, String> positions = new TableColumn<>("Position");
+        TableColumn<Tour, String> row = new TableColumn<>("Ligne");
+        TableColumn<Tour, String> column = new TableColumn<>("Colonne");
         
-        // Add sub columns to the FullName
-        fullNameCol.getColumns().addAll(firstNameCol, lastNameCol);
+        TableColumn<Tour, String> nbPrises = new TableColumn<>("Nombre de prises");
         
-        // Active Column
-        TableColumn<UserAccount, Boolean> activeCol//
-                = new TableColumn<>("Active");
+        // Adds sub columns to the FullName
+        positions.getColumns().addAll(row, column);
         
         // Defines how to fill data for each cell.
-        // Get value from property of UserAccount. .
-        userNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
-        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        activeCol.setCellValueFactory(new PropertyValueFactory<>("active"));
+        // Get value from property of Tour. .
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        action.setCellValueFactory(new PropertyValueFactory<>("action"));
+        row.setCellValueFactory(new PropertyValueFactory<>("row"));
+        column.setCellValueFactory(new PropertyValueFactory<>("column"));
+        nbPrises.setCellValueFactory(new PropertyValueFactory<>("nbPrises"));
+        
+        // Align every cell infos on the center of the cell
+        id.setStyle( "-fx-alignment: CENTER;");
+        name.setStyle( "-fx-alignment: CENTER;");
+        action.setStyle( "-fx-alignment: CENTER;");
+        row.setStyle( "-fx-alignment: CENTER;");
+        column.setStyle( "-fx-alignment: CENTER;");
+        nbPrises.setStyle( "-fx-alignment: CENTER;");
         
         // Set Sort type for userName column
-        userNameCol.setSortType(TableColumn.SortType.DESCENDING);
-        lastNameCol.setSortable(false);
+        id.setSortType(TableColumn.SortType.DESCENDING);
         
-        getColumns().addAll(userNameCol, emailCol, fullNameCol, activeCol);
+        getColumns().addAll(id, name, action, positions, nbPrises);
         
         updateHistoric();
     }
     
-    private ObservableList<UserAccount> getUserList()
+    private ObservableList<Tour> getUserList()
     {
-        UserAccount user1 = new UserAccount(1L, "smith", "smith@gmail.com", //
-                "Susan", "Smith", true);
-        UserAccount user2 = new UserAccount(2L, "mcneil", "mcneil@gmail.com", //
-                "Anne", "McNeil", true);
-        UserAccount user3 = new UserAccount(3L, "white", "white@gmail.com", //
-                "Kenvin", "White", false);
+        Tour tour1 = new Tour(1, "Arnaud", Action.NOUVELLE_PARTIE, 5, 3, 1);
+        Tour tour2 = new Tour(2, "Jean", Action.NOUVELLE_PARTIE, 5, 3, 1);
+        Tour tour3 = new Tour(3, "Auguste", Action.NOUVELLE_PARTIE, 5, 3, 1);
         
-        ObservableList<UserAccount> list = FXCollections.observableArrayList(user1, user2, user3);
+        ObservableList<Tour> list = FXCollections.observableArrayList(tour1, tour2, tour3);
         return list;
     }
     
     void updateHistoric()
     {
         // Display row data
-        ObservableList<UserAccount> list = getUserList();
+        ObservableList<Tour> list = getUserList();
         setItems(list);
     }
     

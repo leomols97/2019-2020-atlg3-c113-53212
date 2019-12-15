@@ -20,7 +20,6 @@ public class BotLevel1 extends Player implements Bot
         int random = (int) (Math.random() * game.possiblePositions(position).size());
         System.out.println(random);
         Position pos = game.possiblePositions(position).get(random);
-        
-            game.play(pos);
+        game.play(pos);
     }
 }

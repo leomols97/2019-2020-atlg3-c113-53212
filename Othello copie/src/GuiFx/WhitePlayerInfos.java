@@ -46,7 +46,7 @@ public class WhitePlayerInfos extends GridPane implements Observer
     
     public void initPlayerInfos ()
     {
-        this.setHgap(5);
+        this.setHgap(98);
         
         // Set a CSS for the GridPane
         this.setStyle("-fx-padding: 10;" + 
