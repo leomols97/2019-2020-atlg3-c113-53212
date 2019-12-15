@@ -16,24 +16,26 @@ import javafx.scene.shape.Rectangle;
 
 public class BlackPlayerInfos extends GridPane implements Observer
 {
-    private final Game game;
-    private final Menu menu;
+    private final Model game;
+    //private final Menu menu;
+    private final MenuView menuView;
     // The background color of the rectangle that contains all the infos about the player
     private Color backGroundColor;
     private final Rectangle infos;
     private final Label lblName;
     private final Label lblPion;
-    private Label lblScore;
+    private final Label lblScore;
     private final Label score;
     private final Label name;
-    private Circle color;
+    private final Circle color;
     
-    public BlackPlayerInfos (Game game, Menu menu)
+    public BlackPlayerInfos (Model game, /*Menu menu*/ MenuView menuView)
     {
         this.game = game;
-        this.menu = menu;
+        //this.menu = menu;
+        this.menuView = menuView;
         this.score = new Label();
-        this.name = new Label();
+        this.name = new Label(menuView.getMenu().getTfdPlayer1());
         this.color = new Circle(10, Paint.valueOf("#FFFFFF"));
         this.infos = new Rectangle(100, 20);
         this.infos.setFill(Paint.valueOf("#098765"));
@@ -55,8 +57,8 @@ public class BlackPlayerInfos extends GridPane implements Observer
                       "-fx-border-insets: 5;" + 
                       "-fx-border-radius: 5;" + 
                       "-fx-border-color: yellow;");
-        score.setText("" + this.game.getScore(Color.WHITE));
-        this.name.setText(this.menu.getTfdPlayer1());
+        this.score.setText("" + this.game.getScore(Color.WHITE));
+        //this.name.setText("" + this.menuView.getMenu().getTfdPlayer1());
         this.lblName.setStyle("-fx-font-weight: bold");
         
         GridPane.setHalignment(lblName, HPos.CENTER);
@@ -92,10 +94,15 @@ public class BlackPlayerInfos extends GridPane implements Observer
                 lblName
         )*/
     }
+    
+    public void updateInfos ()
+    {
+        score.setText(String.valueOf(this.game.getScore(Color.BLACK)));
+    }
 
     @Override
     public void update()
     {
-        initPlayerInfos();
+        updateInfos();
     }
 }

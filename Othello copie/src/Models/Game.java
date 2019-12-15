@@ -168,16 +168,6 @@ public class Game implements Observable, Model
     @Override
     public void changePlayer()
     {
-        changePlayerDefensive();
-    }
-    
-    
-    /**
-     * Defensive copy of the moethod changePlayer
-     */
-    
-    private void changePlayerDefensive()
-    {
         Player tmp;
         tmp = oponent;
         oponent = current;
@@ -230,7 +220,12 @@ public class Game implements Observable, Model
             throw new IllegalArgumentException("La position n'est pas libre ! ");
         }
         
-        if (hasStrikes(current.getColor()))
+        /*if (!hasStrikes(current.getColor()))
+        {
+            changePlayer();
+        }*/
+        
+        if (!canPlay(position))
         {
             changePlayer();
         }
@@ -264,7 +259,6 @@ public class Game implements Observable, Model
             changePlayer();
             notifyObservers();
         }
-        
         else
         {
             throw new IllegalArgumentException("Le joueur ne peut pas placer de pion sur cette case !");
@@ -470,6 +464,7 @@ public class Game implements Observable, Model
      * @return the number of pieces that stands on the playing board
      */
     
+    @Override
     public double getNbPieces ()
     {
         double nbPieces = 0;
@@ -496,6 +491,7 @@ public class Game implements Observable, Model
      * @return the number of squares that compose on the playing board
      */
     
+    @Override
     public double getNbCases ()
     {
         double nbCases = 0;

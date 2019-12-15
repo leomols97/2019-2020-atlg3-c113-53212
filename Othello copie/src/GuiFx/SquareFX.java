@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 public class SquareFX extends StackPane
 {
 
-    private final Rectangle rect;
+    final Rectangle rect;
     private final Circle piece;
 
     private final Paint colorBlack = Paint.valueOf("#000000");
@@ -66,11 +66,6 @@ public class SquareFX extends StackPane
         {
             rect.setFill(Paint.valueOf("#ef5252")); //RED
         }
-    }
-
-    public Rectangle getRect()
-    {
-        return rect;
     }
 
     public Paint getColorGreen()

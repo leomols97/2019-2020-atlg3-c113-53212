@@ -100,4 +100,48 @@ public interface Model
      * @return true if he can play and false else
      */
     boolean canPlay(Position position);
+    
+    
+    /**
+     * Adds an observer in the observer list
+     * 
+     * @param obs the observer to add
+     */
+    
+    void registerObserver(Observer obs);
+    
+    
+    /**
+     * Remove an observer from the observer list
+     * 
+     * @param obs the observer to remove
+     */
+    
+    void removeObserver(Observer obs);
+    
+    
+    /**
+     * Calls each method update()
+     * from each observer from the observer list
+     */
+    
+    void notifyObservers();
+    
+    /**
+     * 
+     * Counts the number of pieces that stands on the playing board
+     * 
+     * @return the number of pieces that stands on the playing board
+     */
+    
+    double getNbPieces ();
+    
+    
+    /**
+     * Count the number of squares that compose the playing board
+     * 
+     * @return the number of squares that compose on the playing board
+     */
+    
+    double getNbCases ();
 }

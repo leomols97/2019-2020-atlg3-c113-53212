@@ -35,8 +35,9 @@ public class ViewFX extends VBox implements Observer
     private final WhitePlayerInfos whitePlayerInfos;
     private final BlackPlayerInfos blackPlayerInfos;
     private final Historic historic;
+    private final Stage stage; // Only to have the inital stage
     
-    public ViewFX (Game game)
+    public ViewFX (Model game, Stage stage)
     {
         this.up = new HBox();
         this.lblCurrentWinner = new Label("Partage NOIRS/BALNCS ");
@@ -46,15 +47,16 @@ public class ViewFX extends VBox implements Observer
         this.progressionsAndButtons = new VBox();
         this.HBCompletion = new HBox();
         this.HBCurrentWinner = new HBox();
-        this.historic = new Historic(game);
         this.game = new GameFX(game);
+        this.stage = stage;
+        this.historic = new Historic(game, stage);
         this.menuView = new MenuView();
         this.buttons = new ButtonsFX(menuView);
         this.gameProgression = new ProgressIndicator();
         this.currentWinner = new ProgressBar();
         this.play = new Button("Jouer");
-        this.whitePlayerInfos = new WhitePlayerInfos(game, this.menuView.getMenu());
-        this.blackPlayerInfos = new BlackPlayerInfos(game, this.menuView.getMenu());
+        this.whitePlayerInfos = new WhitePlayerInfos(this.game.getGame(), this.menuView);
+        this.blackPlayerInfos = new BlackPlayerInfos(this.game.getGame(), this.menuView);
         
         displayView();
         addMenu();
@@ -77,6 +79,12 @@ public class ViewFX extends VBox implements Observer
         this.buttons.getHistorique().setOnAction((event) ->
         {
             this.buttons.displayGameHistoric(game.getGame());
+        });
+        
+        this.buttons.getPass().setOnAction((event) ->
+        {
+            game.getGame().changePlayer();
+            //this.buttons.noStrikesLeft(game.getGame());
         });
         
         displayGameProgression();
@@ -123,27 +131,6 @@ public class ViewFX extends VBox implements Observer
         this.menuView.clickOnPlayButton();
     }
     
-    
-    /**
-     * Shows a new window if the current player hasn't strikes left
-     */
-    
-    public void noStrikesLeft ()
-    {
-        GridPane GPNoStrikesLeft = new GridPane();
-        Button ok = new Button("Ok");
-        Label lblNoStrikesLeft = new Label("Vous ne pouvez pas jouer lors de ce tour. Le programme va changer de joueur.");
-        GPNoStrikesLeft.add(lblNoStrikesLeft, 0, 0);
-        Scene secondScene = new Scene(GPNoStrikesLeft, 230, 100);
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Plus de mouvement");
-        newWindow.setScene(secondScene);
-        ok.setOnAction((event) ->
-        {
-            newWindow.close();
-        });
-    }
-    
     public GridPane displayGameProgression ()
     {
         GridPane GPScore = new GridPane();
@@ -160,8 +147,6 @@ public class ViewFX extends VBox implements Observer
             GridPane.setHalignment(lblScorePlayer1, HPos.CENTER);
             GridPane.setValignment(lblScorePlayer1, VPos.CENTER);
             GPScore.add(lblScorePlayer1, 0, 0);
-            
-            Label scorePlayer1 = new Label();
             
             Label lblScorePlayer2 = new Label(menuView.getMenu().getTfdPlayer2());
             GPScore.add(lblScorePlayer2, 0, 1);

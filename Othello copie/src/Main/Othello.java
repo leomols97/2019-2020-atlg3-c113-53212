@@ -1,7 +1,7 @@
 package Main;
 
 import GuiFx.*;
-import Models.Game;
+import Models.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -27,10 +27,10 @@ public class Othello extends Application
     @Override
     public void start(Stage primaryStage)
     {
-        Game g = new Game();
-        g.initialize();
-        ViewFX view = new ViewFX(g);
-        g.registerObserver(view);
+        Model game = new Game();
+        game.initialize();
+        ViewFX view = new ViewFX(game, primaryStage);
+        game.registerObserver(view);
         
         primaryStage.setTitle("Othello");
         primaryStage.setMinHeight(750);

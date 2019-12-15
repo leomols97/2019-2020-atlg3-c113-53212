@@ -13,13 +13,13 @@ import javafx.scene.paint.Paint;
 public class BoardFX extends HBox implements Observer
 {
 
-    private final Game game;
+    private final Model game;
     private final int SIZE = 8;
 
     private final GridPane plateau;
     private final SquareFX[][] squares;
 
-    public BoardFX(Game game)
+    public BoardFX(Model game)
     {
         this.game = game;
         plateau = new GridPane();
@@ -55,17 +55,17 @@ public class BoardFX extends HBox implements Observer
             squares[y][x].playableSquare(game.canPlay(pos));
             if (game.canPlay(pos))
             {
-                squares[y][x].getRect().setStroke(Paint.valueOf("#efd752")); // Yellow border
+                squares[y][x].rect.setStroke(Paint.valueOf("#efd752")); // Yellow border
             }
             else
             {
-                squares[y][x].getRect().setStroke(Paint.valueOf("#ef5252")); // red border
+                squares[y][x].rect.setStroke(Paint.valueOf("#ef5252")); // red border
             }
         });
         squares[y][x].setOnMouseExited(e ->
         {
             squares[y][x].setBGGreen();
-            squares[y][x].getRect().setStroke(squares[y][x].getColorGreen());
+            squares[y][x].rect.setStroke(squares[y][x].getColorGreen());
         });
         squares[y][x].setOnMouseClicked(e ->
         {

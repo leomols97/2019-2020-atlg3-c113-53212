@@ -90,7 +90,7 @@ public class ButtonsFX extends HBox implements Observer
         return quit;
     }
     
-    public GridPane displayGameHistoric (Game game)
+    public GridPane displayGameHistoric (Model game)
     {
         // Nouvelle fenêtre
         Stage newWindow = new Stage();
@@ -130,6 +130,35 @@ public class ButtonsFX extends HBox implements Observer
         });
         
         return GPScore;
+    }
+    
+    
+    /**
+     * Shows a new window if the current player hasn't strikes left
+     */
+    
+    public void noStrikesLeft (Model game)
+    {
+        // Nouvelle fenêtre
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Plus de mouvement");
+        newWindow.centerOnScreen();
+        
+        GridPane GPNoStrikesLeft = new GridPane();
+        
+        Scene secondScene = new Scene(GPNoStrikesLeft, 230, 100);
+        newWindow.setScene(secondScene);
+        
+        Button ok = new Button("Ok");
+        ok.setMaxWidth(Double.MAX_VALUE);
+        Label lblNoStrikesLeft = new Label("Vous ne pouvez pas jouer lors de ce tour. Le programme va changer de joueur.");
+        game.changePlayer();
+        GPNoStrikesLeft.add(lblNoStrikesLeft, 0, 0);
+        
+        ok.setOnAction((event) ->
+        {
+            newWindow.close();
+        });
     }
     
     @Override

@@ -1,6 +1,6 @@
 package GuiFx;
 
-import Models.Game;
+import Models.Model;
 import Models.Observer;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
@@ -13,10 +13,10 @@ import javafx.scene.layout.VBox;
 
 public class GameFX extends VBox implements Observer
 {
-    private final Game game;
+    private final Model game;
     private final BoardFX board;
     
-    public GameFX (Game game)
+    public GameFX (Model game)
     {
         this.game = game;
         this.game.initialize();
@@ -32,7 +32,7 @@ public class GameFX extends VBox implements Observer
         this.getChildren().add(board);
     }
     
-    public Game getGame()
+    public Model getGame()
     {
         return game;
     }
