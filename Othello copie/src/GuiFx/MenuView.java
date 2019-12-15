@@ -1,6 +1,5 @@
 package GuiFx;
 
-import Models.Observer;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
@@ -12,7 +11,7 @@ import javafx.scene.layout.VBox;
  * @author leopoldmols
  */
 
-public class MenuView extends VBox implements Observer
+public class MenuView extends VBox
 {
     private Menu menu;
     
@@ -40,11 +39,5 @@ public class MenuView extends VBox implements Observer
     public Menu getMenu()
     {
         return menu;
-    }
-
-    @Override
-    public void update()
-    {
-        menu.update();
     }
 }

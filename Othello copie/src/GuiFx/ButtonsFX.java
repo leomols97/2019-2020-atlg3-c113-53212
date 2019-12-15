@@ -5,8 +5,8 @@ import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
@@ -21,7 +21,7 @@ public class ButtonsFX extends HBox implements Observer
     private final Button abandon;
     private final Button pass;
     private final Button restart;
-    private final Button historique;
+    private final Button actualScore;
     
     public ButtonsFX(MenuView menuView)
     {
@@ -29,16 +29,15 @@ public class ButtonsFX extends HBox implements Observer
         this.restart = new Button("Recommencer");
         this.abandon = new Button("Abandon");
         this.pass = new Button("Pass");
-        this.historique = new Button("Historique du jeu");
+        this.actualScore = new Button("Score actuel");
         
         displayButtons();
     }
     
     public void displayButtons()
     {
-        HBox.setMargin(pass, Insets.EMPTY);
         this.setSpacing(10);
-        this.setAlignment(Pos.CENTER);
+        //this.setAlignment(Pos.CENTER);
         //this.setHover(true);
         //this.setDepthTest(DepthTest.ENABLE);
         //this.setMinSize(100, 25);
@@ -48,10 +47,11 @@ public class ButtonsFX extends HBox implements Observer
                 abandon, 
                 pass, 
                 restart, 
-                historique
+                actualScore
         );
         
-        this.historique.setOnMouseClicked(event ->
+        // Ce morceau ne sert à rien car on appelle le bouton dans ViewFX
+        this.actualScore.setOnMouseClicked(event ->
         {
             
         });
@@ -76,38 +76,41 @@ public class ButtonsFX extends HBox implements Observer
     {
         return restart;
     }
-
+    
     public Button getHistorique ()
     {
-        return historique;
+        return actualScore;
     }
     
-    public void displayGameHistoric ()
+    public GridPane displayGameHistoric (Game game)
     {
-        menu.getMenu().update();
-        Label windowTitle = new Label(/*"Historique de jeu"*/);
-        Label lblScorePlayer1 = new Label(/*menu.getMenu().tfdPlayer1.getText()*/);
-        System.out.println(menu.getMenu().tfdPlayer1.getText());
-        windowTitle.setText(menu.getMenu().getTfdPlayer1() + " dfghj ");
-        //lblScorePlayer1.setText();
-        //displayScore();
-        
-        StackPane historicWindow = new StackPane();
-        historicWindow.getChildren().add(windowTitle);
-        historicWindow.getChildren().add(lblScorePlayer1);
-        
-        Scene gameHisto = new Scene(historicWindow, 300, 300);
-        
-        // New window (Stage)
+        // Nouvelle fenêtre
         Stage newWindow = new Stage();
-        newWindow.setTitle("Historique de jeu");
+        newWindow.setTitle("Score des joueurs");
+        newWindow.centerOnScreen();
+        
+        GridPane GPScore = new GridPane();
+        
+        Scene gameHisto = new Scene(GPScore, 300, 300);
         newWindow.setScene(gameHisto);
         
-        // Set position of second window, related to primary window.
-        //newWindow.setX(primaryStage.getX() + 200);
-        //newWindow.setY(primaryStage.getY() + 100);
+        Label lblScorePlayer1 = new Label(menu.getMenu().getTfdPlayer1() + " : ");
+        GridPane.setHalignment(lblScorePlayer1, HPos.CENTER);
+        GridPane.setValignment(lblScorePlayer1, VPos.CENTER);
+        GPScore.add(lblScorePlayer1, 0, 0);
+        
+        Label scorePlayer1 = new Label("" + game.getScore(Color.WHITE));
+        GPScore.add(scorePlayer1, 1, 0);
+        
+        Label lblScorePlayer2 = new Label(menu.getMenu().getTfdPlayer2() + " : ");
+        GPScore.add(lblScorePlayer2, 0, 1);
+        
+        Label scorePlayer2 = new Label("" + game.getScore(Color.BLACK));
+        GPScore.add(scorePlayer2, 1, 1);
         
         newWindow.show();
+        
+        return GPScore;
     }
     
     @Override

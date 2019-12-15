@@ -1,7 +1,5 @@
 package GuiFx;
 
-import Models.Observer;
-import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -11,7 +9,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author leopoldmols
  */
-public class Menu extends GridPane implements Observer
+public class Menu extends GridPane
 {
     Label lblPlayer1;
     Label lblPlayer2;
@@ -67,17 +65,21 @@ public class Menu extends GridPane implements Observer
         this.add(lblPlayer2, 2, 1);
         
         
-        //tfdPlayer1.setText("Pseudo du joueur blancsss");
+        tfdPlayer1.setText("Pseudo du joueur blanc");
         tfdPlayer1.setPrefColumnCount(20);
         this.add(tfdPlayer1, 3, 0);
         
-        //tfdPlayer2.setText("Pseudo du joueur noir");
+        tfdPlayer2.setText("Pseudo du joueur noir");
         tfdPlayer2.setPrefColumnCount(20);
         this.add(tfdPlayer2, 3, 1);
     }
     
     public void setRegistered ()
     {
+        lblPlayer1.setDisable(true);
+        lblPlayer2.setDisable(true);
+        lblTypePlayer1.setDisable(true);
+        lblTypePlayer2.setDisable(true);
         tfdPlayer1.setDisable(true);
         tfdPlayer2.setDisable(true);
         CBPlayer1.setDisable(true);
@@ -89,9 +91,9 @@ public class Menu extends GridPane implements Observer
         return tfdPlayer1.getText();
     }
 
-    public TextField getTfdPlayer2()
+    public String getTfdPlayer2()
     {
-        return tfdPlayer2;
+        return tfdPlayer2.getText();
     }
 
     public PlayerFX getCBPlayer1()
@@ -102,11 +104,5 @@ public class Menu extends GridPane implements Observer
     public PlayerFX getCBPlayer2()
     {
         return (PlayerFX) CBPlayer2.getValue();
-    }
-
-    @Override
-    public void update()
-    {
-        getTfdPlayer1();
     }
 }
