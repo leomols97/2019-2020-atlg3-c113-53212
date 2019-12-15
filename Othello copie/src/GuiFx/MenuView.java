@@ -1,5 +1,6 @@
 package GuiFx;
 
+import Models.Model;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;

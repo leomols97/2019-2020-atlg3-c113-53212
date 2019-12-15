@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.List;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -153,4 +154,10 @@ public interface Model
      * @return
      */
     public List<Position> possiblePositions (Position position);
+    
+    List<Tour> getTours ();
+    
+    void placePiecRowTable ();
+    
+    void passRowTable ();
 }

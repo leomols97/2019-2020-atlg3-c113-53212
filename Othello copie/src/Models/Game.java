@@ -12,18 +12,18 @@ import java.util.*;
 
 public class Game implements Observable, Model
 {
-    
-    
     /**
      * @Board the playong board of the game
      * @current the current player
      * @oponent the oponent player
      */
+    private int id = 0;
     private Board board;
     private Position selected;
     private Player current;
     private Player oponent;
     private final List<Observer> observers;
+    private final List<Tour> tours;
     
     
     /**
@@ -45,6 +45,9 @@ public class Game implements Observable, Model
             this.oponent = new Player(Color.WHITE);
         }
         this.observers = new ArrayList<>();
+        this.tours = new ArrayList<>();
+        this.tours.add(new Tour(id, this.current.getName(), Action.NOUVELLE_PARTIE, 0, 0, 0));
+        id++;
     }
     
     
@@ -272,6 +275,8 @@ public class Game implements Observable, Model
                 }
             }
             changePlayer();
+            placePiecRowTable();
+            passRowTable();
             notifyObservers();
         }
         else
@@ -380,7 +385,7 @@ public class Game implements Observable, Model
                 pos = new Position(i, j);
                 if (canPlay(pos))
                 {
-                    list.add(position);
+                    list.add(pos);
                 }
             }
         }
@@ -572,6 +577,26 @@ public class Game implements Observable, Model
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Tour> getTours ()
+    {
+        return tours;
+    }
+    
+    @Override
+    public void placePiecRowTable ()
+    {
+        this.tours.add(new Tour(id, this.current.getName(), Action.PLACE_PIECE, selected.getRow(), selected.getColumn(), 0));
+        id++;
+    }
+    
+    @Override
+    public void passRowTable ()
+    {
+        this.tours.add(new Tour(id, this.current.getName(), Action.PASSE_TOUR, 0, 0, 0));
+        id++;
     }
 }
 

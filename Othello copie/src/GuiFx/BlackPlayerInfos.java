@@ -49,13 +49,13 @@ public class BlackPlayerInfos extends GridPane implements Observer
         this.lblPion = new Label("Couleur");
         this.lblName = new Label("Nom");
         
-        initPlayerInfos();
+        initPlayerInfos(game);
     }
     
     /**
      * Initializes the rectangle that will contains the infos about the player
      */
-    public void initPlayerInfos ()
+    public void initPlayerInfos (Model Game)
     {
         this.setHgap(98);
         
@@ -66,8 +66,8 @@ public class BlackPlayerInfos extends GridPane implements Observer
                       "-fx-border-insets: 5;" + 
                       "-fx-border-radius: 5;" + 
                       "-fx-border-color: yellow;");
-        this.score.setText("" + this.game.getScore(Color.BLACK));
-        //this.name.setText("" + this.menuView.getMenu().getTfdPlayer1());
+        this.score.setText("" + game.getScore(Color.BLACK));
+        this.name.setText(this.menuView.getMenu().getTfdPlayer2());
         this.lblName.setStyle("-fx-font-weight: bold");
         
         GridPane.setHalignment(lblName, HPos.CENTER);

@@ -9,15 +9,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 /**
- *
+ * This class makes all what concerns the historic of the game
+ * 
  * @author leopoldmols
  */
 
 public class Historic extends TableView<Tour> implements Observer
 {
-    private int id = 0;
+    //private int id = 0;
     private Model game;
     private MenuView menuView;
+    ObservableList<Tour> list;
     
     /**
      * Constructs an object "Historic"
@@ -33,21 +35,17 @@ public class Historic extends TableView<Tour> implements Observer
     }
     
     /**
-     *
+     * Initializes the historic
      */
     public void initHistoric ()
     {
         
         TableColumn<Tour, String> id = new TableColumn<>("ID");
-        
         TableColumn<Tour, String> name = new TableColumn<>("Name");
-        
         TableColumn<Tour, String> action = new TableColumn<>("Action");
-        
         TableColumn<Tour, String> positions = new TableColumn<>("Position");
         TableColumn<Tour, String> row = new TableColumn<>("Ligne");
         TableColumn<Tour, String> column = new TableColumn<>("Colonne");
-        
         TableColumn<Tour, String> nbPrises = new TableColumn<>("Nombre de prises");
         
         // Adds sub columns to the FullName
@@ -74,15 +72,13 @@ public class Historic extends TableView<Tour> implements Observer
         id.setSortType(TableColumn.SortType.DESCENDING);
         
         getColumns().addAll(id, name, action, positions, nbPrises);
-        
-        //updateHistoric();
     }
     
-    private ObservableList<Tour> getUserList()
+    /*private ObservableList<Tour> getUserList()
     {
-        ObservableList<Tour> list = getUserList();
+        list = getUserList();
         Tour tourX = new Tour(1, "sdfgh", Action.NOUVELLE_PARTIE, 5, 3, 1);
-        /*if (current.getColor() == Color.WHITE)
+        if (game.getCurrent().getColor() == Color.WHITE)
         {
             tourX.setName(menuView.getMenu().getTfdPlayer1());
         }
@@ -93,30 +89,28 @@ public class Historic extends TableView<Tour> implements Observer
         tourX.setId(id);
         tourX.setAction(Action.PLACE_PIECE);
         tourX.setRow(7);
-        tourX.setColumn(4);*/
+        tourX.setColumn(4);
         Tour tour2 = new Tour(2, "Jean", Action.NOUVELLE_PARTIE, 5, 3, 1);
         Tour tour3 = new Tour(3, "Auguste", Action.NOUVELLE_PARTIE, 5, 3, 1);
         
         game.notifyObservers();
         
-        FXCollections.observableArrayList(tourX, tour2, tour3);
+        list = FXCollections.observableArrayList(tourX, tour2, tour3);
         
         //this.setItems(list);
         
         return list;
-    }
-    
-    /*void updateHistoric()
-    {
-        // Display row data
-        getUserList(game.getCurrent());
-        list.add(getUserList(game.getCurrent()));
-        setItems(list);
     }*/
     
-    private void increase ()
+    public void updateTable ()
     {
-        id++;
+        game.placePiecRowTable();
+        game.passRowTable();
+        for (int i = 0; i < game.getTours().size(); i++)
+        {
+            Tour tour = game.getTours().get(i);
+            this.getItems().add(tour);
+        }
     }
     
     /**
@@ -125,8 +119,9 @@ public class Historic extends TableView<Tour> implements Observer
     @Override
     public void update()
     {
-        increase();
+        updateTable();
+        ///increase();
         //updateHistoric();
-        getUserList();
+        //getUserList();
     }
 }

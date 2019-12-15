@@ -1,5 +1,7 @@
 package GuiFx;
 
+import Models.Model;
+import Models.Observer;
 import javafx.collections.FXCollections;
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -9,7 +11,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author leopoldmols
  */
-public class Menu extends GridPane
+public class Menu extends GridPane implements Observer
 {
     private final Label lblPlayer1;
     private final Label lblPlayer2;
@@ -46,6 +48,15 @@ public class Menu extends GridPane
         this.setHgap(10);
         this.setVgap(5);
         
+        
+        tfdPlayer1.setText("Pseudo du joueur blanc");
+        tfdPlayer1.setPrefColumnCount(20);
+        this.add(tfdPlayer1, 3, 0);
+        
+        tfdPlayer2.setText("Pseudo du joueur noir");
+        tfdPlayer2.setPrefColumnCount(20);
+        this.add(tfdPlayer2, 3, 1);
+        
         GridPane.setHalignment(lblTypePlayer1, HPos.RIGHT);
         this.add(lblTypePlayer1, 0, 0);
         
@@ -69,15 +80,6 @@ public class Menu extends GridPane
         GridPane.setHalignment(lblPlayer2, HPos.RIGHT);
         lblPlayer2.setUnderline(true);
         this.add(lblPlayer2, 2, 1);
-        
-        
-        tfdPlayer1.setText("Pseudo du joueur blanc");
-        tfdPlayer1.setPrefColumnCount(20);
-        this.add(tfdPlayer1, 3, 0);
-        
-        tfdPlayer2.setText("Pseudo du joueur noir");
-        tfdPlayer2.setPrefColumnCount(20);
-        this.add(tfdPlayer2, 3, 1);
     }
     
     /**
@@ -130,5 +132,11 @@ public class Menu extends GridPane
     public PlayerFX getCBPlayer2()
     {
         return (PlayerFX) CBPlayer2.getValue();
+    }
+
+    @Override
+    public void update() 
+    {
+        initMenu();
     }
 }

@@ -60,8 +60,8 @@ public class ViewFX extends VBox implements Observer
         this.HBCompletion = new HBox();
         this.HBCurrentWinner = new HBox();
         this.game = new GameFX(game);
-        this.historic = new Historic(game, menuView);
         this.menuView = new MenuView();
+        this.historic = new Historic(game, menuView);
         this.buttons = new ButtonsFX(menuView);
         this.gameProgression = new ProgressIndicator();
         this.currentWinner = new ProgressBar();
@@ -88,8 +88,6 @@ public class ViewFX extends VBox implements Observer
         MenuItem scoreActuel = new MenuItem("Score actuel");
         partie.getItems().add(jouer);
         partie.getItems().add(scoreActuel);
-        menu.getItems().add(partie);
-        
         menu.getItems().add(partie);
         
         this.VBoxMenuBar.getChildren().addAll(this.menuBar);
