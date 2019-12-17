@@ -6,21 +6,22 @@ import javafx.scene.paint.Paint;
 
 
 /**
- *
+ * This class constructs the playing board and observe the Game
+ * 
  * @author leopoldmols
  */
-
 public class BoardFX extends HBox implements Observer
 {
 
     private Model game;
     private final int SIZE = 8;
-
     private GridPane plateau;
     private SquareFX[][] squares;
 
+    
     /**
-     *
+     * Constructs the object BoardFX
+     * 
      * @param game
      */
     public BoardFX(Model game)
@@ -34,8 +35,9 @@ public class BoardFX extends HBox implements Observer
         this.getChildren().add(plateau);
     }
 
+    
     /**
-     *
+     * Really creates the board
      */
     public void createBoard()
     {
@@ -43,8 +45,8 @@ public class BoardFX extends HBox implements Observer
         {
             for (int x = 0; x < SIZE; x++)
             {
-                plateau.setHgap(2);
-                plateau.setVgap(2);
+                plateau.setHgap(2); //sets the gap between the playing board cases
+                plateau.setVgap(2); //sets the gap between the playing board cases
                 squares[y][x] = new SquareFX();
                 addEvents(x, y);
                 plateau.add(squares[y][x], x, y);
@@ -53,9 +55,11 @@ public class BoardFX extends HBox implements Observer
         updatePieces();
     }
     
+    
     /**
-     *
-     * @param game
+     * Resets the game as it hasn't been played on
+     * 
+     * @param game the game belonging which the board has to be shown
      */
     public void resetBoard (Model game)
     {
@@ -71,9 +75,10 @@ public class BoardFX extends HBox implements Observer
     }
 
     /**
-     *
-     * @param x
-     * @param y
+     * Adds events to every playing board square to make them cliquable
+     * 
+     * @param x the row parameter at which the square will become cliquable
+     * @param y the column parameter at which the square will become cliquable
      */
     public void addEvents(int x, int y)
     {
@@ -93,8 +98,9 @@ public class BoardFX extends HBox implements Observer
         });
         squares[y][x].setOnMouseExited(e ->
         {
-            squares[y][x].setBGGreen();
-            squares[y][x].rect.setStroke(squares[y][x].getColorGreen());
+            squares[y][x].setBGGreen(); // sets the background color to green
+            // sets the stroke of the square to the color it has to be if the square is playable or not
+            squares[y][x].rect.setStroke(squares[y][x].getColorGreen()); 
         });
         squares[y][x].setOnMouseClicked(e ->
         {
@@ -105,8 +111,9 @@ public class BoardFX extends HBox implements Observer
         });
     }
     
+    
     /**
-     *
+     * Updates the color of the piece that is contained by the square
      */
     public void updatePieces()
     {
@@ -119,8 +126,9 @@ public class BoardFX extends HBox implements Observer
         }
     }
 
+    
     /**
-     *
+     * Overrides the update() method form the Observer interface
      */
     @Override
     public void update()

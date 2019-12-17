@@ -7,18 +7,20 @@ import javafx.scene.layout.VBox;
 
 
 /**
- *
+ * This class creates a new view of the game
+ * 
  * @author leopoldmols
  */
-
 public class GameFX extends VBox implements Observer
 {
     private final Model game;
     private final BoardFX board;
     
+    
     /**
-     *
-     * @param game
+     * Constructs a view of the game belonging the game
+     * 
+     * @param game the game that will define the view of the game
      */
     public GameFX (Model game)
     {
@@ -30,8 +32,9 @@ public class GameFX extends VBox implements Observer
         displayView();
     }
     
+    
     /**
-     *
+     * Adds everything on the game view
      */
     public void displayView ()
     {
@@ -39,26 +42,31 @@ public class GameFX extends VBox implements Observer
         this.getChildren().add(board);
     }
     
+    
     /**
-     *
-     * @return
+     * Gets the game
+     * 
+     * @return the game
      */
     public Model getGame()
     {
         return game;
     }
 
+    
     /**
-     *
-     * @return
+     * Gets the actual playing board
+     * 
+     * @return the actual playing board
      */
     public BoardFX getBoardFX()
     {
         return board;
     }
     
+    
     /**
-     *
+     * Overrides the update() method form the Observer interface
      */
     @Override
     public void update()

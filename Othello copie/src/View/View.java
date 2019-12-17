@@ -9,15 +9,14 @@ import java.util.Scanner;
  *
  * @author leopoldmols
  */
-
-public class View {
+public class View
+{
 
     
     /**
      * @param in to let the user enter some commands
      * @param game to initiate a new game
      */
-
     private final Scanner in;
     private final Model game;
     
@@ -27,7 +26,6 @@ public class View {
      * 
      * @param game the game to construct
      */
-    
     public View(Model game)
     {
         in = new Scanner(System.in);
@@ -38,7 +36,6 @@ public class View {
     /**
      * This shows a welcome message to the user
      */
-    
     public void displayStart()
     {
         System.out.println("\n Bienvenue dans le jeu Othello");
@@ -48,7 +45,6 @@ public class View {
     /**
      * This show a goobye message to the user
      */
-    
     public void displayQuit()
     {
         System.out.println("\nA la prochaine, et merci d'avoir joué !");
@@ -60,7 +56,6 @@ public class View {
      *
      * @param message the error message that should be shown when an error occurs
      */
-    
     public void displayError(String message)
     {
         System.out.println(message);
@@ -70,7 +65,6 @@ public class View {
     /**
      * Shows the different commands possible for the player
      */
-    
     public void displayHelp()
     {
         System.out.println("\nCommandes possibles : ");
@@ -86,7 +80,6 @@ public class View {
      *
      * @return the command the user entered
      */
-    
     public String askCommand()
     {
         System.out.print("Entrez votre commande : ");
@@ -98,7 +91,6 @@ public class View {
     /**
      * Displays the user that the game is finished
      */
-    
     public void displayOver()
     {
         System.out.println("Partie terminée.");
@@ -110,7 +102,6 @@ public class View {
      *
      * @param plateaus the playing game that is received as parameters to know which step of the game it has to return
      */
-    
     private void topAndBottomRow (Piece[][] plateau)
     {
         for (int i = 0; i <= plateau[0].length; i++)
@@ -126,7 +117,6 @@ public class View {
      *
      * @param plateau the playing board
      */
-    
     public void displayBoard (Piece[][] plateau)
     {
         

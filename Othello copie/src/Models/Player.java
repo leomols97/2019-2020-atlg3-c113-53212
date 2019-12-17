@@ -14,7 +14,6 @@ public class Player
     /**
      * The color of the player
      */
-
     private Color color;
     private String name;
 
@@ -24,7 +23,6 @@ public class Player
      * 
      * @param color the color of the Player
      */
-
     public Player(Color color)
     {
         this.color = color;
@@ -35,7 +33,6 @@ public class Player
     /**
      * Inverts the current player by inverting the color of the current player
      */
-
     public void invert ()
     {
         if (this.color == Color.BLACK)
@@ -54,41 +51,28 @@ public class Player
      * 
      * @return the color of the player
      */
-    
     public Color getColor()
     {
         return color;
     }
 
+    /**
+     * Gets the name of the player
+     * 
+     * @return the name of the player
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Sets a name to the player
+     * 
+     * @param name the name to set to him
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 }
-    
-    /**
-     * Verifies if the current player has pieces left or not
-     * 
-     * @param color the color to verify if the player has pieces left or not
-     * 
-     * @return true if the current player has at least one piece left and false else
-     */
-    
-//    public boolean hasPieces (Color color)
-//    {
-//        for (int i = 0; i < 8; i++)
-//        {
-//            for (int j = 0; j < 8; j++)
-//            {
-//                if (board[i][j]) {
-//                    
-//                }
-//            }
-//        }
-//        return false;
-//    }

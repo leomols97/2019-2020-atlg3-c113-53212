@@ -7,12 +7,9 @@ package Models;
  */
 public enum Color
 {
-    
-    
     /**
      * Possible colors
      */
-    
     WHITE,
     BLACK,
     EMPTY;
@@ -23,7 +20,6 @@ public enum Color
      *
      * @return the nexw color of this piece
      */
-    
     public Color invert()
     {
         switch (this)

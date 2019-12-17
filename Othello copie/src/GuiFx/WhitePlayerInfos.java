@@ -10,49 +10,56 @@ import javafx.scene.shape.Rectangle;
 
 
 /**
- *
+ * This class creates the rectangle that contains all the informations about the black player
+ * 
  * @author leopoldmols
  */
-
 public class WhitePlayerInfos extends GridPane implements Observer
 {
     private final Model game;
     private final MenuView menuView;
     // The background color of the rectangle that contains all the infos about the player
-    private Color backGroundColor;
     private final Rectangle infos;
     private final Label lblName;
     private final Label lblPion;
     private final Label lblScore;
     private final Label score;
     private final Label name;
-    private final Circle color;
+    private final Circle color; // To display the color of the player
+    
     
     /**
-     *
-     * @param game
-     * @param menuView
+     * Constructs the object WhitePlayerInfos
+     * that will contain 3 labels and the 
+     * correspondant info (name, color, score)
+     * 
+     * @param game the game belonging which
+     * it has to display the information of the player
+     * @param menuView the manu thanks to which
+     * the name of the player will be taken
      */
     public WhitePlayerInfos (Model game, MenuView menuView)
     {
         this.game = game;
         this.menuView = menuView;
         this.score = new Label();
-        this.name = new Label();
-        this.color = new Circle(10, Paint.valueOf("#000000"));
+        this.name = new Label(menuView.getMenu().getTfdPlayer1());
+        this.color = new Circle(10, Paint.valueOf("#FFFFFF"));
         this.infos = new Rectangle(100, 20);
-        this.infos.setFill(Paint.valueOf("#000000"));
+        this.infos.setFill(Paint.valueOf("#098765"));
         this.lblScore = new Label("Score");
         this.lblPion = new Label("Couleur");
         this.lblName = new Label("Nom");
         
-        initPlayerInfos();
+        initPlayerInfos(game);
     }
     
+    
     /**
-     *
+     * Initializes the informations about the player.
+     * It shows rightly all the informations
      */
-    public void initPlayerInfos ()
+    public void initPlayerInfos (Model Game)
     {
         this.setHgap(98);
         
@@ -62,12 +69,9 @@ public class WhitePlayerInfos extends GridPane implements Observer
                       "-fx-border-width: 2;" +
                       "-fx-border-insets: 5;" + 
                       "-fx-border-radius: 5;" + 
-                      "-fx-border-color: blue;");
-        this.score.setText("" + this.game.getScore(Color.WHITE));
-        //this.name.setText("" + menuView.getMenu().getTfdPlayer1());
-        this.name.setText(String.valueOf(menuView.getMenu().getTfdPlayer1()));
-        //this.game.getCurrent().setName(menuView.getMenu().getTfdPlayer1());
-        System.out.println(menuView.getMenu().getTfdPlayer1());
+                      "-fx-border-color: yellow;");
+        this.score.setText("" + game.getScore(Color.WHITE));
+        this.name.setText(this.menuView.getMenu().getTfdPlayer2());
         this.lblName.setStyle("-fx-font-weight: bold");
         
         GridPane.setHalignment(lblName, HPos.CENTER);
@@ -87,34 +91,32 @@ public class WhitePlayerInfos extends GridPane implements Observer
         
         GridPane.setHalignment(score, HPos.CENTER);
         this.add(score, 2, 1);
-        
-        /*this.lblName.setAlignment(Pos.TOP_LEFT);
-        this.lblPion.setAlignment(Pos.TOP_CENTER);
-        this.lblScore.setAlignment(Pos.TOP_RIGHT);
-        this.name.setAlignment(Pos.BOTTOM_LEFT);
-        this.score.setAlignment(Pos.BOTTOM_RIGHT);
-        this.getChildren().addAll(
-                score,
-                name,
-                color,
-                infos,
-                lblScore,
-                lblPion,
-                lblName
-        )*/
     }
-
+    
+    
     /**
-     *
+     * Updates the informations about the player.
+     * Actually, it is only needed to update the score
      */
     public void updateInfos ()
     {
         score.setText(String.valueOf(this.game.getScore(Color.WHITE)));
-        //name.setText(String.valueOf(menuView.getMenu().getTfdPlayer1()));
     }
+    
+    
+    /**
+     * Sets the score to 0 because the button "restart has been pushed"
+     * 
+     * @param game the game belonging which it has to show the score of the player
+     */
+    public void reInit (Game game) // to restart a game
+    {
+        this.score.setText("" + game.getScore(Color.WHITE));
+    }
+    
 
     /**
-     *
+     * Overrides the update() method form the Observer interface
      */
     @Override
     public void update()

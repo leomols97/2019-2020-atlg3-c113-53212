@@ -1,7 +1,6 @@
 package Models;
 
 import java.util.List;
-import javafx.collections.ObservableList;
 
 
 /**
@@ -9,15 +8,12 @@ import javafx.collections.ObservableList;
  * 
  * @author leopoldmols
  */
-
 public interface Model
 {
-    
     
     /**
      * Initializes a new game with a default board
      */
-    
     void initialize();
     
     
@@ -26,9 +22,7 @@ public interface Model
      * 
      * @throws IllegalStateException if no board is set.
      * @throws IllegalStateException if the board set is incomplete.
-     * 
      */
-    
     void start();
     
     
@@ -37,7 +31,6 @@ public interface Model
      *
      * @return true if it's the end of the game.
      */
-    
     boolean isOver();
     
     
@@ -46,7 +39,6 @@ public interface Model
      * 
      * @return the board.
      */
-    
     Piece [][] getBoard();
     
     
@@ -55,7 +47,6 @@ public interface Model
      * 
      * @return the player that has to play now
      */
-    
     Player getCurrent();
     
     
@@ -64,7 +55,6 @@ public interface Model
      * 
      * @return true if he can and false else
      */
-    
     boolean canPlaceSmw();
     
     
@@ -75,7 +65,6 @@ public interface Model
      * 
      * @return the score of the player
      */
-    
     int getScore(Color color);
     
     
@@ -84,14 +73,12 @@ public interface Model
      * 
      * @param position the position where to add a piece
      */
-    
     void play(Position position);
     
     
     /**
      * Change the current player
      */
-    
     void changePlayer();
     
     
@@ -110,7 +97,6 @@ public interface Model
      * 
      * @param obs the observer to add
      */
-    
     void registerObserver(Observer obs);
     
     
@@ -119,7 +105,6 @@ public interface Model
      * 
      * @param obs the observer to remove
      */
-    
     void removeObserver(Observer obs);
     
     
@@ -127,7 +112,6 @@ public interface Model
      * Calls each method update()
      * from each observer from the observer list
      */
-    
     void notifyObservers();
     
     /**
@@ -136,7 +120,6 @@ public interface Model
      * 
      * @return the number of pieces that stands on the playing board
      */
-    
     double getNbPieces ();
     
     
@@ -145,8 +128,8 @@ public interface Model
      * 
      * @return the number of squares that compose on the playing board
      */
-    
     double getNbCases ();
+    
     
     /**
      *
@@ -155,9 +138,62 @@ public interface Model
      */
     public List<Position> possiblePositions (Position position);
     
+    
+    /**
+     * Gets the strike done by a player
+     * 
+     * @return a list of every strikes
+     */
     List<Tour> getTours ();
     
-    void placePiecRowTable ();
     
+    /**
+     * Adds to the table the informations about a turn when the player puts a piece
+     */
+    void placePieceRowTable ();
+    
+    
+    /**
+     * Adds to the table a row when the player passed his turn
+     */
     void passRowTable ();
+    
+    
+    /**
+     * Gets the oponent player
+     * 
+     * @return the oponent player
+     */
+    Player getOponent ();
+    
+    
+    /**
+     * Verifies if the current player has strikes left or not
+     * 
+     * @param color the color of the current player
+     * 
+     * @return true if the player can play and false else
+     */
+    boolean hasStrikes (Color color);
+    
+    
+    /**
+     * Verifies if there's only one color on the playing board
+     * 
+     * @param color the color to verify
+     * 
+     * @return true if there's only this color on the playing board and false else
+     */
+    boolean onlyOneColor (Color color);
+    
+    
+    /**
+     * Counts the number of pieces that the turn will flip
+     * 
+     * @param position the position where the player will play
+     * @param color the color of the player
+     * 
+     * @return the number of pieces that will be flipped
+     */
+    int nbPiecesGot (Position position, Color color);
 }

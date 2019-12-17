@@ -60,4 +60,9 @@ public enum Action
     {
         return PASSE_TOUR;
     }
+
+    //@Override
+    //public String toString() {
+    //    return /*"Action{" + "libelle=" +*/ libelle /*+ '}'*/;
+    //}
 }

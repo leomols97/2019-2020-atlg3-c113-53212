@@ -12,7 +12,6 @@ public enum Direction
     /**
      * Possible directions
      */
-    
     UP (-1, 0),
     DOWN (1, 0),
     LEFT (0, -1),
@@ -22,11 +21,11 @@ public enum Direction
     UPLEFT (-1, -1),
     UPRIGHT (-1, 1);
     
+    
     /**
      * As the directions are moves, it is necessary to know the row and the column
      * that will be the values of the different deltas of moves
      */
-    
     private final int row;
     private final int column;
 
@@ -37,7 +36,6 @@ public enum Direction
      * @param row the row of the direction standing
      * @param column the column of the direction standing
      */
-    
     private Direction(int row, int column)
     {
         this.row = row;
@@ -50,7 +48,6 @@ public enum Direction
      * 
      * @return the row of the direction
      */
-    
     public int getRow()
     {
         return row;
@@ -62,7 +59,6 @@ public enum Direction
      * 
      * @return the column of the direction
      */
-    
     public int getColumn()
     {
         return column;

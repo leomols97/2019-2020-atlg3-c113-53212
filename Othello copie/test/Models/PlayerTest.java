@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
 import org.junit.Test;
@@ -82,6 +77,33 @@ public class PlayerTest {
         System.out.println("invert");
         Player instance = null;
         instance.invert();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getName method, of class Player.
+     */
+    @Test
+    public void testGetName() {
+        System.out.println("getName");
+        Player instance = null;
+        String expResult = "";
+        String result = instance.getName();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setName method, of class Player.
+     */
+    @Test
+    public void testSetName() {
+        System.out.println("setName");
+        String name = "";
+        Player instance = null;
+        instance.setName(name);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

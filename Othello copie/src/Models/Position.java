@@ -6,7 +6,6 @@ package Models;
  *
  * @author Léopold Mols
  */
-
 public class Position
 {
 
@@ -14,7 +13,6 @@ public class Position
     /**
      * The row and the column of a certain position
      */
-
     private int row;
     private int column;
 
@@ -28,7 +26,6 @@ public class Position
      * this method throws an IllegalArgumentException("La ligne est négative !") if the row is negative
      * this method throws an IllegalArgumentException("La colonne est négative !") if the column is negative
      */
-
     public Position(int row, int column)
     {
         if (this.row < 0)
@@ -47,11 +44,10 @@ public class Position
     /**
      * This constructs the object Position with the parameters "row" and "column" received as class parameters
      * 
-     * @param row the row of the position
-     * @param column the column of the position
+     * 
+     * @param pos
      */
-    
-    Position(Position pos)
+    public Position(Position pos)
     {
         this.row = pos.getRow();
         this.column = pos.getColumn();
@@ -63,7 +59,6 @@ public class Position
      *
      * @return the row of the current object "Position"
      */
-    
     public int getRow()
     {
         return row;
@@ -75,7 +70,6 @@ public class Position
      *
      * @return the row of the current object "Position"
      */
-    
     public int getColumn()
     {
         return column;
@@ -87,7 +81,6 @@ public class Position
      *
      * @param row the new row of a position
      */
-    
     public void setRow(int row)
     {
         this.row = row;
@@ -99,7 +92,6 @@ public class Position
      *
      * @param column the new column of a position
      */
-    
     public void setColumn(int column)
     {
         this.column = column;
@@ -122,7 +114,6 @@ public class Position
      * 
      * @return the parameters of the current position
      */
-    
     @Override
     public String toString() {
         return "Position{" + "row=" + row + ", column=" + column + '}';

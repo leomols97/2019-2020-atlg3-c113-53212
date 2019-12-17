@@ -1,5 +1,6 @@
 package Models;
 
+
 /**
  * This class initialize a game board to welcome the Pieces to play It also
  * helps the other classes to know all the information that directly concerns
@@ -16,7 +17,6 @@ public class Board
      * It will have 8 rows
      * It will have 8 columns
      */
-    
     private final Piece[][] board;
     private final int rowLength = 8;
     private final int colLength = 8;
@@ -26,7 +26,6 @@ public class Board
      * This constructs the object Board with the parameter "board" received as
      * class parameter
      */
-    
     public Board()
     {
         this.board = new Piece[this.rowLength][this.colLength];
@@ -43,7 +42,6 @@ public class Board
     /**
      * Puts the four first pieces on the board
      */
-    
     public void initialize()
     {
         this.board[3][3].setColor(Color.WHITE);
@@ -59,7 +57,6 @@ public class Board
      *
      * @return a call to the private method that constructs the board
      */
-    
     public Piece[][] getBoard()
     {
         return copieDefensiveBoard();
@@ -71,7 +68,6 @@ public class Board
      * 
      * @return the playing board
      */
-    
     private Piece[][] copieDefensiveBoard()
     {
         Piece[][] copyBoard = new Piece[rowLength][colLength];
@@ -93,7 +89,6 @@ public class Board
      * @param player the player that wants to add a piece
      * @param pos the position where to add the piece
      */
-    
     public void addPiece(Player player, Position pos)
     {
         this.board[pos.getRow()][pos.getColumn()].setColor(player.getColor());
@@ -113,7 +108,6 @@ public class Board
      * throws an IllegalArgumentException("La position ne fait pas partie du tableau de jeu !")
      * if the position is outside the board
      */
-    
     public boolean isFree(Position pos)
     {
         if (!isInside(pos))
@@ -134,7 +128,6 @@ public class Board
      * @return true if the position given in the parameters is contained by the
      * playing board, and false if not
      */
-    
     public boolean isInside(Position pos)
     {
         return pos.getColumn() >= 0
@@ -156,7 +149,6 @@ public class Board
      * partie du tableau de jeu !") if the position is not insiade the playing
      * board
      */
-    
     public Piece getPiece(Position pos)
     {
         if (!isInside(pos))

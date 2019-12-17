@@ -1,6 +1,5 @@
 package GuiFx;
 
-import Models.Model;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
@@ -10,13 +9,13 @@ import javafx.scene.layout.VBox;
  *
  * @author leopoldmols
  */
-
 public class MenuView extends VBox
 {
-    private Menu menu;
+    private final Menu menu; // The menu that will define the MenuView
+    
     
     /**
-     *
+     * Constructs the object menuView that will contain the menu
      */
     public MenuView ()
     {
@@ -27,8 +26,9 @@ public class MenuView extends VBox
         initMenuView();
     }
     
+    
     /**
-     *
+     * Initialises the menuView
      */
     public void initMenuView ()
     {
@@ -38,25 +38,31 @@ public class MenuView extends VBox
         this.getChildren().addAll(menu);
     }
     
+    
     /**
-     *
+     * Sets the menuView at Disable by calling the method 
+     * "setGameVisible()" of the class "Menu"
      */
     public void clickOnPlayButton ()
     {
         menu.setGameVisible(true);
     }
     
+    
     /**
-     *
+     * Sets the menuView at not Disable by calling the method 
+     * "setGameVisible()" of the class "Menu"
      */
     public void clickOnRestartButton ()
     {
         menu.setGameVisible(false);
     }
     
+    
     /**
-     *
-     * @return
+     * Gets the menu 
+     * 
+     * @return the menu contained by the menuView
      */
     public Menu getMenu()
     {

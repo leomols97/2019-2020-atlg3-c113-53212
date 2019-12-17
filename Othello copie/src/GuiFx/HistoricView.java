@@ -8,33 +8,37 @@ import javafx.scene.layout.VBox;
 
 
 /**
- *
+ * This class construct the historic tableView
  * @author leopoldmols
  */
-
 public class HistoricView extends VBox
 {
-    private Model game;
-    private GridPane GPHisto; // Pour la partie gauche de l'écran
-    private Historic historic;
-    private MenuView menuView;
+    private Model game; //The game belonging which the historic will be built
+    private Historic historic; // The information that it will contain
+    
     
     /**
-     *
-     * @param game
-     * @param menuView
+     * Construct the object Historic View that is a VBox
+     * 
+     * @param game the game belonging which the historicView will be built
      */
-    public HistoricView (Model game, MenuView menuView)
+    public HistoricView (Model game)
     {
         this.game = game;
-        this.menuView = menuView;
-        this.historic = new Historic(this.game, this.menuView);
+        this.historic = new Historic(this.game);
         
         intitHistoricView();
-        
-        this.getChildren().add(GPHisto);
     }
 
+    
+    /**
+     * Initialises the historicView by setting 
+     * the insets, 
+     * the height 
+     * and the alignement
+     * 
+     * This method adds the historicView in the Box
+     */
     private void intitHistoricView ()
     {
         this.setPadding(new Insets(10));
@@ -45,8 +49,9 @@ public class HistoricView extends VBox
     }
     
     /**
-     *
-     * @return
+     * Gets the historic that composes the historixView
+     * 
+     * @return the historic that composes the historicView
      */
     public Historic getHistoric ()
     {

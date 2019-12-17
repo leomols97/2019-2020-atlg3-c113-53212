@@ -1,102 +1,101 @@
 package Models;
 
+
 /**
- *
+ * This class creates a new Tour 
+ * to let it enter in the tableView with the right parameters
+ * 
  * @author leopoldmols
  */
 public class Tour
 {
- 
-   private int id;
-   private String name;
-   private Action action;
-   private int row;
-   private int column;
-   private int nbPrises;
- 
+    private int id; // The id of the row
+    private String name; // the name of the player that plays this turn
+    private Action action; // The action the player played
+    private int row; // The row at which the player placed a piece
+    private int column; // The column at which the player placed a piece
+    // The number of pieces that the player took from the other one
+    private int nbPrises;
+
+    
     /**
-     *
-     * @param id
-     * @param name
-     * @param action
-     * @param row
-     * @param column
-     * @param nbPrises
+     * Constructs a row of the tableView with all those parameters
+     * 
+     * @param id the id of the row of the tableView
+     * @param name the name of the row of the tableView
+     * @param action the action of the row of the tableView
+     * @param row the row of the row of the tableView
+     * @param column the column of the row of the tableView
+     * @param nbPrises the nbPrises of the row of the tableView
      */
-    public Tour(int id, String name, Action action, int row, int column, int nbPrises)
-   {
-       this.id = id;
-       this.name = name;
-       this.action = action;
-       this.row = row;
-       this.column = column;
-       this.nbPrises = nbPrises;
-   }
- 
+    public Tour(int id,
+            String name,
+            Action action,
+            int row,
+            int column,
+            int nbPrises)
+    {
+        this.id =  id;
+        this.name = name;
+        this.action = action;
+        this.row = row;
+        this.column = column;
+        this.nbPrises = nbPrises;
+    }
+    
+
     /**
-     *
-     * @return
+     * Gets the id of the row of the tableView
+     * 
+     * @return the id
      */
     public int getId()
-   {
-       return id;
-   }
- 
-   /*public void setId(int id)
-   {
-       this.id = id;
-   }*/
-
+    {
+        return id;
+    }
+    
+    
     /**
-     *
-     * @return
+     * Gets the name of the row of the tableView
+     * 
+     * @return the name
      */
+    public String getName()
+    {
+        return name;
+    }
 
- 
-   public String getName()
-   {
-       return name;
-   }
- 
+    
     /**
-     *
-     * @param name
-     */
-    public void setName(String name)
-   {
-       this.name = name;
-   }
- 
-    /**
-     *
-     * @return
+     * Gets the action of the row of the tableView
+     * 
+     * @return the action
      */
     public Action getAction()
-   {
-       return action;
-   }
- 
-    /**
-     *
-     * @param action
-     */
-    public void setAction(Action action)
-   {
-       this.action = action;
-   }
+    {
+        /*if (id == 0)
+        {
+            return action.NOUVELLE_PARTIE;
+        }*/
+        return action;
+    }
 
+    
     /**
-     *
-     * @return
+     * Gets the row of the row of the tableView
+     * 
+     * @return the row
      */
     public int getRow()
     {
         return row;
     }
 
+    
     /**
-     *
-     * @return
+     * Gets the column of the row of the tableView
+     * 
+     * @return the column
      */
     public int getColumn()
     {
@@ -104,47 +103,12 @@ public class Tour
     }
 
     /**
-     *
-     * @param row
-     */
-    public void setRow(int row)
-    {
-        this.row = row;
-    }
-
-    /**
-     *
-     * @param column
-     */
-    public void setColumn(int column)
-    {
-        this.column = column;
-    }
-
-    /**
-     *
-     * @return
+     * Gets the number of flipped pieces of the row of the tableView
+     * 
+     * @return the number of flipped pieces
      */
     public int getNbPrises()
     {
         return nbPrises;
-    }
-
-    /**
-     *
-     * @param id
-     */
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @param nbPrises
-     */
-    public void setNbPrises(int nbPrises)
-    {
-        this.nbPrises = nbPrises;
     }
 }

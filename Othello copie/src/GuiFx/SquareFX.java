@@ -6,22 +6,28 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+
 /**
- *
+ * This class handels each squares that stands on the playing board
+ * 
  * @author leopoldmols
  */
 public class SquareFX extends StackPane
 {
-
-    final Rectangle rect;
+    final Rectangle rect; // The rectangle that will be a square
+    // The different possible pieces that can be contained on a square
     private final Circle piece;
-
+    
+    /**
+     * The different colors that a piece can take
+     */
     private final Paint colorBlack = Paint.valueOf("#000000");
     private final Paint colorWhite = Paint.valueOf("#FFFFFF");
     private final Paint colorGreen = Paint.valueOf("#00FF00");
 
+    
     /**
-     *
+     * Constructs the square and the circle
      */
     public SquareFX()
     {
@@ -36,7 +42,13 @@ public class SquareFX extends StackPane
         this.getChildren().addAll(rect, piece);
     }
     
-    void drawPiece(Color color)
+    
+    /**
+     * Draw pieces on every square of the playing board
+     * 
+     * @param color the color that the piece will take
+     */
+    public void drawPiece(Color color)
     {
         switch (color)
         {
@@ -54,12 +66,22 @@ public class SquareFX extends StackPane
         }
     }
     
-    void setBGGreen()
+    
+    /**
+     * Sets the square background at green
+     */
+    public void setBGGreen()
     {
         rect.setFill(colorGreen);
     }
 
-    void playableSquare(boolean playable)
+    
+    /**
+     * Sets the color of a square at YELLOW if the square is playable and RED else
+     * 
+     * @param playable the boolean value that will define the color of the square
+     */
+    public void playableSquare(boolean playable)
     {
         if (playable)
         {
@@ -71,9 +93,12 @@ public class SquareFX extends StackPane
         }
     }
 
+    
     /**
-     *
-     * @return
+     * Gets the Green color of a square
+     * 
+     * @return the parameter "colorgreen" 
+     * as this is the coor of the parameter
      */
     public Paint getColorGreen()
     {

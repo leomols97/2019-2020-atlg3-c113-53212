@@ -9,7 +9,6 @@ import java.util.*;
  * 
  * @author leopoldmols
  */
-
 public class Game implements Observable, Model
 {
     /**
@@ -17,7 +16,7 @@ public class Game implements Observable, Model
      * @current the current player
      * @oponent the oponent player
      */
-    private int id = 0;
+    private int id;
     private Board board;
     private Position selected;
     private Player current;
@@ -32,7 +31,6 @@ public class Game implements Observable, Model
      * and a new oponent player
      * @param bot
      */
-    
     public Game(boolean bot)
     {
         this.current = new Player(Color.BLACK);
@@ -54,10 +52,10 @@ public class Game implements Observable, Model
     /**
      * Initiates the board by calling the method "initialize()" in the Board class
      */
-    
     @Override
     public void initialize()
     {
+        this.id = 0;
         this.board = new Board();
         this.board.initialize();
     }
@@ -70,7 +68,6 @@ public class Game implements Observable, Model
      * This method throws a IllegalStateException("Le plateau de jeu n'a pas été initialisé !") if the board doesn't exist
      * This method throws a IllegalArgumentException("La partie est terminée !") if the game is finished
      */
-    
     @Override
     public void start()
     {
@@ -92,7 +89,6 @@ public class Game implements Observable, Model
      *
      * @return true if both players have moves left and if both of them still have their own flags and false either
      */
-    
     @Override
     public boolean isOver()
     {
@@ -114,7 +110,6 @@ public class Game implements Observable, Model
      * Overrides the method "getBoard()" from the class Model.
      * @return the playing board from the current playing board
      */
-    
     @Override
     public Piece [][] getBoard()
     {
@@ -129,7 +124,6 @@ public class Game implements Observable, Model
      * 
      * @return the piece
      */
-    
     public Piece getPiece(Position pos)
     {
         if (!this.board.isInside(pos))
@@ -151,7 +145,6 @@ public class Game implements Observable, Model
      * 
      * @return true if the position is free and false else
      */
-    
     public boolean isFree(Position pos)
     {
         if (!this.board.isInside(pos))
@@ -166,7 +159,6 @@ public class Game implements Observable, Model
      * Gets the current player
      * @return the current player
      */
-    
     @Override
     public Player getCurrent()
     {
@@ -177,7 +169,6 @@ public class Game implements Observable, Model
     /**
      * Change of current player
      */
-    
     @Override
     public void changePlayer()
     {
@@ -199,7 +190,6 @@ public class Game implements Observable, Model
      * 
      * @return the score of the White player
      */
-    
     @Override
     public int getScore (Color color)
     {
@@ -223,11 +213,9 @@ public class Game implements Observable, Model
      * 
      * @param position the position where the current player wants to put a piece
      */
-    
     @Override
     public void play (Position position)
     {
-        this.selected = position;
         Objects.requireNonNull(position, "La position est vide !");
         if (!this.board.isInside(position))
         {
@@ -247,41 +235,49 @@ public class Game implements Observable, Model
         {
             changePlayer();
         }
-        
-        if (canPlay(position))
+        System.out.println(nbPiecesGot(position, getCurrent().getColor()));
+        if (!onlyOneColor(getCurrent().getColor()))
         {
-            this.board.addPiece(current, position);
-            for (Direction dir : Direction.values())
+            if (canPlay(position))
             {
-                Position pos = position.next(dir);
-                Position posFin = pos.next(dir);
-                
-                do
+                this.selected = position;
+                this.board.addPiece(current, position);
+                for (Direction dir : Direction.values())
                 {
-                    posFin = posFin.next(dir);
-                } while (this.board.isInside(posFin)
-                        && !this.board.isFree(posFin)
-                        && !isMyOwn(posFin, this.current.getColor()));
-                
-                if (canFlip(position, dir))
-                {
-                    while (this.board.isInside(pos)
-                            && !this.board.isFree(pos)
-                            && !isMyOwn(pos, current.getColor()))
+                    Position pos = position.next(dir);
+                    Position posFin = pos.next(dir);
+                    
+                    do
                     {
-                        this.board.getPiece(pos).invert();
-                        pos = pos.next(dir);
+                        posFin = posFin.next(dir);
+                    } while (this.board.isInside(posFin)
+                            && !this.board.isFree(posFin)
+                            && !isMyOwn(posFin, this.current.getColor()));
+                    
+                    if (canFlip(position, dir))
+                    {
+                        while (this.board.isInside(pos)
+                                && !this.board.isFree(pos)
+                                && !isMyOwn(pos, current.getColor()))
+                        {
+                            this.board.getPiece(pos).invert();
+                            pos = pos.next(dir);
+                        }
                     }
                 }
             }
+            else
+            {
+                throw new IllegalArgumentException("Le joueur ne peut pas placer de pion sur cette case !");
+            }
             changePlayer();
-            placePiecRowTable();
-            passRowTable();
+            // Place a row in the table with the information about the strike that the player played
+            placePieceRowTable();
             notifyObservers();
         }
         else
         {
-            throw new IllegalArgumentException("Le joueur ne peut pas placer de pion sur cette case !");
+            throw new IllegalArgumentException("Il n'y a plus qu'une seule couleur sur le plateau de jeu !");
         }
     }
     
@@ -293,7 +289,6 @@ public class Game implements Observable, Model
      * 
      * @return true if the player can play and false else
      */
-    
     @Override
     public boolean canPlay (Position position)
     {
@@ -327,7 +322,6 @@ public class Game implements Observable, Model
      * 
      * @return true of the direction contains flippable pieces
      */
-    
     private boolean canFlip (Position position, Direction direction)
     {
         Objects.requireNonNull(position, "La position est vide !");
@@ -372,7 +366,6 @@ public class Game implements Observable, Model
      * 
      * @return a list of positions
      */
-    
     @Override
     public List<Position> possiblePositions (Position position)
     {
@@ -404,7 +397,6 @@ public class Game implements Observable, Model
      * This method throws a NullPointerException("La position n'existe pas !") if the piece doesn't exist
      * This throws a new IllegalStateException("La position ne fait pas partie du tableau de jeu !") if the position is not inside the playing board
      */
-    
     private boolean isMyOwn(Position position, Color color)
     {
         Objects.requireNonNull(position, "La position n'existe pas !");
@@ -421,7 +413,6 @@ public class Game implements Observable, Model
      * 
      * @return true if he can and false else
      */
-    
     @Override
     public boolean canPlaceSmw()
     {
@@ -444,7 +435,6 @@ public class Game implements Observable, Model
      * 
      * @param obs the observer to add
      */
-    
     @Override
     public void registerObserver(Observer obs)
     {
@@ -457,7 +447,6 @@ public class Game implements Observable, Model
      * 
      * @param obs the observer to remove
      */
-    
     @Override
     public void removeObserver(Observer obs)
     {
@@ -469,7 +458,6 @@ public class Game implements Observable, Model
      * Calls each method update()
      * from each observer from the observer list
      */
-    
     @Override
     public void notifyObservers()
     {
@@ -485,7 +473,6 @@ public class Game implements Observable, Model
      * 
      * @return the number of white pieces that stands on the board
      */
-    
     public int getNbWhites ()
     {
         int nbWhites = 0;
@@ -511,7 +498,6 @@ public class Game implements Observable, Model
      * 
      * @return the number of pieces that stands on the playing board
      */
-    
     @Override
     public double getNbPieces ()
     {
@@ -538,7 +524,6 @@ public class Game implements Observable, Model
      * 
      * @return the number of squares that compose on the playing board
      */
-    
     @Override
     public double getNbCases ()
     {
@@ -553,6 +538,7 @@ public class Game implements Observable, Model
         return nbCases;
     }
     
+    
     /**
      * Verifies if a player has strikes left
      * 
@@ -561,7 +547,7 @@ public class Game implements Observable, Model
      * 
      * @return true if he has at least one strike left and false else
      */
-    
+    @Override
     public boolean hasStrikes (Color color)
     {
         Position pos;
@@ -578,25 +564,131 @@ public class Game implements Observable, Model
         }
         return false;
     }
+    
+    
+    /**
+     * Verifies if there's only one color on the playing board
+     * 
+     * @param color the color to verify
+     * 
+     * @return true if there's only this color on the playing board and false else
+     */
+    @Override
+    public boolean onlyOneColor (Color color)
+    {
+        Position pos;
+        for (int i = 0; i < board.getBoard().length; i++)
+        {
+            for (int j = 0; j < board.getBoard()[i].length; j++)
+            {
+                pos = new Position(i, j);
+                if (board.getPiece(pos).getColor() != color) 
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
+    
+    /**
+     * Gets the strike done by a player
+     * 
+     * @return a list of every strikes
+     */
     @Override
     public List<Tour> getTours ()
     {
         return tours;
     }
     
+    
+    /**
+     * Adds to the table the informations about a turn when the player puts a piece
+     */
     @Override
-    public void placePiecRowTable ()
+    public void placePieceRowTable ()
     {
-        this.tours.add(new Tour(id, this.current.getName(), Action.PLACE_PIECE, selected.getRow(), selected.getColumn(), 0));
+        this.tours.add(
+                new Tour(id, 
+                        this.current.getName(),
+                        Action.PLACE_PIECE,
+                        this.selected.getColumn() + 1,
+                        this.selected.getRow() + 1,
+                        nbPiecesGot(
+                                selected,
+                                getCurrent().getColor()
+                        )
+                )
+        );
         id++;
     }
     
+    
+    /**
+     * Adds to the table a row when the player passed his turn
+     */
     @Override
     public void passRowTable ()
     {
-        this.tours.add(new Tour(id, this.current.getName(), Action.PASSE_TOUR, 0, 0, 0));
+        this.tours.add(
+                new Tour(
+                        id,
+                        this.current.getName(),
+                        Action.PASSE_TOUR,
+                        0,
+                        0,
+                        nbPiecesGot(
+                                selected,
+                                getCurrent().getColor()
+                        )
+                )
+        );
         id++;
+    }
+
+    
+    /**
+     * Gets the oponent player
+     * 
+     * @return the oponent player
+     */
+    @Override
+    public Player getOponent()
+    {
+        return oponent;
+    }
+    
+    
+    /**
+     * Counts the number of pieces that the turn will flip
+     * 
+     * @param position the position where the player will play
+     * @param color the color of the player
+     * 
+     * @return the number of pieces that will be flipped
+     */
+    @Override
+    public int nbPiecesGot (Position position, Color color)
+    {
+        int cptFlippablePieces = 0;
+        if (canPlay(position))
+        {
+            for (Direction dir : Direction.values())
+            {
+                if (canFlip(position, dir))
+                {
+                    Position next = position.next(dir);
+                    while (getBoard()[next.getRow()][next.getColumn()].getColor() != color)
+                    {
+                        next = next.next(dir);
+                        cptFlippablePieces++;
+                    }
+                }
+            }
+        }
+        return cptFlippablePieces;
     }
 }
 

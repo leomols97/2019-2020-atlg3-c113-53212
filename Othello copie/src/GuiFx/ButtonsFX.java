@@ -11,12 +11,14 @@ import javafx.stage.Stage;
 
 
 /**
- *
+ * This class creates, initializes and rightly
+ * place the buttons needed for the game after it begins
+ * 
  * @author leopoldmols
  */
-
 public class ButtonsFX extends HBox implements Observer
 {
+    // The menu belonging which buttons have to react
     private final MenuView menu;
     private final Button abandon;
     private final Button pass;
@@ -24,9 +26,13 @@ public class ButtonsFX extends HBox implements Observer
     private final Button actualScore;
     private final Button quit;
     
+    
     /**
-     *
-     * @param menuView
+     * Constructs the object "ButtonFX" that will contain
+     * evry button
+     * 
+     * @param menuView the menu that contains all the information needed
+     * to make the buttons rightly react
      */
     public ButtonsFX(MenuView menuView)
     {
@@ -40,18 +46,13 @@ public class ButtonsFX extends HBox implements Observer
         displayButtons();
     }
     
+    
     /**
-     *
+     * Adds all the buttons to the window
      */
     public void displayButtons()
     {
         this.setSpacing(10);
-        //this.setAlignment(Pos.CENTER);
-        //this.setHover(true);
-        //this.setDepthTest(DepthTest.ENABLE);
-        //this.setMinSize(100, 25);
-        //this.setFillHeight(true);
-        
         this.getChildren().addAll(
                 abandon, 
                 pass, 
@@ -59,107 +60,114 @@ public class ButtonsFX extends HBox implements Observer
                 actualScore,
                 quit
         );
-        
-        // Ce morceau ne sert à rien car on appelle le bouton dans ViewFX
-        this.actualScore.setOnMouseClicked(event ->
-        {
-            
-        });
-        
-        this.abandon.setOnMouseClicked(event ->
-        {
-            
-        });
     }
 
+    
     /**
-     *
-     * @return
+     * Gets the button "abandon"
+     * @return the button "abandon"
      */
     public Button getAbandon ()
     {
         return abandon;
     }
 
+    
     /**
-     *
-     * @return
+     * Gets the button "pass"
+     * @return the button "pass"
      */
     public Button getPass ()
     {
         return pass;
     }
 
+    
     /**
-     *
-     * @return
+     * Gets the button "restart"
+     * @return the button "restart"
      */
     public Button getRestart ()
     {
         return restart;
     }
+
     
     /**
-     *
-     * @return
+     * Gets the button "actualScore"
+     * @return the button "actuakScore"
      */
     public Button getActualScore ()
     {
         return actualScore;
     }
 
+    
     /**
-     *
-     * @return
+     * Gets the button "quit"
+     * @return the button "quit"
      */
     public Button getQuit()
     {
         return quit;
     }
     
+    
     /**
-     *
-     * @param game
-     * @return
+     * Displays a new window with the ending information
+     * 
+     * @param game the game belonging which the information will be updated
+     * 
+     * @return the gridpane that will contain the ending information
      */
     public GridPane displayEndGame (Model game)
     {
-        // Nouvelle fenêtre
+        // New window that will contain the gridpane
         Stage newWindow = new Stage();
-        newWindow.setTitle("Abandon");
+        newWindow.setTitle("Fin de la partie");
         newWindow.centerOnScreen();
         
+        // New GridPane that contains all the ending information
         GridPane GPScore = new GridPane();
-        Button ok = new Button("Ok");
+        Button ok = new Button("Ok"); // The button to exit the window
         ok.setMaxWidth(Double.MAX_VALUE);
         GPScore.setHalignment(ok, HPos.CENTER);
         GPScore.setValignment(ok, VPos.CENTER);
         
-        Scene gameHisto = new Scene(GPScore, 300, 80);
+        //The new scene that will be inside the window and contain the gridpane
+        Scene gameHisto = new Scene(GPScore, 250, 80);
         newWindow.setScene(gameHisto);
         
-        Label endGame = new Label("Fin de la partie");
+        Label endGame = new Label("Abandon");
         endGame.setUnderline(true);
         GPScore.add(endGame, 0, 0);
         
+        //Displays rightly the name of the player 1
         Label lblScorePlayer1 = new Label(menu.getMenu().getTfdPlayer1() + " : ");
         GridPane.setHalignment(lblScorePlayer1, HPos.CENTER);
         GridPane.setValignment(lblScorePlayer1, VPos.CENTER);
         GPScore.add(lblScorePlayer1, 0, 1);
         
+        //Displays rightly the score of the player 1
         Label scorePlayer1 = new Label("" + game.getScore(Color.WHITE));
         GPScore.add(scorePlayer1, 1, 1);
         
+        //Displays rightly the name of the player 2
         Label lblScorePlayer2 = new Label(menu.getMenu().getTfdPlayer2() + " : ");
+        GridPane.setHalignment(lblScorePlayer2, HPos.CENTER);
+        GridPane.setValignment(lblScorePlayer2, VPos.CENTER);
         GPScore.add(lblScorePlayer2, 0, 2);
         
+        //Displays rightly the score of the player 2
         Label scorePlayer2 = new Label("" + game.getScore(Color.BLACK));
         GPScore.add(scorePlayer2, 1, 2);
         
+        // The okay button to exit the window
         GPScore.add(ok, 1, 3);
         
         newWindow.show();
         
+        // The action to close the window
         ok.setOnAction((event) ->
         {
             menu.getMenu().setGameVisible(false);
@@ -169,10 +177,14 @@ public class ButtonsFX extends HBox implements Observer
         return GPScore;
     }
     
+    
     /**
-     *
-     * @param game
-     * @return
+     * Creates a new window with the actual scores
+     * 
+     * @param game the game belonging which
+     * the scores has to be displayed
+     * 
+     * @return the gridpane contained by the window
      */
     public GridPane displayActualScore (Model game)
     {
@@ -181,26 +193,34 @@ public class ButtonsFX extends HBox implements Observer
         newWindow.setTitle("Score des joueurs");
         newWindow.centerOnScreen();
         
+        // New GridPane that contains all the ending information
         GridPane GPScore = new GridPane();
-        Button ok = new Button("Ok");
+        Button ok = new Button("Ok"); // The button to exit the window
         ok.setMaxWidth(Double.MAX_VALUE);
         GPScore.setHalignment(ok, HPos.CENTER);
         GPScore.setValignment(ok, VPos.CENTER);
         
-        Scene gameHisto = new Scene(GPScore, 300, 60);
+        //The new scene that will be inside the window and contain the gridpane
+        Scene gameHisto = new Scene(GPScore, 250, 60);
         newWindow.setScene(gameHisto);
         
+        //Displays rightly the name of the player 1
         Label lblScorePlayer1 = new Label(menu.getMenu().getTfdPlayer1() + " : ");
         GridPane.setHalignment(lblScorePlayer1, HPos.CENTER);
         GridPane.setValignment(lblScorePlayer1, VPos.CENTER);
         GPScore.add(lblScorePlayer1, 0, 0);
         
+        //Displays rightly the score of the player 1
         Label scorePlayer1 = new Label("" + game.getScore(Color.WHITE));
         GPScore.add(scorePlayer1, 1, 0);
         
+        //Displays rightly the name of the player 2
         Label lblScorePlayer2 = new Label(menu.getMenu().getTfdPlayer2() + " : ");
+        GridPane.setHalignment(lblScorePlayer2, HPos.CENTER);
+        GridPane.setValignment(lblScorePlayer2, VPos.CENTER);
         GPScore.add(lblScorePlayer2, 0, 1);
         
+        //Displays rightly the score of the player 2
         Label scorePlayer2 = new Label("" + game.getScore(Color.BLACK));
         GPScore.add(scorePlayer2, 1, 1);
         
@@ -208,6 +228,7 @@ public class ButtonsFX extends HBox implements Observer
         
         newWindow.show();
         
+        // The action to close the window
         ok.setOnAction((event) ->
         {
             newWindow.close();
@@ -219,12 +240,12 @@ public class ButtonsFX extends HBox implements Observer
     
     /**
      * Shows a new window if the current player hasn't strikes left
+     * 
      * @param game
      */
-    
     public void noStrikesLeft (Model game)
     {
-        // Nouvelle fenêtre
+        // New window
         Stage newWindow = new Stage();
         newWindow.setTitle("Plus de mouvement");
         newWindow.centerOnScreen();
@@ -246,8 +267,9 @@ public class ButtonsFX extends HBox implements Observer
         });
     }
     
+    
     /**
-     *
+     * Overrides the update() method form the Observer interface
      */
     @Override
     public void update()

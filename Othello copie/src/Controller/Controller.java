@@ -33,7 +33,6 @@ public class Controller
      * by calling the appropriate method ("initialize")
      * respectively in the Model Package and the View package
      */
-    
     public void initialize()
     {
         game.initialize();
@@ -47,7 +46,6 @@ public class Controller
      * Still in the while, "board" will be displayed  and the variable "arretJeu"
      * will change to true if the variable "arret" typed in by the user takes the value "quit"
      */
-    
     public void startGame()
     {
         initialize();
@@ -130,7 +128,6 @@ public class Controller
     /**
      * Displays who's turn it is
      */
-    
     private void turn ()
     {
         if (game.getCurrent().getColor() == Color.BLACK)

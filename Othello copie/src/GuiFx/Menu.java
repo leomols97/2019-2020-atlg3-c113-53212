@@ -1,14 +1,18 @@
 package GuiFx;
 
-import Models.Model;
 import Models.Observer;
+import Models.Player;
+import com.sun.prism.paint.Color;
 import javafx.collections.FXCollections;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
+
 /**
- *
+ * This class creates the beginning view to register all the members
+ * to be able to begin a game properly
+ * 
  * @author leopoldmols
  */
 public class Menu extends GridPane implements Observer
@@ -17,13 +21,20 @@ public class Menu extends GridPane implements Observer
     private final Label lblPlayer2;
     private final Label lblTypePlayer1;
     private final Label lblTypePlayer2;
+    // Where the player1 will put his name
     private final TextField tfdPlayer1;
+    // Where the player2 will put his name
     private final TextField tfdPlayer2;
+    // The choice that will define if the player1 is either a human or a bot
     private final ChoiceBox CBPlayer1;
+    // The choice that will define if the player1 is either a human or a bot
     private final ChoiceBox CBPlayer2;
+    private boolean isBot;
+    
     
     /**
-     *
+     * Constructs all the menu with the different objects needed
+     * to properly begin a game
      */
     public Menu ()
     {
@@ -35,12 +46,14 @@ public class Menu extends GridPane implements Observer
         this.tfdPlayer2 = new TextField();
         this.CBPlayer1 = new ChoiceBox(FXCollections.observableArrayList(PlayerFX.values()));
         this.CBPlayer2 = new ChoiceBox(FXCollections.observableArrayList(PlayerFX.values()));
+        this.isBot = false;
         
         initMenu();
     }
     
+    
     /**
-     *
+     * Initialises the menu with all the needed values
      */
     public void initMenu ()
     {
@@ -49,11 +62,11 @@ public class Menu extends GridPane implements Observer
         this.setVgap(5);
         
         
-        tfdPlayer1.setText("Pseudo du joueur blanc");
+        tfdPlayer1.setPromptText("Pseudo du joueur blanc");
         tfdPlayer1.setPrefColumnCount(20);
         this.add(tfdPlayer1, 3, 0);
         
-        tfdPlayer2.setText("Pseudo du joueur noir");
+        tfdPlayer2.setPromptText("Pseudo du joueur noir");
         tfdPlayer2.setPrefColumnCount(20);
         this.add(tfdPlayer2, 3, 1);
         
@@ -82,9 +95,12 @@ public class Menu extends GridPane implements Observer
         this.add(lblPlayer2, 2, 1);
     }
     
+    
     /**
-     *
-     * @param no
+     * Sets the menu at visible or not 
+     * wether the game has begun or not
+     * 
+     * @param no if the menu doesn't have to be disabled
      */
     public void setGameVisible (boolean no)
     {
@@ -98,18 +114,22 @@ public class Menu extends GridPane implements Observer
         CBPlayer2.setDisable(no);
     }
     
+    
     /**
-     *
-     * @return
+     * Gets the name of the player1
+     * 
+     * @return the name entered by the player1
      */
     public String getTfdPlayer1()
     {
         return tfdPlayer1.getText();
     }
-
+    
+    
     /**
-     *
-     * @return
+     * Gets the name of the player2
+     * 
+     * @return the name entered by the player2
      */
     public String getTfdPlayer2()
     {
@@ -117,8 +137,9 @@ public class Menu extends GridPane implements Observer
     }
 
     /**
-     *
-     * @return
+     * Gets the type of the player1
+     * 
+     * @return the type of the player1
      */
     public PlayerFX getCBPlayer1()
     {
@@ -126,14 +147,38 @@ public class Menu extends GridPane implements Observer
     }
 
     /**
-     *
-     * @return
+     * Gets the type of the player2
+     * 
+     * @return the type of the player2
      */
     public PlayerFX getCBPlayer2()
     {
         return (PlayerFX) CBPlayer2.getValue();
     }
+    
+    
+    /**
+     * Verifies if a player is a bot or not
+     * 
+     * @return true if he is and false else
+     */
+    public boolean checkBot (Player player)
+    {
+        if (player.getColor().equals(Color.BLACK))
+        {
+            isBot = true;
+        }
+        else if (player.getColor().equals(Color.WHITE))
+        {
+            isBot = true;
+        }
+        return isBot;
+    }
 
+    
+    /**
+     * Overrides the update() method form the Observer interface
+     */
     @Override
     public void update() 
     {

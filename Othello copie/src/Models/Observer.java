@@ -1,5 +1,6 @@
 package Models;
 
+
 /**
  * This class represents the Observer.
  *
@@ -7,9 +8,8 @@ package Models;
  */
 public interface Observer
 {
-
     /**
-     *
+     * Calls all the "update()" methods to update the playing board
      */
     void update();
 }
