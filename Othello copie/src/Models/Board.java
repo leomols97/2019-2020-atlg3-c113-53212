@@ -169,7 +169,20 @@ public class Board
      */
     public void addPiece(Player player, Position pos)
     {
-        this.board[pos.getRow()][pos.getColumn()].setColor(player.getColor());
+        if (player.getColor() == Color.BLACK
+                && this.board[pos.getRow()][pos.getColumn()].getColor() == Color.BONUS)
+        {
+            this.board[pos.getRow()][pos.getColumn()].setColor(Color.BONUSBLACK);
+        }
+        else if (player.getColor() == Color.WHITE
+                && this.board[pos.getRow()][pos.getColumn()].getColor() == Color.BONUS)
+        {
+            this.board[pos.getRow()][pos.getColumn()].setColor(Color.BONUSWHITE);
+        }
+        else
+        {
+            this.board[pos.getRow()][pos.getColumn()].setColor(player.getColor());
+        }
     }
 
     
@@ -193,8 +206,7 @@ public class Board
             throw new IllegalArgumentException("La position ne fait pas partie du tableau de jeu !");
         }
         return this.board[pos.getRow()][pos.getColumn()].getColor() == Color.EMPTY
-                || this.board[pos.getRow()][pos.getColumn()].getColor() == Color.BONUSBLACK
-                || this.board[pos.getRow()][pos.getColumn()].getColor() == Color.BONUSWHITE;
+                || this.board[pos.getRow()][pos.getColumn()].getColor() == Color.BONUS;
     }
     
     

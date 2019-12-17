@@ -117,7 +117,7 @@ public class BoardFX extends HBox implements Observer
         {
             if (game.isBonusCase(pos))
             {
-                squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
+                squares[y][x].setBGBonus();
                 squares[y][x].rect.setStroke(Paint.valueOf("#ABCDEF"));
             }
             else
@@ -135,15 +135,17 @@ public class BoardFX extends HBox implements Observer
                 //squares[y][x].setBGGreen(); // sets the background color to green
                 // sets the stroke of the square to the color it has to be if the square is playable or not
                 //squares[y][x].rect.setStroke(squares[y][x].getColorGreen());
-                game.play(pos);
-                squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
+                //squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
+                squares[y][x].setBGBonus();
                 squares[y][x].rect.setStroke(Paint.valueOf("#ABCDEF"));
+                game.play(pos);
             }
             else if (game.isBonusCase(pos)
                     && !game.isFree(pos))
             {
-                squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
+                squares[y][x].setBGBonus();
                 squares[y][x].rect.setStroke(Paint.valueOf("#ABCDEF"));
+                //squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
             }
         });
     }
@@ -158,7 +160,20 @@ public class BoardFX extends HBox implements Observer
         {
             for (int x = 0; x < SIZE; x++)
             {
-                squares[y][x].drawPiece(game.getBoard()[x][y].getColor());
+                if (game.getBoard()[x][y].getColor() == Color.BONUS
+                        && game.getCurrent().getColor() == Color.BLACK)
+                {
+                    squares[y][x].drawPiece(Color.BONUSBLACK);
+                }
+                else if (game.getBoard()[x][y].getColor() == Color.BONUS
+                        && game.getCurrent().getColor() == Color.WHITE)
+                {
+                    squares[y][x].drawPiece(Color.BONUSWHITE);
+                }
+                else
+                {
+                    squares[y][x].drawPiece(game.getBoard()[x][y].getColor());
+                }
             }
         }
     }

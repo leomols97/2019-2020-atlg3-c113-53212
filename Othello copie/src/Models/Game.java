@@ -205,7 +205,7 @@ public class Game implements Observable, Model
                     {
                         cpt += 3;
                     }
-                    else if (board.getBoard()[i][j].getColor() == Color.BLACK)
+                    if (board.getBoard()[i][j].getColor() == Color.BLACK)
                     {
                         cpt++;
                     }
@@ -237,7 +237,7 @@ public class Game implements Observable, Model
                     {
                         cpt += 3;
                     }
-                    else if (board.getBoard()[i][j].getColor() == Color.WHITE)
+                    if (board.getBoard()[i][j].getColor() == Color.WHITE)
                     {
                         cpt++;
                     }

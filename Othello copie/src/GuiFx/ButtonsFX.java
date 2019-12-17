@@ -210,8 +210,9 @@ public class ButtonsFX extends HBox implements Observer
         GridPane.setValignment(lblScorePlayer1, VPos.CENTER);
         GPScore.add(lblScorePlayer1, 0, 0);
         
+        int scoreWhite = game.getScoreWHITE(Color.WHITE) + game.getScoreWHITE(Color.BONUSWHITE);
         //Displays rightly the score of the player 1
-        Label scorePlayer1 = new Label("Nombre de vos pièces : " + game.getNbWhites() + ". Votre score : " + game.getScoreWHITE(Color.WHITE));
+        Label scorePlayer1 = new Label("Nombre de vos pièces : " + game.getNbWhites() + ". Votre score : " + scoreWhite);
         GPScore.add(scorePlayer1, 1, 0);
         
         //Displays rightly the name of the player 2
@@ -220,8 +221,9 @@ public class ButtonsFX extends HBox implements Observer
         GridPane.setValignment(lblScorePlayer2, VPos.CENTER);
         GPScore.add(lblScorePlayer2, 0, 1);
         
+        int scoreBlack = game.getScoreBLACK(Color.BLACK) + game.getScoreBLACK(Color.BONUSBLACK);
         //Displays rightly the score of the player 2
-        Label scorePlayer2 = new Label("Nombre de vos pièces : " + game.getNbBlacks() + ". Votre score : " + game.getScoreBLACK(Color.BLACK));
+        Label scorePlayer2 = new Label("Nombre de vos pièces : " + game.getNbBlacks() + ". Votre score : " + scoreBlack);
         GPScore.add(scorePlayer2, 1, 1);
         
         GPScore.add(ok, 1, 3);
