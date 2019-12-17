@@ -88,6 +88,10 @@ public class ViewFX extends VBox implements Observer
         this.blackPlayerInfos = new BlackPlayerInfos(this.game, this.menuView);
         this.whitePlayerInfos = new WhitePlayerInfos(this.game, this.menuView);
         
+        // Adds the menu bar to the window
+        this.VBoxMenuBar.getChildren().addAll(this.menuBar);
+        this.getChildren().addAll(VBoxMenuBar);
+        
         displayView();
         addMenu();
     }
@@ -214,8 +218,6 @@ public class ViewFX extends VBox implements Observer
              * and so on until the 3 boxes up, middle and down
              * that are added to the current VBox
              */
-            this.VBoxMenuBar.getChildren().addAll(this.menuBar);
-            this.getChildren().add(VBoxMenuBar);
             this.HBCompletion.getChildren().addAll(lblCompletion, gameProgression);
             this.HBCurrentWinner.getChildren().addAll(lblCurrentWinner, currentWinner);
             this.up.getChildren().addAll(

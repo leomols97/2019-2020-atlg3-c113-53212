@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Random;
+
 
 /**
  * This class initialize a game board to welcome the Pieces to play It also
@@ -41,13 +43,89 @@ public class Board
     
     /**
      * Puts the four first pieces on the board
+     * and the three bonus cases
      */
     public void initialize()
     {
+        Position posBonus1 = random();
+        Position posBonus2 = random();
+        Position posBonus3 = random();
+        while (isAlreadyBonusPosition(posBonus2))
+        {            
+            posBonus2 = random();
+        }
+        while (isAlreadyBonusPosition(posBonus3))
+        {            
+            posBonus3 = random();
+        }
+        this.board[posBonus1.getRow()][posBonus1.getColumn()].setColor(Color.BONUS);
+        this.board[posBonus2.getRow()][posBonus2.getColumn()].setColor(Color.BONUS);
+        this.board[posBonus3.getRow()][posBonus3.getColumn()].setColor(Color.BONUS);
         this.board[3][3].setColor(Color.WHITE);
         this.board[3][4].setColor(Color.BLACK);
         this.board[4][4].setColor(Color.WHITE);
         this.board[4][3].setColor(Color.BLACK);
+    }
+    
+    
+    /**
+     * Verifies if a position is already a bonus position
+     * 
+     * @param position the position to verify
+     * @return true if the position is already a bonus position and false else
+     */
+    public boolean isAlreadyBonusPosition (Position position)
+    {
+        /*if (!isFree(position))
+        {
+            throw new IllegalArgumentException("La position n'est pas libre !");
+        }*/
+        return board[position.getRow()][position.getColumn()].getColor() != Color.EMPTY
+                || board[position.getRow()][position.getColumn()].getColor() == Color.BONUS;
+    }
+    
+    
+    /**
+     * Initializes a random position
+     * that's not one of which that already has a piece on it
+     * 
+     * @return the position
+     */
+    public Position random ()
+    {
+        Position pos = new Position(1, 1);
+        int randomRow = intGeneration(1, rowLength);
+        int randomCol = intGeneration(1, colLength);
+        while (randomRow == 3
+                || randomRow == 4)
+        {            
+            randomRow = intGeneration(1, rowLength);
+        }
+        while (randomCol == 3
+                || randomCol == 4)
+        {            
+            randomCol = intGeneration(1, rowLength);
+        }
+        pos.setRow(randomRow);
+        pos.setColumn(randomCol);
+        return pos;
+    }
+    
+    
+    /**
+     * Generates a random position between two numbers
+     * 
+     * @param min the minimal value of the random
+     * @param max the maximal value of the random
+     * 
+     * @return the random value
+     */
+    public int intGeneration(int min, int max)
+    {
+        Random random = new Random();
+        int nb;
+        nb = min+random.nextInt(max-min);
+        return nb;
     }
     
     
@@ -114,7 +192,9 @@ public class Board
         {
             throw new IllegalArgumentException("La position ne fait pas partie du tableau de jeu !");
         }
-        return this.board[pos.getRow()][pos.getColumn()].getColor() == Color.EMPTY;
+        return this.board[pos.getRow()][pos.getColumn()].getColor() == Color.EMPTY
+                || this.board[pos.getRow()][pos.getColumn()].getColor() == Color.BONUSBLACK
+                || this.board[pos.getRow()][pos.getColumn()].getColor() == Color.BONUSWHITE;
     }
     
     

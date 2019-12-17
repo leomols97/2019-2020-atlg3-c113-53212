@@ -67,7 +67,8 @@ public class BlackPlayerInfos extends GridPane implements Observer
                       "-fx-border-insets: 5;" + 
                       "-fx-border-radius: 5;" + 
                       "-fx-border-color: blue;");
-        this.score.setText("" + this.game.getScore(Color.BLACK));
+        int scoreBlack = (this.game.getScoreBLACK(Color.BLACK) + this.game.getScoreBLACK(Color.BONUSBLACK));
+        this.score.setText("" + scoreBlack);
         //this.name.setText("" + menuView.getMenu().getTfdPlayer1());
         this.name.setText(String.valueOf(menuView.getMenu().getTfdPlayer1()));
         //this.game.getCurrent().setName(menuView.getMenu().getTfdPlayer1());
@@ -100,7 +101,8 @@ public class BlackPlayerInfos extends GridPane implements Observer
      */
     public void updateInfos ()
     {
-        score.setText(String.valueOf(this.game.getScore(Color.BLACK)));
+        int scoreBlack = (this.game.getScoreBLACK(Color.BLACK) + this.game.getScoreBLACK(Color.BONUSBLACK));
+        score.setText(String.valueOf(scoreBlack));
         //name.setText(String.valueOf(menuView.getMenu().getTfdPlayer1()));
     }
     
@@ -112,7 +114,8 @@ public class BlackPlayerInfos extends GridPane implements Observer
      */
     public void reInit (Game game) // to restart a game
     {
-        this.score.setText("" + game.getScore(Color.BLACK));
+        int scoreBlack = (this.game.getScoreBLACK(Color.BLACK) + this.game.getScoreBLACK(Color.BONUSBLACK));
+        this.score.setText("" + scoreBlack);
     }
 
     

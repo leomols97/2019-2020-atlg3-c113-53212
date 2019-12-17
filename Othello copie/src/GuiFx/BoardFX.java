@@ -86,27 +86,64 @@ public class BoardFX extends HBox implements Observer
         
         squares[y][x].setOnMouseEntered(e ->
         {
-            squares[y][x].playableSquare(game.canPlay(pos));
-            if (game.canPlay(pos))
+            if (game.isBonusCase(pos))
             {
-                squares[y][x].rect.setStroke(Paint.valueOf("#efd752")); // Yellow border
+                if (game.canPlay(pos))
+                {
+                    squares[y][x].rect.setStroke(Paint.valueOf("#efd752")); // Yellow border
+                }
+                else
+                {
+                    squares[y][x].rect.setStroke(Paint.valueOf("#ef5252")); // Red border
+                }
+                squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
             }
             else
             {
-                squares[y][x].rect.setStroke(Paint.valueOf("#ef5252")); // red border
+                squares[y][x].rect.setFill(Paint.valueOf("#00FF00"));
+                //squares[y][x].playableSquare(game.canPlay(pos));
+                if (game.canPlay(pos))
+                {
+                    squares[y][x].rect.setStroke(Paint.valueOf("#efd752")); // Yellow border
+                }
+                else
+                {
+                    squares[y][x].rect.setStroke(Paint.valueOf("#ef5252")); // Red border
+                }
             }
         });
+        
         squares[y][x].setOnMouseExited(e ->
         {
-            squares[y][x].setBGGreen(); // sets the background color to green
-            // sets the stroke of the square to the color it has to be if the square is playable or not
-            squares[y][x].rect.setStroke(squares[y][x].getColorGreen()); 
+            if (game.isBonusCase(pos))
+            {
+                squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
+                squares[y][x].rect.setStroke(Paint.valueOf("#ABCDEF"));
+            }
+            else
+            {
+                squares[y][x].setBGGreen(); // sets the background color to green
+                // sets the stroke of the square to the color it has to be if the square is playable or not
+                squares[y][x].rect.setStroke(squares[y][x].getColorGreen());
+            }
         });
+        
         squares[y][x].setOnMouseClicked(e ->
         {
             if (game.canPlay(pos))
             {
+                //squares[y][x].setBGGreen(); // sets the background color to green
+                // sets the stroke of the square to the color it has to be if the square is playable or not
+                //squares[y][x].rect.setStroke(squares[y][x].getColorGreen());
                 game.play(pos);
+                squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
+                squares[y][x].rect.setStroke(Paint.valueOf("#ABCDEF"));
+            }
+            else if (game.isBonusCase(pos)
+                    && !game.isFree(pos))
+            {
+                squares[y][x].rect.setFill(Paint.valueOf("#ABCDEF"));
+                squares[y][x].rect.setStroke(Paint.valueOf("#ABCDEF"));
             }
         });
     }

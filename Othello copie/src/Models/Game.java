@@ -145,6 +145,7 @@ public class Game implements Observable, Model
      * 
      * @return true if the position is free and false else
      */
+    @Override
     public boolean isFree(Position pos)
     {
         if (!this.board.isInside(pos))
@@ -191,7 +192,7 @@ public class Game implements Observable, Model
      * @return the score of the White player
      */
     @Override
-    public int getScore (Color color)
+    public int getScoreBLACK (Color color)
     {
         int cpt = 0;
         for (int i = 0; i < board.getBoard().length; i++)
@@ -200,7 +201,46 @@ public class Game implements Observable, Model
             {
                 if (board.getBoard()[i][j].getColor() == color)
                 {
-                    cpt++;
+                    if (board.getBoard()[i][j].getColor() == Color.BONUSBLACK)
+                    {
+                        cpt += 3;
+                    }
+                    else if (board.getBoard()[i][j].getColor() == Color.BLACK)
+                    {
+                        cpt++;
+                    }
+                }
+            }
+        }
+        return cpt;
+    }
+    
+    
+    /**
+     * Gets the score of the White player
+     * 
+     * @param color The color of the player that has to know its score
+     * 
+     * @return the score of the White player
+     */
+    @Override
+    public int getScoreWHITE (Color color)
+    {
+        int cpt = 0;
+        for (int i = 0; i < board.getBoard().length; i++)
+        {
+            for (int j = 0; j < board.getBoard()[0].length; j++)
+            {
+                if (board.getBoard()[i][j].getColor() == color)
+                {
+                    if (board.getBoard()[i][j].getColor() == Color.BONUSWHITE)
+                    {
+                        cpt += 3;
+                    }
+                    else if (board.getBoard()[i][j].getColor() == Color.WHITE)
+                    {
+                        cpt++;
+                    }
                 }
             }
         }
@@ -473,6 +513,7 @@ public class Game implements Observable, Model
      * 
      * @return the number of white pieces that stands on the board
      */
+    @Override
     public int getNbWhites ()
     {
         int nbWhites = 0;
@@ -490,6 +531,32 @@ public class Game implements Observable, Model
             }
         }
         return nbWhites;
+    }
+    
+    
+    /**
+     * Counts the number of white piece on the playing board
+     * 
+     * @return the number of white pieces that stands on the board
+     */
+    @Override
+    public int getNbBlacks ()
+    {
+        int nbBlack = 0;
+        Position pos;
+        for (int i = 0; i < this.getBoard().length; i++)
+        {
+            for (int j = 0; j < this.getBoard()[i].length; j++)
+            {
+                pos = new Position(i, j);
+                if (!isFree(pos)
+                        && this.getPiece(pos).getColor() == Color.BLACK)
+                {
+                    nbBlack++;
+                }
+            }
+        }
+        return nbBlack;
     }
     
     
@@ -689,6 +756,12 @@ public class Game implements Observable, Model
             }
         }
         return cptFlippablePieces;
+    }
+
+    @Override
+    public boolean isBonusCase(Position position)
+    {
+        return this.board.getBoard()[position.getRow()][position.getColumn()].getColor() == Color.BONUS;
     }
 }
 

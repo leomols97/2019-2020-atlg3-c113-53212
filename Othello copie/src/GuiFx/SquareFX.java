@@ -24,12 +24,13 @@ public class SquareFX extends StackPane
     private final Paint colorBlack = Paint.valueOf("#000000");
     private final Paint colorWhite = Paint.valueOf("#FFFFFF");
     private final Paint colorGreen = Paint.valueOf("#00FF00");
+    private final Paint bonusCasePaint = Paint.valueOf("#ABCDEF");
 
     
     /**
      * Constructs the square and the circle
      */
-    public SquareFX()
+    public SquareFX ()
     {
         this.rect = new Rectangle(44.2, 44.2);
         this.rect.setFill(Paint.valueOf("#00FF00"));
@@ -48,7 +49,7 @@ public class SquareFX extends StackPane
      * 
      * @param color the color that the piece will take
      */
-    public void drawPiece(Color color)
+    public void drawPiece (Color color)
     {
         switch (color)
         {
@@ -60,6 +61,21 @@ public class SquareFX extends StackPane
                 piece.setFill(colorWhite);
                 piece.setVisible(true);
                 break;
+            case BONUS:
+                rect.setFill(bonusCasePaint);
+                rect.setStroke(bonusCasePaint);
+            case BONUSBLACK:
+                piece.setFill(colorBlack);
+                piece.setVisible(true);
+                rect.setFill(bonusCasePaint);
+                rect.setStroke(bonusCasePaint);
+                break;
+            case BONUSWHITE:
+                piece.setFill(colorWhite);
+                piece.setVisible(true);
+                rect.setFill(bonusCasePaint);
+                rect.setStroke(bonusCasePaint);
+                break;
             case EMPTY:
                 piece.setVisible(false);
                 break;
@@ -70,9 +86,18 @@ public class SquareFX extends StackPane
     /**
      * Sets the square background at green
      */
-    public void setBGGreen()
+    public void setBGGreen ()
     {
         rect.setFill(colorGreen);
+    }
+    
+    
+    /**
+     * Sets the square background at green
+     */
+    public void setBGBonus ()
+    {
+        rect.setFill(bonusCasePaint);
     }
 
     
@@ -81,7 +106,7 @@ public class SquareFX extends StackPane
      * 
      * @param playable the boolean value that will define the color of the square
      */
-    public void playableSquare(boolean playable)
+    public void playableSquare (boolean playable)
     {
         if (playable)
         {
@@ -98,10 +123,22 @@ public class SquareFX extends StackPane
      * Gets the Green color of a square
      * 
      * @return the parameter "colorgreen" 
-     * as this is the coor of the parameter
+     * as this is the color of the parameter
      */
-    public Paint getColorGreen()
+    public Paint getColorGreen ()
     {
         return colorGreen;
+    }
+
+    
+    /**
+     * Gets the Bonus color of a square
+     * 
+     * @return the parameter "bonusCasePaint" 
+     * as this is the color of the parameter
+     */
+    public Paint getBonusCasePaint ()
+    {
+        return bonusCasePaint;
     }
 }

@@ -65,7 +65,17 @@ public interface Model
      * 
      * @return the score of the player
      */
-    int getScore(Color color);
+    int getScoreBLACK(Color color);
+    
+    
+    /**
+     * gets the score of a player
+     * 
+     * @param color the color of the player that wants his score
+     * 
+     * @return the score of the player
+     */
+    int getScoreWHITE(Color color);
     
     
     /**
@@ -91,6 +101,32 @@ public interface Model
      */
     boolean canPlay(Position position);
     
+    
+    /**
+     * Tells if a position is free or not
+     * 
+     * @param pos the position to verify
+     * 
+     * @return true if the position is free and false else
+     */
+    boolean isFree(Position pos);
+    
+    
+    /**
+     * Counts the number of white pieces on the playing board
+     * 
+     * @return the number of white pieces that stands on the board
+     */
+    int getNbWhites ();
+    
+    
+    /**
+     * Counts the number of black pieces on the playing board
+     * 
+     * @return the number of black pieces that stands on the board
+     */
+    int getNbBlacks ();
+            
     
     /**
      * Adds an observer in the observer list
@@ -132,9 +168,11 @@ public interface Model
     
     
     /**
-     *
-     * @param position
-     * @return
+     * Looks for all the playable positions on the playing board
+     * 
+     * @param position the position where the player could add a piece
+     * 
+     * @return a list of all those positions
      */
     public List<Position> possiblePositions (Position position);
     
@@ -196,4 +234,6 @@ public interface Model
      * @return the number of pieces that will be flipped
      */
     int nbPiecesGot (Position position, Color color);
+    
+    boolean isBonusCase (Position position);
 }

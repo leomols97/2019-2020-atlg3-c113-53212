@@ -149,7 +149,7 @@ public class ButtonsFX extends HBox implements Observer
         GPScore.add(lblScorePlayer1, 0, 1);
         
         //Displays rightly the score of the player 1
-        Label scorePlayer1 = new Label("" + game.getScore(Color.WHITE));
+        Label scorePlayer1 = new Label("" + game.getScoreWHITE(Color.WHITE));
         GPScore.add(scorePlayer1, 1, 1);
         
         //Displays rightly the name of the player 2
@@ -159,7 +159,7 @@ public class ButtonsFX extends HBox implements Observer
         GPScore.add(lblScorePlayer2, 0, 2);
         
         //Displays rightly the score of the player 2
-        Label scorePlayer2 = new Label("" + game.getScore(Color.BLACK));
+        Label scorePlayer2 = new Label("" + game.getScoreBLACK(Color.BLACK));
         GPScore.add(scorePlayer2, 1, 2);
         
         // The okay button to exit the window
@@ -201,7 +201,7 @@ public class ButtonsFX extends HBox implements Observer
         GPScore.setValignment(ok, VPos.CENTER);
         
         //The new scene that will be inside the window and contain the gridpane
-        Scene gameHisto = new Scene(GPScore, 250, 60);
+        Scene gameHisto = new Scene(GPScore, 400, 100);
         newWindow.setScene(gameHisto);
         
         //Displays rightly the name of the player 1
@@ -211,7 +211,7 @@ public class ButtonsFX extends HBox implements Observer
         GPScore.add(lblScorePlayer1, 0, 0);
         
         //Displays rightly the score of the player 1
-        Label scorePlayer1 = new Label("" + game.getScore(Color.WHITE));
+        Label scorePlayer1 = new Label("Nombre de vos pièces : " + game.getNbWhites() + ". Votre score : " + game.getScoreWHITE(Color.WHITE));
         GPScore.add(scorePlayer1, 1, 0);
         
         //Displays rightly the name of the player 2
@@ -221,7 +221,7 @@ public class ButtonsFX extends HBox implements Observer
         GPScore.add(lblScorePlayer2, 0, 1);
         
         //Displays rightly the score of the player 2
-        Label scorePlayer2 = new Label("" + game.getScore(Color.BLACK));
+        Label scorePlayer2 = new Label("Nombre de vos pièces : " + game.getNbBlacks() + ". Votre score : " + game.getScoreBLACK(Color.BLACK));
         GPScore.add(scorePlayer2, 1, 1);
         
         GPScore.add(ok, 1, 3);

@@ -38,13 +38,17 @@ public class RatioBlackAndWhite extends ProgressIndicator implements Observer
         double white = 0.0;
         if (this.game.getCurrent().getColor().equals(Color.BLACK))
         {
-            black = (double) game.getScore(game.getCurrent().getColor());
-            white = (double) game.getScore(game.getOponent().getColor());
+            int scoreBlack = (this.game.getScoreBLACK(Models.Color.BLACK) + this.game.getScoreBLACK(Models.Color.BONUSBLACK));
+            int scoreWhite = (this.game.getScoreWHITE(Models.Color.WHITE) + this.game.getScoreWHITE(Models.Color.BONUSWHITE));
+            black = (double) scoreBlack;
+            white = (double) scoreWhite;
         }
         else
         {
-            black = (double) game.getScore(game.getOponent().getColor());
-            white = (double) game.getScore(game.getCurrent().getColor());
+            int scoreBlack = (this.game.getScoreBLACK(Models.Color.BLACK) + this.game.getScoreBLACK(Models.Color.BONUSBLACK));
+            int scoreWhite = (this.game.getScoreWHITE(Models.Color.WHITE) + this.game.getScoreWHITE(Models.Color.BONUSWHITE));
+            black = (double) scoreBlack;
+            white = (double) scoreWhite;
         }
         setProgress((black + white) / 64.0);
     }

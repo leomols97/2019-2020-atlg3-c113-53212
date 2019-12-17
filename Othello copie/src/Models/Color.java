@@ -12,7 +12,10 @@ public enum Color
      */
     WHITE,
     BLACK,
-    EMPTY;
+    EMPTY,
+    BONUS,
+    BONUSBLACK,
+    BONUSWHITE;
     
     
     /**
@@ -28,6 +31,10 @@ public enum Color
                 return BLACK;
             case BLACK:
                 return WHITE;
+            case BONUSBLACK:
+                return BONUSWHITE;
+            case BONUSWHITE:
+                return BONUSBLACK;
             default:
                 return EMPTY;
         }

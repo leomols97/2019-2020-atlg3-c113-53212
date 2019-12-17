@@ -70,7 +70,8 @@ public class WhitePlayerInfos extends GridPane implements Observer
                       "-fx-border-insets: 5;" + 
                       "-fx-border-radius: 5;" + 
                       "-fx-border-color: yellow;");
-        this.score.setText("" + game.getScore(Color.WHITE));
+        int scoreWhite = (this.game.getScoreWHITE(Color.WHITE) + this.game.getScoreWHITE(Color.BONUSWHITE));
+        this.score.setText("" + scoreWhite);
         this.name.setText(this.menuView.getMenu().getTfdPlayer2());
         this.lblName.setStyle("-fx-font-weight: bold");
         
@@ -100,7 +101,8 @@ public class WhitePlayerInfos extends GridPane implements Observer
      */
     public void updateInfos ()
     {
-        score.setText(String.valueOf(this.game.getScore(Color.WHITE)));
+        int scoreWhite = (this.game.getScoreWHITE(Color.WHITE) + this.game.getScoreWHITE(Color.BONUSWHITE));
+        score.setText(String.valueOf(scoreWhite));
     }
     
     
@@ -111,7 +113,8 @@ public class WhitePlayerInfos extends GridPane implements Observer
      */
     public void reInit (Game game) // to restart a game
     {
-        this.score.setText("" + game.getScore(Color.WHITE));
+        int scoreWhite = (this.game.getScoreWHITE(Color.WHITE) + this.game.getScoreWHITE(Color.BONUSWHITE));
+        this.score.setText("" + scoreWhite);
     }
     
 
